@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>星空连星</title>
+	<style>
+		*{
+			padding: 0; 
+			margin: 0;
+		}
+		#canvas{
+			background: #000;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+	<script>
+	//模块功能：星空背景连线
+	//作者：chen
+	//最后更新时间：2017-10-31	
+	window.onload = function(){
+		var Canvas = {};//声明Canvas对象
+		var mx =0;//存放鼠标x位
+		var my = 0;//存放鼠标y位置
+		Canvas.animate={
+			init:function(){//初始化
+				var can = document.getElementById("canvas");//获取画布
+				this.ctx = can.getContext("2d");//获取2d画笔
+				var w = window.innerWidth;//获取浏览器宽度
+				var h = window.innerHeight;//获取浏览器高度
+				can.width = w;//将浏览器宽度赋值给画布宽度
+				can.height = h;//将浏览器高度赋值给画布高度
+
+				this.cw =can.width;//存放画布宽度
+				this.ch = can.height;//存放画布高度
+				this.num =200;//声明num常量等于200（星星数量）
+				this.onmouseover= function(){};//声明onmousemove功能
+				this.date = [];//声明空数组，存放各种变量值
+				for(var i=0; i<this.num; i++){
+					this.date[i] = {
+						x: Math.random()*this.cw,//生成随机x（星星x坐标）
+						y: Math.random()*this.ch,//生成随机y（星星y坐标）
+						cX: Math.random()*0.6-0.3,//生产随机x轴速度
+						cY: Math.random()*0.6-0.3//声明随机y轴速度
+					}
+					this.drawCircle(this.date[i].x, this.date[i].y);//绘制星星
+				}
+			},
+			//绘制星星函数
+			drawCircle:function(x,y){
+				var ctx = this.ctx;
+				ctx.save();//保存初始画笔
+				ctx.fillStyle = "pink";//定义填充色
+				ctx.beginPath();//重置绘制路径
+				ctx.arc(x, y, 1, 0, Math.PI*2, false);//绘制圆（星星）
+				ctx.closePath();//闭合路径
+				ctx.fill();//填充
+				ctx.restore();//释放初始画笔
+			},
+
+			//绘制线条函数
+			drawLine: function(x1, y1, x2, y2){
+				var ctx = this.ctx;
+				var color = ctx.createLinearGradient(x1, y1, x2, y2);//声明渐变色
+				color.addColorStop(0, "#FFF");//起始渐变色
+				color.addColorStop(1,"#333");//终止渐变色
+				ctx.save();
+				ctx.strokeStyle = color;//定义边框色
+				ctx.beginPath();
+				ctx.moveTo(x1, y1);//移动画笔至起点
+				ctx.lineTo(x2, y2);//移动画笔至终点
+				ctx.closePath();
+				ctx.stroke();//绘制线条
+				ctx.restore();
+			},
+
+			//获得鼠标位置函数
+			getMouse:function(ev){
+				document.onmousemove = function(ev){//声明鼠标移动函数
+					var ev = ev || window.event;
+					mx = ev.clientX;//鼠标x位置赋值给mx
+					my = ev.clientY;	//鼠标y位置赋值给my	
+				}
+
+			},
+
+			//星星自由运动
+			moveCircle:function(){
+				this.ctx.clearRect(0, 0, this.cw, this.ch);//清除画布
+				for(var i=0; i<this.num; i++){
+					this.date[i].x+=this.date[i].cX;//x轴移动
+					this.date[i].y+=this.date[i].cY;//y轴移动					
+					if(this.date[i].x>this.cw || this.date[i].x<0){//如果x坐标超出屏幕最右侧或最左侧
+						this.date[i].cX= -this.date[i].cX;//x轴速度取反
+					}
+					if(this.date[i].y>this.ch || this.date[i].y<0){//如果y坐标超出屏幕最下侧或最上侧
+						this.date[i].cY= -this.date[i].cY;//y轴速度取反
+					}
+					this.drawCircle(this.date[i].x, this.date[i].y);//画当前星星
+					for(var j=i+1; j<this.num; j++){//遍历下一个点
+						if((this.date[i].x-this.date[j].x)*(this.date[i].x-this.date[j].x)+(this.date[i].y-this.date[j].y)*(this.date[i].y-this.date[j].y)<=60*60){//用勾股定理判断
+							this.drawLine(this.date[i].x, this.date[i].y, this.date[j].x, this.date[j].y);//将满足条件的点连线
+						}
+						if(Math.abs(this.date[j].x-mx)<=90&&Math.abs(this.date[j].y-my)<=90){//判断鼠标与下一点的位置
+							this.drawLine(this.date[j].x, this.date[j].y, mx, my);//满足条线连线
+						}
+					}
+				}
+			}
+		}
+		Canvas.animate.init();//初始化
+		Canvas.animate.getMouse();//获得鼠标位置
+		setInterval(function(){//开定时器
+			Canvas.animate.moveCircle();
+		}, 1000/60);
+		window.onresize = function(){//窗口改变时重载
+			Canvas.animate.init();
+			Canvas.animate.drawCircle();
+		}
+	}
+	</script>
+</body>
+</html>
