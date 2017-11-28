@@ -62,10 +62,11 @@
 		.about, .space, .contact{
 			width: 80%;
 			min-height: 400px;
-			background: rgba(100, 110, 100, 0.1);
+			background: rgba(100, 110, 100, 0.4);
 			position: relative;
 			top: 60px;
 			margin: 0 auto;
+			display: none;
 		}
 		.about p{
 			text-align: center;
@@ -102,7 +103,7 @@
 				display: none;
 			}
 			.space div:hover{
-				background: #666;
+				background: url(./img/code.jpg);
 			}
 			.space div:hover>h1{
 				display: block;			
@@ -118,20 +119,23 @@
 			}
 		 } 
 		.code{
-			background: red;
+			background: url(./img/code.jpg);
+			background-size: 100% 100%;
 		}
 		.word{
-			background: blue;
+			background: url(./img/word.jpg);
+			background-size: 100% 100%;
 		}
 		.photo{
-			background: yellow;
+			background: url(./img/photo.jpg);
+			background-size: 100% 100%;
 		}
 	</style>
 </head>
 <body>
 	<div class="header">
 		<a class="logo" href="#"><img src="./img/logo.png" alt="陈昭雨"></a>
-		<ul>
+		<ul class="item">
 			<li>ABOUT</li>
 			<li>SPACE</li>
 			<li>CONTACT</li>
@@ -148,5 +152,34 @@
 	<div class="contact">
 		
 	</div>
+	<script>
+	window.onload = function(){
+		(function item(){
+			var aItem = document.getElementsByTagName("li");
+			var oAbout = document.getElementsByClassName("about")[0];
+			var oSpace = document.getElementsByClassName("space")[0];
+			var oContact = document.getElementsByClassName("contact")[0];
+			for(var i = 0; i<aItem.length;i++){
+				aItem[i].index = i;
+				aItem[i].onclick = function(){
+					switch(this.index){
+						case 0: 
+							oAbout.style.display = "block";
+							oSpace.style.display = "none";
+							oContact.style.display = "none";
+						break;
+						case 1:
+							oAbout.style.display = "none";
+							oSpace.style.display = "block";
+							oContact.style.display = "none";
+						break;						
+					}
+				}
+			}
+
+
+		})();
+	}
+	</script>
 </body>
 </html>
