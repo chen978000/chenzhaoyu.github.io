@@ -1,2 +1,94 @@
-
-你好，我是陈昭雨
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Hello World</title>
+	<style>
+		html, body, div, ul, li, img, h1, h2, h3, h4, h5, span, i, p, a, canvas, header, footer{
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font-size: 100%;
+			font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+		}
+		h1, h2, h3, p, i, strong{
+			cursor: default;
+		}
+		a{
+			text-decoration: none;
+		}
+		ul{
+			list-style: none;
+		}
+		body{
+			background: url(./img/back_img.jpg) fixed ;
+		}
+		.header{
+			width: 100%;
+			height: 4vw;
+			min-height: 40px;
+			background: rgba(0, 0, 0, 0);
+			position: fixed;
+			z-index: 1;
+			/*box-shadow: 0 1px 5px #333;*/
+		}
+		.header img{
+			width: 5%;
+			min-width: 50px;
+		}
+		.header .logo{
+			position: relative;
+			top: 20%;
+		}
+		.header ul{
+			float: right;
+			position: relative;
+			top: 32%;
+		}
+		.header ul li{
+			float: left;
+			margin-right: 20px;
+			margin-left: 20px;
+			text-align: center;
+			color: #000;
+			font-size: 14px;
+			/*font-weight: bold;*/
+			font-family: "Helvetica", "Tahoma", "Arial", "Heiti SC";
+			cursor: pointer;
+		}
+		.header ul li:hover{
+			color: #999;
+		}
+		.about, .space, .contact{
+			width: 80%;
+			min-height: 400px;
+			background: rgba(100, 110, 100, 0.1);
+			position: relative;
+			top: 60px;
+			margin: 0 auto;
+		}
+		.about p{
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="header">
+		<a class="logo" href="#"><img src="./img/logo.png" alt="陈昭雨"></a>
+		<ul>
+			<li>ABOUT</li>
+			<li>SPACE</li>
+			<li>CONTACT</li>
+		</ul>
+	</div>
+	<div class="about">
+		<p>Hi, I am Chen Zhao Yu. <br/>Welcome to my station.</p>
+	</div>
+	<div class="space">
+		
+	</div>
+	<div class="contact">
+		
+	</div>
+</body>
+</html>
