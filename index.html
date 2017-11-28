@@ -10,6 +10,7 @@
 			border: 0;
 			font-size: 100%;
 			font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+			color: #FFF;
 		}
 		h1, h2, h3, p, i, strong{
 			cursor: default;
@@ -21,7 +22,7 @@
 			list-style: none;
 		}
 		body{
-			background: url(./img/back_img.jpg) fixed ;
+			background: #000 fixed ;
 		}
 		.header{
 			width: 100%;
@@ -50,19 +51,17 @@
 			margin-right: 20px;
 			margin-left: 20px;
 			text-align: center;
-			color: #000;
-			font-size: 14px;
-			/*font-weight: bold;*/
+			font-size: 16px;
 			font-family: "Helvetica", "Tahoma", "Arial", "Heiti SC";
 			cursor: pointer;
 		}
 		.header ul li:hover{
-			color: #999;
+			color: rgb(21, 100, 32);
 		}
 		.about, .space, .contact{
 			width: 80%;
 			min-height: 400px;
-			background: rgba(100, 110, 100, 0.4);
+			background: rgba(100, 110, 100, 0);
 			position: relative;
 			top: 60px;
 			margin: 0 auto;
@@ -70,6 +69,8 @@
 		}
 		.about p{
 			text-align: center;
+			position: relative;
+			top: 150px;
 		}
 		@media all and (max-width: 500px){
 			.space div{
@@ -83,17 +84,18 @@
 				display: none;
 			}	
 			.space div:hover{
-				background: #469;
+				background: url(./img/code.jpg);
 			}
 			.space div:hover>h1{
-				display: block;			
+				display: block;	
+				color: #999;			
 			}	 	
 		 }
 		@media all and (min-width: 501px) {
 		 	.space div{
 				width: 20%;
 				position: absolute;
-				top: 50px;
+				top: 130px;
 				min-height: 200px;
 			}
 			.space div h1{
@@ -106,7 +108,8 @@
 				background: url(./img/code.jpg);
 			}
 			.space div:hover>h1{
-				display: block;			
+				display: block;	
+				color: #333;	
 			}
 			.code{
 				left: 50px;
@@ -134,7 +137,7 @@
 </head>
 <body>
 	<div class="header">
-		<a class="logo" href="#"><img src="./img/logo.png" alt="陈昭雨"></a>
+		<a class="logo" href="#"><img src="./img/logo1.png" alt="陈昭雨"></a>
 		<ul class="item">
 			<li>ABOUT</li>
 			<li>SPACE</li>
@@ -172,6 +175,11 @@
 							oAbout.style.display = "none";
 							oSpace.style.display = "block";
 							oContact.style.display = "none";
+						break;
+						case 2:
+							oAbout.style.display = "none";
+							oSpace.style.display = "none";
+							oContact.style.display = "block";
 						break;						
 					}
 				}
