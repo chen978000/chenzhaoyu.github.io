@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Hello World</title>
+	<title>昭，雨</title>
 	<style>
-		html, body, div, ul, li, img, h1, h2, h3, h4, h5, span, i, p, a, canvas, header, footer{
+		html, body, div, ul, li, img, span, i, p, a, canvas, header, footer, h1{
 			margin: 0;
 			padding: 0;
 			border: 0;
@@ -34,31 +34,34 @@
 			/*box-shadow: 0 1px 5px #333;*/
 		}
 		.header img{
-			width: 5%;
-			min-width: 50px;
+			width: 10%;
+			min-width: 80px;
 		}
 		.header .logo{
 			position: relative;
 			top: 20%;
 		}
 		.header ul{
-			float: right;
-			position: relative;
-			top: 32%;
+			/*float: right;*/
+			position: absolute;
+			top: 50%;
+			right: 5%;
+			/*margin-right: 30px;*/
 		}
 		.header ul li{
 			float: left;
 			margin-right: 20px;
-			margin-left: 20px;
+			margin-left: 50px;
 			text-align: center;
-			font-size: 16px;
+			font-size: 18px;
 			font-family: "Helvetica", "Tahoma", "Arial", "Heiti SC";
 			cursor: pointer;
 		}
 		.header ul li:hover{
-			color: rgb(21, 100, 32);
+			text-decoration: overline;
+			color: #ccc;
 		}
-		.about, .space, .contact{
+		.main, .about, .space, .contact{
 			width: 80%;
 			min-height: 400px;
 			background: rgba(100, 110, 100, 0);
@@ -70,12 +73,19 @@
 		.about p{
 			text-align: center;
 			position: relative;
-			top: 150px;
+			top: 100px;
+		}
+		.contact_me{
+			color: #666;
+		}
+		.contact_me:hover{
+			cursor: pointer;
 		}
 		@media all and (max-width: 500px){
 			.space div{
 				width: 100%;
 				min-height: 200px;
+				margin-top: 10px;
 			}
 			.space div h1{
 				font-size: 10vw;
@@ -93,7 +103,7 @@
 		 }
 		@media all and (min-width: 501px) {
 		 	.space div{
-				width: 20%;
+				width: 28%;
 				position: absolute;
 				top: 130px;
 				min-height: 200px;
@@ -111,11 +121,14 @@
 				display: block;	
 				color: #333;	
 			}
+			.space h1:hover>a{
+				color: #111;
+			}
 			.code{
 				left: 50px;
 			}
 			.word{
-				left: 40%;
+				left: 36%;
 			}
 			.photo{
 				right: 50px;
@@ -133,6 +146,12 @@
 			background: url(./img/photo.jpg);
 			background-size: 100% 100%;
 		}
+		#canvas{
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: -1;
+		}
 	</style>
 </head>
 <body>
@@ -144,19 +163,136 @@
 			<li>CONTACT</li>
 		</ul>
 	</div>
+	<div class="main"></div>
 	<div class="about">
-		<p>你好，我是陈昭雨<br/>欢迎访问我的网站</p>
+		<p>你好<br/><br/>
+		我叫陈昭雨<br/><br/>
+		欢迎访问我的网站<br/><br/>
+		我是一名传统机械制造从业者<br/><br/>
+		做过每天拧9000个螺丝的工作，也做过管理300多名员工的职务；改造过价值600万RMB的设备，也安装过1块5毛钱的灯泡<br/><br/>
+		我爱读书、爱写字、爱互联网<br/><br/>
+		目前在自主学习WEB前端<br/><br/>
+		如果你有相关前端职务<br/><br/>
+		请<strong class="contact_me">联系</strong>我<br/><br/>
+		谢谢</p>
 	</div>
 	<div class="space">
 		<div class="code"><h1><a href="#">代码</a></h1></div>
-		<div class="word"><h1><a href="#">文字</a></h1></div>
+		<div class="word"><h1><a href="./web/word.html">文字</a></h1></div>
 		<div class="photo"><h1><a href="#">相片</a></h1></div>		
 	</div>
 	<div class="contact">
 		
 	</div>
+	<canvas id="canvas"></canvas>
+	<script>
+	
+	</script>
 	<script>
 	window.onload = function(){
+		//canvas背景
+		(function star(){
+			var Canvas = {};//声明Canvas对象
+			var mx =0;//存放鼠标x位
+			var my = 0;//存放鼠标y位置
+			Canvas.animate={
+				init:function(){//初始化
+					var can = document.getElementById("canvas");//获取画布
+					this.ctx = can.getContext("2d");//获取2d画笔
+					var w = window.innerWidth;//获取浏览器宽度
+					var h = window.innerHeight;//获取浏览器高度
+					can.width = w;//将浏览器宽度赋值给画布宽度
+					can.height = h;//将浏览器高度赋值给画布高度
+
+					this.cw =can.width;//存放画布宽度
+					this.ch = can.height;//存放画布高度
+					this.num =120;//声明num常量等于200（星星数量）
+					this.onmouseover= function(){};//声明onmousemove功能
+					this.date = [];//声明空数组，存放各种变量值
+					for(var i=0; i<this.num; i++){
+						this.date[i] = {
+							x: Math.random()*this.cw,//生成随机x（星星x坐标）
+							y: Math.random()*this.ch,//生成随机y（星星y坐标）
+							cX: Math.random()*0.6-0.3,//生产随机x轴速度
+							cY: Math.random()*0.6-0.3//声明随机y轴速度
+						}
+						this.drawCircle(this.date[i].x, this.date[i].y);//绘制星星
+					}
+				},
+				//绘制星星函数
+				drawCircle:function(x,y){
+					var ctx = this.ctx;
+					ctx.save();//保存初始画笔
+					ctx.fillStyle = "pink";//定义填充色
+					ctx.beginPath();//重置绘制路径
+					ctx.arc(x, y, 1, 0, Math.PI*2, false);//绘制圆（星星）
+					ctx.closePath();//闭合路径
+					ctx.fill();//填充
+					ctx.restore();//释放初始画笔
+				},
+
+				//绘制线条函数
+				drawLine: function(x1, y1, x2, y2){
+					var ctx = this.ctx;
+					var color = ctx.createLinearGradient(x1, y1, x2, y2);//声明渐变色
+					color.addColorStop(0, "#FFF");//起始渐变色
+					color.addColorStop(1,"#333");//终止渐变色
+					ctx.save();
+					ctx.strokeStyle = color;//定义边框色
+					ctx.beginPath();
+					ctx.moveTo(x1, y1);//移动画笔至起点
+					ctx.lineTo(x2, y2);//移动画笔至终点
+					ctx.closePath();
+					ctx.stroke();//绘制线条
+					ctx.restore();
+				},
+
+				//获得鼠标位置函数
+				getMouse:function(ev){
+					document.onmousemove = function(ev){//声明鼠标移动函数
+						var ev = ev || window.event;
+						mx = ev.clientX;//鼠标x位置赋值给mx
+						my = ev.clientY;	//鼠标y位置赋值给my	
+					}
+
+				},
+
+				//星星自由运动
+				moveCircle:function(){
+					this.ctx.clearRect(0, 0, this.cw, this.ch);//清除画布
+					for(var i=0; i<this.num; i++){
+						this.date[i].x+=this.date[i].cX;//x轴移动
+						this.date[i].y+=this.date[i].cY;//y轴移动					
+						if(this.date[i].x>this.cw || this.date[i].x<0){//如果x坐标超出屏幕最右侧或最左侧
+							this.date[i].cX= -this.date[i].cX;//x轴速度取反
+						}
+						if(this.date[i].y>this.ch || this.date[i].y<0){//如果y坐标超出屏幕最下侧或最上侧
+							this.date[i].cY= -this.date[i].cY;//y轴速度取反
+						}
+						this.drawCircle(this.date[i].x, this.date[i].y);//画当前星星
+						for(var j=i+1; j<this.num; j++){//遍历下一个点
+							if((this.date[i].x-this.date[j].x)*(this.date[i].x-this.date[j].x)+(this.date[i].y-this.date[j].y)*(this.date[i].y-this.date[j].y)<=60*60){//用勾股定理判断
+								this.drawLine(this.date[i].x, this.date[i].y, this.date[j].x, this.date[j].y);//将满足条件的点连线
+							}
+							if(Math.abs(this.date[j].x-mx)<=90&&Math.abs(this.date[j].y-my)<=90){//判断鼠标与下一点的位置
+								this.drawLine(this.date[j].x, this.date[j].y, mx, my);//满足条线连线
+							}
+						}
+					}
+				}
+			}
+			Canvas.animate.init();//初始化
+			Canvas.animate.getMouse();//获得鼠标位置
+			setInterval(function(){//开定时器
+				Canvas.animate.moveCircle();
+			}, 1000/60);
+			window.onresize = function(){//窗口改变时重载
+				Canvas.animate.init();
+				Canvas.animate.drawCircle();
+			}
+		})();
+
+		//item切换
 		(function item(){
 			var aItem = document.getElementsByTagName("li");
 			var oAbout = document.getElementsByClassName("about")[0];
@@ -184,8 +320,6 @@
 					}
 				}
 			}
-
-
 		})();
 	}
 	</script>
