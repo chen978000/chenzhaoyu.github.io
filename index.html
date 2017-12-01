@@ -24,6 +24,15 @@
 		ul{
 			list-style: none;
 		}
+		@font-face{
+			font-family: "fontello";
+			src: url("./font/fontello.eot"),
+				url("./font/fontello.woff"),
+				url("./font/fontello.ttf"),
+				url("./font/fontello.svg");
+			font-weight: normal;
+			font-style: normal;
+		}
 		body{
 			background: #000 fixed ;
 		}
@@ -78,8 +87,34 @@
 			position: relative;
 			top: 100px;
 		}
+		.contact .icon{
+			/*border: 2px solid red;*/
+			width: 100%;
+			position: absolute;
+			top: 30%;
+		}
+		.contact li{
+			width: 25vw;
+			height: 10vw;
+			font-family: "fontello";
+			font-size: 3vw;
+			float: left;
+			text-align: center;
+			line-height: 10vw;
+			/*border:2px solid blue;*/
+		}
+		.contact li a{
+			display: none;
+			font-size: 2vw;
+		}
+		.contact li:hover{
+			background: rgba(100, 100, 100, 0.5);
+		}
+		.contact li:hover a{
+			display: inline-block;
+		}
 		.contact_me{
-			color: #666;
+			/*color: #666;*/
 		}
 		.contact_me:hover{
 			cursor: pointer;
@@ -176,7 +211,7 @@
 		我爱读书、爱写字、爱互联网<br/><br/>
 		目前在自主学习WEB前端<br/><br/>
 		如果你有相关前端职务<br/><br/>
-		请<strong class="contact_me">联系</strong>我<br/><br/>
+		请<i class="contact_me">联系</i> 我<br/><br/>
 		谢谢</p>
 	</div>
 	<div class="space">
@@ -185,7 +220,16 @@
 		<div class="photo"><h1><a href="#">相片</a></h1></div>		
 	</div>
 	<div class="contact">
-		
+		<div class="icon">
+			<ul>
+				<li class="icon_home">&#xe800;<a href="http://www.czy0.com" target="view_window">www.czy0.com</a></li>
+				<li class="icon_phone">&#xe801;<a href="javascript:;">暂未公开</a></li>
+				<li class="icon_weibo">&#xe802;<a href="https://weibo.com/u/1586893100?topnav=1&wvr=6&topsug=1&is_all=1" target="view_window">小夜的异想空间</a></li>
+				<li class="icon_email">&#xe803;<a href="mailto:chenzhaoyuhuan@163.com">向我发邮件</a></li>
+				<li class="icon_qq">&#xf1d6;<a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=327273498" target="class"">点我加好友</a></li>
+				<li class="icon_wechat">&#xf1d7;<a href="javascript:;">微信ID:csymbian</a></li>
+			</ul>
+		</div>
 	</div>
 	<canvas id="canvas"></canvas>
 	<script>
@@ -301,6 +345,7 @@
 			var oAbout = document.getElementsByClassName("about")[0];
 			var oSpace = document.getElementsByClassName("space")[0];
 			var oContact = document.getElementsByClassName("contact")[0];
+			var oContactMe = document.getElementsByClassName("contact_me")[0];
 			for(var i = 0; i<aItem.length;i++){
 				aItem[i].index = i;
 				aItem[i].onclick = function(){
@@ -321,6 +366,11 @@
 							oContact.style.display = "block";
 						break;						
 					}
+				}
+				oContactMe.onclick = function(){
+						oAbout.style.display = "none";
+						oSpace.style.display = "none";
+						oContact.style.display = "block";					
 				}
 			}
 		})();
