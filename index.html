@@ -124,70 +124,60 @@
 		.contact_me:hover{
 			cursor: pointer;
 		}
-		@media all and (max-width: 500px){
-			.space div{
-				width: 100%;
-				min-height: 200px;
-				margin-top: 10px;
-			}
-			.space div h1{
-				font-size: 10vw;
-				text-align: center;
-				line-height: 200px;
-				display: none;
-			}	
-			.space div:hover{
-				background: url(./img/code.jpg);
-			}
-			.space div:hover>h1{
-				display: block;	
-				color: #999;			
-			}	 	
-		 }
-		@media all and (min-width: 501px) {
-		 	.space div{
-				width: 28%;
-				position: absolute;
-				top: 130px;
-				min-height: 200px;
-			}
-			.space div h1{
-				font-size: 4vw;
-				text-align: center;
-				line-height: 200px;
-				display: none;
-			}
-			.space div:hover{
-				background: url(./img/code.jpg);
-			}
-			.space div:hover>h1{
-				display: block;	
-				color: #333;	
-			}
-			.space h1:hover>a{
-				color: #111;
-			}
-			.code{
-				left: 50px;
-			}
-			.word{
-				left: 36%;
-			}
-			.photo{
-				right: 50px;
-			}
-		 } 
+
+		 .space div{
+			width: 28%;
+			position: absolute;
+			top: 130px;
+			min-height: 200px;
+		}	
+		.space div h1:hover::before, .space div h1:hover::after {
+			opacity: 1;
+			transform:scale(1);
+			transition: all 1s;
+		}
+		.space div h1::before, .space div h1::after{
+			position:absolute;
+			content:'';
+			opacity:0;
+			transition:all 1s;
+		}
+		.space div h1::before {
+			top:25px;
+			right:15px;
+			bottom:25px;
+			left:15px;
+			z-index: -1;
+			border-top:0.5vw solid #fff;
+			border-bottom:0.5vw solid #fff;
+			transform:scale(0,1);
+			-webkit-transform-origin:0 0;
+			transform-origin:0 0;
+		}  
+		.space div h1::after {
+			top:15px;
+			right:25px;
+			bottom:15px;
+			left:25px;
+			z-index: -1;
+			border-right:0.5vw solid #fff;
+			border-left:0.5vw solid #fff;
+			transform:scale(1,0);
+			transform-origin:100% 0;
+		}  
+		.space div h1{
+			font-size: 3vw;
+			text-align: center;
+			line-height: 200px;
+		}
 		.code{
-			background: url(./img/code.jpg);
-			background-size: 100% 100%;
+			left: 50px;
 		}
 		.word{
-			background: url(./img/word.jpg);
-			background-size: 100% 100%;
+			left: 36%;
 		}
 		.photo{
-			background: url(./img/photo.jpg);
-			background-size: 100% 100%;
+			right: 50px;
 		}
 		#canvas{
 			position: absolute;
