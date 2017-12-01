@@ -29,6 +29,18 @@ a:hover{
 	position: relative;
 	/*border: 2px solid black;*/
 }
+.czy_logo img{
+	position: absolute;
+	/*left: 20px;*/
+	top: -5px;
+	width: 10%;
+	min-width: 80px;
+}
+@media screen and (max-width: 1180px) {
+	.czy_logo{
+		display: none;
+	}
+}
 .logo{
 	position: absolute;
 	top: -1px;
