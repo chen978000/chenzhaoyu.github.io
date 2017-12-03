@@ -5,6 +5,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<!-- <meta name="viewport" content="width=device-width, initinal-scale=1.0"> -->
 	<meta name="keywords" content="陈昭雨, 昭雨, czy, zy, chenzhaoyu, chen, zhaoyu">
 	<meta name="description" content="陈昭雨的个人网站">
 	<meta name="author" content="Chen Zhaoyu">
@@ -17,8 +18,8 @@
 			padding: 0;
 			border: 0;
 			font-size: 100%;
-			font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
-			color: #FFF;
+			font-family: "Microsoft YaHei", "Microsoft JhengHei", "SimHei",sans-serif;
+			color: #eee;
 		}
 		h1, h2, h3, p, i, strong{
 			cursor: default;
@@ -39,46 +40,51 @@
 			font-style: normal;
 		}
 		body{
-			background: #000 fixed ;
+			background: #111;
 		}
 		.header{
 			width: 100%;
 			height: 4vw;
 			min-height: 40px;
-			background: rgba(0, 0, 0, 0);
 			position: fixed;
 			z-index: 1;
-			/*box-shadow: 0 1px 5px #333;*/
 		}
 		.header img{
 			width: 10%;
-			min-width: 80px;
+			min-width: 100px;
 		}
 		.header .logo{
 			position: relative;
 			top: 20%;
 		}
 		.header ul{
-			/*float: right;*/
 			position: absolute;
 			top: 50%;
-			right: 5%;
-			/*margin-right: 30px;*/
+			right: 4vw;
 		}
 		.header ul li{
-			float: left;
-			margin-right: 20px;
-			margin-left: 50px;
 			text-align: center;
 			font-size: 18px;
 			font-family: "Helvetica", "Tahoma", "Arial", "Heiti SC";
 			cursor: pointer;
+		}		
+		@media screen and (min-width: 641px) {
+			.header ul li{
+				float: left;
+				margin-left: 4vw;
+			}
 		}
+		@media screen and (max-width: 640px) {
+			.header ul li{
+				margin-bottom: 20px;
+			}		
+		}
+		
 		.header ul li:hover{
 			text-decoration: overline;
 			color: #ccc;
 		}
-		.main, .about, .space, .contact{
+		.about, .space, .contact{
 			width: 80%;
 			min-height: 400px;
 			background: rgba(100, 110, 100, 0);
@@ -87,52 +93,136 @@
 			margin: 0 auto;
 			display: none;
 		}
-		.about p{
-			text-align: center;
-			position: relative;
+		.about{
+			background: rgba(100, 100, 100, 0.2);
 			top: 100px;
 		}
+
+		.about img{
+			height: 400px;
+			-webkit-filter: invert(50%); /* Chrome, Safari, Opera */
+			filter: invert(50%);
+			float: left;
+			/*opacity: 0.3;*/
+		}
+		.about_container{
+			border:1px solid rgba(100, 100, 100, 0.2);
+			min-height: 400px;
+		}
+		.about p{
+			display: block;
+			font-family: "Microsoft YaHei", "Microsoft JhengHei", "SimHei";
+			text-align: center;
+			/*border:1px solid blue;*/
+		}
+		.about_name, .about_now{
+			font-size: 3vw;
+			font-weight: bold;
+			/*line-height: 40px;*/
+		}
+		.about_name{
+			margin-top: 30px;
+		}
+		.about_intro{
+			text-align: right;
+			/*width: 30%;*/
+		}
 		.contact .icon{
-			/*border: 2px solid red;*/
 			width: 100%;
 			position: absolute;
 			top: 30%;
 		}
-		.contact li{
-			width: 25vw;
-			height: 10vw;
-			font-family: "fontello";
-			font-size: 3vw;
-			float: left;
+		.icon ul{
+			margin: 0 auto;
 			text-align: center;
-			line-height: 10vw;
-			/*border:2px solid blue;*/
+		}
+		.contact li{
+			font-family: "fontello";
+			float: left;
+			display: inline;
+			text-align: center;
+		}
+		@media screen and (min-width: 641px) {
+			.icon ul{
+				width: 75vw;
+			}
+			.contact li{
+				width: 25vw;
+				height: 10vw;
+				font-size: 3vw;
+				line-height: 10vw;
+			}		
+		}		
+		@media screen and (max-width: 640px) {
+			.icon ul{
+				width: 70vw;
+			}
+			.contact li{
+				width: 35vw;
+				height: 15vw;
+				font-size: 6vw;
+				line-height: 15vw;
+			}		
 		}
 		.contact li a{
 			display: none;
 			font-size: 2vw;
 		}
 		.contact li:hover{
-			background: rgba(100, 100, 100, 0.5);
+			background: rgba(100, 100, 100, 0.2);
 		}
 		.contact li:hover a{
 			display: inline-block;
 		}
-		.contact_me{
-			/*color: #666;*/
-		}
 		.contact_me:hover{
 			cursor: pointer;
 		}
-
 		 .space div{
-			width: 28%;
 			position: absolute;
-			top: 130px;
-			min-height: 200px;
-		}	
+		}
+		@media screen and (min-width: 641px){
+			 .space div{
+				width: 28%;
+				top: 40%;
+				min-height: 200px;
+			}
+			.code{
+				left: 50px;
+			}
+			.word{
+				left: 36%;
+			}
+			.photo{
+				right: 50px;
+			}
+			.space div h1{
+				font-size: 3vw;
+				text-align: center;
+				line-height: 200px;
+			}
+		}
+		@media screen and (max-width: 640px){
+			 .space div{
+				width: 100%;
+				margin: 0 auto;
+			}
+			.code{
+				top: 50px;
+			}
+			.word{
+				top: 200px;
+			}
+			.photo{
+				top: 350px;
+			}
+			.space div h1{
+				font-size: 5vw;
+				text-align: center;
+				line-height: 150px;
+			}
+		}
 		.space div h1:hover::before, .space div h1:hover::after {
-			opacity: 1;
+			opacity: 0.9;
 			transform:scale(1);
 			transition: all 1s;
 		}
@@ -165,20 +255,6 @@
 			transform:scale(1,0);
 			transform-origin:100% 0;
 		}  
-		.space div h1{
-			font-size: 3vw;
-			text-align: center;
-			line-height: 200px;
-		}
-		.code{
-			left: 50px;
-		}
-		.word{
-			left: 36%;
-		}
-		.photo{
-			right: 50px;
-		}
 		#canvas{
 			position: absolute;
 			top: 0;
@@ -196,18 +272,19 @@
 			<li>CONTACT</li>
 		</ul>
 	</div>
-	<div class="main"></div>
 	<div class="about">
-		<p>你好<br/><br/>
-		我叫陈昭雨<br/><br/>
-		欢迎访问我的网站<br/><br/>
-		我是一名传统机械制造从业者<br/><br/>
-		做过每天拧9000个螺丝的工作，也做过管理300多名员工的职务；改造过价值600万RMB的设备，也安装过1块5毛钱的灯泡<br/><br/>
-		我爱读书、爱写字、爱互联网<br/><br/>
-		目前在自主学习WEB前端<br/><br/>
-		如果你有相关前端职务<br/><br/>
-		请<i class="contact_me">联系</i> 我<br/><br/>
-		谢谢</p>
+		<img src="./img/zipai.png" alt="" ondragstart="return false" oncontextmenu="return false">
+		<div class="about_container">
+			<p class="about_name">我叫陈昭雨<br/>——————</p>
+			<p class="about_intro">
+				欢迎访问我的网站。<br/>
+				我是一名传统机械制造从业者。<br/>做过每天拧9000个螺丝的工作，也做过管理300多名员工的职务；<br/>改造过价值600万RMB的设备，也安装过1块5毛钱的灯泡。<br/>
+				我爱读书、爱写字、爱互联网，目前在自主学习WEB前端。
+			</p>
+			<p class="about_now">——————<br/>如果你有相关前端职务，请<i class="contact_me">联系</i> 我，谢谢。</p>
+		</div>
+
+
 	</div>
 	<div class="space">
 		<div class="code"><h1><a href="#">代码</a></h1></div>
@@ -265,7 +342,7 @@
 				drawCircle:function(x,y){
 					var ctx = this.ctx;
 					ctx.save();//保存初始画笔
-					ctx.fillStyle = "pink";//定义填充色
+					ctx.fillStyle = "#FFF";//定义填充色
 					ctx.beginPath();//重置绘制路径
 					ctx.arc(x, y, 1, 0, Math.PI*2, false);//绘制圆（星星）
 					ctx.closePath();//闭合路径
