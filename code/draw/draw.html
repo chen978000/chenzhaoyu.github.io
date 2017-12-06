@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body, div, ul, li{
+			margin:0;
+			padding: 0;
+			border: 0;
+		}
+		ul {
+			list-style: none;
+		}
+		#left_nav{
+			/*background: blue;*/
+			position: absolute;
+			width: 100px;
+			height: 570px;
+			float: left;
+			top: 0;
+		}
+		.btn{
+			text-align: center;
+		}
+		.up{
+			margin-top:16px;
+			float: left;
+		}
+		.down{
+			margin-top: 435px;
+		}
+		.btn input{
+			width: 70px;
+			height:25px;
+			background: #D9D1D1;
+			margin: 0 auto;
+			border-radius: 5px;
+		}
+		.btn li{
+			display: inline-block;
+			margin-bottom: 5px;
+		}
+		#main{
+			width: 800px;
+			height: 570px;
+			background: #D9D9D9;
+			margin: 20px auto;
+			position: relative;
+		}
+		#canvas{
+			background: #fff;
+			margin: 20px 0 0 100px;
+		}
+		#canvas2{
+			background: rgba(255, 255, 255, 0);
+			position: absolute;
+			top: 20px;
+			left: 100px;
+		}
+		#canvas3{
+			/*background: #fff;*/
+			position: absolute;
+			top: 190px;
+			left:20px;
+		}
+		#stroke_color, #fill_color{
+			width: 18px;
+			height: 22px;
+			border: 1px solid white;
+			position: absolute;
+			top: 385px;
+		}
+		#stroke_color{
+			left: 20px;
+		}
+		#fill_color{
+			left: 55px;
+		}
+		img{
+			position: absolute;
+			top: 160px;
+			left: 19px;
+		}
+		#down_nav{
+			/*background: blue;*/
+			width: 675px;
+			height: 75px;
+			position: absolute;
+			top: 495px;
+			left: 100px;
+		}
+		#lineWidth{
+			width: 50px;
+		}
+		.bottom{
+			float: right;
+			/*border:2px solid black;*/
+			margin-top: 20px;
+		}
+		.bottom input{
+			width: 90px;
+			margin-left: 20px;
+		}
+		#line_width{
+			margin-top: 20px;
+			float: left;
+		}
+</style>
+<!-- <script src="./js/7.js"></script>*/ -->
+</head>
+<body>
+
+	<div id="main">
+		<canvas id="canvas" width="675" height="475"></canvas>
+		<canvas id="canvas2" width="675" height="475"></canvas>
+		<div id="left_nav">
+			<ul class="btn up">
+				<li><input id="free" type="button" value="涂鸦(N)"></li>
+				<li><input id="line" type="button" value="直线(N)"></li>
+				<li><input id="rect" type="button" value="矩形(R)"></li>
+				<li><input id="arc" type="button" value="圆形(O)"></li>
+				<!-- <li><input type="button" value="多边形(G)"></li> -->
+			</ul>
+			<img src="./img/img.jpg" alt="">
+			<ul class="btn down">
+				<li><input id="noFill" type="button" value="无填充色"></li>
+				<li><input id="haveFill" type="button" value="有填充色"></li>
+				<!-- <li><input type="button" value="蜡笔(W)"></li> -->
+				<li><input id="eraser" type="button" value="橡皮擦(E)"></li>
+			</ul>
+			<canvas id="canvas3" width="59" height="191"></canvas>
+			<input type="color" id="stroke_color">
+			<input type="color" id="fill_color">
+		</div>
+		<div id="down_nav">
+			<div id="line_width">
+				<span>线径：</span>
+				<select name="" id="lineWidth">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5" selected="selected">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12" >12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+				</select>
+			</div>
+			<ul class="btn bottom">
+				<li><input id="save" type="button" value="保存(C+S)"><a id="save_a" href="#" download="我的作品"></a></li>
+<!-- 				<li><input id="next" type="button" value="前进(C+Y)"></li>
+				<li><input id="last" type="button" value="后退(C+Z)"></li> -->
+				<li><input id="clear" type="button" value="清空(C+Q)"></li>
+			</ul>
+		</div>
+	</div>
+	<script src="./js/draw.js"></script>
+</body>
+</html>
