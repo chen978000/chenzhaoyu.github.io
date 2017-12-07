@@ -238,4 +238,5 @@ var List =[
 	"img":"http://p1.music.126.net/C6txAWMGlVmAcAD37RVutQ==/122045790684028.jpg", 
 	"artist":"许巍"
 	}
+	
 ];
