@@ -72,6 +72,7 @@ body, div, ul{
 }
 .stop{
 	animation-play-state: paused;
+	-webkit-animation-play-state: paused;
 }
 .disc .fengmian{
 	position: absolute;
