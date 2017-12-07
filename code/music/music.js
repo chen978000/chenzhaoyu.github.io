@@ -13,7 +13,13 @@ window.onload = function(){
 	var intro_artist = document.querySelector(".intro_artist");
 	var next = document.querySelector(".control_next");
 	var pre = document.querySelector(".control_pre");
+	var mode = document.querySelector(".mode");
 	var i=0;
+	var n=0;
+	mode.onclick = function(){
+		console.log(n, i);
+		n=playMode(n, n, mode);		
+	}
 	getData(obj, cover, fengmian, intro_name, intro_artist, i);	
 	play.onclick = function(){
 		playing(disc, citou, play, pause, obj);
@@ -25,20 +31,41 @@ window.onload = function(){
 		scrolling(obj, next);
 	}
 	next.onclick = function(){
-		i++;
-		if(i>List.length-1){
-			i = 0;
-		}else{
+
+		switch(n){
+			case 0:
+				i++;
+				if(i>List.length-1){
+					i = 0;
+				}
+			break;
+			case 1:
+				i=i;
+			break;
+			case 2:
+				i = randomMode();
+			break;
 		}
+		console.log(n, i);
 		getData(obj, cover, fengmian, intro_name, intro_artist, i);
 		playing(disc, citou, play, pause, obj);
 	}
 	pre.onclick = function(){
-		i--;
-		if(i<0){
-			i=List.length;
-		}else{
+		switch(n){
+			case 0:
+				i--;
+				if(i<0){
+					i=List.length-1;
+				}
+			break;
+			case 1:
+				i=i;
+			break;
+			case 2:
+				i = randomMode();
+			break;
 		}
+		console.log(n, i);
 		getData(obj, cover, fengmian, intro_name, intro_artist, i);
 		playing(disc, citou, play, pause, obj);
 	}
@@ -75,7 +102,7 @@ function scrolling(obj, next){
 	var progress = document.querySelector(".progress");
 	var bar = document.querySelector(".bar");
 	var point = document.querySelector(".point");
-	var musicTime = document.querySelector(".musci_time");
+	var musicTime = document.querySelector(".music_time");
 	var ratio = (obj.currentTime/obj.duration);
 	musicTime.firstChild.innerHTML = setTime(obj.currentTime);
 	if(setTime(obj.duration)=="NaN:NaN"){
@@ -85,10 +112,45 @@ function scrolling(obj, next){
 	}
 	bar.style.width = (progress.offsetWidth*ratio)+"px";
 	point.style.left = (progress.offsetWidth*ratio)+"px";
-	console.log(obj.currentTime);
+	// console.log(obj.currentTime);
 	if(obj.ended){
 		next.click();
 	}
+}
+//播放模式
+function playMode(t, n, mode){
+	if(t<2){
+		t++;
+	}else{
+		t=0;
+	}
+	imgMode(n, mode);
+	return t;
+}
+function imgMode(n, mode){
+	switch(n){
+		case 0:
+			mode.classList.remove("mode_random");
+			mode.classList.remove("mode_circle");
+			mode.classList.add("mode_single");
+		break;
+		case 1:
+			mode.classList.remove("mode_single");
+			mode.classList.remove("mode_circle");
+			mode.classList.add("mode_random");
+		break;
+		case 2:
+			mode.classList.remove("mode_single");
+			mode.classList.remove("mode_random");
+			mode.classList.add("mode_circle");
+		break;
+	}
+	console.log(n, mode);
+}
+//随机音乐
+function randomMode(){
+	var x = Math.floor(Math.random()*(List.length-1));
+	return x;
 }
 function drag(disc, citou, play, pause, obj){
 	var progress = document.querySelector(".progress");
@@ -106,6 +168,10 @@ function drag(disc, citou, play, pause, obj){
 function setTime(x){
 	var m = Math.floor(x/60);
 	var s = x.toFixed(0)-m*60;
+	if(s==60){
+		m++;
+		s=0;
+	}
 	m = m<10?"0"+m:m;
 	s = s<10?"0"+s:s;
 	return m+":"+s;
@@ -238,5 +304,4 @@ var List =[
 	"img":"http://p1.music.126.net/C6txAWMGlVmAcAD37RVutQ==/122045790684028.jpg", 
 	"artist":"许巍"
 	}
-	
 ];
