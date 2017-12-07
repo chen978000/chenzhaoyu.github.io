@@ -1,3 +1,6 @@
+/*主题：仿网易云音乐css
+作者：陈昭雨
+更新时间：20171207*/
 @-webkit-keyframes disc{
 	100%{
 		-webkit-transform:rotateZ(360deg);
@@ -30,17 +33,17 @@ body, div, ul{
 	overflow: hidden;
 }
 
-	 .citou{
-		position: absolute;
-		width: 110px;
-		top: -25px;
-		left: 50%;
-		margin-left: -35px;
-		z-index: 1;
-		transform-origin: 20px 20px;
-		transform: rotate(-20deg);
-		transition-duration: 0.3s;
-	}	
+ .citou{
+	position: absolute;
+	width: 110px;
+	top: -25px;
+	left: 50%;
+	margin-left: -32px;
+	z-index: 1;
+	transform-origin: 20px 20px;
+	transform: rotate(-20deg);
+	transition-duration: 0.3s;
+}	
 
 .bg{
 	width: 250px;
