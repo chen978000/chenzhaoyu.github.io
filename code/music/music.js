@@ -1,3 +1,6 @@
+// 主题：仿网易云音乐js
+// 作者：陈昭雨
+// 更新时间：20171207 
 window.onload = function(){
 	var disc = document.querySelector(".disc");
 	var citou = document.querySelector(".citou");
@@ -104,7 +107,7 @@ function setTime(x){
 	return m+":"+s;
 }
 
-//歌单
+//歌单（更新于20171207）
 var List =[ 
 	{"name":"成都", 
 	"id":"436514312", 
@@ -161,4 +164,74 @@ var List =[
 	"img":"http://p1.music.126.net/3K6W80SyZ0ZIy3btLRlZMw==/7820826208648668.jpg", 
 	"artist":"黄晓明 / 邓超 / 佟大为"
 	},
+	{"name":"阴天", 
+	"id":"276936", 
+	"img":"http://p1.music.126.net/DjyL8sXf9iU0Cik4hzs4RQ==/109951162783381.jpg", 
+	"artist":"莫文蔚"
+	},
+	{"name":"最重要的决定", 
+	"id":"229161", 
+	"img":"http://p1.music.126.net/N9fWHLChdjpcGa1QbCbhDg==/19014954090943253.jpg", 
+	"artist":"范玮琪"
+	},
+	{"name":"有点甜", 
+	"id":"165340", 
+	"img":"http://p1.music.126.net/2rMIJCU94hXW4pmxayvhPQ==/96757023249983.jpg", 
+	"artist":"汪苏泷 / By2"
+	},
+	{"name":"Honey", 
+	"id":"297829", 
+	"img":"http://p1.music.126.net/YiTOLZAw20itRSFsHHBaPw==/18657612813739192.jpg", 
+	"artist":"王心凌"
+	},
+	{"name":"风继续吹", 
+	"id":"26620762", 
+	"img":"http://p1.music.126.net/AtMpiqgluHefLF6nD_Pcug==/4417837720418086.jpg", 
+	"artist":"张国荣"
+	},
+	{"name":"一笑倾城", 
+	"id":"426852063", 
+	"img":"http://p1.music.126.net/XtQbs_V1OAvtZo9tmJFAJA==/1369991503018202.jpg", 
+	"artist":"汪苏泷"
+	},
+	{"name":"文科生的一个下午", 
+	"id":"5265943", 
+	"img":"http://p1.music.126.net/4FY52KxHJezy0lbpEugllw==/102254581400467.jpg", 
+	"artist":"赵节"
+	},
+	{"name":"那些花儿(吉他版)", 
+	"id":"139392", 
+	"img":"http://p1.music.126.net/QYI8P7bfmwUKxH3Kll95LQ==/18878614649179588.jpg", 
+	"artist":"朴树"
+	},
+	{"name":"一腔诗意喂了狗", 
+	"id":"460542191", 
+	"img":"http://p1.music.126.net/d95pQeIaep9IKy3gI0fKXw==/109951162862111882.jpg", 
+	"artist":"花粥"
+	},
+	{"name":"想把我唱给你听", 
+	"id":"297612", 
+	"img":"http://p1.music.126.net/EmcMtmLwXZaOfCG1454oyQ==/73667279078627.jpg", 
+	"artist":"王筝 / 老狼 / 小柯 / 曹方"
+	},
+	{"name":"干杯，朋友", 
+	"id":"293721", 
+	"img":"http://p1.music.126.net/1Z7Rvewx5xsdBl24doz5fA==/64871186051046.jpg", 
+	"artist":"田震"
+	},
+	{"name":"晴天娃娃", 
+	"id":"185846", 
+	"img":"http://p1.music.126.net/UAgXkK9Buq7NcFJ2fy0KhA==/84662395351539.jpg", 
+	"artist":"江语晨"
+	},
+	{"name":"心愿", 
+	"id":"379785", 
+	"img":"http://p1.music.126.net/-QgrpnBhavRcLtaBaad5Lw==/52776558150270.jpg", 
+	"artist":"四个女生"
+	},
+	{"name":"蓝莲花", 
+	"id":"168091", 
+	"img":"http://p1.music.126.net/C6txAWMGlVmAcAD37RVutQ==/122045790684028.jpg", 
+	"artist":"许巍"
+	}
 ];
