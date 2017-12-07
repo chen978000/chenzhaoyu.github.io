@@ -1,43 +1,164 @@
-<!-- 主题：仿网易云音乐html
+/*主题：仿网易云音乐css
 作者：陈昭雨
-更新时间：20171206 -->
-<!DOCTYPE html>
-	<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-		<title>陈昭雨的网易云音乐</title>
-		<link rel="stylesheet" href="music.css">
-		<link rel="shortcut icon" href="favicon.ico">
+更新时间：20171207*/
+@-webkit-keyframes disc{
+	100%{
+		-webkit-transform:rotateZ(360deg);
+	}
+}
+@-webkit-keyframes citou{
+	100%{
+		-webkit-transform:rotateZ(360deg);
+	}
+}
+body, div, ul{
+	padding: 0;
+	margin: 0;
+}
+.cover{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: url(http://p1.music.126.net/pERhjARCIrZwNd0UFfHpWg==/5749346301711508.jpg);
+	background-size: cover;
+	filter: blur(15px) brightness(0.8);
+	opacity: 0.5;
+}
+.play-board{
+	width: 100%;
+	height: 550px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	overflow: hidden;
+}
 
-	</head>
-	<body>
-		<div class="cover"></div>
-		<div class="play-board">
-			<div class="bg"></div>
-			<img class="citou" src="./music_img/needle.png" alt="磁头" draggable="false">
+ .citou{
+	position: absolute;
+	width: 110px;
+	top: -25px;
+	left: 50%;
+	margin-left: -32px;
+	z-index: 1;
+	transform-origin: 20px 20px;
+	transform: rotate(-20deg);
+	transition-duration: 0.3s;
+}	
 
-			<div class="disc music">
-				<img class="fengmian" src="http://p1.music.126.net/pERhjARCIrZwNd0UFfHpWg==/5749346301711508.jpg" alt="">
-				<img class="cipan" src="./music_img/disc.png" alt="磁盘" draggable="false">
-			</div>
-			<div class="music_intro"><span class="intro_name">歌曲</span>——<span class="intro_artist">演唱者</span></div>
-			<div class="progress">
-				<span class="bar"></span>
-				<div class="point"></div>
-				<a class="mode mode_circle" href="javascript:;"></a>
-			</div>
-			<div class="music_time"><span>00:00</span>/<span>00:00</span></div>
-			<div class="control">
-				<img class="control_pre" src="./music_img/pre.png" alt="上一首">
-				<img class="control_play" src="./music_img/play.png" alt="播放">
-				<img class="control_pause" src="./music_img/pause.png" alt="暂停" style="display: none;">
-				<img class="control_next" src="./music_img/next.png" alt="下一首">
-			</div>
-		</div>	
-		<audio id="player" src="http://music.163.com/song/media/outer/url?id=521749251.mp3"></audio>
-		<script src="music.js"></script>
-	</body>
-		
-		
-	</html>	
+.bg{
+	width: 250px;
+	height: 250px;
+	border-radius: 100%;
+	background: rgba(3,32,3,0.2);
+	position: absolute;
+	top: 80px;
+}
+.disc{
+	position: absolute;
+	width: 250px;
+	height: 250px;
+	top: 80px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation: disc 20s linear infinite;
+	animation-play-state: paused;
+}
+.running{
+	animation-play-state: running;
+}
+.stop{
+	animation-play-state: paused;
+}
+.disc .fengmian{
+	position: absolute;
+	width: 170px;
+}
+.disc .cipan{
+	position: absolute;
+	width: 250px;
+}
+.fengmian{
+	position: absolute;
+	width: 170px;
+}
+ .cipan{
+	position: absolute;
+	width: 250px;
+}
+.music_intro, .music_time{
+	position: absolute;
+	font-size: 14px;
+	color: #666;
+}
+.music_intro{
+	top: 345px;	
+}
+.music_time{
+	top: 395px;
+}
+.control{
+	text-align: center;
+	width: 350px;
+	height: 50px;
+	position: absolute;
+	top: 420px;
+	display: flex;
+	justify-content: space-around;
+}
+.control img{
+	cursor: pointer;
+	width: 50px;
+	height: 50px;
+	opacity: 0.6;
+
+}
+.control img:hover{
+	opacity: 1.0;	
+}
+.progress{
+	width: 210px;
+	height: 3px;
+	background: #bbb;
+	opacity: 0.6;
+	position: absolute;
+	top:380px;
+}
+.bar{
+	width: 0%;
+	height: 100%;
+	background: #39f;
+	display: inline-block;
+	position: absolute;
+	top: 0;
+}
+.point{
+	width: 10px;
+	height: 10px;
+	background: #fff;
+	border-radius: 100%;
+	border: 3px solid rgba(0,0,0,0.4);
+	cursor: pointer;
+	position: absolute;
+	top: -7px;
+}
+.mode{
+	position: absolute;
+	left: -25px;
+	top: -8px;
+	width: 20px;
+	height: 20px;
+	opacity: 0.7;
+}
+.mode:hover{
+	opacity: 1.0;
+}
+.mode_circle{
+	background: url(./music_img/playbar.png) -6px -346px no-repeat;	
+}
+.mode_single{
+	background: url(./music_img/playbar.png) -68px -346px no-repeat;	
+}
+.mode_random{
+	background: url(./music_img/playbar.png) -68px -250px no-repeat;	
+}
