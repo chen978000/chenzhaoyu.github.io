@@ -11,6 +11,9 @@
 		-webkit-transform:rotateZ(360deg);
 	}
 }
+/*移动端点击高亮效果取消*/
+-webkit-tap-highlight-color: rgba(0,0,0,0);
+
 body, div, ul{
 	padding: 0;
 	margin: 0;
