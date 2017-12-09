@@ -200,8 +200,6 @@ body, div, ul{
 	min-height: 20px;
 	padding: 5px 5%;
 	border-bottom: 1px solid #999;
-	margin: 0 auto;
-	
 }
 .music_list_ul li span{
 	cursor: pointer;
