@@ -1,14 +1,9 @@
 /*主题：仿网易云音乐css
 作者：陈昭雨
-更新时间：20171207*/
+更新时间：20171209*/
 @-webkit-keyframes disc{
 	100%{
-		-webkit-transform:rotateZ(360deg);
-	}
-}
-@-webkit-keyframes citou{
-	100%{
-		-webkit-transform:rotateZ(360deg);
+		-webkit-transform: rotateZ(360deg);
 	}
 }
 /*移动端点击高亮效果取消*/
@@ -20,7 +15,7 @@ body, div, ul{
 }
 .cover{
 	width: 100%;
-	height: 100%;
+	height: 95%;
 	position: absolute;
 	background: url(http://p1.music.126.net/pERhjARCIrZwNd0UFfHpWg==/5749346301711508.jpg);
 	background-size: cover;
@@ -29,7 +24,7 @@ body, div, ul{
 }
 .play-board{
 	width: 100%;
-	height: 550px;
+	height: 500px;
 	position: relative;
 	display: flex;
 	justify-content: center;
@@ -165,4 +160,49 @@ body, div, ul{
 }
 .mode_random{
 	background: url(./music_img/playbar.png) -68px -250px no-repeat;	
+}
+.music_list{
+	position: absolute;
+	top: 96%;
+	width: 100%;
+	height: 30px;
+	overflow: auto;
+	background: rgba(200, 200, 200, 0.6);
+	transition: top, height 1s, 1s;
+}
+.music_list p{
+	cursor: pointer;
+	width: 84px;
+	position: absolute;
+	left: 50%;
+	margin-left: -42px;
+	margin-top: 0px;
+	z-index: 999;
+	font-size: 16px;
+	color: #333;
+}
+.music_list_hide{
+	position: absolute;
+	right: 3%;
+	font-size: 40px;
+	font-weight: bold;
+	color: #666;
+	cursor: pointer;
+	display: none;
+}
+.music_list_ul{
+	margin-top: 20px;
+}
+.music_list_ul li{
+	width: 80%;
+	list-style: none;
+	height: 20px;
+	padding: 5px 5%;
+	border-bottom: 1px solid #999;
+	/*margin: 0 auto;*/
+}
+.music_list_ul li span{
+	cursor: pointer;
+	color: #333;
+	font-size: 14px;
 }
