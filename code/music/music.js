@@ -17,10 +17,10 @@ window.onload = function(){
 	var mode = document.querySelector(".mode");
 	var shouListBtn = document.querySelector(".music_list_btn");
 	var hideBtn = document.querySelector(".music_list_hide");
-
 	var s = 0;
 	var i=0;
 	var n=0;
+	var c = 0;
 	mode.onclick = function(){
 		console.log(n, i);
 		n=playMode(n, n, mode);		
@@ -28,6 +28,15 @@ window.onload = function(){
 	getData(obj, cover, fengmian, intro_name, intro_artist, i);	
 	play.onclick = function(){
 		playing(disc, citou, play, pause, obj);
+	}
+	citou.onclick = function(){
+		if(c==0){
+			playing(disc, citou, play, pause, obj);
+			c=1;
+		}else if(c==1){
+			pausing(disc, citou, play, pause, obj);
+			c=0;
+		}
 	}
 	pause.onclick = function(){
 		pausing(disc, citou, play, pause, obj);
