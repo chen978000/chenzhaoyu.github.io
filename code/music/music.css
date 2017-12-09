@@ -168,7 +168,7 @@ body, div, ul{
 	height: 30px;
 	overflow: auto;
 	background: rgba(200, 200, 200, 0.6);
-	transition: top, height 1s, 1s;
+	transition: top, height 0.5s, 0.5s ;
 }
 .music_list p{
 	cursor: pointer;
