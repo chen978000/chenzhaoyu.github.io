@@ -1,6 +1,7 @@
 // 主题：仿网易云音乐js
 // 作者：陈昭雨
-// 更新时间：20171207 
+// 更新时间：20171209
+// 20171209更新内容：增加歌单显示、隐藏、点击歌单播放、播放中歌曲颜色功能 
 window.onload = function(){
 	var disc = document.querySelector(".disc");
 	var citou = document.querySelector(".citou");
@@ -14,6 +15,10 @@ window.onload = function(){
 	var next = document.querySelector(".control_next");
 	var pre = document.querySelector(".control_pre");
 	var mode = document.querySelector(".mode");
+	var shouListBtn = document.querySelector(".music_list_btn");
+	var hideBtn = document.querySelector(".music_list_hide");
+
+	var s = 0;
 	var i=0;
 	var n=0;
 	mode.onclick = function(){
@@ -30,8 +35,8 @@ window.onload = function(){
 	obj.ontimeupdate = function(){
 		scrolling(obj, next);
 	}
+	//下一首
 	next.onclick = function(){
-
 		switch(n){
 			case 0:
 				i++;
@@ -47,9 +52,11 @@ window.onload = function(){
 			break;
 		}
 		console.log(n, i);
+		listColor(aMusic, i);
 		getData(obj, cover, fengmian, intro_name, intro_artist, i);
 		playing(disc, citou, play, pause, obj);
 	}
+	//上一首
 	pre.onclick = function(){
 		switch(n){
 			case 0:
@@ -66,11 +73,34 @@ window.onload = function(){
 			break;
 		}
 		console.log(n, i);
+		listColor(aMusic, i);
 		getData(obj, cover, fengmian, intro_name, intro_artist, i);
 		playing(disc, citou, play, pause, obj);
 	}
-	drag();
+	// 显示歌单
+	shouListBtn.onclick = function(){
+		showList(hideBtn);
+	}
+	// 隐藏歌单
+	hideBtn.onclick = function(){
+		hideList(hideBtn);
+	}
+	//加载歌单
+	getList();
+	//点击歌单播放
+	var aMusic = document.querySelectorAll(".listMusic");
+	for(var j=0; j<aMusic.length;j++){
+		aMusic[j].index = j;
+		aMusic[j].onclick = function(){
+			i=this.index;
+			getData(obj, cover, fengmian, intro_name, intro_artist, i);
+			playing(disc, citou, play, pause, obj);
+			listColor(aMusic, i);
+		}
+	}
 }
+
+//功能模块
 //数据读取
 function getData(obj, cover, fengmian, intro_name, intro_artist, i){
 	obj.src = "http://music.163.com/song/media/outer/url?id="+List[i].id+".mp3";	
@@ -112,7 +142,6 @@ function scrolling(obj, next){
 	}
 	bar.style.width = (progress.offsetWidth*ratio)+"px";
 	point.style.left = (progress.offsetWidth*ratio)+"px";
-	// console.log(obj.currentTime);
 	if(obj.ended){
 		next.click();
 	}
@@ -127,6 +156,7 @@ function playMode(t, n, mode){
 	imgMode(n, mode);
 	return t;
 }
+//播放模式图标
 function imgMode(n, mode){
 	switch(n){
 		case 0:
@@ -147,10 +177,50 @@ function imgMode(n, mode){
 	}
 	console.log(n, mode);
 }
-//随机音乐
+//随机歌单
 function randomMode(){
-	var x = Math.floor(Math.random()*(List.length-1));
+	var x = Math.floor(Math.random()*(List.length));		
 	return x;
+}
+//显示歌单
+function showList(hideBtn){
+	var musicList = document.querySelector(".music_list");
+	musicList.style.top = "45%";
+	musicList.style.height = "400px";
+	hideBtn.style.display = "block";
+	musicList.onscroll = function(){
+		hideBtn.style.top = musicList.scrollTop+"px";	
+	}
+
+}
+//隐藏歌单
+function hideList(hideBtn){
+	var musicList = document.querySelector(".music_list");
+	musicList.style.top = "95%";
+	musicList.style.height = "30px";
+	hideBtn.style.display = "none";
+	musicList.scrollTop = "0";
+}
+//创建歌单列表
+function getList(){
+	var listUl = document.querySelector(".music_list_ul");
+	for(var j=0; j<List.length;j++){
+		var content = document.createTextNode(List[j].name+"——"+List[j].artist);
+		var newSpan = document.createElement("span");
+		newSpan.className = "listMusic";
+		var newLi = document.createElement("li");
+		newSpan.appendChild(content);
+		newLi.appendChild(newSpan);
+		listUl.appendChild(newLi);
+	}
+	console.log(listUl);
+}
+//播放中歌曲颜色
+function  listColor(aMusic, i){
+	for(var k=0; k<aMusic.length; k++){
+		aMusic[k].style.color = "#333";			
+	}
+	aMusic[i].style.color = "#E22319";
 }
 function drag(disc, citou, play, pause, obj){
 	var progress = document.querySelector(".progress");
@@ -305,4 +375,3 @@ var List =[
 	"artist":"许巍"
 	}
 ];
-
