@@ -196,7 +196,7 @@ body, div, ul{
 .music_list_ul li{
 	width: 80%;
 	list-style: none;
-	height: 20px;
+	min-height: 20px;
 	padding: 5px 5%;
 	border-bottom: 1px solid #999;
 	/*margin: 0 auto;*/
