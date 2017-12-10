@@ -29,6 +29,7 @@ window.onload = function(){
 	play.onclick = function(){
 		playing(disc, citou, play, pause, obj);
 	}
+	// console.log(obj);	
 	citou.onclick = function(){
 		if(c==0){
 			playing(disc, citou, play, pause, obj);
@@ -107,6 +108,27 @@ window.onload = function(){
 			listColor(aMusic, i);
 		}
 	}
+	var point = document.querySelector(".point");
+	point.onmousedown =function(ev){
+		ev.preventDefault();
+		console.log(point.onmousedown);
+		ev =event || window.event;
+		drag(ev);
+		
+	}
+	point.touchstart  =function(ev){
+		ev.preventDefault();
+		console.log(point.onmousedown);
+		ev =event || window.event;
+		drag(ev);		
+	}
+
+document.onmouseup = function(){
+		document.onmousemove= null;
+}
+document.touchend = function(){
+		document.touchmove= null;
+}	
 }
 
 //功能模块
@@ -213,7 +235,7 @@ function hideList(hideBtn){
 //创建歌单列表
 function getList(){
 	var listUl = document.querySelector(".music_list_ul");
-	for(var j=0; j<List.length;j++){
+	for(var j=0; j<List.length; j++){
 		var content = document.createTextNode(List[j].name+"——"+List[j].artist+"——"+List[j].album);
 		var newSpan = document.createElement("span");
 		newSpan.className = "listMusic";
@@ -222,7 +244,7 @@ function getList(){
 		newLi.appendChild(newSpan);
 		listUl.appendChild(newLi);
 	}
-	console.log(listUl);
+	// console.log(listUl);
 }
 //播放中歌曲颜色
 function  listColor(aMusic, i){
@@ -231,18 +253,51 @@ function  listColor(aMusic, i){
 	}
 	aMusic[i].style.color = "#E22319";
 }
-function drag(disc, citou, play, pause, obj){
+
+function drag(ev, o){
+	console.log(ev);
 	var progress = document.querySelector(".progress");
 	var bar = document.querySelector(".bar");
 	var point = document.querySelector(".point");
-	var musicTime = document.querySelector(".musci_time");
-	point.onmousedown = function(){
-		pausing(disc, citou, play, pause, obj);
-	}
-	point.onmouseup = function(){
-		playing(disc, citou, play, pause, obj);
-	}
+		ev =event || window.event;
+		var oldLeft = ev.clientX-point.offsetLeft;
+		document.onmousemove = function(ev){
+			ev.preventDefault();
+			var obj=document.getElementById("player");	
+			console.log(obj);
+			var curLeft = ev.clientX-oldLeft;
+			if(curLeft<0){
+				point.style.left = 0;
+			}else if(curLeft>progress.offsetWidth){
+				point.style.left = progress.offsetWidth+"px";
+			}else{
+				point.style.left = curLeft+"px";
+
+			}
+			console.log(point.offsetLeft/progress.offsetWidth);
+			obj.currentTime=obj.duration*(point.offsetLeft/progress.offsetWidth);
+		}
+		var point = document.querySelector(".point");
+		ev =event || window.event;
+		var oldLeft = ev.clientX-point.offsetLeft;
+		document.touchmove = function(ev){
+			ev.preventDefault();
+			var obj=document.getElementById("player");	
+			console.log(obj);
+			var curLeft = ev.clientX-oldLeft;
+			if(curLeft<0){
+				point.style.left = 0;
+			}else if(curLeft>progress.offsetWidth){
+				point.style.left = progress.offsetWidth+"px";
+			}else{
+				point.style.left = curLeft+"px";
+
+			}
+			console.log(point.offsetLeft/progress.offsetWidth);
+			obj.currentTime=obj.duration*(point.offsetLeft/progress.offsetWidth);
+		}
 }
+
 //毫秒转换00:00
 function setTime(x){
 	var m = Math.floor(x/60);
