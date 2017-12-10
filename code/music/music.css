@@ -1,6 +1,8 @@
 /*主题：仿网易云音乐css
 作者：陈昭雨
-更新时间：20171209*/
+更新时间：20171210
+更新内容：
+20171210修复歌单在底部也会滑动的问题。*/
 @-webkit-keyframes disc{
 	100%{
 		-webkit-transform: rotateZ(360deg);
@@ -170,6 +172,7 @@ body, div, ul{
 	overflow: auto;
 	background: rgba(200, 200, 200, 0.8);
 	transition: top, height 0.5s, 0.5s ;
+	overflow: hidden;
 }
 .music_list::-webkit-scrollbar{
 	display: none;
