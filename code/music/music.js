@@ -124,15 +124,18 @@ window.onload = function(){
 	document.onmouseup = function(){
 		document.onmousemove= null;
 	}
+
 	//移动端拖动进度条
 	point.addEventListener("touchstart", function(ev){
 		ev =ev.touches[0];
 		var oldLeft = ev.pageX-point.offsetLeft;	
-		document.addEventListener("touchmove", function(event){mobileMove(ev, oldLeft);}, false);	
+		var fn = function(event){mobileMove(ev, oldLeft);}
+		document.addEventListener("touchmove", fn, false);	
+		document.addEventListener("touchend", function(){
+			document.removeEventListener("touchmove", fn, false);
+		}, false); 	
 	}, false);
-	document.addEventListener("touchend", function(){
-		document.removeEventListener("touchmove", function(event){mobileMove(ev, oldLeft);}, false);
-	}, false); 	
+	
 }
 
 //功能模块
@@ -275,12 +278,12 @@ function drag(ev){
 				point.style.left = progress.offsetWidth+"px";
 			}else{
 				point.style.left = curLeft+"px";
-
 			}
 			console.log(point.offsetLeft/progress.offsetWidth);
 			obj.currentTime=obj.duration*(point.offsetLeft/progress.offsetWidth);
 		}
 }
+
 //移动端拖动
 function mobileMove(ev, oldLeft){
 	ev =event || window.event;
