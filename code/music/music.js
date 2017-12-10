@@ -111,18 +111,15 @@ window.onload = function(){
 	var point = document.querySelector(".point");
 	point.onmousedown =function(ev){
 		ev.preventDefault();
-		console.log(point.onmousedown);
 		ev =event || window.event;
 		drag(ev);
 		
 	}
-	point.touchstart  =function(ev){
-		ev.preventDefault();
-		console.log(point.onmousedown);
-		ev =event || window.event;
-		drag(ev);		
-	}
-
+	point.addEventListener("touchstart", function(ev){
+		// ev.preventDefault();
+		ev =ev.touches[0];
+		mobileDrag(ev);
+	}, false);
 document.onmouseup = function(){
 		document.onmousemove= null;
 }
@@ -253,9 +250,8 @@ function  listColor(aMusic, i){
 	}
 	aMusic[i].style.color = "#E22319";
 }
-
-function drag(ev, o){
-	console.log(ev);
+//PC端拖动
+function drag(ev){
 	var progress = document.querySelector(".progress");
 	var bar = document.querySelector(".bar");
 	var point = document.querySelector(".point");
@@ -264,26 +260,6 @@ function drag(ev, o){
 		document.onmousemove = function(ev){
 			ev.preventDefault();
 			var obj=document.getElementById("player");	
-			console.log(obj);
-			var curLeft = ev.clientX-oldLeft;
-			if(curLeft<0){
-				point.style.left = 0;
-			}else if(curLeft>progress.offsetWidth){
-				point.style.left = progress.offsetWidth+"px";
-			}else{
-				point.style.left = curLeft+"px";
-
-			}
-			console.log(point.offsetLeft/progress.offsetWidth);
-			obj.currentTime=obj.duration*(point.offsetLeft/progress.offsetWidth);
-		}
-		var point = document.querySelector(".point");
-		ev =event || window.event;
-		var oldLeft = ev.clientX-point.offsetLeft;
-		document.touchmove = function(ev){
-			ev.preventDefault();
-			var obj=document.getElementById("player");	
-			console.log(obj);
 			var curLeft = ev.clientX-oldLeft;
 			if(curLeft<0){
 				point.style.left = 0;
@@ -297,7 +273,30 @@ function drag(ev, o){
 			obj.currentTime=obj.duration*(point.offsetLeft/progress.offsetWidth);
 		}
 }
+//移动端拖动
+function mobileDrag(ev){
+	var progress = document.querySelector(".progress");
+	var bar = document.querySelector(".bar");
+	var point = document.querySelector(".point");
+		var oldLeft = ev.clientX-point.offsetLeft;
+		document.addEventListener("touchmove", function(ev){
+			ev.preventDefault();
+			ev =ev.touches[0];
+			// console.log(ev);
+			var obj=document.getElementById("player");	
+			var curLeft = ev.pageX-oldLeft;
+			if(curLeft<0){
+				point.style.left = 0;
+			}else if(curLeft>progress.offsetWidth){
+				point.style.left = progress.offsetWidth+"px";
+			}else{
+				point.style.left = curLeft+"px";
 
+			}
+			console.log(point.offsetLeft/progress.offsetWidth);
+			obj.currentTime=obj.duration*(point.offsetLeft/progress.offsetWidth);
+		}, false);
+}
 //毫秒转换00:00
 function setTime(x){
 	var m = Math.floor(x/60);
