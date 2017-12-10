@@ -1,7 +1,8 @@
 // 主题：仿网易云音乐js
 // 作者：陈昭雨
-// 更新时间：20171209
+// 更新时间：20171210
 // 20171209更新内容：增加歌单显示、隐藏、点击歌单播放、播放中歌曲颜色功能 
+// 20171210更新内容：增加进度条拖动功能，修复歌单在底部滑动BUG 
 window.onload = function(){
 	var disc = document.querySelector(".disc");
 	var citou = document.querySelector(".citou");
@@ -21,15 +22,18 @@ window.onload = function(){
 	var i=0;
 	var n=0;
 	var c = 0;
+	//获取数据
+	getData(obj, cover, fengmian, intro_name, intro_artist, i);	
+	//播放模式选择
 	mode.onclick = function(){
 		console.log(n, i);
 		n=playMode(n, n, mode);		
 	}
-	getData(obj, cover, fengmian, intro_name, intro_artist, i);	
+	//点击播放
 	play.onclick = function(){
 		playing(disc, citou, play, pause, obj);
 	}
-	// console.log(obj);	
+	//点击磁头播放或暂停
 	citou.onclick = function(){
 		if(c==0){
 			playing(disc, citou, play, pause, obj);
@@ -39,9 +43,11 @@ window.onload = function(){
 			c=0;
 		}
 	}
+	//点击暂停
 	pause.onclick = function(){
 		pausing(disc, citou, play, pause, obj);
 	}
+	//音乐更新
 	obj.ontimeupdate = function(){
 		scrolling(obj, next);
 	}
@@ -108,24 +114,25 @@ window.onload = function(){
 			listColor(aMusic, i);
 		}
 	}
+	//PC端拖动进度条
 	var point = document.querySelector(".point");
 	point.onmousedown =function(ev){
 		ev.preventDefault();
 		ev =event || window.event;
 		drag(ev);
-		
 	}
-	point.addEventListener("touchstart", function(ev){
-		// ev.preventDefault();
-		ev =ev.touches[0];
-		mobileDrag(ev);
-	}, false);
-document.onmouseup = function(){
+	document.onmouseup = function(){
 		document.onmousemove= null;
-}
-document.touchend = function(){
-		document.touchmove= null;
-}	
+	}
+	//移动端拖动进度条
+	point.addEventListener("touchstart", function(ev){
+		ev =ev.touches[0];
+		var oldLeft = ev.pageX-point.offsetLeft;	
+		document.addEventListener("touchmove", function(event){mobileMove(ev, oldLeft);}, false);	
+	}, false);
+	document.addEventListener("touchend", function(){
+		document.removeEventListener("touchmove", function(event){mobileMove(ev, oldLeft);}, false);
+	}, false); 	
 }
 
 //功能模块
@@ -219,7 +226,7 @@ function showList(hideBtn){
 	musicList.onscroll = function(){
 		hideBtn.style.top = musicList.scrollTop+"px";	
 	}
-
+	musicList.style.overflow = "auto";
 }
 //隐藏歌单
 function hideList(hideBtn){
@@ -228,6 +235,7 @@ function hideList(hideBtn){
 	musicList.style.height = "25px";
 	hideBtn.style.display = "none";
 	musicList.scrollTop = "0";
+	musicList.style.overflow = "hidden";
 }
 //创建歌单列表
 function getList(){
@@ -274,29 +282,26 @@ function drag(ev){
 		}
 }
 //移动端拖动
-function mobileDrag(ev){
+function mobileMove(ev, oldLeft){
+	ev =event || window.event;
+	ev.preventDefault();
+	ev = ev.touches[0];
 	var progress = document.querySelector(".progress");
-	var bar = document.querySelector(".bar");
 	var point = document.querySelector(".point");
-		var oldLeft = ev.clientX-point.offsetLeft;
-		document.addEventListener("touchmove", function(ev){
-			ev.preventDefault();
-			ev =ev.touches[0];
-			// console.log(ev);
-			var obj=document.getElementById("player");	
-			var curLeft = ev.pageX-oldLeft;
-			if(curLeft<0){
-				point.style.left = 0;
-			}else if(curLeft>progress.offsetWidth){
-				point.style.left = progress.offsetWidth+"px";
-			}else{
-				point.style.left = curLeft+"px";
-
-			}
-			console.log(point.offsetLeft/progress.offsetWidth);
-			obj.currentTime=obj.duration*(point.offsetLeft/progress.offsetWidth);
-		}, false);
+	console.log(oldLeft, ev);
+	var obj=document.getElementById("player");	
+	var curLeft = ev.clientX-oldLeft;
+	console.log(ev.clientX);
+	if(curLeft<0){
+		point.style.left = 0;
+	}else if(curLeft>progress.offsetWidth){
+		point.style.left = progress.offsetWidth+"px";
+	}else{
+		point.style.left = curLeft+"px";
+	}
+	obj.currentTime=obj.duration*(point.offsetLeft/progress.offsetWidth);
 }
+
 //毫秒转换00:00
 function setTime(x){
 	var m = Math.floor(x/60);
