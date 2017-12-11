@@ -3,6 +3,7 @@
 // 更新时间：20171210
 // 20171209更新内容：增加歌单显示、隐藏、点击歌单播放、播放中歌曲颜色功能 
 // 20171210更新内容：增加进度条拖动功能，修复歌单在底部滑动BUG 
+// 20171211更新内容：增加title显示播放状态
 window.onload = function(){
 	var disc = document.querySelector(".disc");
 	var citou = document.querySelector(".citou");
@@ -31,12 +32,12 @@ window.onload = function(){
 	}
 	//点击播放
 	play.onclick = function(){
-		playing(disc, citou, play, pause, obj);
+		playing(disc, citou, play, pause, obj, i);
 	}
 	//点击磁头播放或暂停
 	citou.onclick = function(){
 		if(c==0){
-			playing(disc, citou, play, pause, obj);
+			playing(disc, citou, play, pause, obj, i);
 			c=1;
 		}else if(c==1){
 			pausing(disc, citou, play, pause, obj);
@@ -70,7 +71,7 @@ window.onload = function(){
 		console.log(n, i);
 		listColor(aMusic, i);
 		getData(obj, cover, fengmian, intro_name, intro_artist, i);
-		playing(disc, citou, play, pause, obj);
+		playing(disc, citou, play, pause, obj, i);
 	}
 	//上一首
 	pre.onclick = function(){
@@ -91,7 +92,7 @@ window.onload = function(){
 		console.log(n, i);
 		listColor(aMusic, i);
 		getData(obj, cover, fengmian, intro_name, intro_artist, i);
-		playing(disc, citou, play, pause, obj);
+		playing(disc, citou, play, pause, obj, i);
 	}
 	// 显示歌单
 	shouListBtn.onclick = function(){
@@ -110,7 +111,7 @@ window.onload = function(){
 		aMusic[j].onclick = function(){
 			i=this.index;
 			getData(obj, cover, fengmian, intro_name, intro_artist, i);
-			playing(disc, citou, play, pause, obj);
+			playing(disc, citou, play, pause, obj, i);
 			listColor(aMusic, i);
 		}
 	}
@@ -143,18 +144,20 @@ window.onload = function(){
 function getData(obj, cover, fengmian, intro_name, intro_artist, i){
 	obj.src = "http://music.163.com/song/media/outer/url?id="+List[i].id+".mp3";	
 	cover.style.backgroundImage = "url("+List[i].img+")";
+	cover.style.opacity = 0.5;
 	fengmian.src = List[i].img;
 	intro_name.innerHTML = List[i].name;
 	intro_artist.innerHTML = List[i].artist;
 }
 // 播放
-function playing(disc, citou, play, pause, obj){
+function playing(disc, citou, play, pause, obj, i){
 	disc.classList.add("running");
 	disc.classList.remove("stop");
 	citou.style.transform = "rotate(0)";
 	play.style.display = "none";
 	pause.style.display = "inline";
 	obj.play();
+	document.title =List[i].name+" 播放中";
 }
 //暂停
 function pausing(disc, citou, play, pause, obj){
@@ -164,6 +167,7 @@ function pausing(disc, citou, play, pause, obj){
 	play.style.display = "inline";
 	pause.style.display = "none";
 	obj.pause();	
+	document.title =" 陈昭雨的云音乐";
 }
 //播放时滚动条的变化
 function scrolling(obj, next){
