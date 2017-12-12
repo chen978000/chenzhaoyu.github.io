@@ -172,9 +172,6 @@ function playing(disc, citou, play, pause, obj, i){
 function pausing(disc, citou, play, pause, obj){
 	disc.classList.add("stop");
 	disc.classList.remove("running");
-    var iTransform = disc.style.transform; //获取当前元素的动画改变，transform的值
-    var cTransform = disc.style.transform; //获取当前元素的动画改变，transform的值
-    disc.style.transform=cTransform;
 	citou.style.transform = "rotate(-25deg)";
 	play.style.display = "inline";
 	pause.style.display = "none";
