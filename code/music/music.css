@@ -1,8 +1,8 @@
-/*主题：仿网易云音乐css
+/* 主题：仿网易云音乐css
 作者：陈昭雨
-更新时间：20171210
-更新内容：
-20171210修复歌单在底部也会滑动的问题。*/
+更新时间：20171212
+20171210更新内容：修复歌单在底部也会滑动的问题。
+20171212更新内容：增加歌单搜索 */
 @-webkit-keyframes disc{
 	100%{
 		-webkit-transform: rotateZ(360deg);
@@ -207,4 +207,45 @@ body, div, ul{
 	cursor: pointer;
 	color: #333;
 	font-size: 14px;
+}
+.search{
+	width: 100%;
+	height: 30px;
+	position: fixed;
+	z-index: 2;
+	top: 0px;
+	left: 0%;
+}
+.search .search_box{
+	width: 100%;
+	height: 30px;
+	min-width: 320px;
+	max-width: 640px;
+	margin: 0 auto;
+	position: relative;
+	display: none;
+}
+.search .search_box .search_text{
+	box-sizing: border-box;
+	height: 30px;
+	width: 90%;
+	border-radius: 15px 0 0 15px;
+	padding:5px 10px; 
+	outline: none;
+}
+.search .search_box .search_btn{
+	display: block;
+	width: 10%;
+	min-width: 50px;
+	height: 30px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	border-radius: 0 20px 20px 0;
+	text-align: center;
+	background: #333;
+	line-height: 30px;
+	font-size: 14px;
+	color: #EEE;
+	cursor: pointer;
 }
