@@ -213,7 +213,7 @@ body, div, ul{
 	height: 30px;
 	position: fixed;
 	z-index: 2;
-	top: 0px;
+	top: 5px;
 	left: 0%;
 }
 .search .search_box{
