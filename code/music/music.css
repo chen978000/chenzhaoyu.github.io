@@ -73,10 +73,11 @@ body{
 	justify-content: center;
 	align-items: center;
 	animation: disc 20s linear infinite;
-	animation-play-state: paused;
+
 }
 .running{
 	animation-play-state: running;
+	animation-play-state: paused;
 }
 .stop{
 	animation-play-state: paused;
