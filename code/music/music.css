@@ -2,25 +2,15 @@
 作者：陈昭雨
 更新时间：20171212
 20171210更新内容：修复歌单在底部也会滑动的问题。
-20171212更新内容：增加歌单搜索样式 */
+20171212更新内容：增加歌单搜索样式
+20171213更新内容：增加disc外容器样式(解决ios中animation-play-state无效的问题) */
+
 @keyframes disc{
-	/* 0%{
-		transform: rotateZ(0deg);
-	}
-	50%{
-		transform: rotateZ(180deg);
-	} */
 	100%{
 		transform: rotateZ(360deg);
 	}
 }
 @-webkit-keyframes disc{
-	/* 0%{
-		-webkit-transform: rotateZ(0deg);
-	}
-	50%{
-		-webkit-transform: rotateZ(180deg);
-	} */
 	100%{
 		-webkit-transform: rotateZ(360deg);
 	}
@@ -76,19 +66,27 @@ body{
 	position: absolute;
 	top: 80px;
 }
+.disc_box{
+	border: 1px solid black;
+	width: 250px;
+	height: 250px;
+	position: absolute;
+	top: 80px;
+}
 .disc{
 	position: absolute;
 	width: 250px;
 	height: 250px;
-	top: 80px;
+	/* top: 80px; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	animation: disc 10s linear infinite;
-	animation-play-state: paused;
-}
-.running{	animation-play-state: running;
 
+	/* animation-play-state: paused; */
+}
+.running{
+	animation-play-state: running;
+	animation: disc 10s linear infinite;
 }
 .stop{
 	animation-play-state: paused;
