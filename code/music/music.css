@@ -2,7 +2,7 @@
 作者：陈昭雨
 更新时间：20171212
 20171210更新内容：修复歌单在底部也会滑动的问题。
-20171212更新内容：增加歌单搜索 */
+20171212更新内容：增加歌单搜索样式 */
 @-webkit-keyframes disc{
 	100%{
 		-webkit-transform: rotateZ(360deg);
@@ -217,7 +217,7 @@ body, div, ul{
 	left: 0%;
 }
 .search .search_box{
-	width: 100%;
+	width: 90%;
 	height: 30px;
 	min-width: 320px;
 	max-width: 640px;
@@ -232,6 +232,7 @@ body, div, ul{
 	border-radius: 15px 0 0 15px;
 	padding:5px 10px; 
 	outline: none;
+	font-size: 14px;
 }
 .search .search_box .search_btn{
 	display: block;
