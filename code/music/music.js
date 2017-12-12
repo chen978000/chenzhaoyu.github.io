@@ -1,10 +1,10 @@
 // 主题：仿网易云音乐js
 // 作者：陈昭雨
-// 更新时间：20171210
+// 更新时间：20171212
 // 20171209更新内容：增加歌单显示、隐藏、点击歌单播放、播放中歌曲颜色功能 
 // 20171210更新内容：增加进度条拖动功能，修复歌单在底部滑动BUG 
 // 20171211更新内容：增加title显示播放状态
-// 20171211更新内容：增加搜索歌单功能
+// 20171212更新内容：增加搜索歌单功能、页面初始随机歌曲
 window.onload = function(){
 	var disc = document.querySelector(".disc");
 	var citou = document.querySelector(".citou");
@@ -20,9 +20,8 @@ window.onload = function(){
 	var mode = document.querySelector(".mode");
 	var shouListBtn = document.querySelector(".music_list_btn");
 	var hideBtn = document.querySelector(".music_list_hide");
-
 	var s = 0;
-	var i=0;
+	var i=randomMode();
 	var n=0;
 	var c = 0;
 	//获取数据
@@ -141,9 +140,12 @@ window.onload = function(){
 	//搜索歌单
 	var searchBtn = document.querySelector(".search_btn");
 	searchBtn.onclick = function(){
-		searchMusic();
+		searchMusic(i);
 	}
-	
+	var searchText = document.querySelector(".search_text");
+	searchText.onfocus = function(){
+		searchText.value = "";
+	}
 }
 
 //功能模块
@@ -279,13 +281,14 @@ function  listColor(aMusic, i){
 	aMusic[i].style.color = "#E22319";
 }
 //搜索歌单
-function searchMusic(){
+function searchMusic(i){
 	var musicList = document.querySelector(".music_list");
 	var searchText = document.querySelector(".search_text");
 	var aMusic = document.querySelectorAll(".listMusic");
 	var text = searchText.value;
 	for(var j=0;j<List.length;j++){
 		aMusic[j].style.color = "#333";	
+		listColor(aMusic, i);
 		if(text == List[j].name){
 			musicList.scrollTop = aMusic[j].offsetTop-10;
 			aMusic[j].style.color = "blue";
