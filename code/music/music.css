@@ -218,8 +218,10 @@ body{
 	position: fixed;
 	z-index: 2;
 	top: 5px;
+	left: 0;
 }
 .search .search_box{
+	box-sizing: border-box;
 	width: 90%;
 	height: 30px;
 	min-width: 320px;
