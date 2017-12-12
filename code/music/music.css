@@ -72,11 +72,12 @@ body{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	animation: disc 20s linear infinite;
-	animation-play-state: paused;
+
+	/* animation-play-state: paused; */
 }
 .running{
 	animation-play-state: running;
+	animation: disc 20s linear infinite;
 }
 .stop{
 	animation-play-state: paused;
