@@ -174,7 +174,7 @@ function pausing(disc, citou, play, pause, obj){
 	disc.classList.remove("running");
     var iTransform = disc.style.transform; //获取当前元素的动画改变，transform的值
     var cTransform = disc.style.transform; //获取当前元素的动画改变，transform的值
-    disc.style.transform=cTransform === 'none'? iTransform: iTransform.concat(' ', cTransform);//由于父元素没有动画，所以每次赋值的时候，需要将上次父元素的状态加上
+    disc.style.transform=cTransform;
 	citou.style.transform = "rotate(-25deg)";
 	play.style.display = "inline";
 	pause.style.display = "none";
