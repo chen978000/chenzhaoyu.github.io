@@ -3,6 +3,11 @@
 更新时间：20171212
 20171210更新内容：修复歌单在底部也会滑动的问题。
 20171212更新内容：增加歌单搜索样式 */
+@keyframes disc{
+	100%{
+		transform: rotateZ(360deg);
+	}
+}
 @-webkit-keyframes disc{
 	100%{
 		-webkit-transform: rotateZ(360deg);
