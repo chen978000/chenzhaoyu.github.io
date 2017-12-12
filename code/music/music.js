@@ -289,7 +289,7 @@ function searchMusic(i){
 	for(var j=0;j<List.length;j++){
 		aMusic[j].style.color = "#333";	
 		listColor(aMusic, i);
-		if(text == List[j].name){
+		if(List[j].name.indexOf(text)>=0){
 			musicList.scrollTop = aMusic[j].offsetTop-10;
 			aMusic[j].style.color = "blue";
 			searchText.value = text;
