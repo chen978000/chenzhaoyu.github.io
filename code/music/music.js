@@ -180,7 +180,7 @@ function pausing(disc, citou, play, pause, obj){
 	}else{
 		boxDeg = eval("get"+getComputedStyle(discBox).transform);
 	}
-	boxDeg = discDeg+boxDeg;
+	boxDeg = discDeg+boxDeg+5;
 	discBox.style.transform = "rotate("+(boxDeg)+"deg)";
 	//否则下面两条即可实现
 	disc.classList.add("stop");
