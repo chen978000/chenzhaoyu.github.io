@@ -5,6 +5,7 @@
 // 20171210更新内容：增加进度条拖动功能，修复歌单在底部滑动BUG 
 // 20171211更新内容：增加title显示播放状态
 // 20171212更新内容：增加搜索歌单功能、页面初始随机歌曲
+// 20171213更新内容：修复ios safari下animation-play-state失效问题
 window.onload = function(){
 	var disc = document.querySelector(".disc");
 	var citou = document.querySelector(".citou");
@@ -170,8 +171,20 @@ function playing(disc, citou, play, pause, obj, i){
 }
 //暂停
 function pausing(disc, citou, play, pause, obj){
-	disc.classList.remove("running");
+	//ios Safari不兼容animation-play-state的其他方法
+	var discBox = document.querySelector(".disc_box");
+	var discDeg = eval("get"+getComputedStyle(disc).transform);
+	var boxDeg;
+	if(getComputedStyle(discBox).transform=="none"){
+		boxDeg = 0;
+	}else{
+		boxDeg = eval("get"+getComputedStyle(discBox).transform);
+	}
+	boxDeg = discDeg+boxDeg;
+	discBox.style.transform = "rotate("+(boxDeg)+"deg)";
+	//否则下面两条即可实现
 	disc.classList.add("stop");
+	disc.classList.remove("running");
 	citou.style.transform = "rotate(-25deg)";
 	play.style.display = "inline";
 	pause.style.display = "none";
@@ -343,16 +356,14 @@ function mobileMove(ev, oldLeft){
 	obj.currentTime=obj.duration*(point.offsetLeft/progress.offsetWidth);
 }
 
-/* 
-    * 解析matrix矩阵，0°-360°，返回旋转角度 
-    * 当a=b||-a=b,0<=deg<=180 
-    * 当-a+b=180,180<=deg<=270 
-    * 当a+b=180,270<=deg<=360 
-    * 
-    * 当0<=deg<=180,deg=d; 
-    * 当180<deg<=270,deg=180+c; 
-    * 当270<deg<=360,deg=360-(c||d); 
-    * */  
+//将matrix转换为rotate
+// 解析matrix矩阵，0°-360°，返回旋转角度 
+// 当a=b||-a=b,0<=deg<=180 
+// 当-a+b=180,180<=deg<=270 
+// 当a+b=180,270<=deg<=360 
+// 当0<=deg<=180,deg=d; 
+// 当180<deg<=270,deg=180+c; 
+// 当270<deg<=360,deg=360-(c||d); 
 function getmatrix(a,b,c,d,e,f){  
     var aa=Math.round(180*Math.asin(a)/ Math.PI);  
     var bb=Math.round(180*Math.acos(b)/ Math.PI);  
@@ -366,8 +377,7 @@ function getmatrix(a,b,c,d,e,f){
     }else if(aa+bb==180){  
         deg=360-cc||360-dd;  
     }  
-    return deg>=360?0:deg;  
-    //return (aa+','+bb+','+cc+','+dd);  
+    return deg>=360?0:deg;   
 } 
 //毫秒转换00:00
 function setTime(x){
