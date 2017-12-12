@@ -4,11 +4,23 @@
 20171210更新内容：修复歌单在底部也会滑动的问题。
 20171212更新内容：增加歌单搜索样式 */
 @keyframes disc{
+	/* 0%{
+		transform: rotateZ(0deg);
+	}
+	50%{
+		transform: rotateZ(180deg);
+	} */
 	100%{
 		transform: rotateZ(360deg);
 	}
 }
 @-webkit-keyframes disc{
+	/* 0%{
+		-webkit-transform: rotateZ(0deg);
+	}
+	50%{
+		-webkit-transform: rotateZ(180deg);
+	} */
 	100%{
 		-webkit-transform: rotateZ(360deg);
 	}
@@ -72,12 +84,11 @@ body{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
-	/* animation-play-state: paused; */
+	animation: disc 10s linear infinite;
+	animation-play-state: paused;
 }
-.running{
-	animation-play-state: running;
-	animation: disc 20s linear infinite;
+.running{	animation-play-state: running;
+
 }
 .stop{
 	animation-play-state: paused;
