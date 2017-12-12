@@ -170,14 +170,8 @@ function playing(disc, citou, play, pause, obj, i){
 }
 //暂停
 function pausing(disc, citou, play, pause, obj){
-	var deg = eval('get'+getComputedStyle(disc).transform);
-	disc.classList.add("stop");
 	disc.classList.remove("running");
-
-	// disc.style.transform = rotate(0deg);
-
-	disc.style.transform = "rotate("+deg+"deg)";
-	console.log(disc.style.transform);
+	disc.classList.add("stop");
 	citou.style.transform = "rotate(-25deg)";
 	play.style.display = "inline";
 	pause.style.display = "none";
