@@ -1,391 +1,263 @@
-// 主题：仿网易云音乐js
-// 作者：陈昭雨
-// 更新时间：20171212
-// 20171209更新内容：增加歌单显示、隐藏、点击歌单播放、播放中歌曲颜色功能 
-// 20171210更新内容：增加进度条拖动功能，修复歌单在底部滑动BUG 
-// 20171211更新内容：增加title显示播放状态
-// 20171212更新内容：增加搜索歌单功能、页面初始随机歌曲
-window.onload = function(){
-	var disc = document.querySelector(".disc");
-	var citou = document.querySelector(".citou");
-	var play = document.querySelector(".control_play");
-	var pause = document.querySelector(".control_pause");
-	var obj=document.getElementById("player");
-	var cover = document.querySelector(".cover");
-	var fengmian = document.querySelector(".fengmian");
-	var intro_name = document.querySelector(".intro_name");
-	var intro_artist = document.querySelector(".intro_artist");
-	var next = document.querySelector(".control_next");
-	var pre = document.querySelector(".control_pre");
-	var mode = document.querySelector(".mode");
-	var shouListBtn = document.querySelector(".music_list_btn");
-	var hideBtn = document.querySelector(".music_list_hide");
-	var s = 0;
-	var i=randomMode();
-	var n=0;
-	var c = 0;
-	//获取数据
-	getData(obj, cover, fengmian, intro_name, intro_artist, i);	
-	//播放模式选择
-	mode.onclick = function(){
-		console.log(n, i);
-		n=playMode(n, n, mode);		
+/* 主题：仿网易云音乐css
+作者：陈昭雨
+更新时间：20171212
+20171210更新内容：修复歌单在底部也会滑动的问题。
+20171212更新内容：增加歌单搜索样式 */
+@keyframes disc{
+	100%{
+		transform: rotateZ(360deg);
 	}
-	//点击播放
-	play.onclick = function(){
-		playing(disc, citou, play, pause, obj, i);
+}
+@-webkit-keyframes disc{
+	100%{
+		-webkit-transform: rotateZ(360deg);
 	}
-	//点击磁头播放或暂停
-	citou.onclick = function(){
-		if(c==0){
-			playing(disc, citou, play, pause, obj, i);
-			c=1;
-		}else if(c==1){
-			pausing(disc, citou, play, pause, obj);
-			c=0;
-		}
-	}
-	//点击暂停
-	pause.onclick = function(){
-		pausing(disc, citou, play, pause, obj);
-	}
-	//音乐更新
-	obj.ontimeupdate = function(){
-		scrolling(obj, next);
-	}
-	//下一首
-	next.onclick = function(){
-		switch(n){
-			case 0:
-				i++;
-				if(i>List.length-1){
-					i = 0;
-				}
-			break;
-			case 1:
-				i=i;
-			break;
-			case 2:
-				i = randomMode();
-			break;
-		}
-		console.log(n, i);
-		listColor(aMusic, i);
-		getData(obj, cover, fengmian, intro_name, intro_artist, i);
-		playing(disc, citou, play, pause, obj, i);
-	}
-	//上一首
-	pre.onclick = function(){
-		switch(n){
-			case 0:
-				i--;
-				if(i<0){
-					i=List.length-1;
-				}
-			break;
-			case 1:
-				i=i;
-			break;
-			case 2:
-				i = randomMode();
-			break;
-		}
-		console.log(n, i);
-		listColor(aMusic, i);
-		getData(obj, cover, fengmian, intro_name, intro_artist, i);
-		playing(disc, citou, play, pause, obj, i);
-	}
-	// 显示歌单
-	shouListBtn.onclick = function(){
-		showList(hideBtn);
-	}
-	// 隐藏歌单
-	hideBtn.onclick = function(){
-		hideList(hideBtn);
-	}
-	//加载歌单
-	getList();
-	//点击歌单播放
-	var aMusic = document.querySelectorAll(".listMusic");
-	for(var j=0; j<aMusic.length;j++){
-		aMusic[j].index = j;
-		aMusic[j].onclick = function(){
-			i=this.index;
-			getData(obj, cover, fengmian, intro_name, intro_artist, i);
-			playing(disc, citou, play, pause, obj, i);
-			listColor(aMusic, i);
-		}
-	}
-	//PC端拖动进度条
-	var point = document.querySelector(".point");
-	point.onmousedown =function(ev){
-		ev.preventDefault();
-		ev =event || window.event;
-		drag(ev);
-		document.onmouseup = function(){
-			document.onmousemove= null;
-		}
-	}
+}
+/*移动端点击高亮效果取消*/
+-webkit-tap-highlight-color: rgba(0,0,0,0);
 
-	//移动端拖动进度条
-	point.addEventListener("touchstart", function(ev){
-		ev =ev.touches[0];
-		var oldLeft = ev.pageX-point.offsetLeft;	
-		var fn = function(event){mobileMove(ev, oldLeft);}
-		document.addEventListener("touchmove", fn, false);	
-		document.addEventListener("touchend", function(){
-			document.removeEventListener("touchmove", fn, false);
-		}, false); 	
-	}, false);
-	//搜索歌单
-	var searchBtn = document.querySelector(".search_btn");
-	searchBtn.onclick = function(){
-		searchMusic(i);
-	}
-	var searchText = document.querySelector(".search_text");
-	searchText.onfocus = function(){
-		searchText.value = "";
-	}
+body, div, ul{
+	padding: 0;
+	margin: 0;
+}
+body{
+	overflow-x: hidden;
+}
+.cover{
+	width: 100%;
+	height: 95%;
+	position: absolute;
+	background: url(http://p1.music.126.net/pERhjARCIrZwNd0UFfHpWg==/5749346301711508.jpg);
+	background-size: cover;
+	filter: blur(15px) brightness(0.8);
+	opacity: 0.5;
+	transition: opacity 5s linear;
+	-webkit-transition: opacity 5s linear;
+	-moz-transition: opacity 5s linear;
+}
+.play-board{
+	width: 100%;
+	height: 500px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	overflow: hidden;
 }
 
-//功能模块
-//数据读取
-function getData(obj, cover, fengmian, intro_name, intro_artist, i){
-	obj.src = "http://music.163.com/song/media/outer/url?id="+List[i].id+".mp3";	
-	cover.style.backgroundImage = "url("+List[i].img+")";
-	cover.style.opacity = 0.5;
-	fengmian.src = List[i].img;
-	intro_name.innerHTML = List[i].name;
-	intro_artist.innerHTML = List[i].artist;
-}
-// 播放
-function playing(disc, citou, play, pause, obj, i){
-	disc.classList.add("running");
-	disc.classList.remove("stop");
-	citou.style.transform = "rotate(0)";
-	play.style.display = "none";
-	pause.style.display = "inline";
-	obj.play();
-	document.title =List[i].name+" 播放中";
-}
-//暂停
-function pausing(disc, citou, play, pause, obj){
-	var deg = eval('get'+getComputedStyle(disc).transform);
-	disc.classList.add("stop");
-	disc.classList.remove("running");
+ .citou{
+	position: absolute;
+	width: 110px;
+	top: -25px;
+	left: 50%;
+	margin-left: -32px;
+	z-index: 1;
+	transform-origin: 20px 20px;
+	transform: rotate(-20deg);
+	transition-duration: 0.3s;
+}	
 
-	// disc.style.transform = rotate(0deg);
+.bg{
+	width: 250px;
+	height: 250px;
+	border-radius: 100%;
+	background: rgba(3,32,3,0.2);
+	position: absolute;
+	top: 80px;
+}
+.disc{
+	position: absolute;
+	width: 250px;
+	height: 250px;
+	top: 80px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-	disc.style.transform = "rotate("+deg+"deg)";
-	console.log(disc.style.transform);
-	citou.style.transform = "rotate(-25deg)";
-	play.style.display = "inline";
-	pause.style.display = "none";
-	obj.pause();	
-	document.title =" 陈昭雨的云音乐";
+	/* animation-play-state: paused; */
 }
-//播放时滚动条的变化
-function scrolling(obj, next){
-	var progress = document.querySelector(".progress");
-	var bar = document.querySelector(".bar");
-	var point = document.querySelector(".point");
-	var musicTime = document.querySelector(".music_time");
-	var ratio = (obj.currentTime/obj.duration);
-	musicTime.firstChild.innerHTML = setTime(obj.currentTime);
-	if(setTime(obj.duration)=="NaN:NaN"){
-		musicTime.lastChild.innerHTML ="00:00";
-	}else{
-		musicTime.lastChild.innerHTML = setTime(obj.duration);		
-	}
-	bar.style.width = (progress.offsetWidth*ratio)+"px";
-	point.style.left = (progress.offsetWidth*ratio)+"px";
-	if(obj.ended){
-		next.click();
-	}
+.running{
+	animation-play-state: running;
+	animation: disc 20s linear infinite;
 }
-//播放模式
-function playMode(t, n, mode){
-	if(t<2){
-		t++;
-	}else{
-		t=0;
-	}
-	imgMode(n, mode);
-	return t;
+.stop{
+	animation-play-state: paused;
+	-webkit-animation-play-state: paused;
 }
-//播放模式图标
-function imgMode(n, mode){
-	switch(n){
-		case 0:
-			mode.classList.remove("mode_random");
-			mode.classList.remove("mode_circle");
-			mode.classList.add("mode_single");
-		break;
-		case 1:
-			mode.classList.remove("mode_single");
-			mode.classList.remove("mode_circle");
-			mode.classList.add("mode_random");
-		break;
-		case 2:
-			mode.classList.remove("mode_single");
-			mode.classList.remove("mode_random");
-			mode.classList.add("mode_circle");
-		break;
-	}
-	console.log(n, mode);
+.fengmian{
+	position: absolute;
+	width: 170px;
+	height: 170px;
 }
-//随机歌单
-function randomMode(){
-	var x = Math.floor(Math.random()*(List.length));		
-	return x;
+ .cipan{
+	position: absolute;
+	width: 250px;
 }
-//显示歌单
-function showList(hideBtn){
-	var musicList = document.querySelector(".music_list");
-	var search = document.querySelector(".search_box");
-	musicList.style.top = "45%";
-	musicList.style.height = "360px";
-	hideBtn.style.display = "block";
-	musicList.onscroll = function(){
-		hideBtn.style.top = musicList.scrollTop+"px";	
-	}
-	musicList.style.overflow = "auto";
-	search.style.display = "block";
+.music_intro, .music_time{
+	position: absolute;
+	font-size: 14px;
+	color: #666;
 }
-//隐藏歌单
-function hideList(hideBtn){
-	var musicList = document.querySelector(".music_list");
-	var search = document.querySelector(".search_box");
-	var searchText = document.querySelector(".search_text");
-	musicList.style.top = "96%";
-	musicList.style.height = "25px";
-	hideBtn.style.display = "none";
-	musicList.scrollTop = "0";
-	musicList.style.overflow = "hidden";
-	search.style.display = "none";
-	searchText.value = "";
+.music_intro{
+	top: 345px;	
 }
-//创建歌单列表
-function getList(){
-	var listUl = document.querySelector(".music_list_ul");
-	for(var j=0; j<List.length; j++){
-		var content = document.createTextNode(List[j].name+"——"+List[j].artist+"——"+List[j].album);
-		var newSpan = document.createElement("span");
-		newSpan.className = "listMusic";
-		var newLi = document.createElement("li");
-		newSpan.appendChild(content);
-		newLi.appendChild(newSpan);
-		listUl.appendChild(newLi);
-	}
-	// console.log(listUl);
+.music_time{
+	top: 395px;
 }
-//播放中歌曲颜色
-function  listColor(aMusic, i){
-	for(var k=0; k<aMusic.length; k++){
-		aMusic[k].style.color = "#333";			
-	}
-	aMusic[i].style.color = "#E22319";
+.control{
+	text-align: center;
+	width: 350px;
+	height: 50px;
+	position: absolute;
+	top: 420px;
+	display: flex;
+	justify-content: space-around;
 }
-//搜索歌单
-function searchMusic(i){
-	var musicList = document.querySelector(".music_list");
-	var searchText = document.querySelector(".search_text");
-	var aMusic = document.querySelectorAll(".listMusic");
-	var text = searchText.value;
-	for(var j=0;j<List.length;j++){
-		aMusic[j].style.color = "#333";	
-		listColor(aMusic, i);
-		if(List[j].name.indexOf(text)>=0){
-			musicList.scrollTop = aMusic[j].offsetTop-10;
-			aMusic[j].style.color = "blue";
-			searchText.value = text;
-			break;
-		}else{
-			searchText.value = "抱歉，此歌曲暂未收录歌单，我们会尽快录入";
-		}	
-	}
-}
-//PC端拖动
-function drag(ev){
-	var progress = document.querySelector(".progress");
-	var bar = document.querySelector(".bar");
-	var point = document.querySelector(".point");
-		ev =event || window.event;
-		var oldLeft = ev.clientX-point.offsetLeft;
-		document.onmousemove = function(ev){
-			ev.preventDefault();
-			var obj=document.getElementById("player");	
-			var curLeft = ev.clientX-oldLeft;
-			if(curLeft<0){
-				point.style.left = 0;
-			}else if(curLeft>progress.offsetWidth){
-				point.style.left = progress.offsetWidth+"px";
-			}else{
-				point.style.left = curLeft+"px";
-			}
-			console.log(point.offsetLeft/progress.offsetWidth);
-			obj.currentTime=obj.duration*(point.offsetLeft/progress.offsetWidth);
-		}
-}
+.control img{
+	cursor: pointer;
+	width: 50px;
+	height: 50px;
+	opacity: 0.6;
 
-//移动端拖动
-function mobileMove(ev, oldLeft){
-	ev =event || window.event;
-	ev.preventDefault();
-	ev = ev.touches[0];
-	var progress = document.querySelector(".progress");
-	var point = document.querySelector(".point");
-	console.log(oldLeft, ev);
-	var obj=document.getElementById("player");	
-	var curLeft = ev.clientX-oldLeft;
-	console.log(ev.clientX);
-	if(curLeft<0){
-		point.style.left = 0;
-	}else if(curLeft>progress.offsetWidth){
-		point.style.left = progress.offsetWidth+"px";
-	}else{
-		point.style.left = curLeft+"px";
-	}
-	obj.currentTime=obj.duration*(point.offsetLeft/progress.offsetWidth);
 }
-
-/* 
-    * 解析matrix矩阵，0°-360°，返回旋转角度 
-    * 当a=b||-a=b,0<=deg<=180 
-    * 当-a+b=180,180<=deg<=270 
-    * 当a+b=180,270<=deg<=360 
-    * 
-    * 当0<=deg<=180,deg=d; 
-    * 当180<deg<=270,deg=180+c; 
-    * 当270<deg<=360,deg=360-(c||d); 
-    * */  
-function getmatrix(a,b,c,d,e,f){  
-    var aa=Math.round(180*Math.asin(a)/ Math.PI);  
-    var bb=Math.round(180*Math.acos(b)/ Math.PI);  
-    var cc=Math.round(180*Math.asin(c)/ Math.PI);  
-    var dd=Math.round(180*Math.acos(d)/ Math.PI);  
-    var deg=0;  
-    if(aa==bb||-aa==bb){  
-        deg=dd;  
-    }else if(-aa+bb==180){  
-        deg=180+cc;  
-    }else if(aa+bb==180){  
-        deg=360-cc||360-dd;  
-    }  
-    return deg>=360?0:deg;  
-    //return (aa+','+bb+','+cc+','+dd);  
-} 
-//毫秒转换00:00
-function setTime(x){
-	var m = Math.floor(x/60);
-	var s = x.toFixed(0)-m*60;
-	if(s==60){
-		m++;
-		s=0;
-	}
-	m = m<10?"0"+m:m;
-	s = s<10?"0"+s:s;
-	return m+":"+s;
+.control img:hover{
+	opacity: 1.0;	
 }
-
-
+.progress{
+	width: 210px;
+	height: 3px;
+	background: #bbb;
+	opacity: 0.6;
+	position: absolute;
+	top:380px;
+}
+.bar{
+	width: 0%;
+	height: 100%;
+	background: #39f;
+	display: inline-block;
+	position: absolute;
+	top: 0;
+}
+.point{
+	width: 10px;
+	height: 10px;
+	background: #fff;
+	border-radius: 100%;
+	border: 3px solid rgba(0,0,0,0.4);
+	cursor: pointer;
+	position: absolute;
+	top: -7px;
+}
+.mode{
+	position: absolute;
+	left: -25px;
+	top: -8px;
+	width: 20px;
+	height: 20px;
+	opacity: 0.7;
+	filter:alpha(opacity=70);
+}
+.mode:hover{
+	opacity: 1.0;
+}
+.mode_circle{
+	background: url(./music_img/playbar.png) -6px -346px no-repeat;	
+}
+.mode_single{
+	background: url(./music_img/playbar.png) -69px -346px no-repeat;	
+}
+.mode_random{
+	background: url(./music_img/playbar.png) -68px -250px no-repeat;	
+}
+.music_list{
+	position: absolute;
+	top: 96%;
+	width: 100%;
+	height: 30px;
+	overflow: auto;
+	background: rgba(200, 200, 200, 0.8);
+	transition: top, height 0.5s, 0.5s ;
+	overflow: hidden;
+}
+.music_list::-webkit-scrollbar{
+	display: none;
+}
+.music_list p{
+	cursor: pointer;
+	width: 84px;
+	position: absolute;
+	left: 50%;
+	margin-left: -42px;
+	margin-top: 0px;
+	z-index: 999;
+	font-size: 16px;
+	color: #333;
+}
+.music_list_hide{
+	position: absolute;
+	right: 3%;
+	font-size: 40px;
+	font-weight: bold;
+	color: #666;
+	cursor: pointer;
+	display: none;
+}
+.music_list_ul{
+	margin-top: 20px;
+}
+.music_list_ul li{
+	width: 80%;
+	list-style: none;
+	min-height: 20px;
+	padding: 5px 5%;
+	border-bottom: 1px solid #999;
+}
+.music_list_ul li span{
+	cursor: pointer;
+	color: #333;
+	font-size: 14px;
+}
+.search{
+	box-sizing: border-box;
+	width: 100%;
+	height: 30px;
+	position: fixed;
+	z-index: 2;
+	top: 5px;
+	left: 0;
+}
+.search .search_box{
+	box-sizing: border-box;
+	width: 90%;
+	height: 30px;
+	min-width: 320px;
+	max-width: 640px;
+	margin: 0 auto;
+	position: relative;
+	display: none;
+}
+.search .search_box .search_text{
+	box-sizing: border-box;
+	height: 30px;
+	width: 90%;
+	border-radius: 15px 0 0 15px;
+	padding:5px 10px; 
+	outline: none;
+	font-size: 14px;
+}
+.search .search_box .search_btn{
+	display: block;
+	width: 10%;
+	min-width: 50px;
+	height: 30px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	border-radius: 0 20px 20px 0;
+	text-align: center;
+	background: #333;
+	line-height: 30px;
+	font-size: 14px;
+	color: #EEE;
+	cursor: pointer;
+}
