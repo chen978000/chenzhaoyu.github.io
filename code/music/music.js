@@ -172,6 +172,10 @@ function playing(disc, citou, play, pause, obj, i){
 function pausing(disc, citou, play, pause, obj){
 	disc.classList.add("stop");
 	disc.classList.remove("running");
+	var deg = eval('get'+getComputedStyle(disc).transform);
+	console.log(deg);
+	disc.style.transform = "rotate(0deg)";	
+	// disc.style.transform = "rotate("+deg+"deg)";
 	citou.style.transform = "rotate(-25deg)";
 	play.style.display = "inline";
 	pause.style.display = "none";
@@ -343,6 +347,32 @@ function mobileMove(ev, oldLeft){
 	obj.currentTime=obj.duration*(point.offsetLeft/progress.offsetWidth);
 }
 
+/* 
+    * 解析matrix矩阵，0°-360°，返回旋转角度 
+    * 当a=b||-a=b,0<=deg<=180 
+    * 当-a+b=180,180<=deg<=270 
+    * 当a+b=180,270<=deg<=360 
+    * 
+    * 当0<=deg<=180,deg=d; 
+    * 当180<deg<=270,deg=180+c; 
+    * 当270<deg<=360,deg=360-(c||d); 
+    * */  
+function getmatrix(a,b,c,d,e,f){  
+    var aa=Math.round(180*Math.asin(a)/ Math.PI);  
+    var bb=Math.round(180*Math.acos(b)/ Math.PI);  
+    var cc=Math.round(180*Math.asin(c)/ Math.PI);  
+    var dd=Math.round(180*Math.acos(d)/ Math.PI);  
+    var deg=0;  
+    if(aa==bb||-aa==bb){  
+        deg=dd;  
+    }else if(-aa+bb==180){  
+        deg=180+cc;  
+    }else if(aa+bb==180){  
+        deg=360-cc||360-dd;  
+    }  
+    return deg>=360?0:deg;  
+    //return (aa+','+bb+','+cc+','+dd);  
+} 
 //毫秒转换00:00
 function setTime(x){
 	var m = Math.floor(x/60);
