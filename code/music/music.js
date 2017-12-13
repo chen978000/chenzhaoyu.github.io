@@ -174,13 +174,8 @@ function pausing(disc, citou, play, pause, obj){
 	//ios Safari不兼容animation-play-state的其他方法
 	var discBox = document.querySelector(".disc_box");
 	var discDeg = eval("get"+getComputedStyle(disc).transform);
-	var boxDeg;
-	if(getComputedStyle(discBox).transform=="none"){
-		boxDeg = 0;
-	}else{
-		boxDeg = eval("get"+getComputedStyle(discBox).transform);
-	}
-	boxDeg = discDeg+boxDeg+5;
+	var boxDeg = getComputedStyle(discBox).transform=="none"?0:eval("get"+getComputedStyle(discBox).transform);
+	boxDeg = discDeg+boxDeg;
 	discBox.style.transform = "rotate("+(boxDeg)+"deg)";
 	//否则下面两条即可实现
 	disc.classList.add("stop");
@@ -391,5 +386,3 @@ function setTime(x){
 	s = s<10?"0"+s:s;
 	return m+":"+s;
 }
-
-
