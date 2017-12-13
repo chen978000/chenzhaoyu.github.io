@@ -5,7 +5,7 @@
 // 20171210更新内容：增加进度条拖动功能，修复歌单在底部滑动BUG 
 // 20171211更新内容：增加title显示播放状态
 // 20171212更新内容：增加搜索歌单功能、页面初始随机歌曲
-// 20171213更新内容：修复ios safari下animation-play-state失效问题
+// 20171213更新内容：修复ios safari下animation-play-state失效、初始第一首歌播放时歌单中不变为红色等问题
 window.onload = function(){
 	var disc = document.querySelector(".disc");
 	var citou = document.querySelector(".citou");
@@ -34,12 +34,12 @@ window.onload = function(){
 	}
 	//点击播放
 	play.onclick = function(){
-		playing(disc, citou, play, pause, obj, i);
+		playing(disc, citou, play, pause, obj, i, aMusic);
 	}
 	//点击磁头播放或暂停
 	citou.onclick = function(){
 		if(c==0){
-			playing(disc, citou, play, pause, obj, i);
+			playing(disc, citou, play, pause, obj, i, aMusic);
 			c=1;
 		}else if(c==1){
 			pausing(disc, citou, play, pause, obj);
@@ -71,9 +71,8 @@ window.onload = function(){
 			break;
 		}
 		console.log(n, i);
-		listColor(aMusic, i);
 		getData(obj, cover, fengmian, intro_name, intro_artist, i);
-		playing(disc, citou, play, pause, obj, i);
+		playing(disc, citou, play, pause, obj, i, aMusic);
 	}
 	//上一首
 	pre.onclick = function(){
@@ -92,9 +91,8 @@ window.onload = function(){
 			break;
 		}
 		console.log(n, i);
-		listColor(aMusic, i);
 		getData(obj, cover, fengmian, intro_name, intro_artist, i);
-		playing(disc, citou, play, pause, obj, i);
+		playing(disc, citou, play, pause, obj, i, aMusic);
 	}
 	// 显示歌单
 	shouListBtn.onclick = function(){
@@ -113,8 +111,7 @@ window.onload = function(){
 		aMusic[j].onclick = function(){
 			i=this.index;
 			getData(obj, cover, fengmian, intro_name, intro_artist, i);
-			playing(disc, citou, play, pause, obj, i);
-			listColor(aMusic, i);
+			playing(disc, citou, play, pause, obj, i, aMusic);
 		}
 	}
 	//PC端拖动进度条
@@ -160,12 +157,13 @@ function getData(obj, cover, fengmian, intro_name, intro_artist, i){
 	intro_artist.innerHTML = List[i].artist;
 }
 // 播放
-function playing(disc, citou, play, pause, obj, i){
+function playing(disc, citou, play, pause, obj, i, aMusic){
 	disc.classList.add("running");
 	disc.classList.remove("stop");
 	citou.style.transform = "rotate(0)";
 	play.style.display = "none";
 	pause.style.display = "inline";
+	listColor(aMusic, i);
 	obj.play();
 	document.title =List[i].name+" 播放中";
 }
@@ -386,3 +384,5 @@ function setTime(x){
 	s = s<10?"0"+s:s;
 	return m+":"+s;
 }
+
+
