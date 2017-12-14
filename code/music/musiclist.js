@@ -1,4 +1,4 @@
-//歌单（更新于20171212）
+//歌单（更新于20171214）
 var List =[ 
 	{"name":"成都", 
 	"id":"436514312", 
@@ -726,10 +726,184 @@ var List =[
 	"artist":"蔡依林",
 	"album":"<J-Top冠军精选>"
 	},
-	{"name":"倒带", 
-	"id":"209758", 
-	"img":"http://p1.music.126.net/SauiF-zACp_cLXF6Gjffbw==/18768663488035234.jpg", 
-	"artist":"蔡依林",
-	"album":"<J-Top冠军精选>"
+	{"name":"追光者", 
+	"id":"483671599", 
+	"img":"http://p1.music.126.net/ZZAQGWl9mR7g5xCyWWH3Pw==/19149094509535913.jpg", 
+	"artist":"岑宁儿",
+	"album":"<电视剧《夏至未至》插曲>"
+	},
+	{"name":"...Ready For It? (BloodPop® Remix)", 
+	"id":"522617477", 
+	"img":"http://p1.music.126.net/A13d0A4FWokkA9W9cET5-g==/17861566393618284.jpg", 
+	"artist":"Taylor Swift / BloodPop",
+	"album":"<...Ready For It? (BloodPop® Remix)>"
+	},
+	{"name":"像少年啦飞驰", 
+	"id":"523860642", 
+	"img":"http://p1.music.126.net/kAqeqOehGvQ7HJHApPst6g==/109951163082482562.jpg", 
+	"artist":"宿羽阳",
+	"album":"<像少年啦飞驰>"
+	},
+	{"name":"暧昧", 
+	"id":"299981", 
+	"img":"http://p1.music.126.net/l9vAoPLeU2BAA2utoMWbGA==/19028148230552607.jpg", 
+	"artist":"王菲",
+	"album":"<菲主打>"
+	},
+	{"name":"青春纪念册", 
+	"id":"362450", 
+	"img":"http://p1.music.126.net/BmYLCFahloUsrd1-rbs4Cw==/800444465021251.jpg", 
+	"artist":"可米小子",
+	"album":"<青春纪念册>"
+	},
+	{"name":"Anonymous", 
+	"id":"34183387", 
+	"img":"http://p1.music.126.net/vlzoqJCwXGIqtZTD0uDRhQ==/17885755649212522.jpg", 
+	"artist":"Noicybino",
+	"album":"<L.A.N.E>"
+	},
+	{"name":"被驯服的象", 
+	"id":"27747330", 
+	"img":"http://p1.music.126.net/6ZbKlyanTl6KtNDpw2afmA==/1901055604511717.jpg", 
+	"artist":"蔡健雅",
+	"album":"<天使与魔鬼的对话>"
+	},
+	{"name":"南方的我，北方的你", 
+	"id":"426343036", 
+	"img":"http://p1.music.126.net/3j17tIUvUo3gvI5V6n8lzA==/109951162988500127.jpg", 
+	"artist":"王般若",
+	"album":"<南方的我，北方的你>"
+	},
+	{"name":"你是我的OK绷", 
+	"id":"364961", 
+	"img":"http://p1.music.126.net/KlUaJ_Qb6U-cQEJFJ2iTcA==/102254581395305.jpg", 
+	"artist":"浪花兄弟",
+	"album":"<浪花兄弟>"
+	},
+	{"name":"Palace Memories", 
+	"id":"818820", 
+	"img":"http://p1.music.126.net/gzCgl_iznHF8lh06NTKtpQ==/738871813877504.jpg", 
+	"artist":"S.E.N.S.",
+	"album":"<故宫的记忆>"
+	},
+	{"name":"单车恋人", 
+	"id":"92305", 
+	"img":"http://p1.music.126.net/bEqD73LsZJea_iUF0ZMa5g==/666304046444415.jpg", 
+	"artist":"后弦",
+	"album":"<9公主>"
+	},
+	{"name":"世界未末日", 
+	"id":"185621", 
+	"img":"http://p1.music.126.net/aRmkU-iV0yt0F6UTdEAN3A==/19123805742099070.jpg", 
+	"artist":"周杰伦",
+	"album":"<惊叹号>"
+	},
+	{"name":"我的未来式", 
+	"id":"22200079", 
+	"img":"http://p1.music.126.net/saMA1hZ4nZnizVr8FSlV2A==/25288767454182.jpg", 
+	"artist":"郭采洁",
+	"album":"<隐形超人>"
+	},
+	{"name":"我所谓的爱 (吉他先行版)", 
+	"id":"459159634", 
+	"img":"http://p1.music.126.net/Jrpsy7L3g8XY-_60pRSuHg==/18587244069338592.jpg", 
+	"artist":"邵夷贝",
+	"album":"<我所谓的爱>"
+	},
+	{"name":"斗琴", 
+	"id":"185835", 
+	"img":"http://p1.music.126.net/UAgXkK9Buq7NcFJ2fy0KhA==/84662395351539.jpg", 
+	"artist":"周杰伦",
+	"album":"<电影《不能说的秘密》原声带>"
+	},
+	{"name":"后来（Cover：刘若英）", 
+	"id":"458217431", 
+	"img":"http://p1.music.126.net/eZB108MBb7mFCnXua__E9A==/109951162855801304.jpg", 
+	"artist":"坠；一",
+	"album":"<后来.cover>"
+	},
+	{"name":"渔舟唱晚 (cut版)", 
+	"id":"30352477", 
+	"img":"http://p1.music.126.net/5durIn0WQTKS9HSF_pSs8A==/3261151489674621.jpg", 
+	"artist":"浦琦璋",
+	"album":"<央视天气预报背景音乐>"
+	},
+	{"name":"快乐的花果山", 
+	"id":"29743653", 
+	"img":"http://p1.music.126.net/XSBH8HUtnV8p2biYrD3SOQ==/5710863394736002.jpg", 
+	"artist":"许镜清",
+	"album":"<电视剧《西游记》 配乐>"
+	},
+	{"name":"大圣游天宫", 
+	"id":"29810139", 
+	"img":"http://p1.music.126.net/XSBH8HUtnV8p2biYrD3SOQ==/5710863394736002.jpg", 
+	"artist":"许镜清",
+	"album":"<电视剧《西游记》 配乐>"
+	},
+	{"name":"上任弼马温", 
+	"id":"29810154", 
+	"img":"http://p1.music.126.net/XSBH8HUtnV8p2biYrD3SOQ==/5710863394736002.jpg", 
+	"artist":"许镜清",
+	"album":"<电视剧《西游记》 配乐>"
+	},
+	{"name":"金殿戏巨灵", 
+	"id":"29810146", 
+	"img":"http://p1.music.126.net/XSBH8HUtnV8p2biYrD3SOQ==/5710863394736002.jpg", 
+	"artist":"许镜清",
+	"album":"<电视剧《西游记》 配乐>"
+	},
+	{"name":"天王琵琶曲", 
+	"id":"29810158", 
+	"img":"http://p1.music.126.net/XSBH8HUtnV8p2biYrD3SOQ==/5710863394736002.jpg", 
+	"artist":"许镜清",
+	"album":"<电视剧《西游记》 配乐>"
+	},
+	{"name":"助兴鹤仙舞", 
+	"id":"29810175", 
+	"img":"http://p1.music.126.net/XSBH8HUtnV8p2biYrD3SOQ==/5710863394736002.jpg", 
+	"artist":"许镜清",
+	"album":"<电视剧《西游记》 配乐>"
+	},
+	{"name":"庆功天仙曲2", 
+	"id":"29810150", 
+	"img":"http://p1.music.126.net/XSBH8HUtnV8p2biYrD3SOQ==/5710863394736002.jpg", 
+	"artist":"许镜清",
+	"album":"<电视剧《西游记》 配乐>"
+	},
+	{"name":"杨戬擒悟空", 
+	"id":"29810176", 
+	"img":"http://p1.music.126.net/XSBH8HUtnV8p2biYrD3SOQ==/5710863394736002.jpg", 
+	"artist":"许镜清",
+	"album":"<电视剧《西游记》 配乐>"
+	},
+	{"name":"五百年沧海桑田", 
+	"id":"27552546", 
+	"img":"http://p1.music.126.net/XSBH8HUtnV8p2biYrD3SOQ==/5710863394736002.jpg", 
+	"artist":"郁钧剑",
+	"album":"<电视剧《西游记》 配乐>"
+	},
+	{"name":"Here We Are Again", 
+	"id":"27876900", 
+	"img":"http://p1.music.126.net/dezC5zAbgISxdrnjdGjMMg==/3264450024433088.jpg", 
+	"artist":"Various Artists",
+	"album":"<电影《喜剧之王》插曲>"
+	},
+	{"name":"枫", 
+	"id":"185912", 
+	"img":"http://p1.music.126.net/yEGx5yAd9zaa3l03d30KNw==/18511377767183740.jpg", 
+	"artist":"周杰伦",
+	"album":"<十一月的萧邦>"
+	},
+	{"name":"老中医", 
+	"id":"247160", 
+	"img":"http://p1.music.126.net/EJU-z9ykcq95uqruhUpb0Q==/2532175281754058.jpg", 
+	"artist":"花粥",
+	"album":"<早年间的一些歌>"
+	},
+	{"name":"逆鳞", 
+	"id":"185916", 
+	"img":"http://p1.music.126.net/yEGx5yAd9zaa3l03d30KNw==/18511377767183740.jpg", 
+	"artist":"周杰伦",
+	"album":"<十一月的萧邦>"
 	}
 ];
