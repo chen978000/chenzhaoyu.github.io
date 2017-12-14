@@ -86,7 +86,7 @@ body{
 }
 .running{
 	animation-play-state: running;
-	animation: disc 10s linear infinite;
+	animation: disc 20s linear infinite;
 }
 .stop{
 	animation-play-state: paused;
