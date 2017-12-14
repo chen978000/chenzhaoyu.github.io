@@ -1,5 +1,5 @@
 <?php
-    header("Content-type: text/html; charset = utf-8");
+    header('Content-type: text/html; charset = utf-8');
     //获取输入的内容
     $name = $_GET["name"];
      //设置时区  
@@ -9,7 +9,7 @@
      //输出字符串拼接
      $message = $date.":".$name."\r\n";
      
-     @$fp = fopen("https://github.com/chen978000/chenzhaoyu.github.io/edit/master/code/music/music.txt", "ab");
+     @$fp = fopen("http://www.czy0.com/code/music/music.txt", "a+");
      flock($fp,LOCK_EX);
      fwrite($fp,$message);
      flock($fp,LOCK_UN);
