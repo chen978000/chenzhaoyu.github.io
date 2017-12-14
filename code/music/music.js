@@ -303,15 +303,15 @@ function searchMusic(i){
 			break;
 		}else{
 			searchText.value = "抱歉，此歌曲暂未收录歌单，我们会尽快录入";
-			var xml = new XMLHttpRequest();
-			xml.open("get", "xml.php?name="+text);
-			xml.onload = function(){
-				console.log("已记录");
-			}
-			xml.send(null);
-
 		}	
 	}
+	var xml = new XMLHttpRequest();
+	xml.open("get", "xml.php?name="+text);
+	xml.onload = function(){
+		console.log("已记录");
+	}
+	xml.send(null);
+
 }
 //PC端拖动
 function drag(ev){
