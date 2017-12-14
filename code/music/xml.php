@@ -8,7 +8,7 @@
      //输出字符串拼接
      $message = $date.":".$name."\r\n";
      
-     @$fp = fopen("musci.txt", "ab");
+     @$fp = fopen("./music.txt", "ab");
      flock($fp,LOCK_EX);
      fwrite($fp,$message);
      flock($fp,LOCK_UN);
