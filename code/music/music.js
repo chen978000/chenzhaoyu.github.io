@@ -6,6 +6,7 @@
 // 20171211更新内容：增加title显示播放状态
 // 20171212更新内容：增加搜索歌单功能、页面初始随机歌曲
 // 20171213更新内容：修复ios safari下animation-play-state失效、初始第一首歌播放时歌单中不变为红色等问题
+// 20171214更新内容：增加用户搜索歌曲时，不在歌单内的后台存储的功能
 window.onload = function(){
 	var disc = document.querySelector(".disc");
 	var citou = document.querySelector(".citou");
@@ -302,6 +303,10 @@ function searchMusic(i){
 			break;
 		}else{
 			searchText.value = "抱歉，此歌曲暂未收录歌单，我们会尽快录入";
+			var xml = new XMLHttpRequest();
+			xml.open("get", "xml.php?name="+text);
+			xml.send(null);
+
 		}	
 	}
 }
