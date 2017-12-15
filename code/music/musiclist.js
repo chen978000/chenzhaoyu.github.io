@@ -1,4 +1,4 @@
-//歌单（更新于20171214）
+//歌单（更新于20171215）
 var List =[ 
 	{"name":"成都", 
 	"id":"436514312", 
@@ -905,5 +905,83 @@ var List =[
 	"img":"http://p1.music.126.net/yEGx5yAd9zaa3l03d30KNw==/18511377767183740.jpg", 
 	"artist":"周杰伦",
 	"album":"<十一月的萧邦>"
+	},
+	{"name":"青花瓷", 
+	"id":"185811", 
+	"img":"http://p1.music.126.net/8LmuJ7_7MMbubyuF1d0BhA==/19082024300336034.jpg", 
+	"artist":"周杰伦",
+	"album":"<我很忙>"
+	},
+	{"name":"浮夸", 
+	"id":"66282", 
+	"img":"http://p1.music.126.net/KtkP-jJ4OtFCWR7ylozvuw==/19071029183925635.jpg", 
+	"artist":"陈奕迅",
+	"album":"<U-87>"
+	},
+	{"name":"Where are you", 
+	"id":"453843751", 
+	"img":"http://p1.music.126.net/AUfXMljLBgB3PBV731IzRg==/109951162857118370.jpg", 
+	"artist":"AniFace",
+	"album":"<Where are you>"
+	},
+	{"name":"微微一笑很倾城", 
+	"id":"424474214", 
+	"img":"http://p1.music.126.net/XtQbs_V1OAvtZo9tmJFAJA==/1369991503018202.jpg", 
+	"artist":"杨洋",
+	"album":"<电视剧《微微一笑很倾城》片尾曲>"
+	},
+	{"name":"友谊万岁", 
+	"id":"31010921", 
+	"img":"http://p1.music.126.net/4eYL8Jyz9PcW9N9ER_i2pA==/7816428162368841.jpg", 
+	"artist":"杨千嬅",
+	"album":"<电影《可爱的你》主题曲>"
+	},
+	{"name":"过云雨", 
+	"id":"189207", 
+	"img":"http://p1.music.126.net/WdQ-t5wMU0VbTKNmXIbrIg==/90159953489771.jpg", 
+	"artist":"张敬轩",
+	"album":"<春.夏.秋.冬>"
+	},
+	{"name":"又见炊烟", 
+	"id":"300234", 
+	"img":"http://p1.music.126.net/7lQkyZ3yJgYGB_091OfyKw==/18535567023057564.jpg", 
+	"artist":"王菲",
+	"album":"<菲靡靡之音>"
+	},
+	{"name":"海阔天空", 
+	"id":"347351", 
+	"img":"http://p1.music.126.net/suco52xu0lv3dhykrrL_vg==/65970697667610.jpg", 
+	"artist":"Beyond",
+	"album":"<乐与怒>"
+	},
+	{"name":"公路之歌", 
+	"id":"381825", 
+	"img":"http://p1.music.126.net/1f7NwezJUZ_Ewpd070oYaQ==/30786325592070.jpg", 
+	"artist":"痛仰乐队",
+	"album":"<不要停止我的音乐>"
+	},
+	{"name":"别送我", 
+	"id":"456185374", 
+	"img":"http://p1.music.126.net/xejDwyT3y0nJa6tn6GEyJw==/18781857627425190.jpg", 
+	"artist":"陈鸿宇 / 苏紫旭 / 刘昊霖 / 寒洛",
+	"album":"<电影《乘风破浪》插曲>"
+	},
+	{"name":"机器铃 砍菜刀", 
+	"id":"473817665", 
+	"img":"http://p1.music.126.net/uIOrdW8DnS-TM2UinIBwXQ==/18590542604337710.jpg", 
+	"artist":"张卫",
+	"album":"<机器铃 砍菜刀>"
+	},
+	{"name":"乌克丽丽", 
+	"id":"25653005", 
+	"img":"http://p1.music.126.net/iD4CqIEUYJd7f1FO9Z6qlQ==/851021999950907.jpg", 
+	"artist":"周杰伦",
+	"album":"<十二新作>"
+	},
+	{"name":"分裂(离开)", 
+	"id":"186051", 
+	"img":"http://p1.music.126.net/X7I0mO_ohTUukwmEGuJNzw==/18715886930028449.jpg", 
+	"artist":"周杰伦",
+	"album":"<八度空间>"
 	}
 ];
