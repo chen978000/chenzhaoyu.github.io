@@ -1,4 +1,4 @@
-//歌单（更新于20171215）
+//歌单（更新于20171218）
 var List =[ 
 	{"name":"成都", 
 	"id":"436514312", 
@@ -983,5 +983,107 @@ var List =[
 	"img":"http://p1.music.126.net/X7I0mO_ohTUukwmEGuJNzw==/18715886930028449.jpg", 
 	"artist":"周杰伦",
 	"album":"<八度空间>"
+	},
+	{"name":"早晨的晚霞(Live)", 
+	"id":"65493", 
+	"img":"http://p1.music.126.net/yl5lLk9T3wDgDo-KJOlaLQ==/79164837200572.jpg", 
+	"artist":"陈建年",
+	"album":"<海洋>"
+	},
+	{"name":"如果当时", 
+	"id":"167870", 
+	"img":"http://p1.music.126.net/Md3RLH0fe2a_3dMDnfqoQg==/18590542604286213.jpg", 
+	"artist":"许嵩",
+	"album":"<自定义>"
+	},
+	{"name":"城南花已开", 
+	"id":"468176711", 
+	"img":"http://p1.music.126.net/i-7ktILRPImJ0NwiH8DABg==/109951162885959979.jpg", 
+	"artist":"三亩地",
+	"album":"<城南花已开>"
+	},
+	{"name":"Forever", 
+	"id":"514055266", 
+	"img":"http://p1.music.126.net/tcRBODmQOrnfUMB8mDcECQ==/18844529788488557.jpg", 
+	"artist":"Martin Garrix / Matisse & Sadko",
+	"album":"<Forever>"
+	},
+	{"name":"再见只是陌生人", 
+	"id":"442899790", 
+	"img":"http://p1.music.126.net/oLDKrfWfgCDppk3MOgmQdw==/109951162846676803.jpg", 
+	"artist":"阳小阳",
+	"album":"<再见只是陌生人>"
+	},
+	{"name":"我愚蠢的理想主义", 
+	"id":"437289014", 
+	"img":"http://p1.music.126.net/bPoOwlDdL72AkXjYvj-3aQ==/18623527952064964.jpg", 
+	"artist":"阿肆",
+	"album":"<我愚蠢的理想主义>"
+	},
+	{"name":"Зая", 
+	"id":"524230437", 
+	"img":"http://p1.music.126.net/odjnjeO4tk8qMquthGU_Kg==/18266186672814154.jpg", 
+	"artist":"Бамбинтон",
+	"album":"<Альбом года>"
+	},
+	{"name":"一眼千年", 
+	"id":"520459220", 
+	"img":"http://p1.music.126.net/_WO-U782vfzz2vKH7xuNLA==/109951163071184227.jpg", 
+	"artist":"那英",
+	"album":"<《国家宝藏》主题曲>"
+	},
+	{"name":"不说话", 
+	"id":"485607480", 
+	"img":"http://p1.music.126.net/7W4MBi9Q63-hZ5EZroUuYA==/18615831371839316.jpg", 
+	"artist":"周深",
+	"album":"<电影《大护法》概念曲>"
+	},
+	{"name":"小世界", 
+	"id":"522511331", 
+	"img":"http://p1.music.126.net/QxKImlIkGqZLtsD-dvg4-Q==/109951163082277709.jpg", 
+	"artist":"江一燕",
+	"album":"<我们的小世界>"
+	},
+	{"name":"打上花火", 
+	"id":"496869422", 
+	"img":"http://p1.music.126.net/ZUCE_1Tl_hkbtamKmSNXEg==/109951163009282836.jpg", 
+	"artist":"DAOKO / 米津玄師",
+	"album":"<电影《升空的焰火，从下面看还是从侧面看?》主题曲>"
+	},
+	{"name":"9420", 
+	"id":"515143305", 
+	"img":"http://p1.music.126.net/tyOXJ8U9TisNRfcorQ-4og==/109951163050074297.jpg", 
+	"artist":"麦小兜",
+	"album":"<9420>"
+	},
+	{"name":"空空如也", 
+	"id":"524152061", 
+	"img":"http://p1.music.126.net/gIwEtwP71XxNnFFlHdrPNQ==/109951163084643330.jpg", 
+	"artist":"胡66",
+	"album":"<空空如也>"
+	},
+	{"name":"给我乖", 
+	"id":"440464173", 
+	"img":"http://p1.music.126.net/VXoO5Fi9ihk-0DYTbWugdQ==/18776360068615727.jpg", 
+	"artist":"孟佳",
+	"album":"<给我乖>"
+	},
+	{"name":"Starry Starry Night", 
+	"id":"507783538", 
+	"img":"http://p1.music.126.net/a-zKtVuG1UCfDq313hsm9g==/18337654928626469.jpg", 
+	"artist":"Lianne La Havas",
+	"album":"<Loving Vincent>"
+	},
+	{"name":"当年情", 
+	"id":"26620757", 
+	"img":"http://p1.music.126.net/AtMpiqgluHefLF6nD_Pcug==/4417837720418086.jpg", 
+	"artist":"张国荣",
+	"album":"<电影《英雄本色》主题曲>"
+	},
+	{"name":"男儿当自强", 
+	"id":"92428", 
+	"img":"http://p1.music.126.net/Qbm5xA7zKTuFVKWufgk8Mg==/80264348840397.jpg", 
+	"artist":"林子祥",
+	"album":"<电影《黄飞鸿》主题曲>"
 	}
 ];
