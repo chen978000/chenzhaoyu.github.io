@@ -732,7 +732,7 @@ var List =[
 	"artist":"岑宁儿",
 	"album":"<电视剧《夏至未至》插曲>"
 	},
-	{"name":"...Ready For It? (BloodPop® Remix)", 
+	{"name":"...Ready For It", 
 	"id":"522617477", 
 	"img":"http://p1.music.126.net/A13d0A4FWokkA9W9cET5-g==/17861566393618284.jpg", 
 	"artist":"Taylor Swift / BloodPop",
