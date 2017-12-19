@@ -7,6 +7,7 @@
 // 20171212更新内容：增加搜索歌单功能、页面初始随机歌曲
 // 20171213更新内容：修复ios safari下animation-play-state失效、初始第一首歌播放时歌单中不变为红色等问题
 // 20171215更新内容：增加打开歌单显示正在播放歌曲的位置的功能
+// 20171219更新内容：修复ipad打开歌单位置显示不正常的问题
 window.onload = function(){
 	var disc = document.querySelector(".disc");
 	var citou = document.querySelector(".citou");
@@ -246,7 +247,7 @@ function showList(hideBtn,i){
 	var search = document.querySelector(".search_box");
 	var aMusic = document.querySelectorAll(".listMusic");
 	musicList.style.top = "45%";
-	musicList.style.height = "360px";
+	musicList.style.height = "55%";
 	hideBtn.style.display = "block";
 	musicList.onscroll = function(){
 		hideBtn.style.top = musicList.scrollTop+"px";	
