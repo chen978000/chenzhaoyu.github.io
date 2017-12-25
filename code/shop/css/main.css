@@ -239,3 +239,47 @@
 .desc{
     min-height: 38px;
 }
+
+/* 底部 */
+.footer{
+    position: fixed;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 60px;
+    z-index: 1;
+}
+/* 底部版心容器 */
+.footer_box{
+    margin: 0 auto;
+    min-width: 320px;
+    max-width: 640px;
+    height: 60px;
+    border-top: 1px solid #ddd;
+    background: #fff;
+}
+.footer_box ul{
+    width: 100%;
+}
+.footer_box ul li{
+    width: 25%;
+    float: left;
+    text-align: center;
+    padding: 5px 0;
+}
+.footer_box ul li a{
+    width: 40px;
+    height: 50px;
+    display: inline-block;
+    opacity: 0.7;
+}
+.footer_box ul li a img{
+    width: 30px;
+}
+.footer_box ul li a p{
+    font-size: 12px;
+    color: #666;
+}
+.footer_box ul li a:hover{
+    opacity: 1;
+}
