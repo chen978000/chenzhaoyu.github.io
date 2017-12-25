@@ -1,11 +1,23 @@
+/**
+ *主题：商城js
+ *作者：陈昭雨
+ *更新时间：20171225
+ *20171224更新内容：Original completed.
+ *20171225更新内容：修复滑动浏览器默认事件问题。
+ */
 
 window.onload = function () {
     //加载推荐
     getRec();
-    //顶部
+
+    //顶部透明度
     // headChange();
+
+    //轮播图
     Banner();
 }
+
+// 功能模块
 //创建推荐
 function getRec() {
     var oRecUl = document.querySelector(".recUl");
@@ -43,7 +55,7 @@ function getRec() {
     }
 }
 
-//顶部
+//顶部透明度
 function headChange() {
     var header = document.querySelector(".header_box");
     var banner = document.querySelector(".banner");
@@ -121,6 +133,7 @@ function Banner() {
         clearInterval(timer);
     });
     banUl.addEventListener("touchmove", function(event){
+        event.preventDefault();
         var moveX = event.touches[0].clientX;
         distance = moveX-startX;
         translateX = -index*width+distance;
@@ -148,6 +161,7 @@ function Banner() {
     });
 }
 
+// 公用
 //加过渡
 function addTransition(obj) {
     obj.style.transition = "all 0.5s";
