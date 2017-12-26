@@ -4,6 +4,7 @@
  *更新时间：20171225
  *20171224更新内容：Original completed.
  *20171225更新内容：修复滑动浏览器默认事件问题。
+ *20171226更新内容：修复resize浏览器大小时不刷新轮播图异常的问题。
  */
 
 window.onload = function () {
@@ -76,6 +77,9 @@ function headChange() {
 function Banner() {
     var banner = document.querySelector(".banner");
     var width = banner.offsetWidth;
+    window.addEventListener("resize",function(){
+        width = banner.offsetWidth;
+    })
     var banUl = document.querySelector(".bannerUl");
     var pointUl = banner.querySelector("ul:last-child");
     var points = pointUl.querySelectorAll("li");
