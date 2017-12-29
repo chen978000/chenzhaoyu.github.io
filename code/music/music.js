@@ -1,6 +1,6 @@
 // 主题：仿网易云音乐js
 // 作者：陈昭雨
-// 更新时间：20171212
+// 完成时间：20171208
 // 20171209更新内容：增加歌单显示、隐藏、点击歌单播放、播放中歌曲颜色功能 
 // 20171210更新内容：增加进度条拖动功能，修复歌单在底部滑动BUG 
 // 20171211更新内容：增加title显示播放状态
@@ -8,6 +8,7 @@
 // 20171213更新内容：修复ios safari下animation-play-state失效、初始第一首歌播放时歌单中不变为红色等问题
 // 20171215更新内容：增加打开歌单显示正在播放歌曲的位置的功能
 // 20171219更新内容：修复ipad打开歌单位置显示不正常的问题
+// 20171229更新内容：增加搜索歌单时的回车搜索功能
 window.onload = function(){
 	var disc = document.querySelector(".disc");
 	var citou = document.querySelector(".citou");
@@ -126,7 +127,6 @@ window.onload = function(){
 			document.onmousemove= null;
 		}
 	}
-
 	//移动端拖动进度条
 	point.addEventListener("touchstart", function(ev){
 		ev =ev.touches[0];
@@ -143,9 +143,14 @@ window.onload = function(){
 		searchMusic(i);
 	}
 	var searchText = document.querySelector(".search_text");
-	searchText.onfocus = function(){
+	searchText.onfocus = function(ev){
 		searchText.value = "";
 	}
+	searchText.addEventListener("keydown",function(ev){
+		if(ev.keyCode==13){
+			searchMusic(i);
+		};
+	})
 }
 
 //功能模块
@@ -353,7 +358,7 @@ function mobileMove(ev, oldLeft){
 	obj.currentTime=obj.duration*(point.offsetLeft/progress.offsetWidth);
 }
 
-//将matrix转换为rotate
+// 将matrix转换为rotate
 // 解析matrix矩阵，0°-360°，返回旋转角度 
 // 当a=b||-a=b,0<=deg<=180 
 // 当-a+b=180,180<=deg<=270 
@@ -388,5 +393,3 @@ function setTime(x){
 	s = s<10?"0"+s:s;
 	return m+":"+s;
 }
-
-
