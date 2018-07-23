@@ -9,6 +9,7 @@
 // 20171215更新内容：增加打开歌单显示正在播放歌曲的位置的功能
 // 20171219更新内容：修复ipad打开歌单位置显示不正常的问题
 // 20171229更新内容：增加搜索歌单时的回车搜索功能
+// 20180723更新内容：修复歌曲url无效时的报错、样式优化
 window.onload = function(){
 	var disc = document.querySelector(".disc");
 	var citou = document.querySelector(".citou");
@@ -16,6 +17,7 @@ window.onload = function(){
 	var pause = document.querySelector(".control_pause");
 	var obj=document.getElementById("player");
 	var cover = document.querySelector(".cover");
+	var playBoard = document.querySelector(".play-board");
 	var fengmian = document.querySelector(".fengmian");
 	var intro_name = document.querySelector(".intro_name");
 	var intro_artist = document.querySelector(".intro_artist");
@@ -105,6 +107,10 @@ window.onload = function(){
 	hideBtn.onclick = function(){
 		hideList(hideBtn);
 	}
+    //点击收起歌单
+    playBoard.onclick= function () {
+        hideList(hideBtn);
+    }
 	//加载歌单
 	getList();
 	//点击歌单播放
@@ -150,13 +156,17 @@ window.onload = function(){
 		if(ev.keyCode==13){
 			searchMusic(i);
 		};
-	})
+	});
 }
 
 //功能模块
 //数据读取
 function getData(obj, cover, fengmian, intro_name, intro_artist, i){
-	obj.src = "http://music.163.com/song/media/outer/url?id="+List[i].id+".mp3";	
+	try{
+        obj.src = "http://music.163.com/song/media/outer/url?id="+List[i].id+".mp3";
+    }catch (e) {
+		console.log(window.onerror);
+    }
 	cover.style.backgroundImage = "url("+List[i].img+")";
 	cover.style.opacity = 0.5;
 	fengmian.src = List[i].img;
