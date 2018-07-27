@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>南京江宁新城医院</title>
+<link rel="stylesheet" type="text/css" href="./css/hui.css" />
+<link rel="stylesheet" href="./css/aliFont/iconfont.css">
+</head>
+<style>
+    body{
+        font-size:62.5%;
+        background: url("./img/bj.jpg") repeat;
+    }
+    div{
+        box-sizing: border-box;
+    }
+    .footer_box{
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    .shengming_box p{
+        text-align: center;
+        font-size: 1rem;
+    }
+    .hui-content img{
+        display: block;
+        width: 20rem;
+        height: auto;
+        margin: 0 auto;
+    }
+    .main_box{
+        padding: 50px 0.5rem 0.5rem 0.5rem;
+        text-align: center;
+    }
+    .main_box img{
+        width: 26rem;
+        height: auto;
+    }
+</style>
+<body>
+<header class="hui-header">
+    <div id="hui-back"></div>
+    <h1>南京江宁新城医院</h1>
+    <div id="hui-header-menu" onclick="hui.showSlideMenu();"></div>
+</header>
+<div class="hui-slide-menu">
+    <ul>
+        <li onclick="window.location.href = './index.html'">首页</li>
+        <li>医院概况</li>
+        <li>医院新闻</li>
+        <li>就医指南</li>
+        <li>预约挂号</li>
+        <li>查询</li>
+        <li>健康园地</li>
+        <li>在线留言</li>
+    </ul>
+</div>
+
+<div class="hui-wrap main_box">
+    <div class="hui-common-title">
+        <div class="hui-common-title-line"></div>
+        <div class="hui-common-title-txt">内科简介</div>
+        <div class="hui-common-title-line"></div>
+    </div>
+    <img src="./img/neike.jpg" alt="">
+    <div class="hui-content">
+        <p>
+            医院有多位经验丰富的内科主任医师，对于常见的内科疾病的诊疗具有丰富的临床经验， 擅长诊疗常规内科疾病：感冒、发热、上呼吸道感染、扁桃体炎，支气管炎，肺炎，肠炎 、消化不良、慢性胃病、胃溃疡、胆囊炎、结肠炎、慢性高血压、糖尿病等。
+        </p>
+    </div>
+</div>
+
+<div class="footer_box">
+    <div class="hui-common-title">
+        <div class="hui-common-title-line"></div>
+        <div class="hui-common-title-txt">医院地址</div>
+        <div class="hui-common-title-line"></div>
+    </div>
+    <div class="hui-content">
+        <p>南京市江宁区双龙大道2186号</p>
+        <p>
+            电话：025-52120120
+            <a style="color: #5E9DA2;" href="tel:025-52120120">
+                点击拨打
+                <i class="iconfont icon-dianhua" style="color: #5E9DA2;font-size: 2rem;position: relative;top: 0.3rem;"></i>
+            </a>
+        </p>
+        <p>公交乘车路线：Y36、801、851、852、868、869、716路至殷巷北站下车；792、821、838路在清水亭东路站下车；816路在殷华街道站下车。</p>
+        <p>地铁乘坐路线：乘坐1号线南延线到百家湖站下，往南1000米至新城医院；乘坐3号线到九龙站下，往东300米至新城医院。</p>
+    </div>
+</div>
+
+<div>
+    <div class="hui-common-title">
+        <div class="hui-common-title-line"></div>
+        <div class="hui-common-title-txt">微信公众号</div>
+        <div class="hui-common-title-line"></div>
+    </div>
+    <div class="hui-content">
+        <img class="ewm_img" src="./img/ewm.jpg" alt="">
+    </div>
+</div>
+
+<div class="shengming_box">
+    <p>本院声明：本网站信息仅供参考，不能作为诊疗及医疗依据！</p>
+    <p>Copyright ©南京江宁新城医院 All rights reserved.</p>
+    <p>苏ICP备12010801</p>
+</div>
+
+
+
+<script src="./js/hui.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/hui-swipe.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  hui.slideMenu();
+  swiper();
+  hui.scrollNews(scrollnew1,8000);
+
+  function swiper() {
+    var swipe = new huiSwpie('#swipe');
+    swipe.autoPlay = true;
+    swipe.run();
+    hui('#jianjie').unfold();
+
+    /*
+    hui.get(
+      'http://hoa.hcoder.net/index.php?user=hcoder&pwd=hcoder&m=lunbo',
+      function(res){
+        var arr  = res.split('--hcSplitor--');
+        for(var i = 0; i < arr.length; i++){
+          var div = document.createElement('div')
+          div.setAttribute('class', 'hui-swipe-item');
+          div.innerHTML = arr[i];
+          hui(div).appendTo('#swipe2 .hui-swipe-items');
+        }
+        var swipe2 = new huiSwpie('#swipe2');
+        swipe2.run();
+      },
+      function(){
+        hui.toast('读取远程数据失败');
+      }
+    );
+    */
+  }
+</script>
+
+</body>
+</html>

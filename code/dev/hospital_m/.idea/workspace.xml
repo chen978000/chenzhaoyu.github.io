@@ -17,21 +17,26 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="225" column="63" lean-forward="true" selection-start-line="225" selection-start-column="63" selection-end-line="225" selection-end-column="63" />
+            <state relative-caret-position="507">
+              <caret line="300" column="14" lean-forward="true" selection-start-line="300" selection-start-column="14" selection-end-line="300" selection-end-column="14" />
               <folding>
                 <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#style#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#div#3;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#div#5;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#7;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#div#1;n#div#6;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#style#0;n#span#0;n#p#1;n#div#1;n#div#7;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#span#0;n#p#1;n#div#1;n#div#7;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#div#7;n#body#0;n#html#0;n#!!top" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fuke.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fuke.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="644">
+              <caret line="67" column="10" lean-forward="true" selection-start-line="67" selection-start-column="10" selection-end-line="67" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -51,6 +56,7 @@
       <find>hui-common-title-txt</find>
       <find>hui-common-title</find>
       <find>hui-unfold</find>
+      <find>shengming_box</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -58,7 +64,10 @@
       <list>
         <option value="$PROJECT_DIR$/js/hui-swipe.js" />
         <option value="$PROJECT_DIR$/css/hui.css" />
+        <option value="$PROJECT_DIR$/neike.html" />
+        <option value="$PROJECT_DIR$/waike.html" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/fuke.html" />
       </list>
     </option>
   </component>
@@ -69,9 +78,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="4" />
-    <option name="y" value="69" />
-    <option name="width" value="1811" />
+    <option name="x" value="140" />
+    <option name="y" value="111" />
+    <option name="width" value="1403" />
     <option name="height" value="923" />
   </component>
   <component name="ProjectView">
@@ -89,23 +98,7 @@
             <path>
               <item name="DaiJin-m" type="b2602c69:ProjectViewProjectNode" />
               <item name="DaiJin-m" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DaiJin-m" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DaiJin-m" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="aliFont" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DaiJin-m" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DaiJin-m" type="462c0819:PsiDirectoryNode" />
               <item name="img" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DaiJin-m" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DaiJin-m" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -116,7 +109,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../DaiJin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../chenzhaoyu.github.io" />
     <property name="node.js.detected.package.prettier" value="true" />
     <property name="node.js.path.for.package.prettier" value="project" />
     <property name="node.js.selected.package.prettier" value="" />
@@ -124,7 +117,11 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\学习项目\DaiJin-m" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\学习项目\DaiJin-m" />
       <recent name="D:\学习项目\DaiJin-m\img" />
       <recent name="D:\学习项目\DaiJin-m\css" />
     </key>
@@ -152,18 +149,18 @@
       <option name="presentableId" value="Default" />
       <updated>1532600795769</updated>
       <workItem from="1532600796997" duration="3553000" />
-      <workItem from="1532649486295" duration="13378000" />
+      <workItem from="1532649486295" duration="16500000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16931000" />
+    <option name="totallyTimeSpent" value="20053000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="4" y="69" width="1811" height="923" extended-state="0" />
+    <frame x="140" y="111" width="1403" height="923" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17202482" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17142858" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -197,14 +194,10 @@
             <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
             <element signature="n#style#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#5;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#7;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#1;n#div#6;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#span#0;n#p#1;n#div#1;n#div#7;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#i#0;n#span#0;n#p#1;n#div#1;n#div#7;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#7;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
@@ -265,22 +258,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/neike.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="62" column="46" selection-start-line="62" selection-start-column="46" selection-end-line="62" selection-end-column="46" />
+          <folding>
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/waike.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="115" column="88" selection-start-line="115" selection-start-column="88" selection-end-line="115" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuke.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="644">
+          <caret line="67" column="10" lean-forward="true" selection-start-line="67" selection-start-column="10" selection-end-line="67" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="225" column="63" lean-forward="true" selection-start-line="225" selection-start-column="63" selection-end-line="225" selection-end-column="63" />
+        <state relative-caret-position="507">
+          <caret line="300" column="14" lean-forward="true" selection-start-line="300" selection-start-column="14" selection-end-line="300" selection-end-column="14" />
           <folding>
             <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
             <element signature="n#style#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#5;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#7;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#1;n#div#6;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#span#0;n#p#1;n#div#1;n#div#7;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#i#0;n#span#0;n#p#1;n#div#1;n#div#7;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#7;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
