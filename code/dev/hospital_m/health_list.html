@@ -29,6 +29,9 @@
         height: auto;
         margin: 0 auto;
     }
+    .hui-list-text{
+        margin: 0;
+    }
     .main_box{
         padding: 50px 0.5rem 0.5rem 0.5rem;
         text-align: center;
@@ -60,14 +63,19 @@
 <div class="hui-wrap main_box">
     <div class="hui-common-title">
         <div class="hui-common-title-line"></div>
-        <div class="hui-common-title-txt">内科简介</div>
+        <div class="hui-common-title-txt">健康家园</div>
         <div class="hui-common-title-line"></div>
     </div>
-    <img src="./img/neike.jpg" alt="">
-    <div class="hui-content">
-        <p>
-            医院有多位经验丰富的内科主任医师，对于常见的内科疾病的诊疗具有丰富的临床经验， 擅长诊疗常规内科疾病：感冒、发热、上呼吸道感染、扁桃体炎，支气管炎，肺炎，肠炎 、消化不良、慢性胃病、胃溃疡、胆囊炎、结肠炎、慢性高血压、糖尿病等。
-        </p>
+    <div class="hui-list">
+        <ul id="list_ul">
+            <li class="template_li" style="display: none">
+                <div class="hui-list-text">
+                    <div class="hui-list-text-content health_title">
+                        这是健康园地的测试消息
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>
 
@@ -107,42 +115,36 @@
     <p>Copyright ©南京江宁新城医院 All rights reserved.</p>
     <p>苏ICP备12010801</p>
 </div>
-
-
-
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="./js/hui.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/hui-swipe.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+  const baseUrl = 'https://www.ferer.top';
+
   hui.slideMenu();
-  swiper();
-  hui.scrollNews(scrollnew1,8000);
+  getList();
 
-  function swiper() {
-    var swipe = new huiSwpie('#swipe');
-    swipe.autoPlay = true;
-    swipe.run();
-    hui('#jianjie').unfold();
-
-    /*
-    hui.get(
-      'http://hoa.hcoder.net/index.php?user=hcoder&pwd=hcoder&m=lunbo',
-      function(res){
-        var arr  = res.split('--hcSplitor--');
-        for(var i = 0; i < arr.length; i++){
-          var div = document.createElement('div')
-          div.setAttribute('class', 'hui-swipe-item');
-          div.innerHTML = arr[i];
-          hui(div).appendTo('#swipe2 .hui-swipe-items');
-        }
-        var swipe2 = new huiSwpie('#swipe2');
-        swipe2.run();
-      },
-      function(){
-        hui.toast('读取远程数据失败');
-      }
-    );
-    */
+  function getList() {
+    $.get(baseUrl+'/public/api/portal/articles/newLists?type=2',result=> {
+      const data = result.data;
+      data.forEach(item=>{
+        var ele = $(".template_li").eq(0).clone();
+        ele.find(".health_title").html(item.post_title);
+        ele.bind({
+          click:function () {
+            goToDetail(item.id);
+          }
+        });
+        ele.show();
+        $("#list_ul").append(ele);
+      });
+    })
   }
+
+  function goToDetail(id) {
+    window.location = `./article.html?id=${id}`;
+  }
+
 </script>
 
 </body>

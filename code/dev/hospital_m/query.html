@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>南京江宁新城医院</title>
+<link rel="stylesheet" type="text/css" href="./css/hui.css" />
+<link rel="stylesheet" href="./css/aliFont/iconfont.css">
+</head>
+<style>
+    body{
+        font-size:62.5%;
+        background: url("./img/bj.jpg") repeat;
+    }
+    div{
+        box-sizing: border-box;
+    }
+    .footer_box{
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    .shengming_box p{
+        text-align: center;
+        font-size: 1rem;
+    }
+    .hui-content img{
+        display: block;
+        width: 20rem;
+        height: auto;
+        margin: 0 auto;
+    }
+    .main_box{
+        padding: 50px 0.5rem 0.5rem 0.5rem;
+        background: #fff;
+    }
+    .hui-form-items input{
+        border: 1px solid #5E9DA2;
+    }
+    .hui-button{
+        height: 2rem;
+        line-height: 2rem;
+    }
+    .hui-form-items-title{
+        width: 28%;
+    }
+    .result_box{
+        display: none;
+    }
+    .result_box p{
+        text-indent: 1em;
+    }
+    .result_box p span{
+        color: #e83632;
+    }
+</style>
+<body>
+<header class="hui-header">
+    <div id="hui-back"></div>
+    <h1>南京江宁新城医院</h1>
+    <div id="hui-header-menu" onclick="hui.showSlideMenu();"></div>
+</header>
+<div class="hui-slide-menu">
+    <ul>
+        <li onclick="window.location.href = './index.html'">首页</li>
+        <li onclick="window.location.href = './about.html'">医院概况</li>
+        <li onclick="window.location.href = './news.html'">医院新闻</li>
+        <li onclick="window.location.href = './guide.html'">就医指南</li>
+        <li onclick="window.location.href = './registration.html'">预约挂号</li>
+        <li onclick="window.location.href = './query.html'">查询</li>
+        <li onclick="window.location.href = './health_list.html'">健康园地</li>
+        <li onclick="window.location.href = './email.html'">在线留言</li>
+    </ul>
+</div>
+
+<div class="main_box">
+    <div class="hui-common-title">
+        <div class="hui-common-title-line"></div>
+        <div class="hui-common-title-txt">体检查询</div>
+        <div class="hui-common-title-line"></div>
+    </div>
+    <div class="hui-content ">
+        <h4>查询注意事项</h4>
+        <p>请输入身份证号及姓名查询个人体检情况，仔细核对体检日期、体检姓名、登记号、体检单位等信息。</p>
+        <p>如果没有查询结果或者显示的信息与体检报告不一致，则不是我院体检报告，请核实体检报告真伪。</p>
+        <p>体检简要结果可以通过微信公众号查询。 网上查询仅供参考体检结果以纸质报告为准。 </p>
+        <p>正常检时间：8:00-16:30（节假日不休） </p>
+        <p>体检咨询电话：025-52728008 (8:00-20:30)</p>
+        <h4>填写查询信息</h4>
+        <div class="hui-form-items">
+            <div class="hui-form-items-title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</div>
+            <input type="text" class="hui-input hui-input-clear" id="name_input" placeholder="请输入体检人姓名" />
+        </div>
+        <div class="hui-form-items">
+            <div class="hui-form-items-title">身份证号：</div>
+            <input type="text" class="hui-input hui-input-clear" id="card_input" placeholder="请输入身份证号码" />
+        </div>
+        <div style="margin-top: 1rem">
+            <button type="button" class="hui-button hui-primary hui-fl" style="margin-left:1rem;" onclick="submit()">查询</button>
+            <button type="button" class="hui-button hui-fl" style="margin-left:2rem;" onclick="reset()">重置</button>
+        </div>
+        <div class="result_box">
+            <h4 style="text-indent: 1em">体检结果</h4>
+            <p>编号：<span class="login_num"></span></p>
+            <p>姓名：<span class="name"></span></p>
+            <p>年龄：<span class="age"></span></p>
+            <p>身份证号：<span class="card"></span></p>
+            <p>公司：<span class="company"></span></p>
+            <p>联系电话：<span class="phone"></span></p>
+            <p>体检时间：<span class="time"></span></p>
+            <p>体检结果：<span class="status"></span></p>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer_box">
+    <div class="hui-common-title">
+        <div class="hui-common-title-line"></div>
+        <div class="hui-common-title-txt">医院地址</div>
+        <div class="hui-common-title-line"></div>
+    </div>
+    <div class="hui-content">
+        <p>南京市江宁区双龙大道2186号</p>
+        <p>
+            电话：025-52120120
+            <a style="color: #5E9DA2;" href="tel:025-52120120">
+                点击拨打
+                <i class="iconfont icon-dianhua" style="color: #5E9DA2;font-size: 2rem;position: relative;top: 0.3rem;"></i>
+            </a>
+        </p>
+        <p>公交乘车路线：Y36、801、851、852、868、869、716路至殷巷北站下车；792、821、838路在清水亭东路站下车；816路在殷华街道站下车。</p>
+        <p>地铁乘坐路线：乘坐1号线南延线到百家湖站下，往南1000米至新城医院；乘坐3号线到九龙站下，往东300米至新城医院。</p>
+    </div>
+</div>
+
+<div>
+    <div class="hui-common-title">
+        <div class="hui-common-title-line"></div>
+        <div class="hui-common-title-txt">微信公众号</div>
+        <div class="hui-common-title-line"></div>
+    </div>
+    <div class="hui-content">
+        <img class="ewm_img" src="./img/ewm.jpg" alt="">
+    </div>
+</div>
+
+<div class="shengming_box">
+    <p>本院声明：本网站信息仅供参考，不能作为诊疗及医疗依据！</p>
+    <p>Copyright ©南京江宁新城医院 All rights reserved.</p>
+    <p>苏ICP备12010801</p>
+</div>
+
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="./js/hui.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="./js/hui-swipe.js" type="text/javascript" charset="utf-8"></script>-->
+<script type="text/javascript">
+  const baseUrl = 'https://www.ferer.top';
+  hui.slideMenu();
+  hui.datePicker();
+
+
+  function submit() {
+    const params = {
+      name: $("#name_input").val(),
+      card: $("#card_input").val(),
+    }
+    if(!params.name){
+      hui.toast('请输入体检人姓名');
+      return
+    }
+    if(!params.card){
+      hui.toast('请输入身份证号');
+      return
+    }
+    if(!checkCard(params.card)){
+      hui.toast('抱歉！身份证号码格式不正确');
+      return
+    }
+
+    $.post(baseUrl+'/public/api/home/index/selectHealth',params,result=>{
+      const {data} = result;
+      if(result.code == 1){
+        $(".login_num").html(data.login_num);
+        $(".name").html(data.name);
+        $(".age").html(data.age);
+        $(".card").html(data.card);
+        $(".company").html(data.company);
+        $(".phone").html(data.phone);
+        $(".time").html(data.time);
+        $(".status").html(data.status);
+        $(".result_box").show();
+      }else{
+        hui.toast(result.msg);
+      }
+    });
+  }
+  function reset() {
+    $("#name_input").val(null);
+    $("#card_input").val(null);
+    $(".result_box").hide();
+  }
+  function checkCard(card) {
+    let valid_rule = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    return valid_rule.test(card);
+  }
+</script>
+
+</body>
+</html>

@@ -31,11 +31,20 @@
     }
     .main_box{
         padding: 50px 0.5rem 0.5rem 0.5rem;
-        text-align: center;
+        background: #fff;
     }
-    .main_box img{
-        width: 26rem;
-        height: auto;
+    .hui-button{
+        height: 2rem;
+        line-height: 2rem;
+    }
+    .hui-form-items input{
+        border: 1px solid #5E9DA2;
+    }
+    .hui-form-items-title{
+        width: 28%;
+    }
+    textarea{
+        border: 1px solid #5E9DA2;
     }
 </style>
 <body>
@@ -57,18 +66,32 @@
     </ul>
 </div>
 
-<div class="hui-wrap main_box">
+<div class="main_box">
     <div class="hui-common-title">
         <div class="hui-common-title-line"></div>
-        <div class="hui-common-title-txt">内科简介</div>
+        <div class="hui-common-title-txt">在线留言</div>
         <div class="hui-common-title-line"></div>
     </div>
-    <img src="./img/neike.jpg" alt="">
-    <div class="hui-content">
-        <p>
-            医院有多位经验丰富的内科主任医师，对于常见的内科疾病的诊疗具有丰富的临床经验， 擅长诊疗常规内科疾病：感冒、发热、上呼吸道感染、扁桃体炎，支气管炎，肺炎，肠炎 、消化不良、慢性胃病、胃溃疡、胆囊炎、结肠炎、慢性高血压、糖尿病等。
-        </p>
+    <div class="hui-content ">
+        <h4>填写留言</h4>
+        <div class="hui-form-items">
+            <div class="hui-form-items-title">意见反馈:</div>
+            <textarea id="content" placeholder="请输入您想反馈的内容"></textarea>
+        </div>
+        <div class="hui-form-items">
+            <div class="hui-form-items-title">姓名：</div>
+            <input type="text" class="hui-input hui-input-clear" id="name" placeholder="请输入您的姓名" />
+        </div>
+        <div class="hui-form-items">
+            <div class="hui-form-items-title">手机号：</div>
+            <input type="text" class="hui-input hui-input-clear" id="phone" placeholder="请输入手机号码" />
+        </div>
+        <div style="margin-top: 1rem">
+            <button type="button" class="hui-button hui-primary hui-fl" style="margin-left:1rem;" onclick="submit()">立即提交</button>
+            <button type="button" class="hui-button hui-fl" style="margin-left:2rem;" onclick="reset()">重置</button>
+        </div>
     </div>
+
 </div>
 
 <div class="footer_box">
@@ -109,39 +132,56 @@
 </div>
 
 
-
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="./js/hui.js" type="text/javascript" charset="utf-8"></script>
-<script src="./js/hui-swipe.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="./js/hui-swipe.js" type="text/javascript" charset="utf-8"></script>-->
 <script type="text/javascript">
+  const baseUrl = 'https://www.ferer.top';
   hui.slideMenu();
-  swiper();
-  hui.scrollNews(scrollnew1,8000);
+  hui.datePicker();
 
-  function swiper() {
-    var swipe = new huiSwpie('#swipe');
-    swipe.autoPlay = true;
-    swipe.run();
-    hui('#jianjie').unfold();
 
-    /*
-    hui.get(
-      'http://hoa.hcoder.net/index.php?user=hcoder&pwd=hcoder&m=lunbo',
-      function(res){
-        var arr  = res.split('--hcSplitor--');
-        for(var i = 0; i < arr.length; i++){
-          var div = document.createElement('div')
-          div.setAttribute('class', 'hui-swipe-item');
-          div.innerHTML = arr[i];
-          hui(div).appendTo('#swipe2 .hui-swipe-items');
-        }
-        var swipe2 = new huiSwpie('#swipe2');
-        swipe2.run();
-      },
-      function(){
-        hui.toast('读取远程数据失败');
+  function submit() {
+    const params = {
+      name: $("#name").val(),
+      phone: $("#phone").val(),
+      content: $("#content").val()
+    }
+    if(!params.content){
+      hui.toast('请输入反馈意见内容');
+      return
+    }
+    if(!params.name){
+      hui.toast('请输入体检人姓名');
+      return
+    }
+    if(!params.phone){
+      hui.toast('请输入手机号码');
+      return
+    }
+    if(!checkPhone(params.phone)){
+      hui.toast('抱歉！手机号码格式不正确');
+      return
+    }
+
+    $.post(baseUrl+'/public/api/home/index/addMsg',params,result=>{
+      const {data} = result;
+      if(result.code == 1){
+        hui.toast(result.msg);
+        reset();
+      }else{
+        hui.toast(result.msg);
       }
-    );
-    */
+    });
+  }
+  function reset() {
+    $("#name").val(null);
+    $("#phone").val(null);
+    $("#content").val(null);
+  }
+  function checkPhone(tel) {
+    let valid_rule = /^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/;
+    return valid_rule.test(tel);
   }
 </script>
 

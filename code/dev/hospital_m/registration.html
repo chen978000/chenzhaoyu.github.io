@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>南京江宁新城医院</title>
+<link rel="stylesheet" type="text/css" href="./css/hui.css" />
+<link rel="stylesheet" href="./css/aliFont/iconfont.css">
+</head>
+<style>
+    body{
+        font-size:62.5%;
+        background: url("./img/bj.jpg") repeat;
+    }
+    div{
+        box-sizing: border-box;
+    }
+    .footer_box{
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    .shengming_box p{
+        text-align: center;
+        font-size: 1rem;
+    }
+    .hui-content img{
+        display: block;
+        width: 20rem;
+        height: auto;
+        margin: 0 auto;
+    }
+    .main_box{
+        padding: 50px 0.5rem 0.5rem 0.5rem;
+        background: #fff;
+    }
+    .hui-form-items input{
+        border: 1px solid #5E9DA2;
+    }
+    #data_input{
+        height: 1.6rem;
+        line-height: 1.6rem;
+        text-align: left;
+        padding:0;
+    }
+    .hui-button{
+        height: 2rem;
+        line-height: 2rem;
+    }
+    .hui-form-items-title{
+        width: 28%;
+    }
+</style>
+<body>
+<header class="hui-header">
+    <div id="hui-back"></div>
+    <h1>南京江宁新城医院</h1>
+    <div id="hui-header-menu" onclick="hui.showSlideMenu();"></div>
+</header>
+<div class="hui-slide-menu">
+    <ul>
+        <li onclick="window.location.href = './index.html'">首页</li>
+        <li onclick="window.location.href = './about.html'">医院概况</li>
+        <li onclick="window.location.href = './news.html'">医院新闻</li>
+        <li onclick="window.location.href = './guide.html'">就医指南</li>
+        <li onclick="window.location.href = './registration.html'">预约挂号</li>
+        <li onclick="window.location.href = './query.html'">查询</li>
+        <li onclick="window.location.href = './health_list.html'">健康园地</li>
+        <li onclick="window.location.href = './email.html'">在线留言</li>
+    </ul>
+</div>
+
+<div class="main_box">
+    <div class="hui-common-title">
+        <div class="hui-common-title-line"></div>
+        <div class="hui-common-title-txt">预约挂号</div>
+        <div class="hui-common-title-line"></div>
+    </div>
+    <div class="hui-content">
+        <p>
+            医院始终坚持“以病人为中心，以服务为品牌，以专科为特色，以质量为生命”作为发展主题， 以“热情、认真、细致、周到、真诚”作为服务理念，强化自身素质，树立良好的品牌形象， 立足于南京及周边地区，服务广大群众，满足广大群众日益增长的健康需求。 医院设有内科、外科、泌尿科、妇科、计划生育专业、生殖健康与不孕专业、妇女保健科、 性传播疾病专业、口腔科、耳鼻喉科、中医科、急诊医学科、医学检验科、医学影像科、等诊疗科目。
+        </p>
+    </div>
+    <br>
+    <h3>填写预约信息</h3>
+    <div class="hui-form-items">
+        <div class="hui-form-items-title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</div>
+        <input type="text" class="hui-input hui-input-clear" id="name_input" placeholder="请输入就诊人姓名" />
+    </div>
+    <div class="hui-form-items">
+        <div class="hui-form-items-title">手机号码：</div>
+        <input type="text" class="hui-input hui-input-clear" id="phone_input" placeholder="请输入手机号码" />
+    </div>
+    <div class="hui-form-items">
+        <div class="hui-form-items-title">预约日期：</div>
+        <input type="date" id="data_input" class="hui-button hui-button-large hui-date-picker hui-picker-valued " placeholder="请选择月份" />
+    </div>
+    <div class="hui-form-items">
+        <div class="hui-form-items-title">预约科室：</div>
+        <div class="hui-form-select">
+            <select name="office" id="office_select">
+                <option value="内科">内科</option>
+                <option value="外科">外科</option>
+                <option value="妇科">妇科</option>
+                <option value="泌尿外科">泌尿外科</option>
+                <option value="皮肤科">皮肤科</option>
+                <option value="中医科">中医科</option>
+                <option value="计划生育科">计划生育科</option>
+            </select>
+        </div>
+    </div>
+    <div style="margin-top: 1rem">
+        <button type="button" class="hui-button hui-primary hui-fl" style="margin-left:1rem;" onclick="submit()">立即提交</button>
+        <button type="button" class="hui-button hui-fl" style="margin-left:2rem;" onclick="reset()">重置</button>
+    </div>
+</div>
+
+<div class="footer_box">
+    <div class="hui-common-title">
+        <div class="hui-common-title-line"></div>
+        <div class="hui-common-title-txt">医院地址</div>
+        <div class="hui-common-title-line"></div>
+    </div>
+    <div class="hui-content">
+        <p>南京市江宁区双龙大道2186号</p>
+        <p>
+            电话：025-52120120
+            <a style="color: #5E9DA2;" href="tel:025-52120120">
+                点击拨打
+                <i class="iconfont icon-dianhua" style="color: #5E9DA2;font-size: 2rem;position: relative;top: 0.3rem;"></i>
+            </a>
+        </p>
+        <p>公交乘车路线：Y36、801、851、852、868、869、716路至殷巷北站下车；792、821、838路在清水亭东路站下车；816路在殷华街道站下车。</p>
+        <p>地铁乘坐路线：乘坐1号线南延线到百家湖站下，往南1000米至新城医院；乘坐3号线到九龙站下，往东300米至新城医院。</p>
+    </div>
+</div>
+
+<div>
+    <div class="hui-common-title">
+        <div class="hui-common-title-line"></div>
+        <div class="hui-common-title-txt">微信公众号</div>
+        <div class="hui-common-title-line"></div>
+    </div>
+    <div class="hui-content">
+        <img class="ewm_img" src="./img/ewm.jpg" alt="">
+    </div>
+</div>
+
+<div class="shengming_box">
+    <p>本院声明：本网站信息仅供参考，不能作为诊疗及医疗依据！</p>
+    <p>Copyright ©南京江宁新城医院 All rights reserved.</p>
+    <p>苏ICP备12010801</p>
+</div>
+
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="./js/hui.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="./js/hui-swipe.js" type="text/javascript" charset="utf-8"></script>-->
+<script type="text/javascript">
+  const baseUrl = 'https://www.ferer.top';
+  hui.slideMenu();
+  hui.datePicker();
+
+
+  function submit() {
+    const params = {
+      gua_name: $("#name_input").val(),
+      gua_tel: $("#phone_input").val(),
+      gua_time: $("#data_input").val(),
+      gua_section_name: $("#office_select").val()
+    }
+    if(!params.gua_name){
+      hui.toast('请输入就诊人姓名');
+      return
+    }
+    if(!params.gua_tel){
+      hui.toast('请输入联系方式');
+      return
+    }
+    if(!checkPhone(params.gua_tel)){
+      hui.toast('抱歉！手机号码格式不正确');
+      return
+    }
+    if(!params.gua_time){
+      hui.toast('请输入预约日期');
+      return
+    }
+
+    $.post(baseUrl+'/public/api/home/index/guaHao',params,result=>{
+      if(result.code == 1){
+        hui.toast(result.msg);
+        reset();
+      }else{
+        hui.toast(result.msg);
+      }
+    });
+  }
+  function reset() {
+    $("#name_input").val(null);
+    $("#phone_input").val(null);
+    $("#data_input").val(null);
+    $("#office_select").val('内科');
+  }
+  function checkPhone(tel) {
+    let valid_rule = /^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/;
+    return valid_rule.test(tel);
+  }
+</script>
+
+</body>
+</html>

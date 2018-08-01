@@ -29,13 +29,16 @@
         height: auto;
         margin: 0 auto;
     }
+    .hui-list-text{
+        margin: 0;
+    }
     .main_box{
         padding: 50px 0.5rem 0.5rem 0.5rem;
         text-align: center;
+        background: #fff;
     }
-    .main_box img{
-        width: 26rem;
-        height: auto;
+    .yide_box{
+        text-align: center;
     }
 </style>
 <body>
@@ -57,17 +60,28 @@
     </ul>
 </div>
 
-<div class="hui-wrap main_box">
+<div class="main_box">
     <div class="hui-common-title">
         <div class="hui-common-title-line"></div>
-        <div class="hui-common-title-txt">内科简介</div>
+        <div class="hui-common-title-txt">医院新闻</div>
         <div class="hui-common-title-line"></div>
     </div>
-    <img src="./img/neike.jpg" alt="">
     <div class="hui-content">
-        <p>
-            医院有多位经验丰富的内科主任医师，对于常见的内科疾病的诊疗具有丰富的临床经验， 擅长诊疗常规内科疾病：感冒、发热、上呼吸道感染、扁桃体炎，支气管炎，肺炎，肠炎 、消化不良、慢性胃病、胃溃疡、胆囊炎、结肠炎、慢性高血压、糖尿病等。
-        </p>
+        <h4>动态新闻</h4>
+        <div class="hui-list">
+            <ul id="list_ul">
+                <li class="new_li" style="display: none">
+                    <div class="hui-list-text">
+                        <div class="hui-list-text-content new_title">这是测试用的新闻</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <h4>医德医风</h4>
+        <div class="yide_box">
+            <p>康复患者谢赠李志明主任锦旗</p>
+            <img src="./img/jinqi1.jpg" alt="">
+        </div>
     </div>
 </div>
 
@@ -108,40 +122,33 @@
     <p>苏ICP备12010801</p>
 </div>
 
-
-
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="./js/hui.js" type="text/javascript" charset="utf-8"></script>
-<script src="./js/hui-swipe.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+  const baseUrl = 'https://www.ferer.top';
   hui.slideMenu();
-  swiper();
-  hui.scrollNews(scrollnew1,8000);
+  getNewList();
 
-  function swiper() {
-    var swipe = new huiSwpie('#swipe');
-    swipe.autoPlay = true;
-    swipe.run();
-    hui('#jianjie').unfold();
 
-    /*
-    hui.get(
-      'http://hoa.hcoder.net/index.php?user=hcoder&pwd=hcoder&m=lunbo',
-      function(res){
-        var arr  = res.split('--hcSplitor--');
-        for(var i = 0; i < arr.length; i++){
-          var div = document.createElement('div')
-          div.setAttribute('class', 'hui-swipe-item');
-          div.innerHTML = arr[i];
-          hui(div).appendTo('#swipe2 .hui-swipe-items');
-        }
-        var swipe2 = new huiSwpie('#swipe2');
-        swipe2.run();
-      },
-      function(){
-        hui.toast('读取远程数据失败');
-      }
-    );
-    */
+  function getNewList() {
+    $.get(baseUrl+'/public/api/portal/articles/newLists?type=1',result=>{
+      const data = result.data;
+      data.slice(0,4).forEach(item=>{
+        let ele = $(".new_li").eq(0).clone();
+        ele.find(".new_title").html(item.post_title);
+        ele.bind({
+          click:function () {
+            goToNewBody(item.id)
+          }
+        });
+        ele.show();
+        $("#list_ul").append(ele);
+      });
+    });
+  }
+
+  function goToNewBody(id) {
+    window.location = `./article.html?id=${id}`;
   }
 </script>
 

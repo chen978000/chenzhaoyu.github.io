@@ -110,13 +110,13 @@
 <div class="hui-slide-menu">
     <ul>
         <li onclick="window.location.href = './index.html'">首页</li>
-        <li>医院概况</li>
-        <li>医院新闻</li>
-        <li>就医指南</li>
-        <li>预约挂号</li>
-        <li>查询</li>
-        <li>健康园地</li>
-        <li>在线留言</li>
+        <li onclick="window.location.href = './about.html'">医院概况</li>
+        <li onclick="window.location.href = './news.html'">医院新闻</li>
+        <li onclick="window.location.href = './guide.html'">就医指南</li>
+        <li onclick="window.location.href = './registration.html'">预约挂号</li>
+        <li onclick="window.location.href = './query.html'">查询</li>
+        <li onclick="window.location.href = './health_list.html'">健康园地</li>
+        <li onclick="window.location.href = './email.html'">在线留言</li>
     </ul>
 </div>
 
@@ -151,19 +151,19 @@
         <i class="iconfont icon-gynaecology icon_font"></i>
         <p>妇科</p>
     </div>
-    <div class="office miniao">
+    <div class="office miniao" onclick="goToMiniao()">
         <i class="iconfont icon-miniao icon_font"></i>
         <p>泌尿外科</p>
     </div>
-    <div class="office pifu">
+    <div class="office pifu" onclick="goToPifu()">
         <i class="iconfont icon-yaogao icon_font"></i>
         <p>皮肤科</p>
     </div>
-    <div class="office zhongyi">
+    <div class="office zhongyi" onclick="goToZhongyi()">
         <i class="iconfont icon-yaowumedicines4 icon_font"></i>
         <p>中医科</p>
     </div>
-    <div class="office shengyu">
+    <div class="office shengyu" onclick="goToShengyu()">
         <i class="iconfont icon-jihuashengyu icon_font"></i>
         <p>计划生育科</p>
     </div>
@@ -194,23 +194,14 @@
     </div>
     <div class="hui-list">
         <ul>
-            <li>
+            <li class="health_li" style="display: none">
                 <div class="hui-list-text">
-                    <div class="hui-list-text-content">
-                        这是健康园地的测试消息
-                    </div>
+                    <div class="hui-list-text-content health_title"></div>
                 </div>
             </li>
-            <li>
+            <li class="health_see_more">
                 <div class="hui-list-text">
-                    <div class="hui-list-text-content">
-                        这是健康园地的测试消息
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="hui-list-text">
-                    <div class="hui-list-text-content see_more_box">
+                    <div class="hui-list-text-content see_more_box" onclick="goToHealthList()">
                         查看更多>>
                     </div>
                 </div>
@@ -255,41 +246,40 @@
     <p>Copyright ©南京江宁新城医院 All rights reserved.</p>
     <p>苏ICP备12010801</p>
 </div>
-
-
-
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="./js/hui.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/hui-swipe.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+  const baseUrl = 'https://www.ferer.top';
   hui.slideMenu();
   swiper();
-  hui.scrollNews(scrollnew1,8000);
 
   function swiper() {
-    var swipe = new huiSwpie('#swipe');
+    let swipe = new huiSwpie('#swipe');
     swipe.autoPlay = true;
     swipe.run();
     hui('#jianjie').unfold();
+    getHealthList();
+  }
 
-    /*
-    hui.get(
-      'http://hoa.hcoder.net/index.php?user=hcoder&pwd=hcoder&m=lunbo',
-      function(res){
-        var arr  = res.split('--hcSplitor--');
-        for(var i = 0; i < arr.length; i++){
-          var div = document.createElement('div')
-          div.setAttribute('class', 'hui-swipe-item');
-          div.innerHTML = arr[i];
-          hui(div).appendTo('#swipe2 .hui-swipe-items');
-        }
-        var swipe2 = new huiSwpie('#swipe2');
-        swipe2.run();
-      },
-      function(){
-        hui.toast('读取远程数据失败');
-      }
-    );
-    */
+  function getHealthList() {
+    $.get(baseUrl+'/public/api/portal/articles/newLists?type=2',result=>{
+      const data = result.data;
+      data.slice(0,4).forEach(item=>{
+        let ele = $(".health_li").eq(0).clone();
+        ele.find(".health_title").html(item.post_title);
+        ele.bind({
+          click:function () {
+            goToHealthBody(item.id)
+          }
+        });
+        ele.show();
+        ele.insertBefore($(".health_see_more"));
+      });
+    });
+  }
+  function goToHealthBody(id) {
+    window.location = `./article.html?id=${id}`
   }
 
   function goToNeike() {
@@ -300,6 +290,21 @@
   }
   function goToFuke() {
     window.location = './fuke.html'
+  }
+  function goToMiniao() {
+    window.location = './miniao.html'
+  }
+  function goToPifu() {
+    window.location = './pifu.html'
+  }
+  function goToZhongyi() {
+    window.location = './zhongyi.html'
+  }
+  function goToShengyu() {
+    window.location = './shengyu.html'
+  }
+  function goToHealthList() {
+    window.location = './health_list.html'
   }
 </script>
 

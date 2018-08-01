@@ -32,10 +32,22 @@
     .main_box{
         padding: 50px 0.5rem 0.5rem 0.5rem;
         text-align: center;
+        background: #fff;
     }
     .main_box img{
         width: 26rem;
         height: auto;
+    }
+    .time_box{
+        font-size: 1rem;
+        color: #ccc;
+    }
+    .health_title{
+        font-size: 1.2rem;
+        padding-bottom: 1rem;
+    }
+    .time_box span{
+        color: #ccc;
     }
 </style>
 <body>
@@ -58,17 +70,14 @@
 </div>
 
 <div class="hui-wrap main_box">
-    <div class="hui-common-title">
-        <div class="hui-common-title-line"></div>
-        <div class="hui-common-title-txt">内科简介</div>
-        <div class="hui-common-title-line"></div>
-    </div>
-    <img src="./img/neike.jpg" alt="">
-    <div class="hui-content">
-        <p>
-            医院有多位经验丰富的内科主任医师，对于常见的内科疾病的诊疗具有丰富的临床经验， 擅长诊疗常规内科疾病：感冒、发热、上呼吸道感染、扁桃体炎，支气管炎，肺炎，肠炎 、消化不良、慢性胃病、胃溃疡、胆囊炎、结肠炎、慢性高血压、糖尿病等。
-        </p>
-    </div>
+    <!--<div class="hui-common-title">-->
+        <!--<div class="hui-common-title-line"></div>-->
+        <!--<div class="hui-common-title-txt health_title">健康家园</div>-->
+        <!--<div class="hui-common-title-line"></div>-->
+    <!--</div>-->
+    <h2 class="health_title">健康家园</h2>
+    <div class="time_box">发布时间：<span class="create_time"></span></div>
+    <div class="hui-content" style="padding:18px 8px;" id="content"></div>
 </div>
 
 <div class="footer_box">
@@ -107,42 +116,31 @@
     <p>Copyright ©南京江宁新城医院 All rights reserved.</p>
     <p>苏ICP备12010801</p>
 </div>
-
-
-
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="./js/hui.js" type="text/javascript" charset="utf-8"></script>
 <script src="./js/hui-swipe.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/public.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+  const baseUrl = 'https://www.ferer.top';
+
   hui.slideMenu();
-  swiper();
-  hui.scrollNews(scrollnew1,8000);
+  getList();
 
-  function swiper() {
-    var swipe = new huiSwpie('#swipe');
-    swipe.autoPlay = true;
-    swipe.run();
-    hui('#jianjie').unfold();
-
-    /*
-    hui.get(
-      'http://hoa.hcoder.net/index.php?user=hcoder&pwd=hcoder&m=lunbo',
-      function(res){
-        var arr  = res.split('--hcSplitor--');
-        for(var i = 0; i < arr.length; i++){
-          var div = document.createElement('div')
-          div.setAttribute('class', 'hui-swipe-item');
-          div.innerHTML = arr[i];
-          hui(div).appendTo('#swipe2 .hui-swipe-items');
-        }
-        var swipe2 = new huiSwpie('#swipe2');
-        swipe2.run();
-      },
-      function(){
-        hui.toast('读取远程数据失败');
-      }
-    );
-    */
+  function getList() {
+    const id = window.location.href.match(/id=?(\S*)/)[1];
+    $.get(`${baseUrl}/public/api/portal/articles/read?id=${id}`,result=> {
+      const data = result.data;
+      $(".create_time").html(new Date(data.create_time*1000).formatTime("yyyy-MM-dd"));
+      $(".health_title").html(data.post_title);
+      $("#content").html(data.post_content);
+    })
   }
+
+  function goToDetail(id) {
+  }
+
+
+
 </script>
 
 </body>
