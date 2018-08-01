@@ -124,9 +124,9 @@
     <div style="padding:10px;">
         <div class="hui-swipe" id="swipe">
             <div class="hui-swipe-items">
-                <div class="hui-swipe-item"><img src="./img/banner1.jpg"/></div>
-                <div class="hui-swipe-item"><img src="./img/banner2.jpg"/></div>
-                <div class="hui-swipe-item"><img src="./img/banner3.jpg"/></div>
+                <!--<div class="hui-swipe-item"><img src="./img/banner1.jpg"/></div>-->
+                <!--<div class="hui-swipe-item"><img src="./img/banner2.jpg"/></div>-->
+                <!--<div class="hui-swipe-item"><img src="./img/banner3.jpg"/></div>-->
             </div>
         </div>
     </div>
@@ -255,13 +255,32 @@
   swiper();
 
   function swiper() {
-    let swipe = new huiSwpie('#swipe');
-    swipe.autoPlay = true;
-    swipe.run();
+    // let swipe = new huiSwpie('#swipe');
+    getBanner();
+    // swipe.autoPlay = true;
+    // swipe.run();
     hui('#jianjie').unfold();
     getHealthList();
   }
 
+  function getBanner() {
+    $.get(`${baseUrl}/public/api/home/Slides/read`,function(res){
+        var arr  = res.data.map(item=>{
+          return item.image
+        });
+        for(var i = 0; i < arr.length; i++){
+          var div = document.createElement('div')
+          div.setAttribute('class', 'hui-swipe-item');
+          var ele = `<img src="${arr[i]}"/>`;
+          $(div).html(ele);
+          hui(div).appendTo('#swipe .hui-swipe-items');
+        }
+        var swipe = new huiSwpie('#swipe');
+      swipe.autoPlay = true;
+      swipe.run();
+      }
+    );
+  }
   function getHealthList() {
     $.get(baseUrl+'/public/api/portal/articles/newLists?type=2',result=>{
       const data = result.data;
