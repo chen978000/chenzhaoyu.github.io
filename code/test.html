@@ -63,6 +63,15 @@
     position: [115.536931,35.258964]
   });
   text.setMap(map);
+  new AMap.Marker({
+    map: map,
+    position: [115.536931,35.258964],
+    icon: new AMap.Icon({
+      size: new AMap.Size(40, 50),  //图标大小
+      image: "https://webapi.amap.com/theme/v1.3/images/newpc/way_btn2.png",
+      imageOffset: new AMap.Pixel(0, -60)
+    })
+  });
   text.on('click',()=>{
     window.open('http://www.baidu.com')
   })
