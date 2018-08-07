@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+  <title>测试一下</title>
+  <script src="//webapi.amap.com/maps?v=1.4.8&key=您申请的key值"></script>
+  <style>
+    html,body,#container {
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+<div id="container"></div>
+<script>
+  var map = new AMap.Map("container", {
+    viewMode: '3D',
+    resizeEnable: true,
+    center: [115.536143,35.258897], //地图中心点
+    zoom:20
+  });
+
+  var yi = new AMap.Text({
+    text:'亿成食品',
+    textAlign:'center', // 'left' 'right', 'center',
+    verticalAlign:'middle', //middle 、bottom
+    draggable:true,
+    cursor:'pointer',
+    angle:0,
+    style:{
+      'background-color':'yellow',
+      'border':'solid 1px #0088ff',
+      'padding':'20px 20px',
+      'opacity': '0'
+    },
+    position: [115.536143,35.258897]
+  });
+  yi.setMap(map);
+  yi.on('click',()=>{
+    window.open('http://www.yichengshipin.com/')
+  })
+
+
+  var text = new AMap.Text({
+    text:'城东小镇',
+    textAlign:'center', // 'left' 'right', 'center',
+    verticalAlign:'middle', //middle 、bottom
+    draggable:true,
+    cursor:'pointer',
+    angle:0,
+    style:{
+      'background-color':'yellow',
+      'border':'solid 1px #0088ff',
+      'padding':'20px 20px',
+      'opacity': '0'
+    },
+    position: [115.536931,35.258964]
+  });
+  text.setMap(map);
+  text.on('click',()=>{
+    window.open('http://www.baidu.com')
+  })
+</script>
+</body>
+
+</html>
