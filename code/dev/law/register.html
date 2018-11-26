@@ -158,9 +158,13 @@
           data:{
             phone: that.phone
           },
-          complete:(res)=>{
-            console.log(res);
+          success:function(res){
             that.loading = false
+            console.log(res)
+            return
+            if(res.error_code == 200){
+              that.$message.success('验证码已发送')
+            }
           }
         })
       },
@@ -184,7 +188,7 @@
             phone: that.phone,
             yzm: that.code
           },
-          complete:(res)=>{
+          success:(res)=>{
             console.log(res);
             if(res.error_code == 200){
               codeRight = true
@@ -233,7 +237,7 @@
             phone: that.phone,
             password: that.password
           },
-          complete:(res)=>{
+          success:(res)=>{
             that.loading = false
             console.log(res);
             if(res.error_code == 200){
@@ -256,7 +260,7 @@
           head: [
             "Content-Type: application/json",
           ],
-          complete: function (e) {
+          success: function (e) {
             that.loading = false
             const data = JSON.parse(e);
             console.log(data)
