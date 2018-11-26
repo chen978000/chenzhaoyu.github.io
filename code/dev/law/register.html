@@ -158,7 +158,7 @@
           data:{
             phone: that.phone
           },
-          success:(res)=>{
+          complete:(res)=>{
             console.log(res);
             that.loading = false
           }
@@ -184,7 +184,7 @@
             phone: that.phone,
             yzm: that.code
           },
-          success:(res)=>{
+          complete:(res)=>{
             console.log(res);
             if(res.error_code == 200){
               codeRight = true
@@ -233,7 +233,7 @@
             phone: that.phone,
             password: that.password
           },
-          success:(res)=>{
+          complete:(res)=>{
             that.loading = false
             console.log(res);
             if(res.error_code == 200){
@@ -256,7 +256,7 @@
           head: [
             "Content-Type: application/json",
           ],
-          success: function (e) {
+          complete: function (e) {
             that.loading = false
             const data = JSON.parse(e);
             console.log(data)

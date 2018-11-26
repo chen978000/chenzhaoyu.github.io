@@ -15,14 +15,14 @@ const URL = `${HOST}/act.php`
  * @param method
  * @param url
  * @param data
- * @param success
+ * @param complete
  */
-function ourNetwork({method,url,data,success}) {
+function ourNetwork({method,url,data,complete}) {
   $.ajax({
     type: method,
     url: HOST+url,
     data: data,
-    success: success
+    complete: complete
   })
 }
 
@@ -32,9 +32,9 @@ function ourNetwork({method,url,data,success}) {
  * @param path
  * @param method
  * @param head
- * @param success
+ * @param complete
  */
-function network({params,path,method,head,success}) {
+function network({params,path,method,head,complete}) {
     $.ajax({
         type:"post",
         url: URL,
@@ -45,6 +45,6 @@ function network({params,path,method,head,success}) {
             header: head,
         },
         ContentType: "Application/JSON",
-        success: success
+        complete: complete
     })
 }

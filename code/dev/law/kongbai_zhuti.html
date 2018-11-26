@@ -173,7 +173,7 @@
             "Content-Type: application/json",
             `x-dc-uid: 61ca33bc-8365-46b8-9cff-c08f756a8082`
           ],
-          success: function (e) {
+          complete: function (e) {
             that.loading = false
             const data = JSON.parse(e);
             console.log(data)
