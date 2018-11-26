@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta name="keywords" content="" /> 
+<meta name="description" content="">
+<link rel="stylesheet" type="text/css" href="font/iconfont.css">
+<link type="text/css" rel="stylesheet" href="css/public.css" />
+<link type="text/css" rel="stylesheet" href="css/index.css" />
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/my.js" type="text/javascript"></script>
+<title>个人信息</title>
+<body>
+<header class="other_header">
+	 <div class="head_box">
+	    <a href="" class="head_left"><i class="iconfont">&#xe6d9;</i></a>
+	    <span>个人信息</span>
+	    <a href="javascript:void(0);" class="head_right personal_edit">编辑</a>
+	  </div>
+</header>
+<section>
+	<div class="personal">
+		<ul>
+			<li class="first">
+				头像
+				<img src="images/head.jpg" alt="">
+				<label for="first_img">
+					<img src="images/head.jpg" alt="">
+				</label>
+				<i class="iconfont">&#xe6d0;</i>
+				 <input type="file" id="first_img" readonly="readonly" name="first_img[]" multiple="" onchange="return img_upload()" style="display:none;">
+			</li>
+			<li class="second">
+				名字
+				<span class="one">OCD</span>
+				<input class="one" type="text" placeholder="请输入">
+			</li>
+			<li class="second">
+				手机号
+				<span class="two">12546546446</span>
+				<input class="two" type="text" placeholder="请输入">
+			</li>
+			<li class="second">
+				城市
+				<span class="three">北京</span>
+				<input class="three" type="text" placeholder="请输入">
+			</li>
+			<li class="third">
+				<a href="">
+					微信号
+					<span>未绑定</span>
+					<i class="iconfont">&#xe6d0;</i>
+				</a>
+			</li>
+			<li>
+				<a href="modify.html">
+					修改密码
+					<i class="iconfont">&#xe6d0;</i>
+				</a>
+			</li>
+		</ul>
+	</div>
+</section>
+<script>
+	$("body,html").css("background","#fafafa");
+</script>
+<script language="javascript"> 
+function img_upload(){
+  var files= $('#first_img')[0].files,
+    img="";
+  for (var i = 0; i < files.length ; i++) {
+    var file = files[i];
+    var imageType = /^image\//;
+    if (!imageType.test(file.type)) {
+      continue;
+    }
+    var src = window.URL.createObjectURL(file);
+    img=img+'<img src="'+src+'" alt="" />';
+  };
+  $(".personal ul li.first img").remove();
+  $(".personal ul li.first").append(img);
+  $(".personal ul li.first label").append(img);
+}
+</script>
+</body>
+</html>

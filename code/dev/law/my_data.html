@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta name="keywords" content="" /> 
+<meta name="description" content="">
+<link rel="stylesheet" type="text/css" href="font/iconfont.css">
+<link type="text/css" rel="stylesheet" href="css/public.css" />
+<link type="text/css" rel="stylesheet" href="css/index.css" />
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/my.js" type="text/javascript"></script>
+<title>我的</title>
+<body>
+<header>
+  <div class="head_box">
+    <!--<a href="" class="head_left"><i class="iconfont">&#xe6d9;</i></a>-->
+    <span>我的</span>
+    <a href="" class="head_right"></a>
+  </div>
+</header>
+<section>
+	<div class="my_data" style="background:url(images/my_data.jpg) no-repeat center center;background-size:100% 100%;">
+		<a href="personal.html">
+			<img src="images/head.jpg" alt="">
+		</a>
+		<h1>OCD</h1>
+		<p>id:1313131334</p>
+	</div>
+	<div class="personal">
+		<ul>
+			<li>
+				<a href="my_order.html">
+					我的订单
+					<i class="iconfont">&#xe6d0;</i>
+				</a>
+			</li>
+			<li>
+				<a href="cq_hetong.html">
+					草签合同
+					<i class="iconfont">&#xe6d0;</i>
+				</a>
+			</li>
+			<li>
+				<a href="yq_hetong.html">
+					已签合同
+					<i class="iconfont">&#xe6d0;</i>
+				</a>
+			</li>
+			<li>
+				<a href="subject.html">
+					常用主体
+					<i class="iconfont">&#xe6d0;</i>
+				</a>
+			</li>
+		</ul>
+	</div>
+</section>
+<footer>
+	<ul class="footer_ul">
+		<li class='footer_ul_li'>
+			<a href='my.html'>
+				<i class='iconfont'>&#xe79e;</i>
+				<p>首页</p>
+			</a>
+		</li>
+		<li class='footer_ul_li am_active'>
+			<a href='my_data.html'>
+				<i class='iconfont'>&#xe7a1;</i>
+				<p>我的</p>
+			</a>
+		</li>
+	</ul>
+</footer>
+<!--<script src="js/footer.js"></script>-->
+<script type="text/javascript">
+	let path ='user';
+    $.ajax({
+        type:"post",
+        url: "http://law.8xcms.com/act.php",
+        data: {
+            param: {
+                email: 'test2@163.com',
+            },
+            url: 'https://ec2-18-209-228-104.compute-1.amazonaws.com:8443/'+path,
+            type: 'get',
+            header: [
+                "Content-Type: application/json",
+                // `x-dc-uid: 61ca33bc-8365-46b8-9cff-c08f756a8082`
+            ]
+        },
+        ContentType: "Application/JSON",
+        success: function (e) {
+            const data = JSON.parse(e);
+            console.log(data)
+        }
+    });
+</script>
+</body>
+</html>

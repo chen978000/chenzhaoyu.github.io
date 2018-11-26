@@ -1,0 +1,16 @@
+document.writeln("<footer>");
+document.writeln("  <ul>");
+document.writeln("    <li class=\'am_active\'>");
+document.writeln("      <a href=\'my.html\'>");
+document.writeln("        <i class=\'iconfont\'>&#xe79e;</i>");
+document.writeln("        <p>首页</p>");
+document.writeln("      </a>");
+document.writeln("    </li>");
+document.writeln("    <li>");
+document.writeln("      <a href=\'my_data.html\'>");
+document.writeln("        <i class=\'iconfont\'>&#xe7a1;</i>");
+document.writeln("        <p>我的</p>");
+document.writeln("      </a>");
+document.writeln("    </li>");
+document.writeln("  </ul>");
+document.writeln("</footer>");

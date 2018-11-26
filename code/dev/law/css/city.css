@@ -1,0 +1,119 @@
+@charset "utf-8";
+body{margin: 0 auto;padding:0;font-family:"微软雅黑";color:#656565;background: #f8f8f8;}
+ul,li,dl,dt,dd{display:block;list-style:none;}
+a{text-decoration:none;outline:none;display: block;}
+.fl{float:left;}
+.fr{float:right;}
+.none{display:none;}
+.loan_jm1{width:94%;margin:0 auto;}
+.loan_jm_spa1{width:39%;height:40px;line-height:40px;font-size:1em;color:#666;display:block;float:left;}
+.loan_jm_l1{margin-top:10px;margin-bottom:15px;height:40px;}
+.wbk_srn{width:57%;height:40px;border:1px solid #ccc;background:#FFF;float:left;padding-left:3%;line-height:40px;color:#ADADAD;
+font-size:1.1em; background-size:45%;background-position:center;background:#fff;}
+.wbk_srn b{width:30px;height:40px;border:1px solid #ccc;background:#FFF;float:left;padding-left:3%;line-height:40px;color:#ADADAD;
+font-size:1.1em;}
+/*显示点击是哪个字母*/
+.showLetter{
+    position: fixed;
+    color:#105eae;
+    width: 50px;
+    height:50px;
+    top:45%;
+    left: 45%;
+    border-radius: 50%;
+    border: #105eae 1px solid;
+    text-align: center;
+    display: none;
+}
+.showLetter span{
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 30px;
+}
+.seach{
+    width: 90%;
+    height: 45px;
+    padding-top: 10px;
+    background: #fff;
+}
+.seach input{
+    width: 90%;
+    height: 45px;
+    font-size: 16px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #eee;
+    color: #000
+}
+/*城市弹层*/
+.container{width:100%;right:20px;overflow-y:scroll}
+.letter{width:auto;position:fixed;top:90px;right:5px;text-align:center;}
+.letter ul{list-style-type:none;}
+.letter ul li a{text-decoration:none;color:#ff6b00;font-size: 16px}
+
+.history{margin-top: 15px;}
+.hot{overflow: hidden;padding: 0 20px 10px 20px}
+.hot div{
+    display: block;
+    width: 29%;
+    height: 40px;
+    float: left;
+    text-align: center;
+    line-height: 40px;
+    color: #afafaf;
+    margin-top: 10px;
+    margin-right: 3%;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.clear-history{display: block;float: right;}
+.city-list{width:100%;}
+.city-list .city-letter{font-size:20px;display:inline-block;border-bottom:1px solid #e8ecf1;width:100%;
+    background: #f8f8f8;padding: 10px 20px;}
+.city-list p{color:#afafaf;width:95%;min-height:50px;line-height:50px;border-bottom:1px solid #e8ecf1;cursor:pointer;background: #ffffff;padding: 0 20px;}
+.UISelect{margin-top:5px}
+.city_box{background: #fff;}
+.search_address{position: relative;background: #fff;padding: 6px 20px;}
+.search_address input{width: 100%;text-align: center;border:1px solid #e2e2e2;border-radius: 16px;height: 32px;background: transparent;outline: none;}
+.search_address i{position: absolute;left:30%;top:6px;line-height: 32px;display: inline-block;}
+.location{background: #fff;margin:20px 0;padding: 0 20px;}
+.location span{}
+.location ul{overflow: hidden;}
+.location ul li{    display: block;
+    width: 29%;
+    height: 40px;
+    float: left;
+    text-align: center;
+    line-height: 40px;
+    color: #afafaf;
+    margin-top: 10px;
+    margin-right: 3%;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;}
+.tips{padding: 0 20px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
