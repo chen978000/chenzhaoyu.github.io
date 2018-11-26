@@ -17,12 +17,13 @@ const URL = `${HOST}/act.php`
  * @param data
  * @param success
  */
-function ourNetwork({method,url,data,complete}) {
+function ourNetwork({method,url,data,success,fail}) {
   $.ajax({
     type: method,
     url: HOST+url,
     data: data,
-    complete: complete
+    success: success,
+    fail: fail
   })
 }
 
