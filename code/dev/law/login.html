@@ -121,6 +121,8 @@
               setTimeout(()=>{
                 window.location = './my.html'
               },1500)
+            }else {
+              that.$message.error('登录失败，请检查用户名和密码是否正确')
             }
           },
           fail: function (res) {
