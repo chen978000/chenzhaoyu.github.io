@@ -118,9 +118,7 @@
             if(data.error_code == 200){
               sessionStorage.setItem('token',data.data.token)
               that.$message.success('登录成功')
-              setTimeout(()=>{
-                window.location = './my.html'
-              },1500)
+              window.location = './my.html'
             }else {
               that.$message.error('登录失败，请检查用户名和密码是否正确')
             }

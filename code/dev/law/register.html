@@ -305,6 +305,10 @@
             }else{
               that.$message.error('初始化资料失败，请登录重试')
             }
+            window.location = './login.html'
+            // setTimeout(()=>{
+            //   window.location = './login.html'
+            // },500)
           }
         })
       },
