@@ -37,7 +37,7 @@
           </li>
           <li>
             <input class="input_style" type="number" maxlength="6"  placeholder="请输入验证码" value="code">
-            <a :class="messageDisabled?'get_code_btn_none':''" style="z-index: 2;" href="javascript:;" @click="sendMessage">{{messageCodeText}}</a>
+            <a :class="messageDisabled?'get_code_btn_none':''" style="z-index: 999;" href="javascript:;" @click="sendMessage">{{messageCodeText}}</a>
           </li>
           <li>
             <input class="input_style" type="password"  placeholder="密码" :value="password">
