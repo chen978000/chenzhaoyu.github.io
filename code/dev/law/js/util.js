@@ -7,11 +7,27 @@ function getUrlKey(name){
 function goBack() {
   window.history.back()
 }
-
-const HOST = 'http://law.8xcms.com/act.php'
+const HOST = 'http://law.8xcms.com'
+const URL = `${HOST}/act.php`
 
 /**
- * 调接口通用方法
+ *
+ * @param method
+ * @param url
+ * @param data
+ * @param success
+ */
+function ourNetwork({method,url,data,success}) {
+  $.ajax({
+    type: method,
+    url: HOST+url,
+    data: data,
+    success: success
+  })
+}
+
+/**
+ * 第三方接口通用方法
  * @param params
  * @param path
  * @param method
@@ -21,7 +37,7 @@ const HOST = 'http://law.8xcms.com/act.php'
 function network({params,path,method,head,success}) {
     $.ajax({
         type:"post",
-        url: HOST,
+        url: URL,
         data: {
             param: params,
             url: `https://ec2-18-209-228-104.compute-1.amazonaws.com:8443/v1/${path}`,

@@ -40,6 +40,7 @@
       pointer-events: auto;
     }
     .get_code_btn_none{
+      background: #999;
       pointer-events: none;
     }
   </style>
@@ -135,6 +136,16 @@
           that.messageCodeText = '获取验证码'
           that.messageDisabled = false
         }, 60000)
+        ourNetwork({
+          type: 'post',
+          url: '/index.php/home/V1/sendSMS',
+          data:{
+            phone: that.phone
+          },
+          success:(res)=>{
+            console.log(res);
+          }
+        })
       },
     }
   })
