@@ -172,7 +172,7 @@
 						"Content-Type: application/json",
 						`x-dc-uid: 61ca33bc-8365-46b8-9cff-c08f756a8082`
 					],
-          complete: function (e) {
+          success: function (e) {
             that.loading = false
             const data = JSON.parse(e);
 						console.log(data)
@@ -260,7 +260,7 @@
               "Content-Type: application/json",
               `x-dc-uid: 61ca33bc-8365-46b8-9cff-c08f756a8082`
           ],
-          complete: function (e) {
+          success: function (e) {
             that.loading = false
             const data = JSON.parse(e);
             console.log(data)
@@ -313,7 +313,7 @@
                   "Content-Type: application/json",
                   `x-dc-uid: 61ca33bc-8365-46b8-9cff-c08f756a8082`
               ],
-              complete: function (e) {
+              success: function (e) {
                 that.loading = false
                 const data = JSON.parse(e);
                   console.log(data)
@@ -389,13 +389,13 @@
               `x-dc-uid: 61ca33bc-8365-46b8-9cff-c08f756a8082`,
               `session_id: ${session_id}`
           ],
-          complete: function (e) {
+          success: function (e) {
             that.loading = false
             const data = JSON.parse(e);
             console.log(data)
           }
         })
-      },
+        },
 
 
 		}

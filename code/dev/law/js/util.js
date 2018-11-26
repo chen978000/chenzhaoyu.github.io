@@ -15,7 +15,7 @@ const URL = `${HOST}/act.php`
  * @param method
  * @param url
  * @param data
- * @param complete
+ * @param success
  */
 function ourNetwork({method,url,data,complete}) {
   $.ajax({
@@ -34,7 +34,7 @@ function ourNetwork({method,url,data,complete}) {
  * @param head
  * @param complete
  */
-function network({params,path,method,head,complete}) {
+function network({params,path,method,head,success}) {
     $.ajax({
         type:"post",
         url: URL,
@@ -45,6 +45,6 @@ function network({params,path,method,head,complete}) {
             header: head,
         },
         ContentType: "Application/JSON",
-        complete: complete
+        success: success
     })
 }
