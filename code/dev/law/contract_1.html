@@ -200,10 +200,9 @@
 
 						if(data.cnode_body.questions){
               that.inputList= data.cnode_body.questions.map(item=>{
-                return {
-                  ...item,
-                  value: ''
-                }
+                let a = item
+								a.value = ''
+                return a
               })
 							console.log(that.inputList)
 						}
@@ -216,10 +215,9 @@
         let arr = [];
         this.inputList.map((item,index)=>{
           let ele = document.getElementById("text"+index);
-          arr.push({
-            ...item,
-            value: ele.value,
-          })
+          let a = item
+					a.value = ele.value
+          arr.push(a)
         })
 				console.log(arr)
         const answers = arr.map(item=>{
@@ -283,10 +281,9 @@
             }
             if(data.cnode_body.questions){
               that.inputList= data.cnode_body.questions.map(item=>{
-                return {
-                  ...item,
-                  value: ''
-                }
+                let a = item
+								a.value = ''
+                return a
               })
               console.log(that.inputList)
             }
@@ -340,10 +337,9 @@
 									}
                   if(data.cnode_body.questions){
 										that.inputList= data.cnode_body.questions.map(item=>{
-												return {
-														...item,
-														value: ''
-												}
+										  let a = item
+											a.value = ''
+												return a
 										})
 
                       console.log(that.inputList)
@@ -357,14 +353,11 @@
       checkIt(index){
         this.choices = this.choices.map(item=>{
           if(item.selected){
-            return{
-              ...item,
-            }
+            return item
           }else{
-            return{
-              ...item,
-              selected: false
-            }
+            let a = item
+						a.selected = false
+            return a
           }
         })
         this.choices[index].selected = !this.choices[index].selected
