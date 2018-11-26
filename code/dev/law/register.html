@@ -9,8 +9,10 @@
 <link rel="stylesheet" type="text/css" href="font/iconfont.css">
 <link type="text/css" rel="stylesheet" href="css/public.css" />
 <link type="text/css" rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
   <script src="js/vue.js" type="text/javascript"></script>
   <script src="js/util.js" type="text/javascript"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <script src="js/jquery.js" type="text/javascript"></script>
 <script src="js/my.js" type="text/javascript"></script>
 <title>注册</title>
@@ -58,25 +60,25 @@
       <div>
         <ul>
           <li>
-            <input class="input_style" name="username" type="number" placeholder="请输入手机号" id="mobile" :value="phone">
+            <input class="input_style" name="username" type="number" placeholder="请输入手机号" id="mobile" v-model="phone">
           </li>
           <li>
-            <input class="code_input" type="number" maxlength="6" placeholder="请输入验证码" value="code">
+            <input class="code_input" type="number" maxlength="6" placeholder="请输入验证码" v-model="code">
             <span class="get_code_btn" :class="messageDisabled?'get_code_btn_none':''" @click="sendMessage">{{messageCodeText}}</span>
             <!--<a :class="messageDisabled?'get_code_btn_none':''" href="javascript:;" @click="sendMessage">{{messageCodeText}}</a>-->
           </li>
           <li>
-            <input class="input_style" type="password"  placeholder="密码" :value="password">
+            <input class="input_style" type="password"  placeholder="密码" v-model="password">
           </li>
           <li>
-            <input class="input_style" type="password"  placeholder="确认密码" :value="passwordAgain">
+            <input class="input_style" type="password"  placeholder="确认密码" v-model="passwordAgain">
           </li>
         </ul>
         <div class="agreement">
           <i class="iconfont ">&#xe6e0;</i>我已阅读并同意<a href="#">《用户注册协议》</a>
         </div>
         <div class="submit_button">
-          <input type="submit" value="注册">
+          <input value="注册" @click="goReg">
         </div>
       </div>
     </div>
@@ -119,8 +121,13 @@
     },
     mounted(){},
     methods:{
+      // 发送验证码
       sendMessage(){
         const that = this
+        if(!that.phone){
+          that.$message.error('请输入手机号')
+          return;
+        }
         var time = 60
         that.messageCodeText = time + '秒'
         that.messageDisabled = true
@@ -147,6 +154,58 @@
           }
         })
       },
+      // 校验验证码
+      checkCode(){
+        const that = this;
+        let codeRight = false;
+        ourNetwork({
+          type: 'post',
+          url: '/index.php/home/V1/checkYzm',
+          data:{
+            phone: that.phone,
+            yzm: that.code
+          },
+          success:(res)=>{
+            console.log(res);
+          }
+        })
+        return codeRight
+      },
+      // 注册
+      goReg(){
+        const that = this;
+        if(!that.phone){
+          that.$message.error('请输入手机号')
+          return;
+        }
+        if(!that.code){
+          that.$message.error('请输入验证码')
+          return;
+        }
+        if(!that.password){
+          that.$message.error('请输入密码')
+          return;
+        }
+        if(!that.passwordAgain){
+          that.$message.error('请确认密码')
+          return;
+        }
+        if(!that.checkCode()){
+          that.$message.error('验证码错误，请重新输入')
+          return
+        }
+        ourNetwork({
+          type: 'post',
+          url: '/index.php/home/V1/reg',
+          data:{
+            phone: that.phone,
+            password: that.password
+          },
+          success:(res)=>{
+            console.log(res);
+          }
+        })
+      }
     }
   })
 </script>
