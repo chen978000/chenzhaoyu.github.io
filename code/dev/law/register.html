@@ -75,12 +75,14 @@
           </li>
         </ul>
         <div class="agreement">
-          <el-checkbox v-model="checked">备选项</el-checkbox>
-          我已阅读并同意<a href="#">《用户注册协议》</a>
+          <el-checkbox v-model="checked">
+            我已阅读并同意<a href="#">《用户注册协议》</a>
+          </el-checkbox>
+
           <!--<i class="iconfont ">&#xe6e0;</i>-->
         </div>
         <div class="submit_button">
-          <input value="注册" @click="goReg">
+          <input type="button" value="注册" @click="goReg">
         </div>
       </div>
     </div>
