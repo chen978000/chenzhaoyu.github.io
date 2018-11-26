@@ -132,6 +132,10 @@
           that.$message.error('请输入手机号')
           return;
         }
+        if(!that.checkPhone(that.phone)){
+          that.$message.error('请输入有效手机号码')
+          return;
+        }
         var time = 60
         that.messageCodeText = time + '秒'
         that.messageDisabled = true
@@ -147,6 +151,7 @@
           that.messageCodeText = '获取验证码'
           that.messageDisabled = false
         }, 60000)
+        that.loading = true
         ourNetwork({
           type: 'post',
           url: '/index.php/home/V1/sendSMS',
@@ -155,8 +160,18 @@
           },
           success:(res)=>{
             console.log(res);
+            that.loading = false
           }
         })
+      },
+      // 验证手机号
+      checkPhone(phone){
+        let valid_rule = /^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/;
+        if (!valid_rule.test(phone)) {
+          return false
+        }else{
+          return true
+        }
       },
       // 校验验证码
       checkCode(){
@@ -197,6 +212,10 @@
           that.$message.error('请确认密码')
           return;
         }
+        if(that.passwordAgain != that.password){
+          that.$message.error('两次密码输入不一致')
+          return;
+        }
         if(!that.checked){
           that.$message.error('请阅读并同意《用户注册协议》')
           return
@@ -206,6 +225,7 @@
           return
         }
 
+        that.loading = true
         ourNetwork({
           type: 'post',
           url: '/index.php/home/V1/reg',
@@ -214,7 +234,32 @@
             password: that.password
           },
           success:(res)=>{
+            that.loading = false
             console.log(res);
+            if(res.error_code == 200){
+              that.lawReg()
+            }
+          }
+        })
+      },
+      // 第三方注册
+      lawReg(){
+        const that = this
+        that.loading = true
+        network({
+          params: {
+            "email": `${that.phone}@netLaw.com`,
+            "password": that.password
+          },
+          path: `user`,
+          method: 'post',
+          head: [
+            "Content-Type: application/json",
+          ],
+          success: function (e) {
+            that.loading = false
+            const data = JSON.parse(e);
+            console.log(data)
           }
         })
       }
