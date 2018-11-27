@@ -9,7 +9,10 @@
 <link rel="stylesheet" type="text/css" href="font/iconfont.css">
 <link type="text/css" rel="stylesheet" href="css/public.css" />
 <link type="text/css" rel="stylesheet" href="css/index.css" />
-<script src="js/vue.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="js/vue.js" type="text/javascript"></script>
+  <script src="js/util.js" type="text/javascript"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <script src="js/jquery.js" type="text/javascript"></script>
 <script src="js/my.js" type="text/javascript"></script>
 <title>开始选择合同</title>
@@ -82,10 +85,6 @@
     </div>
   </div>
 </div>
-
-
-<!--<script src="js/footer.js"></script>-->
-<script src="js/config.js"></script>
 <script>
     var app = new Vue({
         el: '#app',
@@ -95,9 +94,20 @@
           list: []
         },
         mounted(){
-          this.xid = sessionStorage.getItem('xid') || '61ca33bc-8365-46b8-9cff-c08f756a8082'
+          this.getId()
         },
         methods: {
+          // 判断是否有xid
+          getId(){
+            const that = this
+            that.xid = sessionStorage.getItem('xid')
+            if(!that.xid){
+              that.$message.error('未知用户，请重新登录')
+              setTimeout(()=>{
+                window.location = './login.html'
+              },1500)
+            }
+          },
           // 创建流程
           create(){
             const that = this;

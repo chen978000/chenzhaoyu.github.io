@@ -96,7 +96,7 @@
       // 登陆
       login(){
         const that = this;
-        that.getUserInfo()
+
         if(!that.phone){
           that.$message.error('请输入用户名')
           return
@@ -119,8 +119,12 @@
             if(data.error_code == 200){
               sessionStorage.setItem('token',data.data.token)
               that.$message.success('登录成功')
-              window.location = './my.html'
-              that.upInfo()
+              console.log(data.data.code_other_id);
+              if(!data.data.code_other_id){
+                that.getUserInfo()
+              }else{
+                window.location = './my.html'
+              }
             }else {
               that.$message.error('登录失败，请检查用户名和密码是否正确')
             }
@@ -135,9 +139,9 @@
         const that = this
         network({
           params: {
-            "email": "17852909766@netLaw.com"
+            // "email": "17852909766@netLaw.com"
           },
-          path: `user`,
+          path: `user?email=17852909766@netLaw.com`,
           method: 'get',
           head: [
             "Content-Type: application/json"
@@ -148,6 +152,7 @@
             console.log(data)
             if(data.user_id){
               sessionStorage.setItem('xid',data.user_id)
+              that.upInfo()
             }
           }
         })
@@ -159,8 +164,8 @@
           type: 'post',
           url: '/index.php/home/V1/upInfo',
           data:{
-            token: localStorage.getItem('token'),
-            xid: localStorage.getItem('xid')
+            token: sessionStorage.getItem('token'),
+            xid: sessionStorage.getItem('xid')
           },
           success:function(res){
             const data = JSON.parse(res)

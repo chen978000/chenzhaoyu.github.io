@@ -26,7 +26,7 @@
 .welcome a{position: absolute;left:10px;top:10px;color:#505050;}
 .welcome a i{font-size: 18px;display: inline-block;padding-right: 4px;vertical-align: middle;}
 .welcome img{width: 80%;position: absolute;left:10%;top:46%;}
-.click_select{text-align: center;margin-top: 60px;}
+.click_select{text-align: center;margin-top: 40px;}
 .click_select a{display: inline-block;width: 160px;height: 160px;border-radius: 50%;box-shadow: 0 0 8px rgba(0,0,0,.1);
 	line-height: 20px;padding-top: 60px;color:#000;}
 /*个人中心*/

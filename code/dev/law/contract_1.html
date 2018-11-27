@@ -144,11 +144,21 @@
 			isSingle: false
     },
 		mounted(){
-      this.token  = sessionStorage.getItem('token')
-      this.xid  = sessionStorage.getItem('xid') || '61ca33bc-8365-46b8-9cff-c08f756a8082'
+      this.getId()
       this.getQA(getUrlKey('index'))
 		},
 		methods: {
+      // 判断是否有xid
+      getId(){
+        const that = this
+        that.xid = sessionStorage.getItem('xid')
+        if(!that.xid){
+          that.$message.error('未知用户，请重新登录')
+          setTimeout(()=>{
+            window.location = './login.html'
+          },1500)
+        }
+      },
       //获取问题
       getQA(id){
         const that = this
