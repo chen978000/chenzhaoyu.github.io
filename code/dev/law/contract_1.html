@@ -145,7 +145,7 @@
     },
 		mounted(){
       this.token  = sessionStorage.getItem('token')
-      this.xid  = sessionStorage.getItem('xid')
+      this.xid  = sessionStorage.getItem('xid') || '61ca33bc-8365-46b8-9cff-c08f756a8082'
       this.getQA(getUrlKey('index'))
 		},
 		methods: {
