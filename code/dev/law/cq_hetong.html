@@ -18,36 +18,83 @@
 	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <title>草签合同</title>
 <body>
-<header class="other_header">
-	 <div class="head_box">
-	    <a href="javascript:void(0);" onclick="goBack()" class="head_left"><i class="iconfont">&#xe6d9;</i></a>
-	    <span>草签合同</span>
-	    <a href="" class="head_right"></a>
-	  </div>
-</header>
-<section>
-	<div class="contract">
-		<ul>
-			<li>
-				<a href="cq_yulan.html">
-					<h2>乙方：马云 <i class="iconfont">&#xe617;</i></h2>
-					<p>房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦</p>
-				</a>
-			</li>
-			<li>
-				<a href="cq_yulan.html">
-					<h2>乙方：马云 <i class="iconfont">&#xe617;</i></h2>
-					<p>房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦</p>
-				</a>
-			</li>
-			<li>
-				<a href="cq_yulan.html">
-					<h2>乙方：马云 <i class="iconfont">&#xe617;</i></h2>
-					<p>房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦</p>
-				</a>
-			</li>
-		</ul>
-	</div>
-</section>	
+<div id="app">
+	<header class="other_header">
+		<div class="head_box">
+			<a href="javascript:void(0);" onclick="goBack()" class="head_left"><i class="iconfont">&#xe6d9;</i></a>
+			<span>草签合同</span>
+			<a href="" class="head_right"></a>
+		</div>
+	</header>
+	<section>
+		<div class="contract">
+			<ul>
+				<li>
+					<a href="cq_yulan.html">
+						<h2>乙方：马云 <i class="iconfont">&#xe617;</i></h2>
+						<p>房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦</p>
+					</a>
+				</li>
+				<li>
+					<a href="cq_yulan.html">
+						<h2>乙方：马云 <i class="iconfont">&#xe617;</i></h2>
+						<p>房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦</p>
+					</a>
+				</li>
+				<li>
+					<a href="cq_yulan.html">
+						<h2>乙方：马云 <i class="iconfont">&#xe617;</i></h2>
+						<p>房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦房产证购买东西啦啦啦啦</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</section>
+</div>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data:{
+		  xid: ''
+		},
+		mounted(){
+		  this.getId()
+			this.getList()
+		},
+		methods:{
+      // 判断是否有xid
+      getId(){
+        const that = this
+        that.xid = sessionStorage.getItem('xid')
+        if(!that.xid){
+          that.$message.error('未知用户，请重新登录')
+          setTimeout(()=>{
+            window.location = './login.html'
+          },1500)
+        }
+      },
+      // 获取列表
+      getList(){
+        const that = this
+        network({
+          params: {
+            "state": 'complete'
+          },
+          path: `session`,
+          method: 'get',
+          head: [
+            "Content-Type: application/json",
+            `x-dc-uid: ${that.xid}`
+          ],
+          success: function (e) {
+            that.loading = false
+            const data = JSON.parse(e);
+            console.log(data)
+          }
+        })
+      }
+		}
+	})
+</script>
 </body>
 </html>

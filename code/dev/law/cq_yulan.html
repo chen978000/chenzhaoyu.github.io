@@ -40,7 +40,7 @@
 		},
     mounted(){
 		  this.getId()
-		  this.createFile()
+		  this.test()
 		},
 		methods:{
       // 判断是否有xid
@@ -62,8 +62,8 @@
           params: {
             "session_id ": session_id
           },
-          path: `compute/${session_id}`,
-          method: 'get',
+          path: `session/${session_id}/tagging`,
+          method: 'post',
           head: [
             "Content-Type: application/json",
             `x-dc-uid: ${that.xid}`
@@ -74,7 +74,7 @@
             console.log(data)
           }
         })
-			}
+			},
 		}
 	})
 </script>
