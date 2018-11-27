@@ -54,10 +54,10 @@
             <i class="iconfont">&#xe61b;</i>
             <p>微信</p>
           </a>
-          <a class="qq" href="#">
-            <i class="iconfont">&#xe61c;</i>
-            <p>QQ</p>
-          </a>
+          <!--<a class="qq" href="#">-->
+          <!--<i class="iconfont">&#xe61c;</i>-->
+          <!--<p>QQ</p>-->
+          <!--</a>-->
         </div>
       </div>
     </div>
@@ -119,10 +119,10 @@
             if(data.error_code == 200){
               sessionStorage.setItem('token',data.data.token)
               that.$message.success('登录成功')
-              console.log(data.data.code_other_id);
               if(!data.data.code_other_id){
                 that.getUserInfo()
               }else{
+                sessionStorage.setItem('xid',data.data.code_other_id)
                 window.location = './my.html'
               }
             }else {

@@ -303,6 +303,10 @@
             }
             if(data.cnode_type=='invite'){
               that.isSend = true
+							that.$message.success('即将跳转草签合同预览页面')
+							setTimeout(()=>{
+							  window.location = `./cq_yulan.html?id=${session_id}`
+							},1500)
             }
           }
         })
