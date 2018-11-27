@@ -90,10 +90,12 @@
     var app = new Vue({
         el: '#app',
         data: {
-            loading: false,
-            list: []
+          xid: '',
+          loading: false,
+          list: []
         },
         mounted(){
+          this.xid = sessionStorage.getItem('xid')
         },
         methods: {
           // 创建流程
@@ -108,7 +110,7 @@
               method: 'post',
               head: [
                 "Content-Type: application/json",
-                `x-dc-uid: 61ca33bc-8365-46b8-9cff-c08f756a8082`
+                `x-dc-uid: ${that.xid}`
               ],
               success: function (e) {
                 that.loading = false
@@ -129,7 +131,7 @@
               method: 'post',
               head: [
                 "Content-Type: application/json",
-                `x-dc-uid: 61ca33bc-8365-46b8-9cff-c08f756a8082`
+                `x-dc-uid: ${that.xid}`
               ],
               success: function (e) {
                 that.loading = false;

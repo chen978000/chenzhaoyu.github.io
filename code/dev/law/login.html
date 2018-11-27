@@ -116,7 +116,7 @@
             that.loading = false
             const data = JSON.parse(res)
             if(data.error_code == 200){
-              sessionStorage.setItem('token',data.data.token)
+              localStorage.setItem('token',data.data.token)
               that.$message.success('登录成功')
               window.location = './my.html'
             }else {
@@ -135,8 +135,8 @@
           type: 'post',
           url: '/index.php/home/V1/upInfo',
           data:{
-            token: sessionStorage.getItem('token'),
-            xid: sessionStorage.getItem('xid')
+            token: localStorage.getItem('token'),
+            xid: localStorage.getItem('xid')
           },
           success:function(res){
             const data = JSON.parse(res)

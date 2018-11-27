@@ -131,6 +131,8 @@
 	var app = new Vue({
     el: '#app',
     data: {
+      token: '',
+			xid: '',
 			quetion: '',
 			choices: [],
 			inputList:[],
@@ -142,6 +144,8 @@
 			isSingle: false
     },
 		mounted(){
+      this.token  = sessionStorage.getItem('token')
+      this.xid  = sessionStorage.getItem('xid')
       this.getQA(getUrlKey('index'))
 		},
 		methods: {
@@ -172,7 +176,7 @@
 					method: 'post',
 					head: [
 						"Content-Type: application/json",
-						`x-dc-uid: 61ca33bc-8365-46b8-9cff-c08f756a8082`
+						`x-dc-uid: ${that.xid}`
 					],
           success: function (e) {
             that.loading = false
@@ -258,7 +262,7 @@
           method: 'post',
           head: [
               "Content-Type: application/json",
-              `x-dc-uid: 61ca33bc-8365-46b8-9cff-c08f756a8082`
+              `x-dc-uid: ${that.xid}`
           ],
           success: function (e) {
             that.loading = false
@@ -310,7 +314,7 @@
               method: 'post',
               head: [
                   "Content-Type: application/json",
-                  `x-dc-uid: 61ca33bc-8365-46b8-9cff-c08f756a8082`
+                  `x-dc-uid: ${that.xid}`
               ],
               success: function (e) {
                 that.loading = false
@@ -381,7 +385,7 @@
           method: 'post',
           head: [
               "Content-Type: application/json",
-              `x-dc-uid: 61ca33bc-8365-46b8-9cff-c08f756a8082`,
+              `x-dc-uid: ${that.xid}`,
               `session_id: ${session_id}`
           ],
           success: function (e) {
