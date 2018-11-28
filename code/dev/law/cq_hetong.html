@@ -48,7 +48,7 @@
 			<ul>
 				<li v-for="item in list">
 					<div class="item_box">
-						<h2>合同类型：{{item.type || '接口未返回'}} <i class="iconfont">&#xe617;</i></h2>
+						<h2>合同类型：{{item.type || '接口未返回'}}</h2>
 						<p>甲方：{{item.key_property?item.key_property.party_name_a:'未填写'}}</p>
 						<p>乙方：{{item.key_property?(item.key_property.party_name_b?item.key_property.party_name_b:'未填写'):'未填写'}}</p>
 						<p>创建时间：{{item.created_date_time}}</p>

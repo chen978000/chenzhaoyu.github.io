@@ -11,6 +11,20 @@
 <link type="text/css" rel="stylesheet" href="css/index.css" />
 <script src="js/jquery.js" type="text/javascript"></script>
 <script src="js/my.js" type="text/javascript"></script>
+	<style>
+		.btn_box{
+			width: 100%;
+			margin-top: 5px;
+			text-align: center;
+		}
+		.all_load_box{
+			width: 100%;
+			line-height: 25px;
+			font-size: 12px;
+			color: #aaa;
+			text-align: center;
+		}
+	</style>
 	<!-- 引入样式 -->
 	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 	<script src="js/vue.js" type="text/javascript"></script>
@@ -18,48 +32,119 @@
 	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <title>已签合同</title>
 <body>
-<header class="other_header">
-	 <div class="head_box">
-	    <a href="javascript:void(0);" onclick="goBack()" class="head_left"><i class="iconfont">&#xe6d9;</i></a>
-	    <span>已签合同</span>
-	    <a href="" class="head_right"></a>
-	  </div>
-</header>
-<section>
-	<div class="already">
-		<ul>
-			<li>
-				<a href="yq_yulan.html">
-					<h2>载莜道科技劳动合同<span>附件数量：2</span></h2>
-					<p>甲方：人</p>
-					<p>乙方：人</p>
-					<p>合同编号：206554464</p>
-					<p>签署日期：2018-07-26</p>
-					<i>查看</i>
-				</a>
-			</li>
-			<li>
-				<a href="yq_yulan.html">
-					<h2>载莜道科技劳动合同<span>附件数量：2</span></h2>
-					<p>甲方：人</p>
-					<p>乙方：人</p>
-					<p>合同编号：206554464</p>
-					<p>签署日期：2018-07-26</p>
-					<i>查看</i>
-				</a>
-			</li>
-			<li>
-				<a href="yq_yulan.html">
-					<h2>载莜道科技劳动合同<span>附件数量：2</span></h2>
-					<p>甲方：人</p>
-					<p>乙方：人</p>
-					<p>合同编号：206554464</p>
-					<p>签署日期：2018-07-26</p>
-					<i>查看</i>
-				</a>
-			</li>
-		</ul>
+<div id="app">
+	<header class="other_header">
+		<div class="head_box">
+			<a href="javascript:void(0);" onclick="goBack()" class="head_left"><i class="iconfont">&#xe6d9;</i></a>
+			<span>已签合同</span>
+			<a href="" class="head_right"></a>
+		</div>
+	</header>
+	<section>
+		<div class="already">
+			<ul>
+				<li v-for="item in list">
+					<div >
+						<h2>{{item.name || '接口未返回'}}<span>附件数量：2</span></h2>
+						<p>甲方：{{item.key_property?item.key_property.party_name_a:'未填写'}}</p>
+						<p>乙方：{{item.key_property?(item.key_property.party_name_b?item.key_property.party_name_b:'未填写'):'未填写'}}</p>
+						<p>合同编号：206554464</p>
+						<p>签署日期：{{item.signing_date_time}}</p>
+						<div class="btn_box">
+							<el-button @click="lookContract(item.session_id)" size="mini" type="success" round>查看合同</el-button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="all_load_box">已加载全部</div>
+	</section>
+	<div class="loading_box" v-if="loading">
+		<div class="loader loader--style1" title="0">
+			<svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+  <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+    s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+    c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+  <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
+    C22.32,8.481,24.301,9.057,26.013,10.047z">
+    <animateTransform attributeType="xml"
+      attributeName="transform"
+      type="rotate"
+      from="0 20 20"
+      to="360 20 20"
+      dur="0.5s"
+      repeatCount="indefinite"/>
+    </path>
+  </svg>
+		</div>
 	</div>
-</section>	
+</div>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+      loading: false,
+      xid: '',
+      count: '',
+      list: []
+		},
+		mounted(){
+		  this.getId()
+			this.getList('complete')
+		},
+		methods:{
+      // 判断是否有xid
+      getId(){
+        const that = this
+        that.xid = sessionStorage.getItem('xid')
+        if(!that.xid){
+          that.$message.error('未知用户，请重新登录')
+          setTimeout(()=>{
+            window.location = './login.html'
+          },1500)
+        }
+      },
+      // 获取合同列表
+      getList(state){
+        const that = this
+        that.loading = true
+        network({
+          params: {
+            // "state": 'complete'
+          },
+          path: `session?state=${state}`,
+          method: 'get',
+          head: [
+            "Content-Type: application/json",
+            `x-dc-uid: ${that.xid}`
+          ],
+          success: function (e) {
+            that.loading = false
+            const data = JSON.parse(e);
+            console.log(data)
+            let arr = data.sessions
+            that.count = data.count
+            that.list = arr.map(item=>{
+              let a = item
+              if(item.key_property){
+                let b = JSON.parse(item.key_property)
+                a.key_property = b
+              }
+              return a
+            })
+          }
+        })
+      },
+      // 前往合同问题页
+      lookContract(id){
+        console.log(id)
+        if(id){
+          window.location = `./yq_yulan.html?id=${id}`
+        }
+      }
+		}
+	})
+</script>
 </body>
 </html>
