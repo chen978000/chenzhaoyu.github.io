@@ -54,9 +54,9 @@
 						<p>创建时间：{{item.created_date_time}}</p>
 						<p>当前状态：{{item.state==0?'待甲方完善信息':item.state==2?'待邀请乙方完善信息':item.state==1?'合同已生成':'未知'}}</p>
 						<div class="btn_box">
-							<el-button size="mini" v-if="item.state==0" type="primary" round>前往完善</el-button>
-							<el-button size="mini" v-if="item.state==2" type="warning" round>前往邀请</el-button>
-							<el-button size="mini" v-if="item.state==1" type="info" round>前往预览</el-button>
+							<el-button @click="goContract(item.session_id)" size="mini" v-if="item.state==0" type="primary" round>前往完善</el-button>
+							<el-button @click="goContract(item.session_id)" size="mini" v-if="item.state==2" type="warning" round>前往邀请</el-button>
+							<el-button @click="goContract(item.session_id)" size="mini" v-if="item.state==1" type="info" round>前往预览</el-button>
 						</div>
 
 					</div>
@@ -149,7 +149,13 @@
 						})
           }
         })
-      }
+      },
+			// 前往合同问题页
+      goContract(id){
+        if(id){
+          window.location = `./contract_1.html?id=${id}`
+        }
+			}
 		}
 	})
 </script>

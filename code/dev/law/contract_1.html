@@ -57,7 +57,7 @@
 		<div class="problem">
 			<p>{{quetion}}</p>
 			<div class="problem_only">
-				<div :class="(item.default || item.selected)?'problem_item_box_active':'problem_item_box'" v-for="item in choices" @click="getQA(item.index)" >{{item.prompt}}</div>
+				<div :class="(item.default || item.selected)?'problem_item_box_active':'problem_item_box'" v-for="item in choices" @click="singleChoice(item.index)" >{{item.prompt}}</div>
 			</div>
 		</div>
 	</section>
@@ -132,6 +132,7 @@
     el: '#app',
     data: {
       token: '',
+      index: '',
 			xid: '',
 			quetion: '',
 			choices: [],
@@ -145,7 +146,7 @@
     },
 		mounted(){
       this.getId()
-      this.getQA(getUrlKey('index'))
+      this.getOpenType()
 		},
 		methods: {
       // 判断是否有xid
@@ -159,18 +160,37 @@
           },1500)
         }
       },
+      // 判断打开方式
+      getOpenType(){
+        const that = this
+        const index = getUrlKey('index')
+        const id = getUrlKey('id')
+        if(index){
+          that.index = index
+          this.getQA()
+        }
+        if(id){
+          sessionStorage.setItem('session_id',id)
+          this.getQA()
+        }
+      },
+      //单选
+      singleChoice(id){
+        this.index = id
+        this.getQA()
+      },
       //获取问题
-      getQA(id){
+      getQA(){
         const that = this
         const session_id = sessionStorage.getItem('session_id')
         const question_id = sessionStorage.getItem('question_id')
-        const index = id
+        const index = that.index
         that.loading = true
 				let arguments = {}
 				if(that.isSingle){
           arguments = {
             question_id: question_id,
-            choice_indexes: [id]
+            choice_indexes: [index]
 					}
 				}else{
           arguments = {
