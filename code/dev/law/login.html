@@ -50,7 +50,7 @@
         </div>
         <div class="other_login">
           <span>其他登录方式</span>
-          <a class="weixin" href="#">
+          <a class="weixin" :href='wxurl'>
             <i class="iconfont">&#xe61b;</i>
             <p>微信</p>
           </a>
@@ -90,6 +90,7 @@
       loading:false,
       phone: '',
       password: '',
+      wxurl: `${HOST}/index.php/home/Wechat/start`
     },
     mounted(){},
     methods:{

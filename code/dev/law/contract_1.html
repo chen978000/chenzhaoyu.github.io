@@ -171,13 +171,77 @@
         }
         if(id){
           sessionStorage.setItem('session_id',id)
-          this.getQA()
+          this.conAsk()
         }
       },
       //单选
       singleChoice(id){
         this.index = id
         this.getQA()
+      },
+      //继续回答
+      conAsk(){
+        const that = this
+        const session_id = sessionStorage.getItem('session_id')
+        const question_id = sessionStorage.getItem('question_id')
+        // const index = that.index
+        that.loading = true
+        let arguments = {}
+        // if(that.isSingle){
+        //   arguments = {
+        //     question_id: question_id,
+        //     choice_indexes: [index] || [' ']
+        //   }
+        // }else{
+        //   arguments = {
+        //     question_id: question_id,
+        //     choice_index: index || ' ',
+        //   }
+        // }
+        network({
+          params: {
+            // "arguments": arguments
+          },
+          path: `compute/${session_id}`,
+          method: 'post',
+          head: [
+            "Content-Type: application/json",
+            `x-dc-uid: ${that.xid}`
+          ],
+          success: function (e) {
+            that.loading = false
+            const data = JSON.parse(e);
+            console.log(data)
+            if(data.cnode_type=='exit'){
+              window.location='./my.html'
+              return
+            }
+            that.quetion = data.cnode_body.text;
+            that.choices = data.cnode_body.choices;
+            that.cnode_type = data.cnode_type;
+            if(data.cnode_type && data.cnode_body.single_choice){
+              that.isSingle = true
+            }else{
+              that.isSingle = false
+            }
+            if(data.cnode_body.choices){
+              that.multiList = that.choices.map(item=>{
+                if(item.selected){
+                  return item.index
+                }
+              }).filter(item=>item)
+            }
+
+            if(data.cnode_body.questions){
+              that.inputList= data.cnode_body.questions.map(item=>{
+                let a = item
+                a.value = ''
+                return a
+              })
+              console.log(that.inputList)
+            }
+          }
+        })
       },
       //获取问题
       getQA(){
@@ -190,12 +254,12 @@
 				if(that.isSingle){
           arguments = {
             question_id: question_id,
-            choice_indexes: [index]
+            choice_indexes: [index] || [' ']
 					}
 				}else{
           arguments = {
             question_id: question_id,
-            choice_index: index,
+            choice_index: index || ' ',
           }
 				}
 				network({
@@ -285,7 +349,9 @@
           params: {
               "arguments": {
                   question_id: question_id,
-                  answers: answers
+                  answers: answers || [{
+                    fillin_id: ' ',
+                    answer: ' '}]
               }
           },
           path: `compute/${session_id}`,
@@ -341,7 +407,7 @@
               params: {
                   "arguments": {
                       question_id: question_id,
-                      choice_indexes: that.multiList
+                      choice_indexes: that.multiList || ['']
                   }
               },
               path: `compute/${session_id}`,
