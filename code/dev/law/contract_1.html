@@ -66,9 +66,28 @@
 			<p>{{quetion}}</p>
 			<div class="problem_only">
 				<div class="input_box" v-for="(item,index) in inputList">
-					{{item.prompt}}:
+					<div>{{item.prompt}}:</div>
 					<div class="fill_input_box">
-						<input class="fill_input" :id="'text'+index" type="text" v-model="item.value" >
+						<el-select v-model="item.value" placeholder="请选择" :id="'text'+index" v-if="item.type=='sex'">
+							<el-option
+											label="男"
+											value="男">
+							</el-option>
+							<el-option
+											label="女"
+											value="女">
+							</el-option>
+						</el-select>
+						<el-date-picker
+										:editable="false"
+										v-if="item.type=='date'"
+										:id="'text'+index"
+										v-model="item.value"
+										type="date"
+										placeholder="选择日期">
+						</el-date-picker>
+						<input v-if="item.type!=='date'&&item.type!=='sex'" class="fill_input" :id="'text'+index" :type="item.type=='phone_number'?'number':item.type=='id'?'number':item.type=='number'?'number':item.type=='integer'?'number':'text'" v-model="item.value" />
+						<span>{{item.unit}}</span>
 					</div>
 				</div>
 				<div class="fill_btn" @click="done">完成</div>
@@ -82,6 +101,16 @@
       <div class="fill_btn" @click="duoxuan">完成</div>
     </div>
 	</section>
+	<el-dialog
+					title="提示"
+					:visible.sync="showModal"
+					width="90%">
+		<span>您也可以为未注册的乙方完善合同信息，是否继续？</span>
+		<span slot="footer" class="dialog-footer">
+    <el-button @click="cancelPartyB">取 消</el-button>
+    <el-button type="primary" @click="goPartyB">确 定</el-button>
+  </span>
+	</el-dialog>
   <div class="loading_box" v-if="loading">
     <div class="loader loader--style1" title="0">
       <svg version="1.1" id="loader-1" x="0px" y="0px"
@@ -133,8 +162,9 @@
     data: {
       token: '',
       index: '',
-			xid: '',
-			quetion: '',
+      xid1: '',
+      xid2: '',
+      quetion: '',
 			choices: [],
 			inputList:[],
 			cnode_type: '',
@@ -142,18 +172,25 @@
 			isSend: false,
 			loading: false,
       multiList: [],
-			isSingle: false
+			isSingle: false,
+      phone: '',
+      showModal: false,
+      party: 1,
+			messageText: '',
+      smsPhone: true,
     },
 		mounted(){
       this.getId()
       this.getOpenType()
 		},
+
 		methods: {
       // 判断是否有xid
       getId(){
         const that = this
-        that.xid = sessionStorage.getItem('xid')
-        if(!that.xid){
+        that.xid1 = sessionStorage.getItem('xid')
+        that.xid2 = sessionStorage.getItem('token2')
+        if(!that.xid1){
           that.$message.error('未知用户，请重新登录')
           setTimeout(()=>{
             window.location = './login.html'
@@ -184,20 +221,7 @@
         const that = this
         const session_id = sessionStorage.getItem('session_id')
         const question_id = sessionStorage.getItem('question_id')
-        // const index = that.index
         that.loading = true
-        let arguments = {}
-        // if(that.isSingle){
-        //   arguments = {
-        //     question_id: question_id,
-        //     choice_indexes: [index] || [' ']
-        //   }
-        // }else{
-        //   arguments = {
-        //     question_id: question_id,
-        //     choice_index: index || ' ',
-        //   }
-        // }
         network({
           params: {
             // "arguments": arguments
@@ -206,7 +230,7 @@
           method: 'post',
           head: [
             "Content-Type: application/json",
-            `x-dc-uid: ${that.xid}`
+            `x-dc-uid: ${that.xid1}`
           ],
           success: function (e) {
             that.loading = false
@@ -249,6 +273,7 @@
         const session_id = sessionStorage.getItem('session_id')
         const question_id = sessionStorage.getItem('question_id')
         const index = that.index
+				const xid = (that.party===1?that.xid1:that.xid2)
         that.loading = true
 				let arguments = {}
 				if(that.isSingle){
@@ -270,7 +295,7 @@
 					method: 'post',
 					head: [
 						"Content-Type: application/json",
-						`x-dc-uid: ${that.xid}`
+						`x-dc-uid: ${xid}`
 					],
           success: function (e) {
             that.loading = false
@@ -324,41 +349,53 @@
             that.isFill = false
 					}else{
             that.isFill = true
-            return {
-              fillin_id: item.fillin_id,
-              answer: item.value
+            if(item.fillin_id == 'fid_party_phone_b'){
+						  that.phone = item.value
 						}
+            if(item.type=='phone_number'){
+						  if(that.checkPhone(item.value)){
+                that.smsPhone = true
+                return {
+                  fillin_id: item.fillin_id,
+                  answer: item.value
+                }
+							}else{
+						    that.smsPhone = false
+						    that.$message.error('请输入有效手机号')
+							}
+						}else{
+              return {
+                fillin_id: item.fillin_id,
+                answer: item.value
+              }
+						}
+
 					}
 				})
-        if(that.isFill){
+        if(that.isFill && that.smsPhone){
           that.fillin(answers)
         }
-
-        // sessionStorage.setItem('answers',JSON.stringify(answers))
-                // window.location = './add_ziliao.html'
-
 			},
       // 填空
       fillin(answers){
         const that = this;
         const session_id = sessionStorage.getItem('session_id')
         const question_id = sessionStorage.getItem('question_id')
+        const xid = (that.party===1?that.xid1:that.xid2)
           // const answers = JSON.parse(sessionStorage.getItem('answers'))
         that.loading = true
         network({
           params: {
               "arguments": {
                   question_id: question_id,
-                  answers: answers || [{
-                    fillin_id: ' ',
-                    answer: ' '}]
+                  answers: answers
               }
           },
           path: `compute/${session_id}`,
           method: 'post',
           head: [
               "Content-Type: application/json",
-              `x-dc-uid: ${that.xid}`
+              `x-dc-uid: ${xid}`
           ],
           success: function (e) {
             that.loading = false
@@ -388,12 +425,22 @@
               console.log(that.inputList)
             }
             if(data.cnode_type=='invite'){
-              that.isSend = true
-							that.$message.success('即将跳转草签合同预览页面')
-							setTimeout(()=>{
-							  window.location = `./cq_yulan.html?id=${session_id}`
-							},1500)
+              // that.isSend = true
+							if(data.summary){
+							  that.messageText = data.summary
+							}
+              that.$message.warning('正在检查此号码是否注册...')
+              that.checkMobile()
+							// setTimeout(()=>{
+							//   window.location = `./cq_yulan.html?id=${session_id}`
+							// },1500)
             }
+            if(data.cnode_type=='word-template'){
+              that.$message.success('恭喜！合同创建成功')
+							setTimeout(()=>{
+							  window.location = `./yq_hetong.html`
+							},1500)
+						}
           }
         })
       },
@@ -402,19 +449,21 @@
         const that = this
         const session_id = sessionStorage.getItem('session_id')
         const question_id = sessionStorage.getItem('question_id')
+        const xid = (that.party===1?that.xid1:that.xid2)
+				console.log(xid)
         that.loading = true
         network({
               params: {
                   "arguments": {
                       question_id: question_id,
-                      choice_indexes: that.multiList || ['']
+                      choice_indexes: that.multiList
                   }
               },
               path: `compute/${session_id}`,
               method: 'post',
               head: [
                   "Content-Type: application/json",
-                  `x-dc-uid: ${that.xid}`
+                  `x-dc-uid: ${xid}`
               ],
               success: function (e) {
                 that.loading = false
@@ -471,6 +520,196 @@
 					}
 				}).filter(item=>item)
 				console.log(this.multiList)
+      },
+      // 验证手机号
+      checkPhone(phone){
+        let valid_rule = /^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/;
+        if (!valid_rule.test(phone)) {
+          return false
+        }else{
+          return true
+        }
+      },
+			//判断是否注册
+      checkMobile(){
+        const that = this;
+        ourNetwork({
+          type: 'post',
+          url: '/index.php/home/V1/checkMobile',
+          data:{
+            phone: that.phone
+          },
+          success:(res)=>{
+            const data = JSON.parse(res)
+            console.log(data);
+            if(data.error_code == 200){
+              that.$message.success('此号码已注册,即将发送邀请信息...')
+            }else{
+              that.$message.warning('此号码未注册,即将注册为默认用户...')
+							setTimeout(()=>{
+                that.goReg()
+              },1500)
+            }
+          }
+        })
+			},
+      // 注册
+      goReg(){
+        const that = this;
+        ourNetwork({
+          type: 'post',
+          url: '/index.php/home/V1/reg',
+          data:{
+            phone: that.phone,
+            password: '123456'
+          },
+          success:(res)=>{
+            that.loading = false
+            const data = JSON.parse(res)
+            console.log(data);
+            if(data.error_code == 200){
+              setTimeout(()=>{
+                that.lawReg()
+              },1500)
+            }else{
+              that.$message.error('默认注册失败')
+						}
+          }
+        })
+      },
+      // 第三方注册
+      lawReg(){
+        const that = this
+        that.loading = true
+        network({
+          params: {
+            "email": `${that.phone}@netLaw.com`,
+            "password": '123456'
+          },
+          path: `user`,
+          method: 'post',
+          head: [
+            "Content-Type: application/json",
+          ],
+          success: function (e) {
+            that.loading = false
+            const data = JSON.parse(e);
+            console.log(data)
+						if(data.user_id){
+						  that.$message.success('已注册成功并发送短信至对方手机，短信为模拟')
+              sessionStorage.setItem('token2',data.user_id)
+              that.xid2 = sessionStorage.getItem('token2')
+              setTimeout(()=>{
+                that.login()
+              },1000)
+						}else{
+						  that.$message.error('默认注册失败，已发送短信至对方手机')
+							setTimeout(()=>{
+                window.location = './cq_hetong.html'
+              },1500)
+						}
+
+          }
+        })
+      },
+      // 登陆
+      login(){
+        const that = this;
+        ourNetwork({
+          type: 'post',
+          url: '/index.php/home/V1/login',
+          data:{
+            phone: that.phone,
+            password: '123456'
+          },
+          success:function(res){
+            const data = JSON.parse(res)
+            if(data.error_code == 200){
+              sessionStorage.setItem('token2',data.data.token)
+              that.xid2 = sessionStorage.getItem('token2')
+              that.showModal = true
+              // that.upInfo()
+            }
+          }
+        })
+      },
+			// 替乙方回答问题
+      goPartyB(){
+        // this.party = 2
+        this.showModal = false
+        this.partyAsk()
+			},
+      //乙方回答
+      partyAsk(){
+        const that = this
+        const session_id = sessionStorage.getItem('session_id')
+        const question_id = sessionStorage.getItem('question_id')
+        const xid = (that.party===1?that.xid1:that.xid2)
+        that.loading = true
+        network({
+          params: {
+            // "arguments": arguments
+          },
+          path: `compute/${session_id}`,
+          method: 'post',
+          head: [
+            "Content-Type: application/json",
+            `x-dc-uid: ${xid}`
+          ],
+          success: function (e) {
+            that.loading = false
+            const data = JSON.parse(e);
+            console.log(data)
+            if(data.cnode_type=='exit'){
+              window.location='./my.html'
+              return
+            }
+            that.quetion = data.cnode_body.text;
+            that.choices = data.cnode_body.choices;
+            that.cnode_type = data.cnode_type;
+            if(data.cnode_type && data.cnode_body.single_choice){
+              that.isSingle = true
+            }else{
+              that.isSingle = false
+            }
+            if(data.cnode_body.choices){
+              that.multiList = that.choices.map(item=>{
+                if(item.selected){
+                  return item.index
+                }
+              }).filter(item=>item)
+            }
+
+            if(data.cnode_body.questions){
+              that.inputList= data.cnode_body.questions.map(item=>{
+                let a = item
+                a.value = ''
+                return a
+              })
+              console.log(that.inputList)
+            }
+          }
+        })
+      },
+			// 不回答
+			cancelPartyB(){
+        this.showModal = false
+				window.location = './cq_hetong.html'
+			},
+      // 更新用户xid
+      upInfo(){
+        const that = this;
+        ourNetwork({
+          type: 'post',
+          url: '/index.php/home/V1/upInfo',
+          data:{
+            token: sessionStorage.getItem('token'),
+            xid: sessionStorage.getItem('xid')
+          },
+          success:function(res){
+            const data = JSON.parse(res)
+          }
+        })
       },
 			// 生成合同
       contract(){

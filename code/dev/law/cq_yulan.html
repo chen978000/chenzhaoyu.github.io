@@ -20,7 +20,7 @@
 <div id="app">
 	<header class="other_header">
 		<div class="head_box">
-			<a href="" class="head_left"><i class="iconfont">&#xe6d9;</i></a>
+			<a href="javascript:;" onclick="goBack()" class="head_left"><i class="iconfont">&#xe6d9;</i></a>
 			<span>草签预览</span>
 			<a href="" class="head_right"></a>
 		</div>
@@ -62,8 +62,8 @@
           params: {
             "session_id ": session_id
           },
-          path: `compute/${session_id}/rollback`,
-          method: 'post',
+          path: `compute/${session_id}`,
+          method: 'get',
           head: [
             "Content-Type: application/json",
             `x-dc-uid: ${that.xid}`

@@ -86,7 +86,7 @@
           that.loading = true
           network({
             params: {
-              // "state": 'complete'
+              "session_id ": id
             },
             path: `session/${id}/download`,
             method: 'get',
