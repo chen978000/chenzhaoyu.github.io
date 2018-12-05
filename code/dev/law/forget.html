@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta name="keywords" content="" /> 
+<meta name="description" content="">
+<link rel="stylesheet" type="text/css" href="font/iconfont.css">
+<link type="text/css" rel="stylesheet" href="css/public.css" />
+<link type="text/css" rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="js/vue.js" type="text/javascript"></script>
+  <script src="js/util.js" type="text/javascript"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/my.js" type="text/javascript"></script>
+<title>找回密码</title>
+  <style>
+    .code_input{
+      width: 100%;
+      height: 45px;
+      outline:none;
+      border:none;
+      border-bottom: 1px solid #e2e2e2;
+      border-radius: 0;
+      padding: 1px 6px;
+    }
+    .get_code_btn{
+      display: inline-block;
+      background: #ff6b00;
+      color:#fff;
+      width: 78px;
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+      border-radius: 28px;
+      position: absolute;
+      right: 0;
+      bottom:10px;
+      z-index: 99;
+      pointer-events: auto;
+    }
+    .get_code_btn_none{
+      background: #999;
+      pointer-events: none;
+    }
+  </style>
+<body>
+<div id="app">
+  <header>
+    <div class="head_box">
+      <a href="javascript:;" onclick="goBack()" class="head_left"><i class="iconfont">&#xe6cf;</i></a>
+      <span>找回密码</span>
+      <a href="" class="head_right"></a>
+    </div>
+  </header>
+  <section>
+    <div class="register_form">
+      <div>
+        <ul>
+          <li>
+            <input class="input_style" name="username" type="number" placeholder="请输入手机号" id="mobile" v-model="phone">
+          </li>
+          <li>
+            <input class="code_input" type="number" maxlength="6" placeholder="请输入验证码" v-model="code">
+            <span class="get_code_btn" :class="messageDisabled?'get_code_btn_none':''" @click="sendMessage">{{messageCodeText}}</span>
+            <!--<a :class="messageDisabled?'get_code_btn_none':''" href="javascript:;" @click="sendMessage">{{messageCodeText}}</a>-->
+          </li>
+          <li>
+            <input class="input_style" type="password"  placeholder="密码" v-model="password">
+          </li>
+          <li>
+            <input class="input_style" type="password"  placeholder="确认密码" v-model="passwordAgain">
+          </li>
+        </ul>
+        <div class="submit_button">
+          <input type="button" value="确定" @click="goReg">
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="loading_box" v-if="loading">
+    <div class="loader loader--style1" title="0">
+      <svg version="1.1" id="loader-1" x="0px" y="0px"
+   width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+  <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+    s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+    c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+  <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
+    C22.32,8.481,24.301,9.057,26.013,10.047z">
+    <animateTransform attributeType="xml"
+      attributeName="transform"
+      type="rotate"
+      from="0 20 20"
+      to="360 20 20"
+      dur="0.5s"
+      repeatCount="indefinite"/>
+    </path>
+  </svg>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data:{
+      loading:false,
+      phone: '',
+      code: '',
+      password: '',
+      passwordAgain: '',
+      messageCodeText: '获取验证码',
+      messageDisabled: false,
+      checked: false,
+      codeRight: false
+
+    },
+    mounted(){},
+    methods:{
+      // 发送验证码
+      sendMessage(){
+        const that = this
+        if(!that.phone){
+          that.$message.error('请输入手机号')
+          return;
+        }
+        if(!that.checkPhone(that.phone)){
+          that.$message.error('请输入有效手机号码')
+          return;
+        }
+        var time = 60
+        that.messageCodeText = time + '秒'
+        that.messageDisabled = true
+        var stop = setInterval(() => {
+          if (time !== 0) {
+            time--
+            that.messageCodeText = time + '秒'
+            that.messageDisabled = true
+          }
+        }, 1000)
+        setTimeout(() => {
+          clearInterval(stop);
+          that.messageCodeText = '获取验证码'
+          that.messageDisabled = false
+        }, 60000)
+        that.loading = true
+        ourNetwork({
+          type: 'post',
+          url: '/index.php/home/V1/sendSMS',
+          data:{
+            phone: that.phone
+          },
+          success:function(res){
+            that.loading = false
+            const data = JSON.parse(res)
+            console.log(data);
+            if(data.error_code == 200){
+              that.$message.success('已发送')
+            }
+          }
+        })
+      },
+      // 验证手机号
+      checkPhone(phone){
+        let valid_rule = /^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/;
+        if (!valid_rule.test(phone)) {
+          return false
+        }else{
+          return true
+        }
+      },
+      // 校验验证码
+      checkCode(){
+        const that = this;
+        ourNetwork({
+          type: 'post',
+          url: '/index.php/home/V1/checkYzm',
+          data:{
+            phone: that.phone,
+            yzm: that.code
+          },
+          success:function(res){
+            const data = JSON.parse(res)
+            if(data.error_code == 200){
+              that.loading = true
+              ourNetwork({
+                type: 'post',
+                url: '/index.php/home/V1/reg',
+                data:{
+                  phone: that.phone,
+                  password: that.password
+                },
+                success:(res)=>{
+                  that.loading = false
+                  const data = JSON.parse(res)
+                  console.log(data);
+                  if(data.error_code == 200){
+                    that.lawReg()
+                  }
+                }
+              })
+            }else{
+              that.$message.error('验证码错误，请重新输入')
+            }
+          }
+        })
+      },
+      // 注册
+      goReg(){
+        const that = this;
+        if(!that.phone){
+          that.$message.error('请输入手机号')
+          return;
+        }
+        if(!that.code){
+          that.$message.error('请输入验证码')
+          return;
+        }
+        if(!that.password){
+          that.$message.error('请输入密码')
+          return;
+        }
+        if(!that.passwordAgain){
+          that.$message.error('请确认密码')
+          return;
+        }
+        if(that.passwordAgain != that.password){
+          that.$message.error('两次密码输入不一致')
+          return;
+        }
+        if(!that.checked){
+          that.$message.error('请阅读并同意《用户注册协议》')
+          return
+        }
+        that.checkCode()
+      },
+      // 第三方注册
+      lawReg(){
+        const that = this
+        that.loading = true
+        network({
+          params: {
+            "email": `${that.phone}@netLaw.com`,
+            "password": that.password
+          },
+          path: `user`,
+          method: 'post',
+          head: [
+            "Content-Type: application/json",
+          ],
+          success: function (e) {
+            that.loading = false
+            const data = JSON.parse(e);
+            console.log(data)
+            if(data.checkCode){
+              that.$message.success('恭喜！注册成功')
+              sessionStorage.setItem('xid',data.user_id)
+              that.login()
+            }
+          }
+        })
+      },
+      // 登陆
+      login(){
+        const that = this;
+        ourNetwork({
+          type: 'post',
+          url: '/index.php/home/V1/login',
+          data:{
+            phone: that.phone,
+            password: that.password
+          },
+          success:function(res){
+            const data = JSON.parse(res)
+            if(data.error_code == 200){
+              sessionStorage.setItem('token',data.data.token)
+              that.upInfo()
+            }
+          }
+        })
+      },
+      // 更新用户xid
+      upInfo(){
+        const that = this;
+        ourNetwork({
+          type: 'post',
+          url: '/index.php/home/V1/upInfo',
+          data:{
+            token: sessionStorage.getItem('token'),
+            xid: sessionStorage.getItem('xid')
+          },
+          success:function(res){
+            const data = JSON.parse(res)
+            if(data.error_code == 200){
+              that.$message.success('初始化资料成功！')
+            }else{
+              that.$message.error('初始化资料失败，请登录重试')
+            }
+            window.location = './login.html'
+            // setTimeout(()=>{
+            //   window.location = './login.html'
+            // },500)
+          }
+        })
+      },
+    }
+  })
+</script>
+</html>
