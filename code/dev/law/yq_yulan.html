@@ -79,6 +79,21 @@
             },1500)
           }
         },
+				//
+				getUserInfo(){
+          $.ajax({
+            type:"get",
+            url: `https://ec2-18-209-228-104.compute-1.amazonaws.com:8443/v1/user`,
+            dataType: "json",
+            ContentType: "application/json",
+            data:{
+              email :'17852909766@netLaw.com'
+            },
+            success:(res)=>{
+              console.log(res);
+            }
+          })
+				},
 			  // 获取合同预览
         getWord(){
           const that = this
@@ -88,12 +103,12 @@
             type:"get",
             url: `https://ec2-18-209-228-104.compute-1.amazonaws.com:8443/v1/session/${id}/download`,
             dataType: "json",
-            ContentType: "application/x-www-form-urlencoded",
+            ContentType: "application/json",
             beforeSend: function (XMLHttpRequest) {
             	XMLHttpRequest.setRequestHeader('x-dc-uid', that.xid);
             },
-						data:{
-              session_id:id
+						headers:{
+              'X-DC-UID':that.xid
 						},
             success:(res)=>{
               console.log(res);
