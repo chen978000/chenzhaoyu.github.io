@@ -9,6 +9,7 @@ function goBack() {
 }
 const HOST = 'http://law.8xcms.com'
 const URL = `${HOST}/act.php`
+const WX_APPID = 'wx9d23592158f26c2f'
 
 /**
  *
