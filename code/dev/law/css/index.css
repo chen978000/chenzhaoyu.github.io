@@ -109,7 +109,7 @@
 .personal ul li.third span{right: 40px;}
 .personal ul li i{color:#ccc;position: absolute;right: 10px;top:0;line-height:48px;vertical-align: middle;}
 .personal ul li label{display: none;}
-.personal ul li input{border:none;position: absolute;right: 10px;top:1px;height: 46px;outline: none;text-align: right;color:#999;display:none;}
+.personal ul li input{border:none;position: absolute;right: 10px;top:1px;height: 46px;outline: none;text-align: right;color:#999;}
 /*确认订单*/
 .sure_order ul{padding-top: 30px;overflow: hidden;}
 .sure_order ul li{background: #fafafa;padding: 10px 20px;}

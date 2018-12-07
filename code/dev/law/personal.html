@@ -14,7 +14,7 @@
 	<script src="js/util.js" type="text/javascript"></script>
 	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <script src="js/jquery.js" type="text/javascript"></script>
-<script src="js/my.js" type="text/javascript"></script>
+<!--<script src="js/my.js" type="text/javascript"></script>-->
 <title>个人信息</title>
 <body>
 <div id="app">
@@ -22,7 +22,8 @@
 		<div class="head_box">
 			<a href="" class="head_left"><i class="iconfont">&#xe6d9;</i></a>
 			<span>个人信息</span>
-			<a href="javascript:void(0);" class="head_right personal_edit">编辑</a>
+			<a v-if="isEdit" href="javascript:void(0);" @click="save" class="head_right personal_edit">完成</a>
+			<a v-else href="javascript:void(0);" @click="edit" class="head_right personal_edit">编辑</a>
 		</div>
 	</header>
 	<section>
@@ -39,21 +40,21 @@
 				</li>
 				<li class="second">
 					名字
-					<span class="one">OCD</span>
-					<input class="one" type="text" placeholder="请输入">
+					<input v-if="isEdit" v-model="userName" class="one" type="text" placeholder="请输入">
+					<span v-else class="one">OCD</span>
 				</li>
 				<li class="second">
 					手机号
-					<span class="two">12546546446</span>
-					<input class="two" type="text" placeholder="请输入">
+					<input v-if="isEdit" v-model="phone" class="two" type="text" placeholder="请输入">
+					<span v-else class="two">12546546446</span>
 				</li>
 				<li class="second">
 					城市
-					<span class="three">北京</span>
-					<input class="three" type="text" placeholder="请输入">
+					<input v-if="isEdit" v-model="city" class="three" type="text" placeholder="请输入">
+					<span v-else class="three">北京</span>
 				</li>
 				<li class="third">
-					<a href="">
+					<a href="javascript:;">
 						微信号
 						<span @click="bindWX">未绑定</span>
 						<i class="iconfont">&#xe6d0;</i>
@@ -68,16 +69,40 @@
 			</ul>
 		</div>
 	</section>
+	<div class="loading_box" v-if="loading">
+		<div class="loader loader--style1" title="0">
+			<svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+  <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+    s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+    c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+  <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
+    C22.32,8.481,24.301,9.057,26.013,10.047z">
+    <animateTransform attributeType="xml"
+      attributeName="transform"
+      type="rotate"
+      from="0 20 20"
+      to="360 20 20"
+      dur="0.5s"
+      repeatCount="indefinite"/>
+    </path>
+  </svg>
+		</div>
+	</div>
 </div>
-
 <script>
 	new Vue({
 		el: '#app',
-		data:{},
+		data:{
+		  loading: false,
+      isEdit: false,
+      userName: '123',
+      phone: '',
+      city: '',
+		},
 		mounted(){
 		  this.getId()
 			this.getUserInfo()
-
 		},
 		methods:{
       // 判断是否有xid
@@ -115,11 +140,54 @@
           }
         })
       },
+			//编辑
+      edit(){
+        this.isEdit = true
+			},
+			//保存
+			save(){
+        const that = this;
+        const token = sessionStorage.getItem('token')
+        if(!that.userName){
+          that.$message.error('请输入名字')
+          return;
+        }
+        if(!that.phone){
+          that.$message.error('请输入手机号')
+          return;
+        }
+        if(!that.city){
+          that.$message.error('请输入城市')
+          return;
+        }
+        that.loading = true
+        ourNetwork({
+          type: 'post',
+          url: '/index.php/home/V1/changeInfo',
+          data:{
+            token: token,
+            userName: that.userName,
+          },
+          success:function(res){
+            that.loading = false
+            const data = JSON.parse(res)
+            if(data.error_code == 200){
+              that.$message.success(data.error_message)
+              that.isEdit = false;
+            }else {
+              that.$message.error(data.error_message)
+            }
+          },
+          fail: function (res) {
+            that.loading = false
+          }
+        })
+			},
 			// 绑定微信
 			bindWX(){
         const localUrl = window.location.href;
         let code = getUrlKey('code');
-        console.log(code)
+        alert(code)
         if(!code){
           window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+ WX_APPID +'&redirect_uri='+ localUrl +'&response_type=code&scope=snsapi_userinfo#wechat_redirect'
         }else{
@@ -132,7 +200,7 @@
 <!--<script>-->
 	<!--$("body,html").css("background","#fafafa");-->
 <!--</script>-->
-<!--<script language="javascript"> -->
+<!--<script language="javascript">-->
 <!--function img_upload(){-->
   <!--var files= $('#first_img')[0].files,-->
     <!--img="";-->
