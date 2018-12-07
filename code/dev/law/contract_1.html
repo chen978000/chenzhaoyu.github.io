@@ -262,7 +262,6 @@
                 a.value = ''
                 return a
               })
-              console.log(that.inputList)
             }
           }
         })
@@ -382,8 +381,71 @@
         const session_id = sessionStorage.getItem('session_id')
         const question_id = sessionStorage.getItem('question_id')
         const xid = (that.party===1?that.xid1:that.xid2)
-          // const answers = JSON.parse(sessionStorage.getItem('answers'))
+				console.log(xid)
         that.loading = true
+				// $.ajax({
+				// 	url:`${HOST1}compute/${session_id}`,
+				// 	type: 'post',
+        //   dataType: "json",
+        //   ContentType: "application/json",
+        //   headers:{
+        //     'X-DC-UID':xid
+        //   },
+				// 	data:{
+        //     session_id: session_id,
+        //     arguments: {
+        //       question_id: question_id,
+        //       answers: answers
+        //     }
+				// 	},
+        //   success: function (e) {
+        //     that.loading = false
+        //     const data = JSON.parse(e);
+        //     console.log(data)
+        //     that.quetion = data.cnode_body.text;
+        //     that.choices = data.cnode_body.choices;
+        //     that.cnode_type = data.cnode_type;
+        //     if(data.cnode_type && data.cnode_body.single_choice){
+        //       that.isSingle = true
+        //     }else{
+        //       that.isSingle = false
+        //     }
+        //     if(data.cnode_body.choices){
+        //       that.multiList = that.choices.map(item=>{
+        //         if(item.selected){
+        //           return item.index
+        //         }
+        //       }).filter(item=>item)
+        //     }
+        //     if(data.cnode_body.questions){
+        //       that.inputList= data.cnode_body.questions.map(item=>{
+        //         let a = item
+        //         a.value = ''
+        //         return a
+        //       })
+        //       console.log(that.inputList)
+        //     }
+        //     if(data.cnode_type=='invite'){
+        //       // that.isSend = true
+        //       if(data.summary){
+        //         that.messageText = data.summary
+        //       }
+        //       that.$message.warning('正在检查此号码是否注册...')
+        //       that.checkMobile()
+        //       // setTimeout(()=>{
+        //       //   window.location = `./cq_yulan.html?id=${session_id}`
+        //       // },1500)
+        //     }
+        //     if(data.cnode_type=='word-template'){
+        //       that.$message.success('恭喜！合同创建成功')
+        //       return
+        //       setTimeout(()=>{
+        //         window.location = `./yq_hetong.html`
+        //       },1500)
+        //     }
+        //   }
+				// })
+				// return
         network({
           params: {
               "arguments": {

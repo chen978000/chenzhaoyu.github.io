@@ -65,7 +65,7 @@
 			},
 			mounted(){
 			  this.getId()
-				this.getWord()
+				this.setWord()
 			},
 			methods:{
         // 判断是否有xid
@@ -94,6 +94,27 @@
             }
           })
 				},
+        setWord(){
+          const that = this
+          const id = getUrlKey('id')
+          that.loading = true
+          $.ajax({
+            type:"get",
+            url: `https://ec2-18-209-228-104.compute-1.amazonaws.com:8443/v1/compute/${id}`,
+            dataType: "json",
+            ContentType: "application/json",
+						data:{
+              session_id: id
+            },
+            headers:{
+              'X-DC-UID':that.xid
+            },
+            success:(res)=>{
+              console.log(res);
+              that.getWord()
+            }
+          })
+        },
 			  // 获取合同预览
         getWord(){
           const that = this
@@ -101,7 +122,7 @@
           that.loading = true
           $.ajax({
             type:"get",
-            url: `https://ec2-18-209-228-104.compute-1.amazonaws.com:8443/v1/session/${id}/download`,
+            url: `${HOST1}session/${id}/download`,
             dataType: "json",
             ContentType: "application/json",
             beforeSend: function (XMLHttpRequest) {

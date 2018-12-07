@@ -7,6 +7,7 @@ function getUrlKey(name){
 function goBack() {
   window.history.back()
 }
+const HOST1 = 'https://ec2-18-209-228-104.compute-1.amazonaws.com:8443/v1/'
 const HOST = 'http://law.8xcms.com'
 const URL = `${HOST}/act.php`
 const WX_APPID = 'wx9d23592158f26c2f'
