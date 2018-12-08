@@ -9,7 +9,7 @@ function goBack() {
 }
 const HOST1 = 'https://ec2-18-209-228-104.compute-1.amazonaws.com:8443/v1/'
 const HOST = 'http://law.8xcms.com'
-const URL = `${HOST}/act.php`
+const URL1 = `${HOST}/act.php`
 const WX_APPID = 'wx9d23592158f26c2f'
 
 /**
@@ -40,7 +40,7 @@ function ourNetwork({method,url,data,success,fail}) {
 function network({params,path,method,head,success}) {
     $.ajax({
         type:"post",
-        url: URL,
+        url: URL1,
         data: {
             param: params,
             url: `https://ec2-18-209-228-104.compute-1.amazonaws.com:8443/v1/${path}`,

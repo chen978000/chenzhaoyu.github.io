@@ -54,7 +54,7 @@
 					<a href="ht_fujian.html"><i class="iconfont">&#xe7af;</i>附件1</a>
 				</li>
 				<li class="two">
-					<a :href="fileUrl"  download="合同"><i class="iconfont">&#xe7b0;</i>下载</a>
+					<a href="javascript:;" @click="file" download="合同"><i class="iconfont">&#xe7b0;</i>下载</a>
 				</li>
 			</ul>
 		</div>
@@ -83,6 +83,46 @@
             },1500)
           }
         },
+        dataURLtoFile(dataurl, filename) {
+          var arr = dataurl.split(',');
+          console.log(arr[1]);return;
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+          while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+          }
+          const a = new File([u8arr], filename, {type:mime});
+          console.log(a)
+        },
+				file(){
+          const that = this
+					that.dataURLtoFile(that.fileUrl,'合同',)
+					return
+          var eleLink = document.createElement('a');
+          eleLink.download = '合同';
+          eleLink.style.display = 'none';
+          var blob = new Blob([u8arr], {
+            type: "application/msword"
+          });
+          eleLink.href = URL.createObjectURL(blob);
+          // 触发点击
+          document.body.appendChild(eleLink);
+          eleLink.click();
+          // 然后移除
+          document.body.removeChild(eleLink);
+
+          // const that = this
+          // let blob = new Blob([that.fileUrl], {
+          //   type: "application/msword"
+          // });
+          // let url = URL.createObjectURL(blob);
+          // let link = document.createElement('a');
+          // link.setAttribute("href", url);
+          // link.setAttribute("download", `word.docx`);
+          // link.style.visibility = 'hidden';
+          // document.body.appendChild(link);
+          // link.click();
+          // document.body.removeChild(link);
+				},
 				//
 				getUserInfo(){
           $.ajax({

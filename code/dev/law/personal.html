@@ -191,8 +191,25 @@
         if(!code){
           window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+ WX_APPID +'&redirect_uri='+ localUrl +'&response_type=code&scope=snsapi_userinfo#wechat_redirect'
         }else{
-
+          this.wxLogin(code)
 				}
+			},
+			// 微信登陆login
+			wxLogin(code){
+        ourNetwork({
+          type: 'post',
+          url: '/index.php/home/Wechat/login',
+          data:{
+            code: code
+          },
+          success:function(res){
+            console.log(res)
+            // that.loading = false
+            // const data = JSON.parse(res)
+          },
+          fail: function (res) {
+          }
+        })
 			},
 		}
 	})
