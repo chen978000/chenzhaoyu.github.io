@@ -27,9 +27,6 @@
 				<a href="" class="head_right"></a>
 			</div>
 		</header>
-    <iframe src='https://view.officeapps.live.com/op/view.aspx?src=http://storage.xuetangx.com/public_assets/xuetangx/PDF/1.xls' width='100%' height='100%' frameborder='1'>
-    </iframe>
-
     <section>
 			<div class="already_text">
 				<div class="already_top">
@@ -54,7 +51,7 @@
 					<a href="ht_fujian.html"><i class="iconfont">&#xe7af;</i>附件1</a>
 				</li>
 				<li class="two">
-					<a href="javascript:;" @click="file" download="合同"><i class="iconfont">&#xe7b0;</i>下载</a>
+					<a href="./12.txt" download="合同"><i class="iconfont">&#xe7b0;</i>下载</a>
 				</li>
 			</ul>
 		</div>
@@ -69,7 +66,7 @@
 			},
 			mounted(){
 			  this.getId()
-				this.setWord()
+				this.getWord()
 			},
 			methods:{
         // 判断是否有xid
@@ -166,17 +163,18 @@
           that.loading = true
           $.ajax({
             type:"get",
-            url: `${HOST1}session/${id}/download`,
+            url: `${HOST1}session/dc9df4e2-69ed-4753-a702-19e648089473/download`,
             dataType: "json",
             ContentType: "application/json",
             beforeSend: function (XMLHttpRequest) {
-            	XMLHttpRequest.setRequestHeader('x-dc-uid', that.xid);
+            	XMLHttpRequest.setRequestHeader('x-dc-uid', 'bc7ad38f-03a1-4a4e-a46d-9cef677a2d3a');
             },
 						headers:{
-              'X-DC-UID':that.xid
+              'X-DC-UID':'bc7ad38f-03a1-4a4e-a46d-9cef677a2d3a'
 						},
             success:(res)=>{
               console.log(res);
+              that.dataURLtoFile(res,'合同',)
             }
           })
           return
