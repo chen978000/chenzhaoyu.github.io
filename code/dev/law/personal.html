@@ -56,7 +56,7 @@
 				<li class="third">
 					<a href="javascript:;">
 						微信号
-						<span @click="bindWX">未绑定</span>
+						<span @click="getCode">未绑定</span>
 						<i class="iconfont">&#xe6d0;</i>
 					</a>
 				</li>
@@ -99,6 +99,7 @@
       userName: '123',
       phone: '',
       city: '',
+			wxInfo: ''
 		},
 		mounted(){
 		  this.getId()
@@ -183,11 +184,10 @@
           }
         })
 			},
-			// 绑定微信
-			bindWX(){
+			// 获取code微信
+			getCode(){
         const localUrl = window.location.href;
         let code = getUrlKey('code');
-        alert(code)
         if(!code){
           window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+ WX_APPID +'&redirect_uri='+ localUrl +'&response_type=code&scope=snsapi_userinfo#wechat_redirect'
         }else{
@@ -204,13 +204,35 @@
           },
           success:function(res){
             console.log(res)
-            // that.loading = false
-            // const data = JSON.parse(res)
+						this.wxInfo = res.data
+            this.blindWeiXin()
           },
           fail: function (res) {
           }
         })
 			},
+      // 微信bind
+      blindWeiXin(code){
+        const that = this
+        ourNetwork({
+          type: 'post',
+          url: '/index.php/home/V1/blindWeiXin',
+          data:{
+            token: sessionStorage.getItem('token'),
+            wxInfo: that.wxInfo
+          },
+          success:function(res){
+            console.log(res)
+						if(error_code===200){
+						  that.$message.success('绑定成功')
+						}else{
+              that.$message.success('绑定失败')
+            }
+          },
+          fail: function (res) {
+          }
+        })
+      },
 		}
 	})
 </script>
