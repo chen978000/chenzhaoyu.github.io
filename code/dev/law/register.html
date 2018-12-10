@@ -51,7 +51,7 @@
   <header>
     <div class="head_box">
       <a href="javascript:;" onclick="goBack()" class="head_left"><i class="iconfont">&#xe6cf;</i></a>
-      <span>注册</span>
+      <span>{{wxInfo?'绑定手机':'注册'}}</span>
       <a href="" class="head_right"></a>
     </div>
   </header>
@@ -82,7 +82,7 @@
           <!--<i class="iconfont ">&#xe6e0;</i>-->
         </div>
         <div class="submit_button">
-          <input type="button" value="注册" @click="goReg">
+          <input type="button" v-model="wxInfo?'绑定手机':'注册'" @click="goReg">
         </div>
       </div>
     </div>
@@ -121,11 +121,21 @@
       messageCodeText: '获取验证码',
       messageDisabled: false,
       checked: false,
-      codeRight: false
-
+      codeRight: false,
+      wxInfo: '',
     },
-    mounted(){},
+    mounted(){
+      this.getWxInfo()
+    },
     methods:{
+      // 获取微信信息
+      getWxInfo(){
+        const type = getUrlKey('type')
+        if(type==2){
+          this.wxInfo = sessionStorage.getItem('wxInfo')
+          document.title = this.wxInfo?'绑定手机':'注册'
+        }
+      },
       // 发送验证码
       sendMessage(){
         const that = this
@@ -197,7 +207,8 @@
                 url: '/index.php/home/V1/reg',
                 data:{
                   phone: that.phone,
-                  password: that.password
+                  password: that.password,
+                  wxinfo: that.wxInfo
                 },
                 success:(res)=>{
                   that.loading = false
