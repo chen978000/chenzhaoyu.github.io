@@ -107,12 +107,15 @@
           $.ajax({
             type: "GET",
             cache: false,
-            // crossDomain: true,
+            crossDomain: true,
             contentType: 'application/json',
             headers: {
-              'x-dc-uid': that.xid
+              'x-dc-uid': 'bc7ad38f-03a1-4a4e-a46d-9cef677a2d3a'
             },
-            url: `${HOST1}/session/${id}/download`,
+            // beforeSend: function(xhr) {
+            //   xhr.setRequestHeader("x-dc-uid", that.xid);
+            // },
+            url: `${HOST1}/session/dc9df4e2-69ed-4753-a702-19e648089473/download`,
             dataType: 'binary',
             processData: false,
             success: function(result) {
