@@ -130,7 +130,7 @@
 .my_data p{color:#333;margin-top: 4px;font-size: 12px;}
 /*我的订单*/
 .my_order ul{padding-top: 30px;overflow: hidden;}
-.my_order ul li{background: #fafafa;padding: 10px 20px;margin-bottom: 20px;position: relative;}
+.my_order ul li{background: #fafafa;padding: 10px 20px;margin-bottom: 10px;position: relative;}
 .my_order ul li h2{color:#666;border-bottom: 1px solid #e2e2e2;font-size: 16px;line-height: 36px;}
 .my_order ul li h2 i{display: inline-block;color:#999;font-weight: bold;margin-left: 6px;}
 .my_order ul li h2 span{float: right;color:#ff6b00;}

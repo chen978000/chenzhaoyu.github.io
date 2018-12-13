@@ -8,7 +8,6 @@ $(function(){
 	//     }
 	//  });
 	// $(".login_form ul li a").click(function(){
-	//    	$(".login_form ul li a").hide();
 	//    	$(".login_form ul li span").show();
 	//  })
 	// $(".register_form ul li a").click(function(){

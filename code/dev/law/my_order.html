@@ -11,7 +11,7 @@
 <link type="text/css" rel="stylesheet" href="css/index.css" />
 
 <script src="js/jquery.js" type="text/javascript"></script>
-<script src="js/my.js" type="text/javascript"></script>
+<!--<script src="js/my.js" type="text/javascript"></script>-->
 	<!-- 引入样式 -->
 	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 	<script src="js/vue.js" type="text/javascript"></script>
@@ -31,41 +31,44 @@
   <section>
     <div class="my_order">
       <ul>
-        <li>
-          <h2>乙方：马云 <i class="iconfont">&#xe617;</i><span>未支付</span></h2>
-          <h1>科技劳动合同 <span>￥9.9<i>元</i></span></h1>
-          <p>编号：123145646465</p>
-          <p>签署日期：2018-07-23</p>
-          <div class="order_button">
-            <a href="javascript:void(0);" class="one">取消合同</a>
-            <a href="sure_order.html" class="two">支付</a>
+        <li v-for="item in list">
+          <h2>乙方：{{item.key_property.party_name_b}} <i class="iconfont">&#xe617;</i><span>未支付</span></h2>
+          <h1>科技劳动合同(模拟接口无) <span>￥{{item.price || 0}}<i>元</i></span></h1>
+          <p>编号：{{item.session_id.substring(item.session_id.length-12)}}</p>
+          <p>签署日期：{{item.modified_date_time.slice(0,10)}} {{item.modified_date_time.slice(11,19)}}</p>
+          <!--<div class="order_button">-->
+            <!--<a href="javascript:void(0);" class="one">取消合同</a>-->
+            <!--<a href="sure_order.html" class="two">支付</a>-->
+          <!--</div>-->
+          <div style="text-align: right;margin-top: 5px">
+            <el-button round size="mini" style="margin-right: 10px;display: inline-block">取消合同</el-button>
+            <el-button size="mini" type="danger" round style="display: inline-block">支付</el-button>
           </div>
         </li>
-        <li>
-          <h2>乙方：马云 <i class="iconfont">&#xe617;</i><span>未支付</span></h2>
-          <h1>科技劳动合同 <span>￥9.9<i>元</i></span></h1>
-          <p>编号：123145646465</p>
-          <p>签署日期：2018-07-23</p>
-          <div class="order_button">
-            <a href="javascript:void(0);" class="one">取消合同</a>
-            <a href="sure_order.html" class="two">支付</a>
-          </div>
-        </li>
-        <li>
-          <h2>乙方：马云 <i class="iconfont">&#xe617;</i><span>未支付</span></h2>
-          <h1>科技劳动合同 <span>￥9.9<i>元</i></span></h1>
-          <p>编号：123145646465</p>
-          <p>签署日期：2018-07-23</p>
-          <div class="order_button">
-            <a href="javascript:void(0);" class="one">取消合同</a>
-            <a href="sure_order.html" class="two">支付</a>
-          </div>
-        </li>
+        <!--<li>-->
+          <!--<h2>乙方：马云 <i class="iconfont">&#xe617;</i><span>未支付</span></h2>-->
+          <!--<h1>科技劳动合同 <span>￥9.9<i>元</i></span></h1>-->
+          <!--<p>编号：123145646465</p>-->
+          <!--<p>签署日期：2018-07-23</p>-->
+          <!--<div class="order_button">-->
+            <!--<a href="javascript:void(0);" class="one">取消合同</a>-->
+            <!--<a href="sure_order.html" class="two">支付</a>-->
+          <!--</div>-->
+        <!--</li>-->
+        <!--<li>-->
+          <!--<h2>乙方：马云 <i class="iconfont">&#xe617;</i><span>未支付</span></h2>-->
+          <!--<h1>科技劳动合同 <span>￥9.9<i>元</i></span></h1>-->
+          <!--<p>编号：123145646465</p>-->
+          <!--<p>签署日期：2018-07-23</p>-->
+          <!--<div class="order_button">-->
+            <!--<a href="javascript:void(0);" class="one">取消合同</a>-->
+            <!--<a href="sure_order.html" class="two">支付</a>-->
+          <!--</div>-->
+        <!--</li>-->
       </ul>
     </div>
   </section>
 </div>
-
 <div class="order_popup">
 	<h1>确认取消订单？</h1>
 	<div class="order_anniu">
@@ -73,17 +76,18 @@
 		<a class="two" href="javascript:void(0);">取消</a>
 	</div>
 </div>
-
-<script src="js/config.js"></script>
 <script>
   new Vue({
     el: '#app',
-    data: {
-      loading: false,
-      xid: '',
-      list: []
+    data(){
+      return {
+        loading: false,
+        xid: '',
+        list: []
+      }
     },
     mounted(){
+      this.getId()
       this.getList()
     },
     methods:{
@@ -110,12 +114,12 @@
           method: 'get',
           head: [
             "Content-Type: application/json",
-            `x-dc-uid: ${that.xid}`
+            `X-DC-UID: ${that.xid}`
           ],
           success: function (e) {
             that.loading = false
             const data = JSON.parse(e);
-            console.log(data)
+            // console.log(data)
             let arr = data.sessions
             that.count = data.count
             that.list = arr.map(item=>{
@@ -126,6 +130,7 @@
               }
               return a
             }).filter(item=>item.key_property)
+            console.log(that.list)
           }
         })
       },

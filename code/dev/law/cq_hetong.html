@@ -97,12 +97,13 @@
 <script>
 	var app = new Vue({
 		el: '#app',
-		data:{
-      loading: false,
-		  xid: '',
-			list: [],
-			// page: 1,
-			// count: 0
+		data(){
+		  return {
+        loading: false,
+          xid: '',
+          list: [],
+      }
+
 		},
 		mounted(){
 		  this.getId()
