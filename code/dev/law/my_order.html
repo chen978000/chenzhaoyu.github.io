@@ -20,49 +20,52 @@
 
 	<title>我的订单</title>
 <body>
-<header class="other_header">
-	 <div class="head_box">
-	    <a href="javascript:void(0);" onclick="goBack()" class="head_left"><i class="iconfont">&#xe6d9;</i></a>
-	    <span>我的订单</span>
-	    <a href="" class="head_right"></a>
-	  </div>
-</header>
-<section>
-	<div class="my_order">
-		<ul>
-			<li>
-				<h2>乙方：马云 <i class="iconfont">&#xe617;</i><span>未支付</span></h2>
-				<h1>科技劳动合同 <span>￥9.9<i>元</i></span></h1>
-				<p>编号：123145646465</p>
-				<p>签署日期：2018-07-23</p>
-				<div class="order_button">
-					<a href="javascript:void(0);" class="one">取消合同</a>
-					<a href="sure_order.html" class="two">支付</a>
-				</div>
-			</li>
-			<li>
-				<h2>乙方：马云 <i class="iconfont">&#xe617;</i><span>未支付</span></h2>
-				<h1>科技劳动合同 <span>￥9.9<i>元</i></span></h1>
-				<p>编号：123145646465</p>
-				<p>签署日期：2018-07-23</p>
-				<div class="order_button">
-					<a href="javascript:void(0);" class="one">取消合同</a>
-					<a href="sure_order.html" class="two">支付</a>
-				</div>
-			</li>
-			<li>
-				<h2>乙方：马云 <i class="iconfont">&#xe617;</i><span>未支付</span></h2>
-				<h1>科技劳动合同 <span>￥9.9<i>元</i></span></h1>
-				<p>编号：123145646465</p>
-				<p>签署日期：2018-07-23</p>
-				<div class="order_button">
-					<a href="javascript:void(0);" class="one">取消合同</a>
-					<a href="sure_order.html" class="two">支付</a>
-				</div>
-			</li>
-		</ul>
-	</div>
-</section>
+<div id="app">
+  <header class="other_header">
+    <div class="head_box">
+      <a href="javascript:void(0);" onclick="goBack()" class="head_left"><i class="iconfont">&#xe6d9;</i></a>
+      <span>我的订单</span>
+      <a href="" class="head_right"></a>
+    </div>
+  </header>
+  <section>
+    <div class="my_order">
+      <ul>
+        <li>
+          <h2>乙方：马云 <i class="iconfont">&#xe617;</i><span>未支付</span></h2>
+          <h1>科技劳动合同 <span>￥9.9<i>元</i></span></h1>
+          <p>编号：123145646465</p>
+          <p>签署日期：2018-07-23</p>
+          <div class="order_button">
+            <a href="javascript:void(0);" class="one">取消合同</a>
+            <a href="sure_order.html" class="two">支付</a>
+          </div>
+        </li>
+        <li>
+          <h2>乙方：马云 <i class="iconfont">&#xe617;</i><span>未支付</span></h2>
+          <h1>科技劳动合同 <span>￥9.9<i>元</i></span></h1>
+          <p>编号：123145646465</p>
+          <p>签署日期：2018-07-23</p>
+          <div class="order_button">
+            <a href="javascript:void(0);" class="one">取消合同</a>
+            <a href="sure_order.html" class="two">支付</a>
+          </div>
+        </li>
+        <li>
+          <h2>乙方：马云 <i class="iconfont">&#xe617;</i><span>未支付</span></h2>
+          <h1>科技劳动合同 <span>￥9.9<i>元</i></span></h1>
+          <p>编号：123145646465</p>
+          <p>签署日期：2018-07-23</p>
+          <div class="order_button">
+            <a href="javascript:void(0);" class="one">取消合同</a>
+            <a href="sure_order.html" class="two">支付</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+</div>
+
 <div class="order_popup">
 	<h1>确认取消订单？</h1>
 	<div class="order_anniu">
@@ -73,38 +76,62 @@
 
 <script src="js/config.js"></script>
 <script>
-	// 创建流程
-    network({
-        params: {
-            "template_name": "劳动合同"
-        },
-		path: 'session',
-		method: 'get',
-		head: [
-            "Content-Type: application/json",
-            `x-dc-uid: 61ca33bc-8365-46b8-9cff-c08f756a8082`
-		],
-		success: function (e) {
-            const data = JSON.parse(e);
-			console.log(data)
+  new Vue({
+    el: '#app',
+    data: {
+      loading: false,
+      xid: '',
+      list: []
+    },
+    mounted(){
+      this.getList()
+    },
+    methods:{
+      // 判断是否有xid
+      getId(){
+        const that = this
+        that.xid = sessionStorage.getItem('xid')
+        if(!that.xid){
+          that.$message.error('未知用户，请重新登录')
+          setTimeout(()=>{
+            window.location = './login.html'
+          },1500)
         }
-	})
-    // 获取session_id
-    network({
-        params: {
-            // "template_name": "劳动合同"
-        },
-        path: 'session',
-        method: 'head',
-        head: [
+      },
+      // 获取合同列表
+      getList(){
+        const that = this
+        that.loading = true
+        network({
+          params: {
+            "state": 'complete'
+          },
+          path: `session`,
+          method: 'get',
+          head: [
             "Content-Type: application/json",
-            `x-dc-uid: 61ca33bc-8365-46b8-9cff-c08f756a8082`
-        ],
-        success: function (e) {
+            `x-dc-uid: ${that.xid}`
+          ],
+          success: function (e) {
+            that.loading = false
             const data = JSON.parse(e);
             console.log(data)
-        }
-    })
+            let arr = data.sessions
+            that.count = data.count
+            that.list = arr.map(item=>{
+              let a = item
+              if(item.key_property){
+                let b = JSON.parse(item.key_property)
+                a.key_property = b
+              }
+              return a
+            }).filter(item=>item.key_property)
+          }
+        })
+      },
+
+    }
+  })
 
 </script>
 </body>
