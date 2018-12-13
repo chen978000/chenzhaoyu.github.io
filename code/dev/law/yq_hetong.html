@@ -91,7 +91,7 @@
 		},
 		mounted(){
 		  this.getId()
-			this.getList('complete')
+			this.getList()
 		},
 		methods:{
       // 判断是否有xid
@@ -106,14 +106,14 @@
         }
       },
       // 获取合同列表
-      getList(state){
+      getList(){
         const that = this
         that.loading = true
         network({
           params: {
-            // "state": 'complete'
+            "state": 'paid'
           },
-          path: `session?state=${state}`,
+          path: `session?state=paid`,
           method: 'get',
           head: [
             "Content-Type: application/json",
