@@ -56,7 +56,7 @@
 						<p>当前状态：{{item.state==0?'待甲方完善信息':item.state==2?'待乙方完善信息':item.state==1?'合同已生成':'未知'}}</p>
 						<div class="btn_box">
 							<el-button @click="goContract(item.session_id)" size="mini" v-if="item.state==0" type="primary" round>前往完善</el-button>
-							<el-button @click="goSMS(item.session_id)" size="mini" v-if="item.state==2" type="warning" round>发短信提醒</el-button>
+							<el-button @click="finishSession(item.session_id)" size="mini" v-if="item.state==2" type="warning" round>生成</el-button>
 							<el-button @click="goYulan(item.session_id)" size="mini" v-if="item.state==1" type="info" round>前往预览</el-button>
 						</div>
 
@@ -95,7 +95,7 @@
 	</div>
 </div>
 <script>
-	var app = new Vue({
+	new Vue({
 		el: '#app',
 		data(){
 		  return {
@@ -164,12 +164,36 @@
           window.location = `./cq_yulan.html?id=${id}`
         }
       },
-      goSMS(id){
+
+      //生成合同
+      finishSession(){
         const that = this
-        if(id){
-          that.$message.success('已发送短信，当前为模拟')
-				}
-			}
+        const session_id =
+        that.loading = true
+        network({
+          params: {
+            // "arguments": arguments
+          },
+          path: `compute/${session_id}`,
+          method: 'post',
+          head: [
+            "Content-Type: application/json",
+            `x-dc-uid: ${that.xid}`
+          ],
+          success: function (e) {
+            that.loading = false
+            const data = JSON.parse(e);
+            console.log(data)
+          }
+        })
+      },
+      // 短信提醒
+      // goSMS(id){
+       //  const that = this
+       //  if(id){
+       //    that.$message.success('已发送短信，当前为模拟')
+			// 	}
+			// }
 		}
 	})
 </script>
