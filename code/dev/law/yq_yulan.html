@@ -115,6 +115,25 @@
           const that = this;
           const id = getUrlKey('id')
           that.loading = true
+          network({
+            params: {
+              "state": 'paid'
+            },
+            path: `compute/${id}`,
+            method: 'get',
+            head: [
+              "Content-Type: application/json",
+              `x-dc-uid: ${that.xid}`
+            ],
+            success: function (e) {
+              that.loading = false
+              const data = JSON.parse(e);
+              console.log(data);
+              that.doc = data.doc[0].node
+              that.sessionId = data.doc[0].node.id
+            }
+          })
+          return false;
           $.ajax({
             type: "GET",
             cache: false,
@@ -142,6 +161,25 @@
           const that = this;
           const id = getUrlKey('id')
           that.loading = true
+          network({
+            params: {
+              "state": 'paid'
+            },
+            path: `compute/${id}`,
+            method: 'get',
+            head: [
+              "Content-Type: application/json",
+              `x-dc-uid: ${that.xid}`
+            ],
+            success: function (e) {
+              that.loading = false
+              const data = JSON.parse(e);
+              console.log(data);
+              that.doc = data.doc[0].node
+              that.sessionId = data.doc[0].node.id
+            }
+          })
+          return false;
           $.ajax({
             type: "GET",
             cache: false,
