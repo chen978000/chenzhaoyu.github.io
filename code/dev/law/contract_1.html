@@ -159,25 +159,28 @@
 
 	var app = new Vue({
     el: '#app',
-    data: {
-      token: '',
-      index: '',
-      xid1: '',
-      xid2: '',
-      quetion: '',
-			choices: [],
-			inputList:[],
-			cnode_type: '',
-			isFill: true,
-			isSend: false,
-			loading: false,
-      multiList: [],
-			isSingle: false,
-      phone: '',
-      showModal: false,
-      party: 1,
-			messageText: '',
-      smsPhone: true,
+    data(){
+      return{
+        token: '',
+        index: '',
+        xid1: '',
+        xid2: '',
+        quetion: '',
+        choices: [],
+        inputList:[],
+        cnode_type: '',
+        isFill: true,
+        isSend: false,
+        loading: false,
+        multiList: [],
+        isSingle: false,
+        phone: '',
+        showModal: false,
+        party: 1,
+        messageText: '',
+        smsPhone: true,
+        sId: ''
+      }
     },
 		mounted(){
       this.getId()
@@ -202,12 +205,18 @@
         const that = this
         const index = getUrlKey('index')
         const id = getUrlKey('id')
+        localStorage.removeItem('sId')
+        that.sId = localStorage.getItem('sId')
+        console.log(that.sId);
         if(index){
           that.index = index
           this.getQA()
         }
         if(id){
           sessionStorage.setItem('session_id',id)
+          this.conAsk()
+        }
+        if(that.sId){
           this.conAsk()
         }
       },
@@ -219,8 +228,14 @@
       //继续回答
       conAsk(){
         const that = this
-        const session_id = sessionStorage.getItem('session_id')
-        const question_id = sessionStorage.getItem('question_id')
+        let session_id;
+        let question_id;
+        if(that.sId){
+          session_id = that.sId
+        } else {
+          session_id = sessionStorage.getItem('session_id')
+          question_id = sessionStorage.getItem('question_id')
+        }
         that.loading = true
         network({
           params: {
@@ -240,9 +255,11 @@
               window.location='./my.html'
               return
             }
-            that.quetion = data.cnode_body.text;
-            that.choices = data.cnode_body.choices;
-            that.cnode_type = data.cnode_type;
+            if(data.cnode_body){
+              that.quetion = data.cnode_body.text;
+              that.choices = data.cnode_body.choices;
+              that.cnode_type = data.cnode_type;
+            }
             if(data.cnode_type && data.cnode_body.single_choice){
               that.isSingle = true
             }else{

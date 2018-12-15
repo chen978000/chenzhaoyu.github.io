@@ -92,16 +92,25 @@
       password: '',
       code: '',
       wxInfo: '',
-      wxurl: `${HOST}/index.php/home/Wechat/start`
+      wxurl: `${HOST}/index.php/home/Wechat/start`,
+      sId: ''
     },
     mounted(){
-      // this.getCode()
+      this.getSessionId()
     },
     methods:{
+      //获取session_id
+      getSessionId(){
+        const that = this
+        const id = getUrlKey('id')
+        that.sId = id
+        if(id){
+          localStorage.setItem('sId',id)
+        }
+      },
       // 登陆
       login(){
         const that = this;
-
         if(!that.phone){
           that.$message.error('请输入用户名')
           return
@@ -128,7 +137,11 @@
                 that.getUserInfo()
               }else{
                 sessionStorage.setItem('xid',data.data.code_other_id)
-                window.location = './my.html'
+                if(that.sId){
+                  window.location = './contract_1.html'
+                } else {
+                  window.location = './my.html'
+                }
               }
             }else {
               that.$message.error('登录失败，请检查用户名和密码是否正确')
@@ -193,7 +206,7 @@
           params: {
             // "email": "17852909766@netLaw.com"
           },
-          path: `user?email=17852909766@netLaw.com`,
+          path: `user?email=${that.phone}@netLaw.com`,
           method: 'get',
           head: [
             "Content-Type: application/json"

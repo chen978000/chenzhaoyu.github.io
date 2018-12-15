@@ -51,7 +51,7 @@
           <div style="text-align: right;margin-top: 5px">
             <el-button @click="del(item.session_id)" round size="mini" style="margin-right: 10px;display: inline-block">取消合同</el-button>
             <el-button @click="zeroPay(item.session_id)" size="mini" type="danger" round style="display: inline-block">免单支付</el-button>
-            <el-button @click="weixinpay(item.session_id,item.price)" size="mini" type="danger" round style="display: inline-block">支付</el-button>
+            <el-button @click="creatOrder(item.session_id,item.price)" size="mini" type="danger" round style="display: inline-block">支付</el-button>
           </div>
         </li>
       </ul>
@@ -195,12 +195,12 @@
           this.code = code
         }
       },
-      //支付
-      weixinpay(id,price){
+      //创建付款订单
+      creatOrder(id,price){
         const that = this;
         ourNetwork({
           type: 'post',
-          url: '/index.php/home/V1/weixinpay',
+          url: '/index.php/home/V1/creatOrder',
           data:{
             token: that.token,
             session_id: id,
@@ -209,29 +209,29 @@
           },
           success:function(res){
             console.log(res)
-            // window.open(res)
-            ourNetwork({
-              type: 'post',
-              url: res,
-              // data: {
-              //   token: that.token,
-              //   session_id: id,
-              //   price: price
-              // },
-              success: (res2) => {
-                console.log(res2);
-              }
-            })
+          },
+          fail: function (res) {
+            that.loading = false
+          }
+        })
+      },
+      //付款
+      wxPay(id,price){
+        const that = this;
+        ourNetwork({
+          type: 'post',
+          url: '/index.php/home/V1/creatOrder',
+          data:{
+            token: that.token,
+            session_id: id,
+            price: price,
+            code: that.code
+          },
+          success:function(res){
+            console.log(res)
+            if(){
 
-            // that.loading = false
-            // const data = JSON.parse(res)
-            // if(data.error_code == 200){
-            //   // console.log(data)
-            //   const url = data.data.url
-            //   window.open(HOST+url)
-            // }else {
-            //   that.$message.error('支付失败')
-            // }
+            }
           },
           fail: function (res) {
             that.loading = false
