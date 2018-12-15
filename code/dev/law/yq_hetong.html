@@ -45,11 +45,17 @@
 			<ul>
 				<li v-for="item in list">
 					<div >
-						<h2>{{item.name || '接口未返回'}}<span>附件数量：2</span></h2>
+						<h2>
+              {{item.name || '合同类型接口未返回'}}
+              <!--<span>附件数量：2</span>-->
+            </h2>
 						<p>甲方：{{item.key_property?item.key_property.party_name_a:'未填写'}}</p>
 						<p>乙方：{{item.key_property?(item.key_property.party_name_b?item.key_property.party_name_b:'未填写'):'未填写'}}</p>
-						<p>合同编号：206554464</p>
-						<p>签署日期：{{item.signing_date_time}}</p>
+						<p>乙方电话：{{item.key_property?(item.key_property.party_phone_b || '未填写'):'未填写'}}</p>
+            <p>乙方紧急联系人：{{item.key_property?(item.key_property.party_emergency_contact_name_b || '未填写'):'未填写'}}</p>
+            <p>乙方紧急联系人电话：{{item.key_property?(item.key_property.party_emergency_contact_phone_b || '未填写'):'未填写'}}</p>
+            <p>合同编号：{{item.session_id.substring(item.session_id.length-12)}}</p>
+						<p>签署日期：{{item.signing_date_time.slice(0,10)}} {{item.signing_date_time.slice(11,19)}}</p>
 						<div class="btn_box">
 							<el-button @click="lookContract(item.session_id)" size="mini" type="success" round>查看合同</el-button>
 						</div>
@@ -81,7 +87,7 @@
 	</div>
 </div>
 <script>
-	var app = new Vue({
+	new Vue({
 		el: '#app',
 		data: {
       loading: false,
