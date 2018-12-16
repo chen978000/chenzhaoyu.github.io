@@ -280,7 +280,6 @@
                 return a
               })
             }
-
             if(data.cnode_type=='template' && data.price){
               that.$message.success('恭喜！合同创建成功')
               setTimeout(()=>{
@@ -352,6 +351,12 @@
               })
 							console.log(that.inputList)
 						}
+            if(data.cnode_type=='template' && data.price){
+              that.$message.success('恭喜！合同创建成功')
+              setTimeout(()=>{
+                window.location = `./yq_hetong.html`
+              },1500)
+            }
 					}
 				})
 			},
@@ -460,12 +465,13 @@
             }
             if(data.cnode_type=='word-template'){
               that.conAsk()
-              // that.$message.success('恭喜！合同创建成功')
-              // return
-							// setTimeout(()=>{
-							//   window.location = `./yq_hetong.html`
-							// },1500)
 						}
+            if(data.cnode_type=='template' && data.price){
+              that.$message.success('恭喜！合同创建成功')
+              setTimeout(()=>{
+                window.location = `./yq_hetong.html`
+              },1500)
+            }
           }
         })
       },
@@ -519,11 +525,13 @@
 											a.value = ''
 												return a
 										})
-
-                      console.log(that.inputList)
                   }
-
-
+                if(data.cnode_type=='template' && data.price){
+                  that.$message.success('恭喜！合同创建成功')
+                  setTimeout(()=>{
+                    window.location = `./yq_hetong.html`
+                  },1500)
+                }
               }
           })
       },
