@@ -158,12 +158,31 @@
         const localUrl = window.location.href;
         let code = getUrlKey('code');
         if(!code){
-          window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+ WX_APPID +'&redirect_uri='+ localUrl +'&response_type=code&scope=snsapi_userinfo#wechat_redirect'
+          window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+ WX_APPID +'&redirect_uri='+ localUrl +'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
+          // window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+ WX_APPID +'&redirect_uri='+ localUrl +'&response_type=code&scope=snsapi_userinfo#wechat_redirect'
           that.getCode()
         }else{
-          that.wxLogin(code)
+          // that.wxLogin(code)
           that.code = code
         }
+      },
+      // 获取openid
+      getOpenID(){
+        const that = this
+        ourNetwork({
+          type: 'post',
+          url: '/index.php/home/Wechat/login',
+          data:{
+            code: code
+          },
+          success:(res)=>{
+            const data = JSON.parse(res)
+            sessionStorage.setItem("wxInfo",data.data)
+          },
+          fail: function (res) {
+            that.wxInfo = res.error_message
+          }
+        })
       },
       // 微信登陆login
       wxLogin(code){
@@ -204,7 +223,6 @@
         const that = this
         network({
           params: {
-            // "email": "17852909766@netLaw.com"
           },
           path: `user?email=${that.phone}@netLaw.com`,
           method: 'get',
@@ -235,7 +253,11 @@
           success:function(res){
             const data = JSON.parse(res)
             if(data.error_code == 200){
-              window.location = './my.html'
+              if(that.sId){
+                window.location = './contract_1.html'
+              }else{
+                window.location = './my.html'
+              }
             }else{
               that.$message.error('登陆失败，请重试')
             }

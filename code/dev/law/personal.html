@@ -62,9 +62,9 @@
 					<span v-else class="three">北京</span>
 				</li>
 				<li class="third">
-					<a href="javascript:;">
+					<a href="javascript:;" @click="getCode">
 						微信号
-						<span @click="getCode">未绑定</span>
+						<span>未绑定</span>
 						<i class="iconfont">&#xe6d0;</i>
 					</a>
 				</li>
@@ -74,6 +74,7 @@
 						<i class="iconfont">&#xe6d0;</i>
 					</a>
 				</li>
+				{{wxInfo}}
 			</ul>
 		</div>
 	</section>
@@ -218,6 +219,8 @@
 			},
 			// 微信登陆login
 			wxLogin(code){
+        const that = this
+        that.wxInfo = 123
         ourNetwork({
           type: 'post',
           url: '/index.php/home/Wechat/login',
@@ -226,15 +229,16 @@
           },
           success:function(res){
             console.log(res)
-						this.wxInfo = res.data
-            this.blindWeiXin()
+            that.wxInfo = res
+            // that.blindWeiXin()
           },
           fail: function (res) {
+            that.wxInfo = res.data
           }
         })
 			},
       // 微信bind
-      blindWeiXin(code){
+      blindWeiXin(){
         const that = this
         ourNetwork({
           type: 'post',
