@@ -14,7 +14,26 @@
       width: 100%;
       padding: 0 20px;
     }
-  </style>
+		.no_box{
+			width: 100%;
+			padding: 0 20px;
+			text-align: right;
+			margin-bottom: 5px;
+		}
+		.contract_nav{
+			margin: 10px;
+			padding: 10px;
+			border: 1px solid #eee;
+		}
+		.contract_nav h2.western{
+			margin-top: 5px;
+			text-align: center;
+		}
+		.contract_nav p{
+			text-align: left;
+		}
+
+	</style>
 	<!-- 引入样式 -->
 	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 	<script src="js/vue.js" type="text/javascript"></script>
@@ -34,18 +53,8 @@
 			</div>
 		</header>
     <section>
-			<div class="already_text">
-				<div class="already_top">
-					<span>合同编号：{{sessionId.substring(sessionId.length-12)}}</span>
-					<!--<h1>{{doc.name}}</h1>-->
-				</div>
-			</div>
-      <!--<div class="word_title_box">-->
-        <!--{{doc.body?doc.body.summary:''}}-->
-      <!--</div>-->
+			<div class="no_box">合同编号：{{sessionId.substring(sessionId.length-12)}}</div>
 			<div class="contract_nav" v-html="htmlText">
-				<!--{{htmlText}}-->
-				<!--<iframe :srcdoc="htmlText" frameborder="0"></iframe>-->
 			</div>
 		</section>
 		<div class="enclosure public_ul">
@@ -95,7 +104,7 @@
 			mounted(){
 			  this.getId()
         this.getSession()
-				this.test()
+				this.lookFile()
 			},
 			methods:{
         // 判断是否有xid

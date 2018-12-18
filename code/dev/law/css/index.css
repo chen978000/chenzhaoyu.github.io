@@ -67,8 +67,6 @@
 .already_top{position: relative;padding-top: 40px;}
 .already_top span{font-size: 12px;color:#999;position: absolute;right: 0px;top:0px;}
 .already_top h1{text-align: center;font-size: 16px;color:#000;}
-.contract_nav{padding: 10px;}
-.contract_nav p{text-indent: 2em;color:#000;line-height: 24px;font-size: 14px;margin-bottom: 6px;}
 .enclosure{z-index: 100;position:fixed;width:100%;max-width:720px;margin:0 auto;height:56px;bottom:0;background:#f8f8f8;}
 .enclosure ul li.one{width: 25%;}
 .enclosure ul li.one i{color:#ff9058;}
