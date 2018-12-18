@@ -54,6 +54,7 @@
             <i class="iconfont">&#xe61b;</i>
             <p>微信</p>
           </a>
+          <div>{{wxInfo}}</div>
           <!--<a class="qq" href="#">-->
           <!--<i class="iconfont">&#xe61c;</i>-->
           <!--<p>QQ</p>-->
@@ -97,6 +98,7 @@
     },
     mounted(){
       this.getSessionId()
+      this.getCode()
     },
     methods:{
       //获取session_id
@@ -131,17 +133,19 @@
             that.loading = false
             const data = JSON.parse(res)
             if(data.error_code == 200){
+              that.token = data.data.token
               sessionStorage.setItem('token',data.data.token)
               that.$message.success('登录成功')
               if(!data.data.code_other_id){
                 that.getUserInfo()
               }else{
+                that.getWxInfo()
                 sessionStorage.setItem('xid',data.data.code_other_id)
-                if(that.sId){
-                  window.location = './contract_1.html'
-                } else {
-                  window.location = './my.html'
-                }
+                // if(that.sId){
+                //   window.location = './contract_1.html'
+                // } else {
+                //   window.location = './my.html'
+                // }
               }
             }else {
               that.$message.error('登录失败，请检查用户名和密码是否正确')
@@ -166,22 +170,25 @@
           that.code = code
         }
       },
-      // 获取openid
-      getOpenID(){
+      // 获取wxInfo
+      getWxInfo(){
         const that = this
+        that.wxInfo = 21212
         ourNetwork({
           type: 'post',
-          url: '/index.php/home/Wechat/login',
+          url: '/index.php/Home/V1/getWeixinInfo',
           data:{
-            code: code
+            code: that.code,
+            token: that.token
           },
           success:(res)=>{
+            that.wxInfo = res
             const data = JSON.parse(res)
-            sessionStorage.setItem("wxInfo",data.data)
+            // sessionStorage.setItem("wxInfo",data.data)
           },
-          fail: function (res) {
-            that.wxInfo = res.error_message
-          }
+          fail: (res)=> {
+            that.wxInfo = res
+          },
         })
       },
       // 微信登陆login
@@ -243,6 +250,7 @@
       // 更新用户xid
       upInfo(){
         const that = this;
+        that.getWxInfo()
         ourNetwork({
           type: 'post',
           url: '/index.php/home/V1/upInfo',
