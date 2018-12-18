@@ -132,83 +132,9 @@
               that.sessionId = data.doc[0].node.id
             }
           })
-          return false;
-          $.ajax({
-            type: "GET",
-            cache: false,
-            crossDomain: true,
-            contentType: 'application/json',
-            headers: {
-              'x-dc-uid': that.xid
-            },
-            url: `${HOST1}compute/${id}`,
-            dataType: 'json',
-            processData: false,
-            success:(res)=>{
-              that.loading = false
-              console.log(res);
-              that.doc = res.doc[0].node
-              that.sessionId = res.doc[0].node.id
-            },
-            fail:(res)=>{
-              that.loading = false
-            }
-          });
         },
         // 预览
         lookFile(){
-          const that = this;
-          const id = getUrlKey('id')
-          that.loading = true
-          network({
-            params: {
-              "state": 'paid'
-            },
-            path: `compute/${id}`,
-            method: 'get',
-            head: [
-              "Content-Type: application/json",
-              `x-dc-uid: ${that.xid}`
-            ],
-            success: function (e) {
-              that.loading = false
-              const data = JSON.parse(e);
-              console.log(data);
-              that.doc = data.doc[0].node
-              that.sessionId = data.doc[0].node.id
-            }
-          })
-          return false;
-          $.ajax({
-            type: "GET",
-            cache: false,
-            crossDomain: true,
-            contentType: 'application/json',
-            headers: {
-              'x-dc-uid': that.xid
-            },
-            url: `${HOST1}session/${id}/download?type='html'`,
-            dataType: 'binary',
-            processData: false,
-            success: function(result) {
-              that.loading = false
-              var url = URL.createObjectURL(result);
-              var $a = $('<a />', {
-                'href': url,
-                'download': 'contract.html',
-                'text': "click"
-              }).hide().appendTo("body")[0].click();
-              setTimeout(function() {
-                URL.revokeObjectURL(url);
-              }, 10000);
-            },
-            fail:(res)=>{
-              that.loading = false
-            }
-          });
-        },
-        //下载
-        test(){
           const that = this;
           const id = getUrlKey('id')
           that.loading = true
@@ -220,9 +146,6 @@
             headers: {
               'x-dc-uid': that.xid
             },
-            // beforeSend: function(xhr) {
-            //   xhr.setRequestHeader("x-dc-uid", that.xid);
-            // },
             url: `${HOST1}session/${id}/download?doc_type=html`,
             dataType: 'binary',
             processData: false,
@@ -231,20 +154,8 @@
               var reader = new FileReader();
               reader.readAsText(result);
               reader.addEventListener("loadend", function() {
-                // reader.result 包含转化为类型数组的blob
-
-                console.log(1,reader.result)
                 that.htmlText = reader.result
               });
-              // var url = URL.createObjectURL(result);
-              // var $a = $('<a />', {
-              //   'href': url,
-              //   'download': 'contract.docx',
-              //   'text': "click"
-              // }).hide().appendTo("body")[0].click();
-              // setTimeout(function() {
-              //   URL.revokeObjectURL(url);
-              // }, 10000);
             },
             fail:(res)=>{
               that.loading = false
