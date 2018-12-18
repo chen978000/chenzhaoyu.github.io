@@ -127,6 +127,9 @@
 							that.oldPassword = ''
 							that.newPassword = ''
 							that.againPassword = ''
+							setTimeout(()=>{
+							  window.location = './login.html'
+							},1500)
             }else {
               that.$message.error('修改失败')
             }
