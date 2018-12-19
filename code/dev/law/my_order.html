@@ -35,7 +35,7 @@
 <div id="app">
   <header class="other_header">
     <div class="head_box">
-      <a href="javascript:void(0);" onclick="goBack()" class="head_left"><i class="iconfont">&#xe6d9;</i></a>
+      <a href="./my_data.html" class="head_left"><i class="iconfont">&#xe6d9;</i></a>
       <span>我的订单</span>
       <a href="" class="head_right"></a>
     </div>
@@ -56,7 +56,15 @@
         </li>
       </ul>
     </div>
-    <!--{{testData}}-->
+    <div>
+      创建订单：{{createData}}
+    </div>
+    <div>
+      获取支付地址：{{urlData}}
+    </div>
+    <div>
+      获取支付信息：{{testData}}
+    </div>
     <div class="all_load_box">已加载全部</div>
 
   </section>
@@ -94,6 +102,8 @@
         session_id: '',
         code: '',
         testData: '',
+        createData: '',
+        urlData: '',
         localUrl: ''
       }
     },
@@ -113,9 +123,9 @@
             window.location = './login.html'
           },1500)
         }
-        if(!that.code){
-          that.getCode()
-        }
+        // if(!that.code){
+        //   that.getCode()
+        // }
       },
       // 获取合同列表
       getList(){
@@ -204,10 +214,9 @@
       //创建付款订单
       creatOrder(id,price){
         const that = this;
-        if(!that.code){
-          that.getCode()
-        }
-        alert(that.code)
+        // if(!that.code){
+        //   that.getCode()
+        // }
         ourNetwork({
           method: 'post',
           url: '/index.php/home/V1/creatOrder',
@@ -215,10 +224,11 @@
             token: that.token,
             session_id: id,
             price: price,
-            code: that.code
+            // code: that.code
           },
           success:function(res){
             const data = JSON.parse(res);
+            that.createData = data
             if(data.error_code == 200){
               that.order_sn = data.data.order_sn
               that.wxPay()
@@ -227,6 +237,7 @@
             }
           },
           fail: function (res) {
+            that.createData = res
             that.loading = false
           }
         })
@@ -240,12 +251,14 @@
           data:{
             token: that.token,
             order_sn: that.order_sn,
-            code: that.code
+            // code: that.code
           },
           success:(res)=>{
             that.getPayInfo(res)
+            that.urlData = res
           },
           fail: function (res) {
+            that.urlData = res
           }
         })
       },
@@ -257,11 +270,11 @@
           url: res,
           success:(result)=>{
             const data = JSON.parse(result);
+            that.tes3tData = data
             that.onBridgeReady(data.data)
-            // that.testData = data
           },
           fail: function (res) {
-            // that.testData = res
+            that.testData = res
           }
         })
       },
