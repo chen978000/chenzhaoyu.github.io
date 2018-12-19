@@ -13,6 +13,7 @@
   <script src="js/vue.js" type="text/javascript"></script>
   <script src="js/util.js" type="text/javascript"></script>
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
 <script src="js/jquery.js" type="text/javascript"></script>
 <script src="js/my.js" type="text/javascript"></script>
 <title>登录</title>
@@ -98,7 +99,7 @@
     },
     mounted(){
       this.getSessionId()
-      this.getCode()
+      // this.getCode()
     },
     methods:{
       //获取session_id
@@ -141,11 +142,11 @@
               }else{
                 that.getWxInfo()
                 sessionStorage.setItem('xid',data.data.code_other_id)
-                // if(that.sId){
-                //   window.location = './contract_1.html'
-                // } else {
-                //   window.location = './my.html'
-                // }
+                if(that.sId){
+                  window.location = './contract_1.html'
+                } else {
+                  window.location = './my.html'
+                }
               }
             }else {
               that.$message.error('登录失败，请检查用户名和密码是否正确')

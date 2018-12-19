@@ -86,7 +86,8 @@
 										type="date"
 										placeholder="选择日期">
 						</el-date-picker>
-						<input v-if="item.type!=='date'&&item.type!=='sex'" class="fill_input" :id="'text'+index" :type="item.type=='phone_number'?'number':item.type=='id'?'number':item.type=='number'?'number':item.type=='integer'?'number':'text'" v-model="item.value" />
+						<input v-if="item.type!=='date'&&item.type!=='sex'" class="fill_input" :id="'text'+index"
+									 :type="(item.type=='phone_number' || item.type=='currency' || item.type=='day' || item.type=='id' || item.type=='number' || item.type=='integer' || item.type=='month')?'number':item.type=='email'?'email':'text'" v-model="item.value" />
 						<span>{{item.unit}}</span>
 					</div>
 				</div>
@@ -351,10 +352,10 @@
               })
 							console.log(that.inputList)
 						}
-            if(data.cnode_type=='template' && data.price){
+            if(data.state==1 && data.price){
               that.$message.success('恭喜！合同创建成功')
               setTimeout(()=>{
-                window.location = `./yq_hetong.html`
+                window.location = `./my_order.html`
               },1500)
             }
 					}
@@ -466,10 +467,10 @@
             if(data.cnode_type=='word-template'){
               that.conAsk()
 						}
-            if(data.cnode_type=='template' && data.price){
+            if(data.state==1 && data.price){
               that.$message.success('恭喜！合同创建成功')
               setTimeout(()=>{
-                window.location = `./yq_hetong.html`
+                window.location = `./my_order.html`
               },1500)
             }
           }
@@ -526,10 +527,10 @@
 												return a
 										})
                   }
-                if(data.cnode_type=='template' && data.price){
+                if(data.state==1 && data.price){
                   that.$message.success('恭喜！合同创建成功')
                   setTimeout(()=>{
-                    window.location = `./yq_hetong.html`
+                    window.location = `./my_order.html`
                   },1500)
                 }
               }
