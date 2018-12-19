@@ -19,13 +19,14 @@ const WX_APPID = 'wx9d23592158f26c2f'
  * @param data
  * @param success
  */
-function ourNetwork({method,url,data,success,fail}) {
+function ourNetwork({method,url,data,success,fail,complete}) {
   $.ajax({
     type: method,
     url: HOST+url,
     data: data,
     success: success,
-    fail: fail
+    fail: fail,
+    complete: complete
   })
 }
 
