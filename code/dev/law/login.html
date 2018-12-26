@@ -55,7 +55,7 @@
             <i class="iconfont">&#xe61b;</i>
             <p>微信</p>
           </a>
-          <div>{{wxInfo}}</div>
+          <!--<div>{{code}}</div>-->
           <!--<a class="qq" href="#">-->
           <!--<i class="iconfont">&#xe61c;</i>-->
           <!--<p>QQ</p>-->
@@ -99,7 +99,8 @@
     },
     mounted(){
       this.getSessionId()
-      // this.getCode()
+      // this.getWxConfig()
+      this.getCode()
     },
     methods:{
       //获取session_id
@@ -110,6 +111,44 @@
         if(id){
           localStorage.setItem('sId',id)
         }
+      },
+      // 获取微信config
+      getWxConfig(){
+        const that = this
+        ourNetwork({
+          type: 'get',
+          url: '/index.php/home/Wechat/jsConfig',
+          data:{
+            // code: that.code,
+            // token: that.token
+          },
+          success:(res)=>{
+            const data = JSON.parse(res)
+            console.log(data);
+            wx.config({
+              debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+              appId: data.appid, // 必填，公众号的唯一标识
+              timestamp: data.timestamp, // 必填，生成签名的时间戳
+              nonceStr: data.noncestr, // 必填，生成签名的随机串
+              signature: data.signature,// 必填，签名
+              jsApiList: data.jsApiList // 必填，需要使用的JS接口列表
+            })
+            wx.ready(()=>{
+              wx.onMenuShareTimeline({//分享到朋友圈
+                title: '你好', // 分享标题
+                link: 'law.8xcms.com/web/law/login.html', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: '', // 分享图标
+                success: function() {
+                  // 用户点击了分享后执行的回调函数
+                }
+              });
+            })
+          },
+          fail: (res)=> {
+          },
+          complete: (res)=>{
+          }
+        })
       },
       // 登陆
       login(){
@@ -163,8 +202,8 @@
         const localUrl = window.location.href;
         let code = getUrlKey('code');
         if(!code){
-          window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+ WX_APPID +'&redirect_uri='+ localUrl +'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
-          // window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+ WX_APPID +'&redirect_uri='+ localUrl +'&response_type=code&scope=snsapi_userinfo#wechat_redirect'
+          // window.location.href = 'https://open.weixin.qq.com/connect/qrconnect?appid='+ WX_APPID +'&redirect_uri='+ localUrl +'&response_type=code&scope=snsapi_login#wechat_redirect'
+          window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+ WX_APPID +'&redirect_uri='+ localUrl +'&response_type=code&scope=snsapi_userinfo#wechat_redirect'
           that.getCode()
         }else{
           // that.wxLogin(code)
