@@ -56,15 +56,15 @@
         </li>
       </ul>
     </div>
-    <div>
-      创建订单：{{createData}}
-    </div>
-    <div>
-      获取支付地址：{{urlData}}
-    </div>
-    <div>
-      获取支付信息：{{testData}}
-    </div>
+    <!--<div>-->
+      <!--创建订单：{{createData}}-->
+    <!--</div>-->
+    <!--<div>-->
+      <!--获取支付地址：{{urlData}}-->
+    <!--</div>-->
+    <!--<div>-->
+      <!--获取支付信息：{{testData}}-->
+    <!--</div>-->
     <div class="all_load_box">已加载全部</div>
 
   </section>
@@ -123,9 +123,9 @@
             window.location = './login.html'
           },1500)
         }
-        // if(!that.code){
-        //   that.getCode()
-        // }
+        if(!that.code){
+          that.getCode()
+        }
       },
       // 获取合同列表
       getList(){
@@ -214,9 +214,9 @@
       //创建付款订单
       creatOrder(id,price){
         const that = this;
-        // if(!that.code){
-        //   that.getCode()
-        // }
+        if(!that.code){
+          that.getCode()
+        }
         ourNetwork({
           method: 'post',
           url: '/index.php/home/V1/creatOrder',
@@ -224,7 +224,7 @@
             token: that.token,
             session_id: id,
             price: price,
-            // code: that.code
+            code: that.code
           },
           success:function(res){
             const data = JSON.parse(res);
@@ -251,7 +251,7 @@
           data:{
             token: that.token,
             order_sn: that.order_sn,
-            // code: that.code
+            code: that.code
           },
           success:(res)=>{
             that.getPayInfo(res)
