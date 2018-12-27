@@ -169,7 +169,7 @@
               success: function (e) {
                 that.loading = false;
                 const data = JSON.parse(e);
-                console.log(data)
+                console.log(123,data)
                 that.list = data.cnode_body
                 sessionStorage.setItem('question_id',data.cnode_id)
                 console.log(that.list)

@@ -166,6 +166,7 @@
         index: '',
         xid1: '',
         xid2: '',
+        question_id: '',
         quetion: '',
         choices: [],
         inputList:[],
@@ -293,20 +294,23 @@
       //获取问题
       getQA(){
         const that = this
+				console.log(1231)
         const session_id = sessionStorage.getItem('session_id')
-        const question_id = sessionStorage.getItem('question_id')
+				if(!that.question_id){
+          that.question_id = sessionStorage.getItem('question_id')
+        }
         const index = that.index
 				const xid = (that.party===1?that.xid1:that.xid2)
         that.loading = true
 				let arguments = {}
 				if(that.isSingle){
           arguments = {
-            question_id: question_id,
+            question_id: that.question_id,
             choice_indexes: [index] || [' ']
 					}
 				}else{
           arguments = {
-            question_id: question_id,
+            question_id: that.question_id,
             choice_index: index || ' ',
           }
 				}
@@ -328,6 +332,7 @@
               window.location='./my.html'
               return
             }
+            that.question_id = data.cnode_id
             that.quetion = data.cnode_body.text;
             that.choices = data.cnode_body.choices;
 						that.cnode_type = data.cnode_type;
@@ -409,14 +414,16 @@
       fillin(answers){
         const that = this;
         const session_id = sessionStorage.getItem('session_id')
-        const question_id = sessionStorage.getItem('question_id')
+        if(!that.question_id){
+          that.question_id = sessionStorage.getItem('question_id')
+        }
         const xid = (that.party===1?that.xid1:that.xid2)
 				console.log(xid)
         that.loading = true
         network({
           params: {
               "arguments": {
-                  question_id: question_id,
+                  question_id: that.question_id,
                   answers: answers
               }
           },
@@ -430,6 +437,7 @@
             that.loading = false
             const data = JSON.parse(e);
             console.log(data)
+            that.question_id = data.cnode_id
             that.quetion = data.cnode_body.text;
             that.choices = data.cnode_body.choices;
             that.cnode_type = data.cnode_type;
@@ -480,14 +488,16 @@
       duoxuan(){
         const that = this
         const session_id = sessionStorage.getItem('session_id')
-        const question_id = sessionStorage.getItem('question_id')
+				if(!that.question_id){
+          const question_id = sessionStorage.getItem('question_id')
+        }
         const xid = (that.party===1?that.xid1:that.xid2)
 				console.log(xid)
         that.loading = true
         network({
               params: {
                   "arguments": {
-                      question_id: question_id,
+                      question_id: that.question_id,
                       choice_indexes: that.multiList
                   }
               },
@@ -505,7 +515,8 @@
                       window.location='./my.html'
                       return
                   }
-                  that.quetion = data.cnode_body.text;
+                that.question_id = data.cnode_id
+                that.quetion = data.cnode_body.text;
                   that.choices = data.cnode_body.choices;
                   that.cnode_type = data.cnode_type;
 									if(data.cnode_type && data.cnode_body.single_choice){
@@ -677,7 +688,9 @@
       partyAsk(){
         const that = this
         const session_id = sessionStorage.getItem('session_id')
-        const question_id = sessionStorage.getItem('question_id')
+				if(!that.question_id){
+          const question_id = sessionStorage.getItem('question_id')
+        }
         const xid = (that.party===1?that.xid1:that.xid2)
         that.loading = true
         network({
@@ -749,7 +762,9 @@
       contract(){
         const that = this
         const session_id = sessionStorage.getItem('session_id')
-        const question_id = sessionStorage.getItem('question_id')
+				if(!that.question_id){
+          const question_id = sessionStorage.getItem('question_id')
+        }
         that.loading = true
         network({
           params: {

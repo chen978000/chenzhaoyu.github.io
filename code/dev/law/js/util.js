@@ -39,7 +39,7 @@ function ourNetwork({method,url,data,success,fail,complete}) {
  * @param head
  * @param complete
  */
-function network({params,path,method,head,success}) {
+function network({params,path,method,head,dataType,success}) {
     $.ajax({
         type:"post",
         url: URL1,
@@ -49,6 +49,7 @@ function network({params,path,method,head,success}) {
             type: method,
             header: head,
         },
+        dataType: dataType,
         ContentType: "Application/JSON",
         success: success
     })

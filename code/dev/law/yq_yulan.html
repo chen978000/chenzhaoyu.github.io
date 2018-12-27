@@ -147,6 +147,29 @@
           const that = this;
           const id = getUrlKey('id')
           that.loading = true
+          network({
+            params: {
+              "state": 'paid'
+            },
+            path: `session/${id}/download?doc_type=html`,
+            method: 'get',
+            head: [
+              "Content-Type: application/html",
+              `x-dc-uid: ${that.xid}`
+            ],
+            dataType: 'binary',
+            success: function (e) {
+              that.loading = false
+              // const data = JSON.parse(e);
+              that.loading = false
+              var reader = new FileReader();
+              reader.readAsText(e);
+              reader.addEventListener("loadend", function() {
+                that.htmlText = reader.result
+              });
+            }
+          })
+					return;
           $.ajax({
             type: "GET",
             cache: false,
