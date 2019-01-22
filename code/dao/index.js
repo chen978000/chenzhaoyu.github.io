@@ -91,15 +91,15 @@ var app = new Vue({
     },
     goWallet:function(){
       // 回调方法
-      window.android.openWallet();
+      alert('功能未开放')
     },
     goTask:function(){
       // 回调方法
-      window.android.openTask();
+      alert('功能未开放')
     },
     goInviting:function(){
       // 回调方法
-      window.android.openInviting();
+      alert('功能未开放')
     }
   }
 })
