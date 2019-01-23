@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>修道</title>
+  <title>炼丹</title>
   <link rel="stylesheet" href="index.css">
   <script type="text/javascript" src="https://unpkg.com/vue"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -16,7 +16,7 @@
       <!-- 显示算力区域 -->
       <div class="text-center">
         <div class="force">
-          <span>当前修道值 +{{count}}</span>
+          <span>当前元气值 +{{count}}</span>
           <i class="coin"></i>
         </div>
       </div>
@@ -28,13 +28,13 @@
         </div>
 
         <div class="mine-item topTobottom-1 mine-item-loading">
-          <i class="operation loading"></i><p>正在修道中</p>
+          <i class="operation loading"></i><p>正在炼丹中</p>
         </div>
       </div>
       <div id="foot" class="foot">
         <ul class="foot-ul">
-          <li><i @click="goWallet" class="operation operation-icon-1"></i><p>道行</p></li>
-          <li><i @click="goTask" class="operation operation-icon-2"></i><p>提升道力</p></li>
+          <li><i @click="goWallet" class="operation operation-icon-1"></i><p>丹房</p></li>
+          <li><i @click="goTask" class="operation operation-icon-2"></i><p>提升元气</p></li>
           <li><i @click="goInviting" class="operation operation-icon-3"></i><p>邀请道友</p></li>
         </ul>
       </div>
