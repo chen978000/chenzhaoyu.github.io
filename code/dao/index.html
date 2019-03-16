@@ -5,7 +5,182 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>炼丹</title>
-  <link rel="stylesheet" href="index.css">
+  <style>
+    /* 动画 */
+    @keyframes topTobottom
+    {
+      0%   {transform:translate(0,0)}
+      50%  {transform:translate(0,6px)}
+      100% {transform:translate(0,0)}
+    }
+
+    @-moz-keyframes topTobottom /* Firefox */
+    {
+      0%   {transform:translate(0,0)}
+      50%  {transform:translate(0,6px)}
+      100% {transform:translate(0,0)}
+    }
+
+    @-webkit-keyframes topTobottom /* Safari 和 Chrome */
+    {
+      0%   {transform:translate(0,0)}
+      50%  {transform:translate(0,6px)}
+      100% {transform:translate(0,0)}
+    }
+
+    @-o-keyframes topTobottom /* Opera */
+    {
+      0%   {transform:translate(0,0)}
+      50%  {transform:translate(0,6px)}
+      100% {transform:translate(0,0)}
+    }
+
+    @keyframes toHide
+    {
+      from {}
+      to {left:1rem;bottom:1rem}
+    }
+    html,body{
+      margin: 0;
+      padding: 0;
+    }
+    ul,li{
+      padding:0;
+      margin:0;
+      list-style:none;
+    }
+    p{
+      margin: 0;
+    }
+    .hide{
+      visibility: hidden;
+    }
+    .container{
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      background: url('images/back2.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
+    .text-center{
+      text-align: center;
+    }
+    .force{
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      background: #0c2778;
+      border: 1px solid #4c7cca;
+      font-size: 1.4rem;
+      display: inline-block;
+      border-radius: 4px;
+      margin-top: 8rem;
+    }
+    .coin{
+      display: inline-block;
+      width: 1.4rem;
+      height: 1.2rem;
+      background: url('images/coin.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      vertical-align: -0.11rem;
+    }
+    .content{
+      /* position: relative; */
+      height: calc(100% - 20rem);
+    }
+    .mine-item{
+      text-align: center;
+      color: #fff;
+      display: inline-block;
+      position: absolute;
+      z-index: 3;
+      transition-property: all;
+      transition-duration: 2s;
+      transition-timing-function: ease-out;
+    }
+    .topTobottom{
+      animation-name: topTobottom;
+      animation-duration: 3s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    .topTobottom-1{
+      animation-name: topTobottom;
+      animation-duration: 3s;
+      animation-timing-function: linear;
+      animation-delay:1s;
+      animation-iteration-count: infinite;
+    }
+    .toHide{
+      animation: toHide;
+      animation-duration: 3s;
+      animation-timing-function: linear;
+      animation-iteration-count: 1;
+    }
+    .mine-item-loading{
+      left: 50%;
+      top: 50%;
+      margin-left: -3rem;
+      margin-top: -4rem;
+      z-index: 1;
+    }
+    .mine-item > p {
+      font-size: 1.4rem;
+      /* width: 4.3rem;
+      overflow: hidden; */
+    }
+    .mine-item-loading > p{
+      width: auto;
+    }
+    .mine{
+      background: url('images/coin-1.png');
+    }
+    .loading{
+      background: url('images/coin-2.png');
+    }
+    .foot{
+      position: absolute;
+      bottom: 1rem;
+      width: 100%;
+    }
+    .foot-ul li{
+      display: inline-block;
+      margin: 0 1rem;
+      text-align: center;
+      color: #fff;
+    }
+    .foot-ul li:last-child{
+      float: right;
+    }
+    .operation-icon-1{
+      background: url('images/icon-1.png');
+    }
+    .operation-icon-2{
+      background: url('images/icon-2.png');
+    }
+    .operation-icon-3{
+      background: url('images/icon-3.png');
+    }
+    .operation{
+      display: inline-block;
+      width: 4.3rem;
+      height: 4.3rem;
+      margin-bottom: 0.5rem;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .foot-ul li p{
+      font-size: 1.2rem;
+    }
+    .inline-block{
+      display: inline-block;
+    }
+  </style>
   <script type="text/javascript" src="https://unpkg.com/vue"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
@@ -40,6 +215,98 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript" src="index.js"></script>
+  <script type="text/javascript" src="rem.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        count: 0,
+        width:docEl.clientWidth,
+        height:docEl.clientHeight,
+        list:[]
+      },
+      computed: {
+        getList: function () {
+          var boxWidth = document.getElementById('content').clientWidth;
+          var boxHeight = document.getElementById('content').clientHeight;
+          var top_1 = docEl.clientHeight-document.getElementById('foot').offsetTop;
+          var top_2 = docEl.clientHeight-document.getElementById('content').offsetTop;
+          var fontsize = parseFloat(docEl.style.fontSize.split('px')[0]);
+          this.list.forEach(function(item,index){
+            var site = Math.random();
+            var site_1 = Math.random();
+            if(item.currencyName!='eth'){
+              if(item.amount>10000){
+                item.amount = (item.amount/10000).toFixed(2)+'W'
+              }else if(item.amount>1000){
+                item.amount = (item.amount/1000).toFixed(2)+'K'
+              }else {
+                item.amount = item.amount.toFixed(2)
+              }
+            }
+            // 很随便的位置随机，可以自己修改
+            item.style = {
+              left:site*boxWidth+(7*fontsize)<boxWidth?site*boxWidth+'px':site*boxWidth-(7*fontsize)-100+'px',
+              bottom:site_1*boxHeight+(8*fontsize)+top_1<top_2?site_1*boxHeight+top_1+'px':site_1*boxHeight+top_1-200+'px'
+            };
+          })
+          return this.list;
+        }
+      },
+      created:function(){
+        //可以接后台数据
+        var init_data = [
+          {
+            amount:10
+          },
+          {
+            amount:100000
+          },
+          {
+            amount:1021
+          },
+          {
+            amount:101
+          },
+          {
+            amount:102
+          },
+        ]
+        init_data.forEach(function(item,index){
+          item.style = {
+            left:0,
+            top:0
+          }
+        })
+        this.list = init_data;
+      },
+      methods:{
+        collect:function(item,index,e){
+          var width = e.currentTarget.offsetWidth;
+          var size = 10 * (docEl.clientWidth / 360);
+          var toleft = 1-(width/size-4.3)/2+'rem';
+          var x = document.getElementById("myaudio");
+          var _this = this;
+          x.play();
+          _this.list[index].style = {left:toleft,bottom:'1rem'};
+          setTimeout(function(){
+            _this.list[index].style = {display:'none'}
+          },2000)
+        },
+        goWallet:function(){
+          // 回调方法
+          alert('功能未开放')
+        },
+        goTask:function(){
+          // 回调方法
+          alert('功能未开放')
+        },
+        goInviting:function(){
+          // 回调方法
+          alert('功能未开放')
+        }
+      }
+    })
+  </script>
 </body>
 </html>
