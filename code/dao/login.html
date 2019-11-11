@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>开启丹房</title>
+  <style>
+    html,body{
+      margin: 0;
+      padding: 0;
+    }
+    ul,li{
+      padding:0;
+      margin:0;
+      list-style:none;
+    }
+    p{
+      margin: 0;
+    }
+    .hide{
+      visibility: hidden;
+    }
+    .container{
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      background: url('images/login_back.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login_box{
+      width: 30rem;
+      height: 30rem;
+      background: rgba(255,255,255,0.3);
+      border-radius: 2rem;
+      padding: 2rem;
+    }
+    .login_title_box{
+      width: 100%;
+      text-align: center;
+      font-weight: 600;
+      font-size: 2rem;
+      color: #555;
+    }
+    .login_input{
+      /*height: 2rem !important;*/
+      /*line-height: 2rem !important;*/
+      margin-top: 2rem;
+      font-size: 1.5rem !important;
+    }
+    .login_input .el-input__inner{
+      height: 3.5rem !important;
+      line-height: 3.5rem !important;
+    }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script type="text/javascript" src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="rem.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div class="container">
+      <div class="login_box">
+        <div class="login_title_box">请登录</div>
+        <el-input class="login_input" v-model="name" placeholder="请输入账号"></el-input>
+        <el-input class="login_input" placeholder="请输入密码" v-model="password" show-password></el-input>
+      </div>
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        name: '',
+        password: ''
+      },
+    })
+  </script>
+</body>
+</html>
