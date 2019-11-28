@@ -93,7 +93,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "5426dc94873b21caefa3";
+/******/ 	var hotCurrentHash = "2d6dc1c6dd3df1d27f03";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -884,7 +884,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/";
+/******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// on error function for async loading
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
@@ -5723,7 +5723,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _rou
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.runtime.esm.js\");\n/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ \"./node_modules/vue-router/dist/vue-router.esm.js\");\n/* harmony import */ var _indexRouters__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./indexRouters */ \"./src/router/indexRouters.js\");\n\n\n\nvue__WEBPACK_IMPORTED_MODULE_0__[\"default\"].use(vue_router__WEBPACK_IMPORTED_MODULE_1__[\"default\"]); // 合并所有的路由\n\nfunction getRouters() {\n  return _indexRouters__WEBPACK_IMPORTED_MODULE_2__[\"default\"];\n}\n\nvar router = new vue_router__WEBPACK_IMPORTED_MODULE_1__[\"default\"]({\n  mode: 'hash',\n  // mode: 'history',\n  // history: true,\n  base: \"/\",\n  routes: getRouters()\n});\n/* harmony default export */ __webpack_exports__[\"default\"] = (router);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvcm91dGVyL2luZGV4LmpzLmpzIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vc3JjL3JvdXRlci9pbmRleC5qcz9hMThjIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBWdWUgZnJvbSAndnVlJ1xyXG5pbXBvcnQgUm91dGVyIGZyb20gJ3Z1ZS1yb3V0ZXInXHJcbmltcG9ydCBJbmRleFJvdXRlcnMgZnJvbSAnLi9pbmRleFJvdXRlcnMnXHJcblxyXG5WdWUudXNlKFJvdXRlcilcclxuXHJcbi8vIOWQiOW5tuaJgOacieeahOi3r+eUsVxyXG5mdW5jdGlvbiBnZXRSb3V0ZXJzKCkge1xyXG4gICAgcmV0dXJuIEluZGV4Um91dGVyc1xyXG59XHJcbmNvbnN0IHJvdXRlciA9IG5ldyBSb3V0ZXIoe1xyXG4gICAgbW9kZTogJ2hhc2gnLFxyXG4gICAgLy8gbW9kZTogJ2hpc3RvcnknLFxyXG4gICAgLy8gaGlzdG9yeTogdHJ1ZSxcclxuICAgIGJhc2U6IHByb2Nlc3MuZW52LkJBU0VfVVJMLFxyXG4gICAgcm91dGVzOiBnZXRSb3V0ZXJzKClcclxufSlcclxuXHJcbmV4cG9ydCBkZWZhdWx0IHJvdXRlcjsiXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFDQTtBQUNBO0FBRUE7QUFDQTtBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBTEE7QUFRQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/router/index.js\n");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.runtime.esm.js\");\n/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ \"./node_modules/vue-router/dist/vue-router.esm.js\");\n/* harmony import */ var _indexRouters__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./indexRouters */ \"./src/router/indexRouters.js\");\n\n\n\nvue__WEBPACK_IMPORTED_MODULE_0__[\"default\"].use(vue_router__WEBPACK_IMPORTED_MODULE_1__[\"default\"]); // 合并所有的路由\n\nfunction getRouters() {\n  return _indexRouters__WEBPACK_IMPORTED_MODULE_2__[\"default\"];\n}\n\nvar router = new vue_router__WEBPACK_IMPORTED_MODULE_1__[\"default\"]({\n  mode: 'hash',\n  // mode: 'history',\n  // history: true,\n  base: \"\",\n  routes: getRouters()\n});\n/* harmony default export */ __webpack_exports__[\"default\"] = (router);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvcm91dGVyL2luZGV4LmpzLmpzIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vc3JjL3JvdXRlci9pbmRleC5qcz9hMThjIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBWdWUgZnJvbSAndnVlJ1xyXG5pbXBvcnQgUm91dGVyIGZyb20gJ3Z1ZS1yb3V0ZXInXHJcbmltcG9ydCBJbmRleFJvdXRlcnMgZnJvbSAnLi9pbmRleFJvdXRlcnMnXHJcblxyXG5WdWUudXNlKFJvdXRlcilcclxuXHJcbi8vIOWQiOW5tuaJgOacieeahOi3r+eUsVxyXG5mdW5jdGlvbiBnZXRSb3V0ZXJzKCkge1xyXG4gICAgcmV0dXJuIEluZGV4Um91dGVyc1xyXG59XHJcbmNvbnN0IHJvdXRlciA9IG5ldyBSb3V0ZXIoe1xyXG4gICAgbW9kZTogJ2hhc2gnLFxyXG4gICAgLy8gbW9kZTogJ2hpc3RvcnknLFxyXG4gICAgLy8gaGlzdG9yeTogdHJ1ZSxcclxuICAgIGJhc2U6IHByb2Nlc3MuZW52LkJBU0VfVVJMLFxyXG4gICAgcm91dGVzOiBnZXRSb3V0ZXJzKClcclxufSlcclxuXHJcbmV4cG9ydCBkZWZhdWx0IHJvdXRlcjsiXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFDQTtBQUNBO0FBRUE7QUFDQTtBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBTEE7QUFRQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/router/index.js\n");
 
 /***/ }),
 
