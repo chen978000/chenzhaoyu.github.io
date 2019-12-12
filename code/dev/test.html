@@ -331,13 +331,14 @@
     $('.user_sex').click(function () {
       var picker = new mui.PopPicker();
       picker.setData([
-        {value:'1',text:'智子'},
-        {value:'2',text:'hhh'},
+        {value:'1',text:'男'},
+        {value:'2',text:'女'},
 
       ]);
       picker.show(function (selectItems) {
-        console.log(selectItems[0].text);//智子
-        console.log(selectItems[0].value);//zz
+        console.log(selectItems[0].value);
+        $('.user_sex').val(selectItems[0].text);
+        $('.user_sex').attr('value',selectItems[0].value);
       })
     })
 
