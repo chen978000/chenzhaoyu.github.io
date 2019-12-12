@@ -43,24 +43,25 @@
     </li>
     <li>
       <p>性别</p>
-      <a href="#sex"><input type="text" placeholder="如：男" class="mui-input" readonly/><input type="hidden"
-                                                                                             name="user_sex"
-                                                                                             id="hbHunyin"/></a>
+      <a href="#sex">
+        <input type="text" placeholder="如：男" class="mui-input user_sex" readonly/>
+        <!--<input type="hidden" name="user_sex" id="hbHunyin"/>-->
+      </a>
     </li>
     <div id="sex" class="mui-popover mui-popover-action mui-popover-bottom">
-      <!--<ul class="mui-table-view">-->
-        <!--<li class="mui-table-view-cell">-->
-          <!--<a href="javascript:;" data-value="1">男</a>-->
-        <!--</li>-->
-        <!--<li class="mui-table-view-cell">-->
-          <!--<a href="javascript:;" data-value="2">女</a>-->
-        <!--</li>-->
-      <!--</ul>-->
-      <!--<ul class="mui-table-view">-->
-        <!--<li class="mui-table-view-cell">-->
-          <!--<a href="#forward">取消</a>-->
-        <!--</li>-->
-      <!--</ul>-->
+      <ul class="mui-table-view">
+        <li class="mui-table-view-cell">
+          <a href="javascript:;" data-value="1" onclick="$('.user_sex').val('1')">男</a>
+        </li>
+        <li class="mui-table-view-cell">
+          <a href="javascript:;" data-value="2">女</a>
+        </li>
+      </ul>
+      <ul class="mui-table-view">
+        <li class="mui-table-view-cell">
+          <a href="#forward">取消</a>
+        </li>
+      </ul>
     </div>
     <li>
       <p>出生日期</p>
@@ -299,16 +300,6 @@
 <script>
   $(function () {
     $(".reg-p span").html($("#form").height());
-    $('#sex').picker({
-      title: "请选择开户行",
-      inputReadOnly: false,
-      cols: [
-        {
-          textAlign: 'center',
-          values: ['男', '女']
-        }
-      ]
-    });
 
     var city = new LightBox();
     $("#subBtn").click(function () {
