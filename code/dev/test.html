@@ -96,29 +96,31 @@
     </li>
     <li>
       <p>婚姻状况</p>
-      <a href="#user_marry"><input type="text" placeholder="如：保密" class="mui-input" readonly/><input type="hidden"
-                                                                                                     name="user_marry"
-                                                                                                     class="user_marry"
-                                                                                                     id="hbHunyin"/></a>
+      <input type="text" name="user_marry" placeholder="如：保密" class="mui-input user_marry" readonly/>
+
+      <!--<a href="#user_marry"><input type="text" placeholder="如：保密" class="mui-input" readonly/><input type="hidden"-->
+                                                                                                     <!--name="user_marry"-->
+                                                                                                     <!--class="user_marry"-->
+                                                                                                     <!--id="hbHunyin"/></a>-->
     </li>
-    <div id="user_marry" class="mui-popover mui-popover-action mui-popover-bottom">
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a href="javascript:;" data-value="1">已婚</a>
-        </li>
-        <li class="mui-table-view-cell">
-          <a href="javascript:;" data-value="0">未婚</a>
-        </li>
-        <li class="mui-table-view-cell">
-          <a href="javascript:;" data-value="3">保密</a>
-        </li>
-      </ul>
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a href="#forward">取消</a>
-        </li>
-      </ul>
-    </div>
+    <!--<div id="user_marry" class="mui-popover mui-popover-action mui-popover-bottom">-->
+      <!--<ul class="mui-table-view">-->
+        <!--<li class="mui-table-view-cell">-->
+          <!--<a href="javascript:;" data-value="1">已婚</a>-->
+        <!--</li>-->
+        <!--<li class="mui-table-view-cell">-->
+          <!--<a href="javascript:;" data-value="0">未婚</a>-->
+        <!--</li>-->
+        <!--<li class="mui-table-view-cell">-->
+          <!--<a href="javascript:;" data-value="3">保密</a>-->
+        <!--</li>-->
+      <!--</ul>-->
+      <!--<ul class="mui-table-view">-->
+        <!--<li class="mui-table-view-cell">-->
+          <!--<a href="#forward">取消</a>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
     <li>
       <p>现居住地</p>
       <!--data-idname唯一标识    data-n联动数     data-id 1为地区选择  2为职位选择  data-maxlength做多可选择数-->
@@ -341,13 +343,25 @@
         $('.user_sex').attr('value',selectItems[0].value);
       })
     })
+    //选择婚姻
+    $('.user_marry').click(function () {
+      var picker = new mui.PopPicker();
+      picker.setData([
+        {value:'1',text:'已婚'},
+        {value:'0',text:'未婚'},
+        {value:'3',text:'保密'}
+      ]);
+      picker.show(function (selectItems) {
+        console.log(selectItems[0].value);
+        $('.user_marry').val(selectItems[0].text);
+        $('.user_marry').attr('value',selectItems[0].value);
+      })
+    })
 
     $(".reg-p span").html($("#form").height());
 
     var city = new LightBox();
     $("#subBtn").click(function () {
-      console.log($("#form").serialize());return;
-
       var i = 0;
       $(".mui-from-box li input").each(function () {
         var hval = $(this).val();
