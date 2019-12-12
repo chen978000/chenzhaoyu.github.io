@@ -44,11 +44,11 @@
     <li>
       <p>性别</p>
       <a href="#sex">
-        <input type="text" placeholder="如：男" class="mui-input user_sex" value="1" readonly/>
+        <input type="text" placeholder="如：男" class="mui-input user_sex" readonly/>
         <!--<input type="hidden" name="user_sex" id="hbHunyin"/>-->
       </a>
     </li>
-    <div id="sex" class="mui-popover mui-popover-action mui-popover-bottom">
+    <div id="sex" class="mui-popover mui-popover-action mui-popover-bottom" style="z-index: 9">
       <ul class="mui-table-view">
         <li class="mui-table-view-cell" onclick="changeSex(1)">
           <a href="javascript:;" data-value="1" >男</a>
@@ -298,9 +298,10 @@
 <!--<script src="./city/ydui.js"></script>-->
 <!--<script src="mui.picker.min.js"></script>-->
 <script>
-  console.log('00')
+  console.log('1')
   function changeSex(e) {
     $('.user_sex').val(e)
+    console.log($('.user_sex'))
   }
   $(function () {
     $(".reg-p span").html($("#form").height());
