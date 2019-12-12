@@ -44,25 +44,26 @@
     <li>
       <p>性别</p>
       <a href="#sex">
-        <input type="text" placeholder="如：男" class="mui-input user_sex" readonly/>
+        如：男
+        <!--<input type="text" placeholder="如：男" class="mui-input user_sex" readonly/>-->
         <!--<input type="hidden" name="user_sex" id="hbHunyin"/>-->
       </a>
     </li>
-    <div id="sex" class="mui-popover mui-popover-action mui-popover-bottom" style="z-index: 9">
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a href="javascript:;" data-value="1" >男</a>
-        </li>
-        <li class="mui-table-view-cell">
-          <a href="javascript:;" data-value="2">女</a>
-        </li>
-      </ul>
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a href="#forward">取消</a>
-        </li>
-      </ul>
-    </div>
+    <!--<div id="sex" class="mui-popover mui-popover-action mui-popover-bottom" style="z-index: 9">-->
+      <!--<ul class="mui-table-view">-->
+        <!--<li class="mui-table-view-cell">-->
+          <!--<a href="javascript:;" data-value="1" >男</a>-->
+        <!--</li>-->
+        <!--<li class="mui-table-view-cell">-->
+          <!--<a href="javascript:;" data-value="2">女</a>-->
+        <!--</li>-->
+      <!--</ul>-->
+      <!--<ul class="mui-table-view">-->
+        <!--<li class="mui-table-view-cell">-->
+          <!--<a href="#forward">取消</a>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
     <li>
       <p>出生日期</p>
       <a href="javascript:;" id="user_birthday" data-id="birthday"
@@ -298,12 +299,31 @@
 <!--<script src="./city/ydui.js"></script>-->
 <!--<script src="mui.picker.min.js"></script>-->
 <script>
-  console.log('2')
+  console.log('1')
 
   $(function () {
-    mui('#sex').on('tap', 'li>a', function() {
-      mui.alert("你刚点击了\"" + this.innerHTML + "\"按钮");
-    })
+    $('#sex').addEventListener('tap',function () {
+      if (mui.os.plus) {
+        var a = [
+          {
+            title: '男',
+            value: 1
+          },
+          {
+            title: '女',
+            value: 2
+          }
+        ];
+        plus.nativeUI.actionSheet({
+          title: "选择性别",
+          cancel: '取消',
+          buttons: a
+        },function (b) {
+          console.log(b)
+        })
+      }
+
+    },false)
 
 
     $(".reg-p span").html($("#form").height());
