@@ -50,10 +50,10 @@
     </li>
     <div id="sex" class="mui-popover mui-popover-action mui-popover-bottom">
       <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a href="javascript:;" data-value="1" onclick="console.log(123)">男</a>
+        <li class="mui-table-view-cell" onclick="changeSex(1)">
+          <a href="javascript:;" data-value="1" >男</a>
         </li>
-        <li class="mui-table-view-cell">
+        <li class="mui-table-view-cell" onclick="changeSex(2)">
           <a href="javascript:;" data-value="2">女</a>
         </li>
       </ul>
@@ -298,6 +298,10 @@
 <!--<script src="./city/ydui.js"></script>-->
 <!--<script src="mui.picker.min.js"></script>-->
 <script>
+  console.log('00')
+  function changeSex(e) {
+    $('.user_sex').val(e)
+  }
   $(function () {
     $(".reg-p span").html($("#form").height());
 
