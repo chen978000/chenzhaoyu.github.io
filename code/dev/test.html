@@ -22,7 +22,7 @@
     height: 100vh !important;
   }
   .mui-backdrop{
-    z-index: 5;
+    z-index: 5 !important;
   }
 </style>
 {/block} {block name="header"}
@@ -48,7 +48,7 @@
       <p>性别</p>
       <a href="#sex">
         <input type="text" placeholder="如：男" class="mui-input" readonly/>
-        <!--<input type="hidden" name="user_sex" id="hbHunyin"/>-->
+        <input type="hidden" name="user_sex" id="hbHunyin"/>
       </a>
     </li>
     <div id="sex" class="mui-popover mui-popover-action mui-popover-bottom" style="z-index: 9">
@@ -301,33 +301,9 @@
 <!--<script src="./city/ydui.js"></script>-->
 <!--<script src="mui.picker.min.js"></script>-->
 <script>
-  console.log('3')
+  alert(1)
 
   $(function () {
-    // mui('#sex').addEventListener('tap',function () {
-    //   if (mui.os.plus) {
-    //     var a = [
-    //       {
-    //         title: '男',
-    //         value: 1
-    //       },
-    //       {
-    //         title: '女',
-    //         value: 2
-    //       }
-    //     ];
-    //     plus.nativeUI.actionSheet({
-    //       title: "选择性别",
-    //       cancel: '取消',
-    //       buttons: a
-    //     },function (b) {
-    //       console.log(b)
-    //     })
-    //   }
-    //
-    // },false)
-
-
     $(".reg-p span").html($("#form").height());
 
     var city = new LightBox();
