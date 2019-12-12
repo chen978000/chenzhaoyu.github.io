@@ -50,10 +50,10 @@
     </li>
     <div id="sex" class="mui-popover mui-popover-action mui-popover-bottom" style="z-index: 9">
       <ul class="mui-table-view">
-        <li class="mui-table-view-cell" onclick="changeSex(1)">
+        <li class="mui-table-view-cell">
           <a href="javascript:;" data-value="1" >男</a>
         </li>
-        <li class="mui-table-view-cell" onclick="changeSex(2)">
+        <li class="mui-table-view-cell">
           <a href="javascript:;" data-value="2">女</a>
         </li>
       </ul>
@@ -298,12 +298,14 @@
 <!--<script src="./city/ydui.js"></script>-->
 <!--<script src="mui.picker.min.js"></script>-->
 <script>
-  console.log('1')
-  function changeSex(e) {
-    $('.user_sex').val(e)
-    console.log($('.user_sex'))
-  }
+  console.log('2')
+
   $(function () {
+    mui('#sex').on('tap', 'li>a', function() {
+      mui.alert("你刚点击了\"" + this.innerHTML + "\"按钮");
+    })
+
+
     $(".reg-p span").html($("#form").height());
 
     var city = new LightBox();
