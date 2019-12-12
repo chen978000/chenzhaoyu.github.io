@@ -51,24 +51,6 @@
 			<p>婚姻状况</p>
 			<a href="#user_marry"><input type="text" placeholder="如：保密" class="mui-input" readonly/><input type="hidden" name="user_marry"class="user_marry" id="hbHunyin" /></a>
 		</li>
-		<div id="user_marry" class="mui-popover mui-popover-action mui-popover-bottom">
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="javascript:;" data-value="1">已婚</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a href="javascript:;" data-value="0">未婚</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a href="javascript:;" data-value="3">保密</a>
-				</li>
-			</ul>
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="#forward">取消</a>
-				</li>
-			</ul>
-		</div>
 		<li>
 			<p>现居住地</p>
 			<!--data-idname唯一标识    data-n联动数     data-id 1为地区选择  2为职位选择  data-maxlength做多可选择数-->
@@ -78,41 +60,12 @@
 			<p>工作经验</p>
 			<a href="#experience_id"><input type="text" placeholder="请选择工作经验" class="mui-input" readonly/><input type="hidden" name="experience_id" id="" /></a>
 		</li>
-		<div id="experience_id" class="mui-popover mui-popover-action mui-popover-bottom">
-			<ul class="mui-table-view">
-				{volist name="$Think.config.system.site_experience" id="vo"}
-				<li class="mui-table-view-cell">
-					<a href="javascript:;" data-value="{$vo.experience_id}">{$vo.experience_name}</a>
-				</li>
-				{/volist}
-
-			</ul>
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="#forward">取消</a>
-				</li>
-			</ul>
-		</div>
 		<li>
 			<p>最高学历</p>
 			<a href="#xueli">
 				<input type="text" placeholder="请选择学历" class="mui-input" readonly/>
 				<input type="hidden" name="educational_id" id="" /></a>
 		</li>
-		<div id="xueli" class="mui-popover mui-popover-action mui-popover-bottom">
-			<ul class="mui-table-view">
-				{volist name="$Think.config.system.site_edu" id="vo"}
-				<li class="mui-table-view-cell">
-					<a href="javascript:;" data-value="{$vo.educational_id}">{$vo.educational_name}</a>
-				</li>
-				{/volist}
-			</ul>
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="#forward">取消</a>
-				</li>
-			</ul>
-		</div>
 		<li>
 			<p>自我评价</p>
 			<textarea rows="5" name="user_introduce" placeholder="自我评价"></textarea>
@@ -259,6 +212,54 @@
 		</li>
 	</ul>
 </div>
+<div id="user_marry" class="mui-popover mui-popover-action mui-popover-bottom">
+	<ul class="mui-table-view">
+		<li class="mui-table-view-cell">
+			<a href="javascript:;" data-value="1">已婚</a>
+		</li>
+		<li class="mui-table-view-cell">
+			<a href="javascript:;" data-value="0">未婚</a>
+		</li>
+		<li class="mui-table-view-cell">
+			<a href="javascript:;" data-value="3">保密</a>
+		</li>
+	</ul>
+	<ul class="mui-table-view">
+		<li class="mui-table-view-cell">
+			<a href="#forward">取消</a>
+		</li>
+	</ul>
+</div>
+<div id="experience_id" class="mui-popover mui-popover-action mui-popover-bottom">
+	<ul class="mui-table-view">
+		{volist name="$Think.config.system.site_experience" id="vo"}
+		<li class="mui-table-view-cell">
+			<a href="javascript:;" data-value="{$vo.experience_id}">{$vo.experience_name}</a>
+		</li>
+		{/volist}
+
+	</ul>
+	<ul class="mui-table-view">
+		<li class="mui-table-view-cell">
+			<a href="#forward">取消</a>
+		</li>
+	</ul>
+</div>
+<div id="xueli" class="mui-popover mui-popover-action mui-popover-bottom">
+	<ul class="mui-table-view">
+		{volist name="$Think.config.system.site_edu" id="vo"}
+		<li class="mui-table-view-cell">
+			<a href="javascript:;" data-value="{$vo.educational_id}">{$vo.educational_name}</a>
+		</li>
+		{/volist}
+	</ul>
+	<ul class="mui-table-view">
+		<li class="mui-table-view-cell">
+			<a href="#forward">取消</a>
+		</li>
+	</ul>
+</div>
+
 <div class="btn-box">
 		<button type="button" class="mui-btn mui-btn-danger mui-btn-block" id="subBtn">生成简历</button>
 	</div>
