@@ -29,6 +29,16 @@
   body {
     height: 100vh !important;
   }
+  [v-cloak]{
+    display: none;
+  }
+  .item_box{
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    border-bottom: 2px solid #ccc;
+  }
 </style>
 {/block} {block name="header"}
 <header class="mui-bar mui-bar-nav nav-top">
@@ -37,7 +47,7 @@
 </header>
 
 {/block} {block name="main"}
-<div id="app">
+<div id="app" v-cloak>
   <p class="reg-p">基本信息<span></span></p>
   <form class="lr-box" id="form" style="height:100vh;overflow-y: auto;">
     <ul class="mui-from-box">
@@ -52,18 +62,15 @@
       </li>
       <li>
         <p>性别</p>
-        <input @click="showSex" type="text" name="user_sex" placeholder="如：男" class="mui-input user_sex" readonly/>
+        <input @click="showSex" type="text" v-model="user_sex_text" placeholder="如：男" class="mui-input" readonly/>
+        <input type="text" hidden name="user_sex" class="user_sex" v-model="user_sex">
         <van-popup position="bottom" v-model="sexShow">
           <div style="width: 100%;background: #fff;">
-            <div style="width: 100%;text-align: center">男</div>
-            <div>女</div>
-            <div>取消</div>
+            <div class="item_box" @click="setSex(1)">男</div>
+            <div class="item_box" @click="setSex(2)">女</div>
+            <div class="item_box" @click="sexShow=false">取消</div>
           </div>
-
         </van-popup>
-        <!--<a href="javascript:;" onclick="showSex">-->
-        <!--<input type="hidden" name="user_sex" id="hbHunyin"/>-->
-        <!--</a>-->
       </li>
       <!--<div class="my_bottom_box">-->
       <!--<div>男</div>-->
@@ -94,30 +101,35 @@
       </li>
       <li>
         <p>婚姻状况</p>
-
-        <a href="#user_marry">
-          <input type="text" placeholder="如：保密" class="mui-input" readonly/>
-          <input type="hidden" id="hbHunyin"/>
-        </a>
+        <input @click="marryShow=true" v-model="marry_text" type="text" placeholder="如：保密" class="mui-input" readonly/>
+        <input type="hidden" v-model="marry" name="user_marry" class="user_marry"/>
+        <van-popup position="bottom" v-model="marryShow">
+          <div style="width: 100%;background: #fff;">
+            <div class="item_box" @click="setMarry(1)">已婚</div>
+            <div class="item_box" @click="setMarry(0)">未婚</div>
+            <div class="item_box" @click="setMarry(3)">保密</div>
+            <div class="item_box" @click="marryShow=false">取消</div>
+          </div>
+        </van-popup>
       </li>
-      <div id="user_marry" class="mui-popover mui-popover-action mui-popover-bottom">
-        <ul class="mui-table-view">
-          <li class="mui-table-view-cell">
-            <a href="javascript:;" data-value="1">已婚</a>
-          </li>
-          <li class="mui-table-view-cell">
-            <a href="javascript:;" data-value="0">未婚</a>
-          </li>
-          <li class="mui-table-view-cell">
-            <a href="javascript:;" data-value="3">保密</a>
-          </li>
-        </ul>
-        <ul class="mui-table-view">
-          <li class="mui-table-view-cell">
-            <a href="#forward">取消</a>
-          </li>
-        </ul>
-      </div>
+      <!--<div id="user_marry" class="mui-popover mui-popover-action mui-popover-bottom">-->
+        <!--<ul class="mui-table-view">-->
+          <!--<li class="mui-table-view-cell">-->
+            <!--<a href="javascript:;" data-value="1">已婚</a>-->
+          <!--</li>-->
+          <!--<li class="mui-table-view-cell">-->
+            <!--<a href="javascript:;" data-value="0">未婚</a>-->
+          <!--</li>-->
+          <!--<li class="mui-table-view-cell">-->
+            <!--<a href="javascript:;" data-value="3">保密</a>-->
+          <!--</li>-->
+        <!--</ul>-->
+        <!--<ul class="mui-table-view">-->
+          <!--<li class="mui-table-view-cell">-->
+            <!--<a href="#forward">取消</a>-->
+          <!--</li>-->
+        <!--</ul>-->
+      <!--</div>-->
       <li>
         <p>现居住地</p>
         <!--data-idname唯一标识    data-n联动数     data-id 1为地区选择  2为职位选择  data-maxlength做多可选择数-->
@@ -129,45 +141,63 @@
       </li>
       <li>
         <p>工作经验</p>
-        <a href="#experience_id"><input type="text" placeholder="请选择工作经验" class="mui-input" readonly/><input type="hidden"
-                                                                                                             name="experience_id"
-                                                                                                             id=""/></a>
+        <input @click="expShow=true" v-model="exp_text" type="text" placeholder="如：保密" class="mui-input" readonly/>
+        <input type="hidden" v-model="exp_id" name="experience_id" class="experience_id"/>
+        <van-popup position="bottom" v-model="expShow">
+          <div style="width: 100%;background: #fff;">
+            <!--{volist name="$Think.config.system.site_experience" id="vo"}-->
+            <!--<div class="item_box" @click="setExp({$vo.experience_id},{$vo.experience_name})">{$vo.experience_name}</div>-->
+            <!--{/volist}-->
+          </div>
+        </van-popup>
+        <!--<a href="#experience_id"><input type="text" placeholder="请选择工作经验" class="mui-input" readonly/><input type="hidden"-->
+                                                                                                             <!--name="experience_id"-->
+                                                                                                             <!--id=""/></a>-->
       </li>
-      <div id="experience_id" class="mui-popover mui-popover-action mui-popover-bottom">
-        <ul class="mui-table-view">
-          {volist name="$Think.config.system.site_experience" id="vo"}
-          <li class="mui-table-view-cell">
-            <a href="javascript:;" data-value="{$vo.experience_id}">{$vo.experience_name}</a>
-          </li>
-          {/volist}
+      <!--<div id="experience_id" class="mui-popover mui-popover-action mui-popover-bottom">-->
+        <!--<ul class="mui-table-view">-->
+          <!--{volist name="$Think.config.system.site_experience" id="vo"}-->
+          <!--<li class="mui-table-view-cell">-->
+            <!--<a href="javascript:;" data-value="{$vo.experience_id}">{$vo.experience_name}</a>-->
+          <!--</li>-->
+          <!--{/volist}-->
 
-        </ul>
-        <ul class="mui-table-view">
-          <li class="mui-table-view-cell">
-            <a href="#forward">取消</a>
-          </li>
-        </ul>
-      </div>
+        <!--</ul>-->
+        <!--<ul class="mui-table-view">-->
+          <!--<li class="mui-table-view-cell">-->
+            <!--<a href="#forward">取消</a>-->
+          <!--</li>-->
+        <!--</ul>-->
+      <!--</div>-->
       <li>
         <p>最高学历</p>
-        <a href="#xueli"><input type="text" placeholder="请选择学历" class="mui-input" readonly/><input type="hidden"
-                                                                                                   name="educational_id"
-                                                                                                   id=""/></a>
+        <input @click="xueShow=true" v-model="xue_text" type="text" placeholder="如：保密" class="mui-input" readonly/>
+        <input type="hidden" v-model="xue_id" name="educational_id" class="educational_id"/>
+        <van-popup position="bottom" v-model="xueShow">
+          <div style="width: 100%;background: #fff;">
+            {volist name="$Think.config.system.site_edu" id="vo"}
+            <!--<div class="item_box" @click="setXue({$vo.educational_id},{$vo.educational_name})">{$vo.educational_name}</div>-->
+            {/volist}
+          </div>
+        </van-popup>
+        <!--<a href="#xueli"><input type="text" placeholder="请选择学历" class="mui-input" readonly/><input type="hidden"-->
+                                                                                                   <!--name="educational_id"-->
+                                                                                                   <!--id=""/></a>-->
       </li>
-      <div id="xueli" class="mui-popover mui-popover-action mui-popover-bottom">
-        <ul class="mui-table-view">
-          {volist name="$Think.config.system.site_edu" id="vo"}
-          <li class="mui-table-view-cell">
-            <a href="javascript:;" data-value="{$vo.educational_id}">{$vo.educational_name}</a>
-          </li>
-          {/volist}
-        </ul>
-        <ul class="mui-table-view">
-          <li class="mui-table-view-cell">
-            <a href="#forward">取消</a>
-          </li>
-        </ul>
-      </div>
+      <!--<div id="xueli" class="mui-popover mui-popover-action mui-popover-bottom">-->
+        <!--<ul class="mui-table-view">-->
+          <!--{volist name="$Think.config.system.site_edu" id="vo"}-->
+          <!--<li class="mui-table-view-cell">-->
+            <!--<a href="javascript:;" data-value="{$vo.educational_id}">{$vo.educational_name}</a>-->
+          <!--</li>-->
+          <!--{/volist}-->
+        <!--</ul>-->
+        <!--<ul class="mui-table-view">-->
+          <!--<li class="mui-table-view-cell">-->
+            <!--<a href="#forward">取消</a>-->
+          <!--</li>-->
+        <!--</ul>-->
+      <!--</div>-->
       <li>
         <p>自我评价</p>
         <textarea rows="5" name="user_introduce" placeholder="自我评价"></textarea>
@@ -330,6 +360,8 @@
 
     var city = new LightBox();
     $("#subBtn").click(function () {
+      console.log($('.user_sex').val())
+
       var i = 0;
       $(".mui-from-box li input").each(function () {
         var hval = $(this).val();
@@ -390,16 +422,62 @@
   })
 </script>
 <script>
+  const expList = $Think.config.system.site_experience
+  const xueList = $Think.config.system.site_edu
+
   new Vue({
     el:'#app',
     data(){
       return{
-        sexShow: false
+        expList: expList,
+        xueList: xueList,
+
+
+        sexShow: false,
+        user_sex: '',
+        user_sex_text: '',
+
+        marryShow: false,
+        marry: '',
+        marry_text: '',
+
+        expShow: false,
+        exp_id: '',
+        exp_text: '',
+
+        xueShow: false,
+        xue_id: '',
+        xue_text: ''
       }
+    },
+    mounted(){
+      console.log(this.xueList)
+      console.log(this.expList)
     },
     methods: {
       showSex(){
         this.sexShow = true
+      },
+      setSex(e){
+        this.user_sex = e;
+        this.user_sex_text = e==1?'男':'女';
+        this.sexShow = false
+        console.log($('.user_sex'))
+      },
+      setMarry(e){
+        this.marry = e;
+        this.marry_text = e==1?'已婚':e==0?'未婚':'保密';
+        this.marryShow = false
+      },
+      setExp(value,text){
+        this.exp_id = value;
+        this.exp_text = text;
+        this.expShow = false
+      },
+      setXue(value,text){
+        this.xue_id = value;
+        this.xue_text = text;
+        this.xueShow = false
       },
     }
   });
