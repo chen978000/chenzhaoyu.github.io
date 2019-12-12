@@ -10,6 +10,14 @@
 <link rel="stylesheet" href="https://m.huibojob.com/static/css/wap/PersonalCenter/PersonalCenter.css">
 <link rel="stylesheet" href="https://m.huibojob.com/static/css/wap/ydui.css">
 <link rel="stylesheet" href="https://m.huibojob.com/static/font/iconfont_wap/iconfont.css">
+
+<!-- 引入样式文件 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.2/lib/index.css">
+
+<!-- 引入 Vue 和 Vant 的 JS 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vant@2.2/lib/vant.min.js"></script>
+
 <script src="https://m.huibojob.com/static/script/wap/jquery-1.12.4.min.js"></script>
 <script src="https://m.huibojob.com/static/script/wap/mui.min.js"></script>
 <script src="https://m.huibojob.com/static/script/wap/rem.js"></script>
@@ -21,24 +29,6 @@
   body {
     height: 100vh !important;
   }
-  .my_bottom_box{
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    background: #fff;
-    transition: 0.3s;
-    transform: translateY(-100%);
-  }
-  .my_bottom_box_show{
-    transform: translateY(0%);
-  }
-  .my_bottom_box div{
-    width: 100%;
-    height: 10vh;
-    text-align: center;
-    border-bottom: 2px solid #ccc;
-  }
 </style>
 {/block} {block name="header"}
 <header class="mui-bar mui-bar-nav nav-top">
@@ -47,276 +37,285 @@
 </header>
 
 {/block} {block name="main"}
-<p class="reg-p">基本信息<span></span></p>
-<form class="lr-box" id="form" style="height:100vh;overflow-y: auto;">
-  <ul class="mui-from-box">
-    <li>
-      <p>真实姓名</p>
-      <a href="javascript:;"><input type="text" id="name" name="user_name" placeholder="如：汇小伯" class="mui-input"/></a>
-    </li>
-    <li>
-      <p>手机号码</p>
-      <a href="javascript:;"><input type="tel" name="user_mobile" id="tel" placeholder="请填写手机号码" class="mui-input"
-                                    value="{$userinfo.user_mobile}"/></a>
-    </li>
-    <li>
-      <p>性别</p>
-      <input type="text" name="user_sex" placeholder="如：男" class="mui-input user_sex" readonly/>
+<div id="app">
+  <p class="reg-p">基本信息<span></span></p>
+  <form class="lr-box" id="form" style="height:100vh;overflow-y: auto;">
+    <ul class="mui-from-box">
+      <li>
+        <p>真实姓名</p>
+        <a href="javascript:;"><input type="text" id="name" name="user_name" placeholder="如：汇小伯" class="mui-input"/></a>
+      </li>
+      <li>
+        <p>手机号码</p>
+        <a href="javascript:;"><input type="tel" name="user_mobile" id="tel" placeholder="请填写手机号码" class="mui-input"
+                                      value="{$userinfo.user_mobile}"/></a>
+      </li>
+      <li>
+        <p>性别</p>
+        <input @click="showSex" type="text" name="user_sex" placeholder="如：男" class="mui-input user_sex" readonly/>
+        <van-popup position="bottom" v-model="sexShow">
+          <div style="width: 100%;background: #fff;">
+            <div style="width: 100%;text-align: center">男</div>
+            <div>女</div>
+            <div>取消</div>
+          </div>
 
-      <!--<a href="javascript:;" onclick="showSex">-->
+        </van-popup>
+        <!--<a href="javascript:;" onclick="showSex">-->
         <!--<input type="hidden" name="user_sex" id="hbHunyin"/>-->
-      <!--</a>-->
-    </li>
-    <!--<div class="my_bottom_box">-->
+        <!--</a>-->
+      </li>
+      <!--<div class="my_bottom_box">-->
       <!--<div>男</div>-->
       <!--<div>女</div>-->
       <!--<div>取消</div>-->
-    <!--</div>-->
-    <!--<div id="sex" class="mui-popover mui-popover-action mui-popover-bottom" style="z-index: 9">-->
+      <!--</div>-->
+      <!--<div id="sex" class="mui-popover mui-popover-action mui-popover-bottom" style="z-index: 9">-->
       <!--<ul class="mui-table-view">-->
-        <!--<li class="mui-table-view-cell">-->
-          <!--<a href="javascript:;" data-value="1" >男</a>-->
-        <!--</li>-->
-        <!--<li class="mui-table-view-cell">-->
-          <!--<a href="javascript:;" data-value="2">女</a>-->
-        <!--</li>-->
+      <!--<li class="mui-table-view-cell">-->
+      <!--<a href="javascript:;" data-value="1" >男</a>-->
+      <!--</li>-->
+      <!--<li class="mui-table-view-cell">-->
+      <!--<a href="javascript:;" data-value="2">女</a>-->
+      <!--</li>-->
       <!--</ul>-->
       <!--<ul class="mui-table-view">-->
-        <!--<li class="mui-table-view-cell">-->
-          <!--<a href="#forward">取消</a>-->
-        <!--</li>-->
+      <!--<li class="mui-table-view-cell">-->
+      <!--<a href="#forward">取消</a>-->
+      <!--</li>-->
       <!--</ul>-->
-    <!--</div>-->
-    <li>
-      <p>出生日期</p>
-      <a href="javascript:;" id="user_birthday" data-id="birthday"
-         data-options='{"type":"date","beginYear":1949,"endYear":2003}'><input type="text" name="user_birthday"
-                                                                               placeholder="请选择出生日期" class="mui-input"
-                                                                               readonly/></a>
-    </li>
-    <li>
-      <p>婚姻状况</p>
-      <input type="text" name="user_marry" placeholder="如：保密" class="mui-input user_marry" readonly/>
+      <!--</div>-->
+      <li>
+        <p>出生日期</p>
+        <a href="javascript:;" id="user_birthday" data-id="birthday"
+           data-options='{"type":"date","beginYear":1949,"endYear":2003}'><input type="text" name="user_birthday"
+                                                                                 placeholder="请选择出生日期" class="mui-input"
+                                                                                 readonly/></a>
+      </li>
+      <li>
+        <p>婚姻状况</p>
 
-      <!--<a href="#user_marry"><input type="text" placeholder="如：保密" class="mui-input" readonly/><input type="hidden"-->
-                                                                                                     <!--name="user_marry"-->
-                                                                                                     <!--class="user_marry"-->
-                                                                                                     <!--id="hbHunyin"/></a>-->
-    </li>
-    <!--<div id="user_marry" class="mui-popover mui-popover-action mui-popover-bottom">-->
-      <!--<ul class="mui-table-view">-->
-        <!--<li class="mui-table-view-cell">-->
-          <!--<a href="javascript:;" data-value="1">已婚</a>-->
-        <!--</li>-->
-        <!--<li class="mui-table-view-cell">-->
-          <!--<a href="javascript:;" data-value="0">未婚</a>-->
-        <!--</li>-->
-        <!--<li class="mui-table-view-cell">-->
-          <!--<a href="javascript:;" data-value="3">保密</a>-->
-        <!--</li>-->
-      <!--</ul>-->
-      <!--<ul class="mui-table-view">-->
-        <!--<li class="mui-table-view-cell">-->
-          <!--<a href="#forward">取消</a>-->
-        <!--</li>-->
-      <!--</ul>-->
-    <!--</div>-->
-    <li>
-      <p>现居住地</p>
-      <!--data-idname唯一标识    data-n联动数     data-id 1为地区选择  2为职位选择  data-maxlength做多可选择数-->
-      <a href="javascript:;" class="J_Address" data-idname="qiwang" data-n="4" data-id="1" data-maxlength="1"><input
-              type="text" placeholder="请选择居住地" class="mui-input" readonly/><input type="hidden" id=""
-                                                                                  value="{present name="
-                                                                                  resumebaseinfo.city_id"}{$resumebaseinfo['city_id']}{/present}"
-        name="city_id" /></a>
-    </li>
-    <li>
-      <p>工作经验</p>
-      <a href="#experience_id"><input type="text" placeholder="请选择工作经验" class="mui-input" readonly/><input type="hidden"
-                                                                                                           name="experience_id"
-                                                                                                           id=""/></a>
-    </li>
-    <div id="experience_id" class="mui-popover mui-popover-action mui-popover-bottom">
-      <ul class="mui-table-view">
-        {volist name="$Think.config.system.site_experience" id="vo"}
-        <li class="mui-table-view-cell">
-          <a href="javascript:;" data-value="{$vo.experience_id}">{$vo.experience_name}</a>
-        </li>
-        {/volist}
-
-      </ul>
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a href="#forward">取消</a>
-        </li>
-      </ul>
-    </div>
-    <li>
-      <p>最高学历</p>
-      <a href="#xueli"><input type="text" placeholder="请选择学历" class="mui-input" readonly/><input type="hidden"
-                                                                                                 name="educational_id"
-                                                                                                 id=""/></a>
-    </li>
-    <div id="xueli" class="mui-popover mui-popover-action mui-popover-bottom">
-      <ul class="mui-table-view">
-        {volist name="$Think.config.system.site_edu" id="vo"}
-        <li class="mui-table-view-cell">
-          <a href="javascript:;" data-value="{$vo.educational_id}">{$vo.educational_name}</a>
-        </li>
-        {/volist}
-      </ul>
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a href="#forward">取消</a>
-        </li>
-      </ul>
-    </div>
-    <li>
-      <p>自我评价</p>
-      <textarea rows="5" name="user_introduce" placeholder="自我评价"></textarea>
-    </li>
-  </ul>
-  <p class="reg-p">求职期望</p>
-  <ul class="mui-from-box">
-    <li>
-      <p>求职状态</p>
-      <a href="#status_zhuangtai"><input type="text" placeholder="如：离职，随时到岗" class="mui-input" readonly/><input
-              type="hidden" name="status_id" id=""/></a>
-    </li>
-    <div id="status_zhuangtai" class="mui-popover mui-popover-action mui-popover-bottom">
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a href="javascript:;" data-value="0">请选择求职状态</a>
-        </li>
-        {volist name="Think.config.system.site_resumestatus" id="vo"}
-        <li class="mui-table-view-cell">
-          <a href="javascript:;" data-value="{$vo.status_id}">{$vo.status_name}</a>
-        </li>
-        {/volist}
-      </ul>
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a href="#forward">取消</a>
-        </li>
-      </ul>
-    </div>
-
-    <li>
-      <p>期望行业</p>
-      <a href="javascript:;" data-id="hangye" class="open-checkbox"><input type="text" placeholder="请选择"
-                                                                           class="mui-input" readonly
-                                                                           name="intention_json_data[intention_profession]"/><input
-              name="profession_id" type="hidden" id=""/><span></span></a>
-    </li>
-    <div class="hangye-list" id="hangye">
-      <div class="mui-card">
-        <div class="mui-input-group">
-
-          {volist name="Think.config.system.site_all_profession" id="vo"}
-          <div class="mui-input-row mui-checkbox mui-left">
-            <label>{$vo.profession_name}
-              <input name="checkbox1" value="{$vo.profession_id}" type="checkbox">
-            </label>
-          </div>
+        <a href="#user_marry">
+          <input type="text" placeholder="如：保密" class="mui-input" readonly/>
+          <input type="hidden" id="hbHunyin"/>
+        </a>
+      </li>
+      <div id="user_marry" class="mui-popover mui-popover-action mui-popover-bottom">
+        <ul class="mui-table-view">
+          <li class="mui-table-view-cell">
+            <a href="javascript:;" data-value="1">已婚</a>
+          </li>
+          <li class="mui-table-view-cell">
+            <a href="javascript:;" data-value="0">未婚</a>
+          </li>
+          <li class="mui-table-view-cell">
+            <a href="javascript:;" data-value="3">保密</a>
+          </li>
+        </ul>
+        <ul class="mui-table-view">
+          <li class="mui-table-view-cell">
+            <a href="#forward">取消</a>
+          </li>
+        </ul>
+      </div>
+      <li>
+        <p>现居住地</p>
+        <!--data-idname唯一标识    data-n联动数     data-id 1为地区选择  2为职位选择  data-maxlength做多可选择数-->
+        <a href="javascript:;" class="J_Address" data-idname="qiwang" data-n="4" data-id="1" data-maxlength="1"><input
+                type="text" placeholder="请选择居住地" class="mui-input" readonly/><input type="hidden" id=""
+                                                                                    value="{present name="
+                                                                                    resumebaseinfo.city_id"}{$resumebaseinfo['city_id']}{/present}"
+          name="city_id" /></a>
+      </li>
+      <li>
+        <p>工作经验</p>
+        <a href="#experience_id"><input type="text" placeholder="请选择工作经验" class="mui-input" readonly/><input type="hidden"
+                                                                                                             name="experience_id"
+                                                                                                             id=""/></a>
+      </li>
+      <div id="experience_id" class="mui-popover mui-popover-action mui-popover-bottom">
+        <ul class="mui-table-view">
+          {volist name="$Think.config.system.site_experience" id="vo"}
+          <li class="mui-table-view-cell">
+            <a href="javascript:;" data-value="{$vo.experience_id}">{$vo.experience_name}</a>
+          </li>
           {/volist}
 
-        </div>
+        </ul>
+        <ul class="mui-table-view">
+          <li class="mui-table-view-cell">
+            <a href="#forward">取消</a>
+          </li>
+        </ul>
       </div>
-      <div class="job_tab_filter3-btn clearfix">
-        <input type="reset" class="" value="重 置"/>
-        <input type="button" class="" value="提 交"/>
+      <li>
+        <p>最高学历</p>
+        <a href="#xueli"><input type="text" placeholder="请选择学历" class="mui-input" readonly/><input type="hidden"
+                                                                                                   name="educational_id"
+                                                                                                   id=""/></a>
+      </li>
+      <div id="xueli" class="mui-popover mui-popover-action mui-popover-bottom">
+        <ul class="mui-table-view">
+          {volist name="$Think.config.system.site_edu" id="vo"}
+          <li class="mui-table-view-cell">
+            <a href="javascript:;" data-value="{$vo.educational_id}">{$vo.educational_name}</a>
+          </li>
+          {/volist}
+        </ul>
+        <ul class="mui-table-view">
+          <li class="mui-table-view-cell">
+            <a href="#forward">取消</a>
+          </li>
+        </ul>
       </div>
-    </div>
+      <li>
+        <p>自我评价</p>
+        <textarea rows="5" name="user_introduce" placeholder="自我评价"></textarea>
+      </li>
+    </ul>
+    <p class="reg-p">求职期望</p>
+    <ul class="mui-from-box">
+      <li>
+        <p>求职状态</p>
+        <a href="#status_zhuangtai"><input type="text" placeholder="如：离职，随时到岗" class="mui-input" readonly/><input
+                type="hidden" name="status_id" id=""/></a>
+      </li>
+      <div id="status_zhuangtai" class="mui-popover mui-popover-action mui-popover-bottom">
+        <ul class="mui-table-view">
+          <li class="mui-table-view-cell">
+            <a href="javascript:;" data-value="0">请选择求职状态</a>
+          </li>
+          {volist name="Think.config.system.site_resumestatus" id="vo"}
+          <li class="mui-table-view-cell">
+            <a href="javascript:;" data-value="{$vo.status_id}">{$vo.status_name}</a>
+          </li>
+          {/volist}
+        </ul>
+        <ul class="mui-table-view">
+          <li class="mui-table-view-cell">
+            <a href="#forward">取消</a>
+          </li>
+        </ul>
+      </div>
 
-    <li>
-      <p>求职意向</p>
-      <!--data-idname唯一标识    data-n联动数     data-id 1为地区选择  2为职位选择  data-maxlength做多可选择数-->
-      <a href="javascript:;" class="J_Address" data-idname="yixiang" data-n="3" data-id="2" data-maxlength="5"><input
-              type="text" name="intention_json_data[job_class_name]" placeholder="请选择求职意向" class="mui-input"
-              readonly/><input name="job_classid" type="hidden" id=""/></a>
-    </li>
-    <li>
-      <p>工作性质</p>
-      <a href="#xingzhi"><input type="text" placeholder="如：全职" class="mui-input" readonly/><input name="job_typeid"
-                                                                                                  type="hidden" id=""/></a>
-    </li>
-    <div id="xingzhi" class="mui-popover mui-popover-action mui-popover-bottom">
-
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a href="javascript:;" data-value="0">不限</a>
-        </li>
-        {volist name="Think.config.system.site_jobtype" id="vo"}
-        <li class="mui-table-view-cell">
-          <a href="javascript:;" data-value="{$vo.type_id}">{$vo.type_name}</a>
-        </li>
-        {/volist}
-      </ul>
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a href="#forward">取消</a>
-        </li>
-      </ul>
-    </div>
-    <li>
-      <p>期望薪资</p>
-      <a href="#showUserPicker"><input type="text" placeholder="如：5000-8000" class="mui-input" readonly/><input
-              type="hidden" name="salary_id" id=""/></a>
-    </li>
-    <div id="showUserPicker" class="mui-popover mui-popover-action mui-popover-bottom">
-      <ul class="mui-table-view">
-        {volist name="Think.config.system.site_salary" id="vo"}
-        <li class="mui-table-view-cell">
-          <a href="javascript:;" data-value="{$vo.salary_id}">{$vo.salary_name}</a>
-        </li>
-        {/volist}
-      </ul>
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a href="#forward">取消</a>
-        </li>
-      </ul>
-    </div>
-    <li>
-      <p>福利待遇</p>
-      <a href="javascript:;" data-id="fuli" class="open-checkbox"><input type="text" placeholder="请选择" class="mui-input"
-                                                                         readonly/><input name="job_tagid" type="hidden"
-                                                                                          id=""/><span></span></a>
-    </li>
-    <div class="job_tab_filter3" id="fuli">
-      <div class="mui-input-group">
+      <li>
+        <p>期望行业</p>
+        <a href="javascript:;" data-id="hangye" class="open-checkbox"><input type="text" placeholder="请选择"
+                                                                             class="mui-input" readonly
+                                                                             name="intention_json_data[intention_profession]"/><input
+                name="profession_id" type="hidden" id=""/><span></span></a>
+      </li>
+      <div class="hangye-list" id="hangye">
         <div class="mui-card">
-          {volist name="Think.config.system.site_jobtag" id="vo"}
-          <div class="mui-checkbox">
-            <label>
-              <input value="{$vo.tag_id}" type="checkbox">
-              <span>{$vo.tag_name}</span>
-            </label>
-          </div>
-          {/volist}
+          <div class="mui-input-group">
 
+            {volist name="Think.config.system.site_all_profession" id="vo"}
+            <div class="mui-input-row mui-checkbox mui-left">
+              <label>{$vo.profession_name}
+                <input name="checkbox1" value="{$vo.profession_id}" type="checkbox">
+              </label>
+            </div>
+            {/volist}
+
+          </div>
+        </div>
+        <div class="job_tab_filter3-btn clearfix">
+          <input type="reset" class="" value="重 置"/>
+          <input type="button" class="" value="提 交"/>
         </div>
       </div>
-      <div class="job_tab_filter3-btn clearfix">
-        <input type="reset" class="" value="重 置"/>
-        <input type="button" class="" value="提 交"/>
+
+      <li>
+        <p>求职意向</p>
+        <!--data-idname唯一标识    data-n联动数     data-id 1为地区选择  2为职位选择  data-maxlength做多可选择数-->
+        <a href="javascript:;" class="J_Address" data-idname="yixiang" data-n="3" data-id="2" data-maxlength="5"><input
+                type="text" name="intention_json_data[job_class_name]" placeholder="请选择求职意向" class="mui-input"
+                readonly/><input name="job_classid" type="hidden" id=""/></a>
+      </li>
+      <li>
+        <p>工作性质</p>
+        <a href="#xingzhi"><input type="text" placeholder="如：全职" class="mui-input" readonly/><input name="job_typeid"
+                                                                                                    type="hidden" id=""/></a>
+      </li>
+      <div id="xingzhi" class="mui-popover mui-popover-action mui-popover-bottom">
+
+        <ul class="mui-table-view">
+          <li class="mui-table-view-cell">
+            <a href="javascript:;" data-value="0">不限</a>
+          </li>
+          {volist name="Think.config.system.site_jobtype" id="vo"}
+          <li class="mui-table-view-cell">
+            <a href="javascript:;" data-value="{$vo.type_id}">{$vo.type_name}</a>
+          </li>
+          {/volist}
+        </ul>
+        <ul class="mui-table-view">
+          <li class="mui-table-view-cell">
+            <a href="#forward">取消</a>
+          </li>
+        </ul>
       </div>
-    </div>
-    <li>
-      <p>意向地区</p>
-      <!--data-idname唯一标识    data-n联动数     data-id 1为地区选择  2为职位选择  data-maxlength做多可选择数-->
-      <a href="javascript:;" class="J_Address" data-idname="diqu" data-n="4" data-id="1" data-maxlength="5"><input
-              type="text" name="intention_json_data[intention_city_name]" placeholder="请选择意向地区" class="mui-input"
-              readonly/><input type="hidden" name="intention_cityid" id=""/></a>
-    </li>
+      <li>
+        <p>期望薪资</p>
+        <a href="#showUserPicker"><input type="text" placeholder="如：5000-8000" class="mui-input" readonly/><input
+                type="hidden" name="salary_id" id=""/></a>
+      </li>
+      <div id="showUserPicker" class="mui-popover mui-popover-action mui-popover-bottom">
+        <ul class="mui-table-view">
+          {volist name="Think.config.system.site_salary" id="vo"}
+          <li class="mui-table-view-cell">
+            <a href="javascript:;" data-value="{$vo.salary_id}">{$vo.salary_name}</a>
+          </li>
+          {/volist}
+        </ul>
+        <ul class="mui-table-view">
+          <li class="mui-table-view-cell">
+            <a href="#forward">取消</a>
+          </li>
+        </ul>
+      </div>
+      <li>
+        <p>福利待遇</p>
+        <a href="javascript:;" data-id="fuli" class="open-checkbox"><input type="text" placeholder="请选择" class="mui-input"
+                                                                           readonly/><input name="job_tagid" type="hidden"
+                                                                                            id=""/><span></span></a>
+      </li>
+      <div class="job_tab_filter3" id="fuli">
+        <div class="mui-input-group">
+          <div class="mui-card">
+            {volist name="Think.config.system.site_jobtag" id="vo"}
+            <div class="mui-checkbox">
+              <label>
+                <input value="{$vo.tag_id}" type="checkbox">
+                <span>{$vo.tag_name}</span>
+              </label>
+            </div>
+            {/volist}
 
-  </ul>
+          </div>
+        </div>
+        <div class="job_tab_filter3-btn clearfix">
+          <input type="reset" class="" value="重 置"/>
+          <input type="button" class="" value="提 交"/>
+        </div>
+      </div>
+      <li>
+        <p>意向地区</p>
+        <!--data-idname唯一标识    data-n联动数     data-id 1为地区选择  2为职位选择  data-maxlength做多可选择数-->
+        <a href="javascript:;" class="J_Address" data-idname="diqu" data-n="4" data-id="1" data-maxlength="5"><input
+                type="text" name="intention_json_data[intention_city_name]" placeholder="请选择意向地区" class="mui-input"
+                readonly/><input type="hidden" name="intention_cityid" id=""/></a>
+      </li>
+
+    </ul>
 
 
-</form>
-<div class="btn-box">
-  <button type="button" class="mui-btn mui-btn-danger mui-btn-block" id="subBtn">生成简历</button>
+  </form>
+  <div class="btn-box">
+    <button type="button" class="mui-btn mui-btn-danger mui-btn-block" id="subBtn">生成简历</button>
+  </div>
 </div>
+
 {/block} {block name="script"}
 
 
@@ -324,39 +323,8 @@
 <!--<script src="./city/ydui.js"></script>-->
 <!--<script src="mui.picker.min.js"></script>-->
 <script>
-  function showSex(){
-
-  }
 
   $(function () {
-
-    $('.user_sex').click(function () {
-      var picker = new mui.PopPicker();
-      picker.setData([
-        {value:'1',text:'男'},
-        {value:'2',text:'女'},
-
-      ]);
-      picker.show(function (selectItems) {
-        console.log(selectItems[0].value);
-        $('.user_sex').val(selectItems[0].text);
-        $('.user_sex').attr('value',selectItems[0].value);
-      })
-    })
-    //选择婚姻
-    $('.user_marry').click(function () {
-      var picker = new mui.PopPicker();
-      picker.setData([
-        {value:'1',text:'已婚'},
-        {value:'0',text:'未婚'},
-        {value:'3',text:'保密'}
-      ]);
-      picker.show(function (selectItems) {
-        console.log(selectItems[0].value);
-        $('.user_marry').val(selectItems[0].text);
-        $('.user_marry').attr('value',selectItems[0].value);
-      })
-    })
 
     $(".reg-p span").html($("#form").height());
 
@@ -420,5 +388,20 @@
 
     })
   })
+</script>
+<script>
+  new Vue({
+    el:'#app',
+    data(){
+      return{
+        sexShow: false
+      }
+    },
+    methods: {
+      showSex(){
+        this.sexShow = true
+      },
+    }
+  });
 </script>
 {/block}
