@@ -77,48 +77,12 @@
 			<p>求职状态</p>
 			<a href="#status_zhuangtai"><input type="text" placeholder="如：离职，随时到岗" class="mui-input" readonly/><input type="hidden" name="status_id" id="" /></a>
 		</li>
-		<div id="status_zhuangtai" class="mui-popover mui-popover-action mui-popover-bottom">
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="javascript:;" data-value="0">请选择求职状态</a>
-				</li>
-				{volist name="Think.config.system.site_resumestatus" id="vo"}
-				<li class="mui-table-view-cell">
-					<a href="javascript:;" data-value="{$vo.status_id}">{$vo.status_name}</a>
-				</li>
-				{/volist}
-			</ul>
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="#forward">取消</a>
-				</li>
-			</ul>
-		</div>
-		
+
 		<li>
 			<p>期望行业</p>
 			<a href="javascript:;" data-id="hangye" class="open-checkbox"><input type="text" placeholder="请选择" class="mui-input" readonly name="intention_json_data[intention_profession]"/><input name="profession_id" type="hidden" id="" /><span></span></a>
 		</li>
-		<div class="hangye-list" id="hangye">
-			<div class="mui-card">
-				<div class="mui-input-group">
 
-					{volist name="Think.config.system.site_all_profession" id="vo"}
-					<div class="mui-input-row mui-checkbox mui-left">
-						<label>{$vo.profession_name}
-						<input name="checkbox1" value="{$vo.profession_id}" type="checkbox">
-						</label>
-					</div>
-					{/volist}
-
-				</div>
-			</div>
-			<div class="job_tab_filter3-btn clearfix">
-				<input type="reset" class="" value="重 置" />
-				<input type="button" class="" value="提 交" />
-			</div>
-		</div>
-		
 		<li>
 			<p>求职意向</p>
 			<!--data-idname唯一标识    data-n联动数     data-id 1为地区选择  2为职位选择  data-maxlength做多可选择数-->
@@ -128,65 +92,14 @@
 			<p>工作性质</p>
 			<a href="#xingzhi"><input type="text" placeholder="如：全职" class="mui-input" readonly/><input name="job_typeid" type="hidden" id="" /></a>
 		</li>
-		<div id="xingzhi" class="mui-popover mui-popover-action mui-popover-bottom">
-
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="javascript:;" data-value="0">不限</a>
-				</li>
-				{volist name="Think.config.system.site_jobtype" id="vo"}
-				<li class="mui-table-view-cell">
-					<a href="javascript:;" data-value="{$vo.type_id}">{$vo.type_name}</a>
-				</li>
-				{/volist}
-			</ul>
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="#forward">取消</a>
-				</li>
-			</ul>
-		</div>
 		<li>
 			<p>期望薪资</p>
 			<a href="#showUserPicker"><input type="text" placeholder="如：5000-8000" class="mui-input" readonly/><input type="hidden" name="salary_id" id="" /></a>
 		</li>
-		<div id="showUserPicker" class="mui-popover mui-popover-action mui-popover-bottom">
-			<ul class="mui-table-view">
-				{volist name="Think.config.system.site_salary" id="vo"}
-				<li class="mui-table-view-cell">
-					<a href="javascript:;" data-value="{$vo.salary_id}">{$vo.salary_name}</a>
-				</li>
-				{/volist}
-			</ul>
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="#forward">取消</a>
-				</li>
-			</ul>
-		</div>
 		<li>
 			<p>福利待遇</p>
 			<a href="javascript:;" data-id="fuli" class="open-checkbox"><input type="text" placeholder="请选择" class="mui-input" readonly/><input name="job_tagid" type="hidden" id="" /><span></span></a>
 		</li>
-		<div class="job_tab_filter3" id="fuli">
-			<div class="mui-input-group">
-				<div class="mui-card">
-					{volist name="Think.config.system.site_jobtag" id="vo"}
-                	<div class="mui-checkbox">
-						<label>
-							<input value="{$vo.tag_id}" type="checkbox" >
-							<span>{$vo.tag_name}</span>
-						</label>
-					</div>
-                {/volist}
-
-				</div>
-			</div>
-			<div class="job_tab_filter3-btn clearfix">
-				<input type="reset" class="" value="重 置" />
-				<input type="button" class="" value="提 交" />
-			</div>
-		</div>
 		<li>
 			<p>意向地区</p>
 			<!--data-idname唯一标识    data-n联动数     data-id 1为地区选择  2为职位选择  data-maxlength做多可选择数-->
@@ -259,6 +172,96 @@
 		</li>
 	</ul>
 </div>
+<div id="status_zhuangtai" class="mui-popover mui-popover-action mui-popover-bottom">
+	<ul class="mui-table-view">
+		<li class="mui-table-view-cell">
+			<a href="javascript:;" data-value="0">请选择求职状态</a>
+		</li>
+		{volist name="Think.config.system.site_resumestatus" id="vo"}
+		<li class="mui-table-view-cell">
+			<a href="javascript:;" data-value="{$vo.status_id}">{$vo.status_name}</a>
+		</li>
+		{/volist}
+	</ul>
+	<ul class="mui-table-view">
+		<li class="mui-table-view-cell">
+			<a href="#forward">取消</a>
+		</li>
+	</ul>
+</div>
+<div class="hangye-list" id="hangye">
+	<div class="mui-card">
+		<div class="mui-input-group">
+
+			{volist name="Think.config.system.site_all_profession" id="vo"}
+			<div class="mui-input-row mui-checkbox mui-left">
+				<label>{$vo.profession_name}
+					<input name="checkbox1" value="{$vo.profession_id}" type="checkbox">
+				</label>
+			</div>
+			{/volist}
+
+		</div>
+	</div>
+	<div class="job_tab_filter3-btn clearfix">
+		<input type="reset" class="" value="重 置" />
+		<input type="button" class="" value="提 交" />
+	</div>
+</div>
+<div id="xingzhi" class="mui-popover mui-popover-action mui-popover-bottom">
+	<ul class="mui-table-view">
+		<li class="mui-table-view-cell">
+			<a href="javascript:;" data-value="0">不限</a>
+		</li>
+		{volist name="Think.config.system.site_jobtype" id="vo"}
+		<li class="mui-table-view-cell">
+			<a href="javascript:;" data-value="{$vo.type_id}">{$vo.type_name}</a>
+		</li>
+		{/volist}
+	</ul>
+	<ul class="mui-table-view">
+		<li class="mui-table-view-cell">
+			<a href="#forward">取消</a>
+		</li>
+	</ul>
+</div>
+<div id="showUserPicker" class="mui-popover mui-popover-action mui-popover-bottom">
+	<ul class="mui-table-view">
+		{volist name="Think.config.system.site_salary" id="vo"}
+		<li class="mui-table-view-cell">
+			<a href="javascript:;" data-value="{$vo.salary_id}">{$vo.salary_name}</a>
+		</li>
+		{/volist}
+	</ul>
+	<ul class="mui-table-view">
+		<li class="mui-table-view-cell">
+			<a href="#forward">取消</a>
+		</li>
+	</ul>
+</div>
+<div class="job_tab_filter3" id="fuli">
+	<div class="mui-input-group">
+		<div class="mui-card">
+			{volist name="Think.config.system.site_jobtag" id="vo"}
+			<div class="mui-checkbox">
+				<label>
+					<input value="{$vo.tag_id}" type="checkbox" >
+					<span>{$vo.tag_name}</span>
+				</label>
+			</div>
+			{/volist}
+
+		</div>
+	</div>
+	<div class="job_tab_filter3-btn clearfix">
+		<input type="reset" class="" value="重 置" />
+		<input type="button" class="" value="提 交" />
+	</div>
+</div>
+
+
+
+
 
 <div class="btn-box">
 		<button type="button" class="mui-btn mui-btn-danger mui-btn-block" id="subBtn">生成简历</button>
