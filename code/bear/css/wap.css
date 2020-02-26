@@ -60,6 +60,15 @@ img.lazy-load{background-color: #e6e6e6;transition:opacity 0.3s ease-in;border: 
 .textList{padding:0.4rem;background: #fff;}
 .textList li{padding-left: 0.44rem;line-height:0.68rem;height: 0.68rem;color: #222;font-size: 0.427rem;background: url(../images/dian.png) no-repeat left center;background-size: 0.28rem 0.28rem}
 
+.logo_img{
+  position: fixed;
+  top: 0.2rem;
+  left: 0.1rem;
+  width: 2rem;
+  z-index: 3;
+}
+.duibi_img{width: 100%;}
+
 .tit{padding-left: 0.4rem;color: #222;font-size: 0.48rem;line-height: 0.48rem;padding-top: 0.52rem;font-weight: bold}
 .menu{width: 100%;margin:0 auto;overflow: hidden;}
 .menu .beerList{width: 100%;overflow-x: auto;margin-top: 0.4rem;padding-bottom: 0.52rem;}
