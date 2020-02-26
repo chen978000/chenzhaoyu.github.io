@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;"/>
+  <title>劳特巴赫啤酒全国“无接触配送”地图上线啦！</title>
+  <meta name="description" content="宅在家 足不出户享美酒"/>
+  <script type="text/javascript">
+    document.write("<link rel='stylesheet' type='text/css' href='css/wap.css?random=" + Math.random() + "' />");
+  </script>
+  <script src="js/flexible.js"></script>
+  <script src="js/echarts.min.js"></script>
+  <script src="js/china.js"></script>
+  <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="js/china_geo.js"></script>
+  <script src="js/vue.js"></script>
+  <style>
+    .textList li {
+      height: auto;
+    }
+
+    .tableBox .li {
+      line-height: 0.7rem;
+    }
+
+    .tableBox .li span {
+      font-size: 0.38rem;
+    }
+
+    .tableBox h4 {
+      height: 0.96rem;
+      line-height: 0.96rem;
+    }
+
+    h4 {
+      font-size: 0.4rem;
+    }
+
+    .map {
+      width: 100%;
+      background: #fff;
+      position: relative;
+    }
+
+    .map .addTips {
+      position: absolute;
+      top: 1.3rem;
+      left: 0.4rem;
+      font-size: 0.42rem;
+      line-height: 0.48rem;
+      color: #2F7827;
+      z-index: 2;
+      font-weight: bold;
+    }
+
+    .mapBox {
+      margin-top: 40px;
+    }
+
+    [v-cloak] {
+      display: none;
+    }
+    .zhichi{
+      padding: 0 0 1.8rem 0;
+      color: #999;
+      text-align: center;
+      font-size: 0.3rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<!--微信分享开始-->
+<div id='wx_JSSDKConfig' style='display:none'
+     data-imgUrl='./images/pro_1.jpg'
+     data-link='http://www.laotebahe.com/peisong/'>
+</div>
+<script>
+  var wshare = document.createElement('script');
+  wshare.src = 'http://www.laotebahe.com/peisong/';
+  document.body.appendChild(wshare);
+</script>
+<!--微信分享结束-->
+
+
+<div id="app" v-cloak>
+  <div class='base'>
+    <div class='infoMain'>
+      <div class='infoBox' :title="item.name" v-for="item in cityList">
+        <h2>{{item.name}}</h2>
+        <div class='info' v-for="item2 in item.list">
+          <h3>{{item2.name}}<span>{{item2.people}}</span></h3>
+          <ul>
+            <li><span>联系电话：</span><a :href="`tel:${item2.phone}`">{{item2.phone}}</a></li>
+            <li><span>配送区域：</span>{{item2.area}}</li>
+          </ul>
+        </div>
+        <div class='kong'></div>
+      </div>
+      <a href='javascript:;' class='close'>关闭</a>
+    </div>
+  </div>
+
+  <div class="banner">
+    <img src="images/banner.jpg">
+  </div>
+  <div class="titTips">
+    <div><span>9个</span>省级单位</div>
+    <div><span>109个</span>城市区域</div>
+  </div>
+  <ul class="textList">
+    <li>劳特巴赫 品质至上</li>
+    <li>劳特巴赫啤酒推出全国“无接触配送”</li>
+    <li>零接触 送到家</li>
+  </ul>
+
+  <div class="menu">
+    <h2 class="tit">热销精选</h2>
+
+    <div class="beerList">
+      <div class="boxScroll" :style="{width: (productList.length)*5+'rem'}">
+
+        <div class="imgBox" v-for="item in productList">
+          <img :src="item.img">
+          <h3>{{item.info}}</h3>
+          <p>{{item.name}}</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="map">
+    <div class="addTips">点击你所在的省市,即刻开始无接触配送</div>
+    <h2 class="tit">配送地图</h2>
+    <div id="container" class="mapBox"></div>
+  </div>
+
+  <div class="table">
+    <div class="title"><span class="area">地区</span><span class="name">联系人</span><span class="range">配送区域</span><span
+            class="tel">电话</span></div>
+    <ul class="tableBox">
+      <li :title="item.name" class="infoli" v-for="item in cityList">
+        <h4 class="down">{{item.name}}</h4>
+        <div class="box" v-for="item2 in item.list">
+          <div class="li"><span class="area">{{item2.name}}</span><span class="name">{{item2.people}}</span><span
+                  class="range">{{item2.area}}</span><a :href="`tel:${item2.phone}}`" class="tel"></a></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="ewm">
+    <div class="ewmBox">
+      <h3>长按二维码<br>关注微信公众号</h3>
+      <img src="images/ewm.png">
+    </div>
+    <a href="javascript:;" class="close"></a>
+  </div>
+
+  <div class="fenxiang" style="background-color:rgba(0,0,0,0.6);">
+    <div class="img"></div>
+  </div>
+
+  <div class="foot">
+    <a href="javascript:;" class="shareBtn">分享</a>
+    <a href="javascript:;" class="gzBtn">关注“水发天源”公众号</a>
+  </div>
+
+  <div class="zhichi">技术支持：山东水发紫光大数据有限责任公司</div>
+  <div id="container1" style="display:none"></div>
+</div>
+
+
+<script>
+  var app =new Vue({
+    el: '#app',
+    data:{
+      productList: [
+        {
+          name: '鲁啤经典原浆',
+          info: '',
+          img: 'images/pro_1.jpg'
+        },
+        {
+          name: '劳特巴赫典藏精酿',
+          info: '',
+          img: 'images/pro_2.jpg'
+        },
+        {
+          name: '劳特巴赫精酿原浆',
+          info: '',
+          img: 'images/pro_3.jpg'
+        },
+        {
+          name: '劳特巴赫精酿原浆',
+          info: '',
+          img: 'images/pro_4.jpg'
+        },
+        {
+          name: '劳特巴赫IPA精酿',
+          info: '',
+          img: 'images/pro_5.jpg'
+        },
+        {
+          name: '劳特巴赫精酿原浆',
+          info: '',
+          img: 'images/pro_6.jpg'
+        },
+        {
+          name: '精酿小麦黑啤',
+          info: '',
+          img: 'images/pro_7.jpg'
+        },
+        {
+          name: '劳特巴赫精酿原浆',
+          info: '',
+          img: 'images/pro_8.jpg'
+        },
+        {
+          name: '劳特巴赫精酿生啤',
+          info: '',
+          img: 'images/pro_9.jpg'
+        },
+        {
+          name: '精酿白啤国王广场',
+          info: '',
+          img: 'images/pro_10.jpg'
+        },
+        {
+          name: '精酿白啤弗兰克',
+          info: '',
+          img: 'images/pro_12.jpg'
+        },
+        {
+          name: '精酿白啤IPA',
+          info: '',
+          img: 'images/pro_13.jpg'
+        },
+        {
+          name: '精酿白啤1386',
+          info: '',
+          img: 'images/pro_14.jpg'
+        },
+        {
+          name: '精酿白啤世纪经典',
+          info: '',
+          img: 'images/pro_15.jpg'
+        },
+        {
+          name: '精酿白啤1386',
+          info: '',
+          img: 'images/pro_16.jpg'
+        }
+      ],
+      cityList: [
+        {
+          name: '天津',
+          list: [
+            {
+              name: '天津市区',
+              people: '刘卓',
+              phone: '15510932599',
+              area: '东丽区、塘沽区'
+            },
+            {
+              name: '天津南区',
+              people: '张曦允',
+              phone: '18822398759',
+              area: '北辰区、河北区、红桥区、南开区'
+            },
+            {
+              name: '天津北区',
+              people: '王伟',
+              phone: '18622352166',
+              area: '武清区、宝坻区、蓟州区、宁河、汉沽'
+            }
+          ]
+        },
+        {
+          name: '河北',
+          list: [
+            {
+              name: '石家庄',
+              people: '董国津',
+              phone: '13582317776',
+              area: '桥西区、新华区、长安区、裕华区、高新技术开发区'
+            },
+            {
+              name: '保定',
+              people: '苏爱国',
+              phone: '18931219898',
+              area: '竞秀区、莲池区、满城区、清苑区、徐水区'
+            },
+            {
+              name: '唐山',
+              people: '张晟武',
+              phone: '18330322832',
+              area: '玉田县'
+            }
+          ]
+        },
+        {
+          name: '内蒙古',
+          list: [
+            {
+              name: '呼和浩特',
+              people: '王永杰',
+              phone: '18635230830',
+              area: '回民区、玉泉区、新城区、赛罕区'
+            }
+          ]
+        },
+        {
+          name: '山西',
+          list: [
+            {
+              name: '大同',
+              people: '赵月明',
+              phone: '03522067777',
+              area: '平城区、云州区、云岗区'
+            },
+            {
+              name: '运城',
+              people: '任晓飞',
+              phone: '15333592888',
+              area: '河津县'
+            },
+            {
+              name: '晋中',
+              people: '温郁峰',
+              phone: '15343441122',
+              area: '榆次区'
+            }
+          ]
+        },
+        {
+          name: '山东',
+          list: [
+            {
+              name: '济南',
+              people: '马桂元',
+              phone: '13969192775',
+              area: '槐荫区'
+            },
+            {
+              name: '济南',
+              people: '杜玉芹',
+              phone: '13969076076',
+              area: '历下区，高新区，市中区'
+            },
+            {
+              name: '济南',
+              people: '吴学源',
+              phone: '15668484566',
+              area: '天桥区'
+            },
+            {
+              name: '济南',
+              people: '马帅',
+              phone: '13853161916',
+              area: '历城区，南部山区'
+            },
+            {
+              name: '菏泽',
+              people: '吕丽',
+              phone: '15554510888',
+              area: '菏泽市区及乡镇'
+            },
+            {
+              name: '菏泽',
+              people: '侯恩魁',
+              phone: '13561338333',
+              area: '定陶区及乡镇'
+            },
+            {
+              name: '菏泽',
+              people: '王国威',
+              phone: '15269017666',
+              area: '曹县庄寨乡镇'
+            },
+            {
+              name: '菏泽',
+              people: '李经理',
+              phone: '05306071333',
+              area: '菏泽电厂附近的1件配送网络'
+            },
+            {
+              name: '菏泽',
+              people: '王普',
+              phone: '13455995722',
+              area: '郓城县1件配送'
+            },
+            {
+              name: '菏泽',
+              people: '申广省',
+              phone: '13853060867',
+              area: '鄄城县'
+            },
+            {
+              name: '菏泽',
+              people: '孙超越',
+              phone: '18053056139',
+              area: '郓城县区及乡镇'
+            },
+            {
+              name: '菏泽',
+              people: '王艳丽',
+              phone: '15315680082',
+              area: '菏泽人民路附近1件配送'
+            },
+            {
+              name: '烟台',
+              people: '宋总',
+              phone: '18660517227',
+              area: '莱阳'
+            },
+            {
+              name: '烟台',
+              people: '李总',
+              phone: '15688864567',
+              area: '莱州'
+            },
+            {
+              name: '威海',
+              people: '于总',
+              phone: '13963136789',
+              area: '威海'
+            },
+            {
+              name: '潍坊',
+              people: '孙总',
+              phone: '18105367193',
+              area: '潍坊'
+            },
+            {
+              name: '潍坊',
+              people: '石总',
+              phone: '13563639999',
+              area: '潍坊高密'
+            },
+            {
+              name: '青岛',
+              people: '陈总',
+              phone: '18563988916',
+              area: '青岛'
+            },
+            {
+              name: '青岛',
+              people: '张总',
+              phone: '13276485999',
+              area: '青岛黄岛'
+            },
+            {
+              name: '青岛',
+              people: '吕总',
+              phone: '13210873546',
+              area: '青岛胶南'
+            },
+            {
+              name: '日照',
+              people: '周总',
+              phone: '15269494886',
+              area: '日照'
+            },
+            {
+              name: '日照',
+              people: '张总',
+              phone: '13863389208',
+              area: '日照'
+            },
+            {
+              name: '临沂',
+              people: '杜总',
+              phone: '15554876777',
+              area: '临沂'
+            },
+            {
+              name: '临沂',
+              people: '周总',
+              phone: '18369595389',
+              area: '临沂'
+            },
+            {
+              name: '连云港',
+              people: '姜总',
+              phone: '15805131100',
+              area: '连云港'
+            }
+          ]
+        },
+        {
+          name: '河南',
+          list: [
+            {
+              name: '周口',
+              people: '张书伟',
+              phone: '18939627888',
+              area: '周口地区及下属各县'
+            },
+            {
+              name: '平顶山',
+              people: '王旭',
+              phone: '13290920909',
+              area: '平顶山市区'
+            },
+            {
+              name: '商丘',
+              people: '盖明刚',
+              phone: '18603704738',
+              area: '民权县'
+            },
+            {
+              name: '商丘',
+              people: '李珈旭',
+              phone: '18337026555',
+              area: '永城市'
+            },
+            {
+              name: '商丘',
+              people: '聂培培',
+              phone: '19137018866',
+              area: '商丘市区'
+            },
+            {
+              name: '商丘',
+              people: '曹君利',
+              phone: '15303702852',
+              area: '商丘市区配送'
+            },
+            {
+              name: '开封',
+              people: '赵俊峰',
+              phone: '13569546736',
+              area: '尉氏县'
+            },
+            {
+              name: '漯河',
+              people: '安东',
+              phone: '15936618080',
+              area: '漯河市区'
+            },
+            {
+              name: '开封',
+              people: '马金鹏',
+              phone: '15993319083',
+              area: '开封县'
+            },
+            {
+              name: '许昌',
+              people: '陈柯',
+              phone: '15939933131',
+              area: '许昌市区'
+            },
+            {
+              name: '信阳',
+              people: '张慧敏',
+              phone: '15737697872',
+              area: '固始县'
+            },
+            {
+              name: '许昌',
+              people: '王永军',
+              phone: '13083612288',
+              area: '许昌市区'
+            },
+            {
+              name: '漯河',
+              people: '崔元麟',
+              phone: '15518216123',
+              area: '漯河市区直供'
+            },
+            {
+              name: '郑州',
+              people: '周怀远',
+              phone: '18638659161',
+              area: '金水区'
+            },
+            {
+              name: '郑州',
+              people: '范云博',
+              phone: '13103712626',
+              area: '郑州市区'
+            },
+            {
+              name: '安阳',
+              people: '贾丙申',
+              phone: '15515073335',
+              area: '林州市'
+            },
+            {
+              name: '安阳',
+              people: '贾飞只',
+              phone: '15515063335',
+              area: '新东区'
+            },
+            {
+              name: '濮阳',
+              people: '许志勇',
+              phone: '18637240800',
+              area: '濮阳市'
+            }
+          ]
+        },
+        {
+          name: '辽宁',
+          list: [
+            {
+              name: '抚顺',
+              people: '徐晨阳',
+              phone: '15541314321',
+              area: '抚顺市市区'
+            },
+            {
+              name: '大连',
+              people: '王经理',
+              phone: '18640934186',
+              area: '大连市区'
+            },
+            {
+              name: '营口',
+              people: '陶总',
+              phone: '13352303939',
+              area: '营口市区'
+            }
+          ]
+        },
+        {
+          name: '黑龙江',
+          list: [
+            {
+              name: '哈尔滨',
+              people: '曲喜荣',
+              phone: '15145071719',
+              area: '哈尔滨市区'
+            },
+            {
+              name: '绥化',
+              people: '张国文',
+              phone: '13804619855',
+              area: '肇东市'
+            }
+          ]
+        },
+        {
+          name: '四川',
+          list: [
+            {
+              name: '广元',
+              people: '张光云',
+              phone: '15984445464',
+              area: '利州区南河片区，城区夜场'
+            },
+            {
+              name: '广元',
+              people: '王彦入',
+              phone: '13881221916',
+              area: '利州区东坝、万元、雪峰区域'
+            },
+            {
+              name: '四川、重庆、陕西、甘肃',
+              people: '汪东',
+              phone: '13981299191',
+              area: '四川、重庆、陕西、甘肃行政区域'
+            },
+            {
+              name: '广元',
+              people: '徐蓉',
+              phone: '18981279679',
+              area: '昭化老城、宝轮镇、石龙工业园区'
+            },
+            {
+              name: '广元',
+              people: '刘云菊',
+              phone: '18881264333',
+              area: '剑阁县行政区域'
+            },
+            {
+              name: '广元',
+              people: '陈静',
+              phone: '13350499285',
+              area: '昭化区'
+            },
+            {
+              name: '广元',
+              people: '陈伟',
+              phone: '18981270228',
+              area: '青川县行政区域'
+            },
+            {
+              name: '广元',
+              people: '吴洪涛',
+              phone: '13547182919',
+              area: '旺苍县行政区域'
+            },
+            {
+              name: '广元',
+              people: '王光旬',
+              phone: '13508066690',
+              area: '苍溪县行政区域'
+            },
+            {
+              name: '成都',
+              people: '谢彬',
+              phone: '13551158127',
+              area: '锦江区、青羊区、武侯区行政区域'
+            },
+            {
+              name: '德阳',
+              people: '张尔东',
+              phone: '18608380775',
+              area: '德阳市行政区域'
+            },
+            {
+              name: '眉山',
+              people: '周帮国',
+              phone: '13666109189',
+              area: '眉山市、都江堰市、双流区行政区域'
+            },
+            {
+              name: '乐山',
+              people: '朱公英',
+              phone: '13882299370',
+              area: '乐山市行政区域'
+            },
+            {
+              name: '攀西地区',
+              people: '岳永明',
+              phone: '13882328861',
+              area: '攀西地区'
+            }
+          ]
+        },
+      ],
+      mapCityList: [
+        {
+          name: '天津',
+          value: 3
+        },
+        {
+          name: '河北',
+          value: 3
+        },
+        {
+          name: '内蒙古',
+          value: 1
+        },
+        {
+          name: '山西',
+          value: 3
+        },
+        {
+          name: '山东',
+          value: 25
+        },
+        {
+          name: '河南',
+          value: 18
+        },
+        {
+          name: '辽宁',
+          value: 3
+        },
+        {
+          name: '黑龙江',
+          value: 2
+        },
+        {
+          name: '四川',
+          value: 14
+        }
+      ]
+    },
+    mounted(){
+      this.createMap()
+    },
+    methods: {
+      createMap(){
+        //初始化echarts实例
+        var myChart = echarts.init(document.getElementById('container'));
+        const dataMap = this.mapCityList;
+
+        var COLORS = ['#C79600', '#D2A92A', '#DBBA55', '#E4CB7F', '#EDDDAA', '#F6EED4'];
+        // 绘制图表，准备数据
+        // 配置项文档https://www.echartsjs.com/zh/option.html#series-map
+        var option = {
+          tooltip: {
+            formatter: function (params) {
+              var info = ''
+              var myseries = option.series[0]['data'];
+              for (var j = 0; j < myseries.length; j++) {
+                if (myseries[j].name == params.name) {
+                  if (params.value > 0) {
+                    info += '<div class="tips" onclick="openWin(\'' + params.name + '\')">'
+                  } else {
+                    info += '<div class="tips">'
+                  }
+                  info += '<div class="text">'
+                  info += '<p>省份：' + params.name + '</p>'
+                  info += '<p>地区：' + params.value + '</p>'
+                  info += '</div>'
+                  if (params.value > 0) {
+                    info += '<div class="more">详情</div>'
+                    info += '</div>'
+                  }
+                }
+              }
+              return info;
+            },
+            triggerOn: 'click',
+            backgroundColor: "",//提示标签背景颜色
+            textStyle: {color: ""} //提示标签字体颜色
+          },
+          visualMap: {
+            show: false,
+            min: 0,
+            max: 10,
+            type: 'piecewise',
+            inRange: {
+              color: COLORS
+            },
+            pieces: [
+              {min: 26, color: COLORS[0]}, // 不指定 max，表示 max 为无限大（Infinity）。
+              {min: 21, max: 25, color: COLORS[1]},
+              {min: 16, max: 20, color: COLORS[2]},
+              {min: 11, max: 15, color: COLORS[3]},
+              {min: 1, max: 10, color: COLORS[4]},
+              {min: 0, max: 0, color: COLORS[5]}
+            ],
+            textStyle: {
+              fontSize: 6
+            },
+            itemWidth: 20,
+            itemHeight: 10
+          },
+          series: [
+            {
+              name: '中国',
+              type: 'map',
+              mapType: 'china',
+              selectedMode: 'single',
+              left: '0',
+              right: '0',
+              label: {
+                normal: {
+                  show: true,//显示省份标签
+                  fontSize: 10
+                },
+              },
+              itemStyle: {
+                normal: {
+                  borderWidth: .5,//区域边框宽度
+                },
+                emphasis: {
+                  borderWidth: .5,
+                  borderColor: '#4b0082',
+                  // areaColor: "#000000",
+                  areaColor: ''
+                }
+              },
+              data: dataMap
+            }
+          ]
+        };
+        //使用制定的配置项和数据显示图表
+        myChart.setOption(option);
+      },
+    }
+
+
+  })
+</script>
+
+<script>
+  $(".tableBox").find("h4").each(function () {
+    $(this).on("click", function () {
+      $(this).parent().find(".box").slideToggle()
+      $(this).parent().siblings().find(".box").slideUp()
+      $(this).parent().siblings().find("h4").removeClass("up").addClass("down")
+      if ($(this).hasClass("down")) {
+        $(this).removeClass("down").addClass("up")
+      } else {
+        $(this).removeClass("up").addClass("down")
+      }
+    })
+  })
+
+  $(".gzBtn").on("click", function () {
+    $(".ewm").show()
+  })
+
+  $(".shareBtn").on("click", function () {
+    $(".fenxiang").show()
+  })
+
+  $(".ewm .close").on("click", function () {
+    $(this).parent().hide()
+  })
+
+  $(".fenxiang").on("click", function () {
+    $(this).hide()
+  })
+
+  $(".base .close").on("click", function () {
+    $(".base").hide()
+  })
+</script>
+
+<script type="text/javascript">
+  function openWin(provName) {
+    var myChart = echarts.init(document.getElementById('container'));
+    myChart.dispatchAction({
+      type: 'hideTip'
+    })
+    $(".infoBox").hide();
+    $(".infoBox").each(function () {
+      if ($(this).attr('title') == provName) {
+        $(this).show();
+      }
+    });
+    //$(".infoBox[title='" + provName + "']").hide();
+    $(".base").show();
+  }
+
+
+</script>
+<script type="text/javascript"
+        src="https://appnews.qingdaonews.com/assets/activity/2020/NCOVmap/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript"
+        src="https://webapi.amap.com/maps?v=1.4.15&key=859828003f83babc37a8474486bae98f&plugin=AMap.Geocoder"></script>
+<script type="text/javascript">
+  // 高德地图相关功能
+  let myPo = '';
+  var map = new AMap.Map("container1", {
+    resizeEnable: true
+  });
+  AMap.plugin('AMap.Geolocation', function () {
+    var geolocation = new AMap.Geolocation({
+      enableHighAccuracy: true,//是否使用高精度定位，默认:true
+      timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+      buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+      zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+      buttonPosition: 'RB'
+    });
+    map.addControl(geolocation);
+    geolocation.getCurrentPosition(function (status, result) {
+      if (status == 'complete') {
+        onComplete(result)
+      } else {
+        onError(result)
+      }
+    });
+  });
+
+  //解析定位结果
+  function onComplete(data) {
+    var str = ['定位成功'];
+    str.push('经度：' + data.position.getLng());
+    str.push('纬度：' + data.position.getLat());
+    lnglatXY = [data.position.getLng(), data.position.getLat()]; //当前定位坐标
+    regeocoder(lnglatXY);
+    myPo = data.position
+    console.log(data.position)
+  }
+
+  //解析定位错误信息
+  function onError(data) {
+    console.log(data.message)
+    $('.js_loc').text('定位失败');
+  }
+
+  function regeocoder(loc) {
+    //逆地理编码
+    var geocoder = new AMap.Geocoder({
+      radius: 1000,
+      extensions: "all"
+    });
+    geocoder.getAddress(loc, function (status, result) {
+      if (status === 'complete' && result.info === 'OK') {
+        console.dir(result);
+        geocoder_CallBack(result);
+      } else {
+        console.log(status, result)
+        //$('.js_loc').text('坐标转换地址失败');
+        console.log('坐标转换地址失败')
+      }
+    });
+  }
+
+  function geocoder_CallBack(data) {
+    var address = data.regeocode.addressComponent.province; //返回省份
+    //var address = data.regeocode.formattedAddress; //返回地址描述
+    //$('.js_loc').text(address);
+    $(".infoli").each(function () {
+      var title = $(this).attr('title');
+      if (address.indexOf(title) != -1) {
+        $(this).find("h4").each(function () {
+          var h4title = $(this).html();
+          $(this).html(h4title + ' ' + '<span style="color:#d2a92a">为您当前所在的省</span>');
+        })
+      }
+    })
+  }
+</script>
+<!--统计代码 begin-->
+<script language="javascript">
+  var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+  document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F099a2f2a4f2c2f042dbd360b42309fc4' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+</html>
