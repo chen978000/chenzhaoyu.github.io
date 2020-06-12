@@ -1,0 +1,135 @@
+
+<!Doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>成武县晚霞红光智慧养老平台</title>
+
+  <style>
+    html,body{
+      width: 100%;
+      height:100%;
+      padding: 0;
+      margin: 0;
+    }
+    .main_box{
+      width: 100%;
+      height: 100%;
+      background: url("./img/bg.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    .top_box{
+      width: 100%;
+      height: 80px;
+      background:rgba(255,255,255,0.3);
+    }
+    .top_box img{
+      width: 222px;
+      margin-left: 20px;
+      margin-top: 6px;
+    }
+    .title_box{
+      width: 100%;
+      text-align: center;
+      padding-top: 80px;
+    }
+    .title_box img{
+      width: 70%;
+    }
+
+    .content_box{
+      width: 100%;
+      margin-top: 153px;
+      z-index: 2;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content:space-around;
+    }
+    .item_box{
+      width: 540px;
+      height: 280px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+      backdrop-filter: blur(20px);
+    }
+
+    .item_hover_box{
+      /*transform: translateY(-100%);*/
+      transition: 0.3s;
+      width: 100%;
+      height: 100%;
+      background: rgba(254,114,83,0.0);
+      color: #fff;
+      box-sizing: border-box;
+      text-align: center;
+      line-height: 70px;
+      padding-top: 30px;
+    }
+    .item_hover_box img{
+      width: 80%;
+      margin-top: 40px;
+    }
+    .item_box:hover .item_hover_box{
+      display: block;
+      transform: translateY(0);
+      width: 100%;
+      height: 100%;
+      background: rgba(254,114,83,0.5);
+      color: #fff;
+      box-sizing: border-box;
+      text-align: center;
+      line-height: 70px;
+      padding-top: 30px;
+      text-align: center;
+      border-radius: 15px;
+    }
+    .foot_box{
+      width: 100%;
+      height: 64px;
+      position: fixed;
+      bottom: 0;
+      text-align: center;
+      background: url("./img/footer.png");
+    }
+  </style>
+</head>
+<body>
+<div>
+  <div class="main_box">
+    <div class="top_box">
+      <img src="./img/logo.png" alt="">
+    </div>
+    <div class="title_box">
+      <img src="./img/title.png" alt="">
+    </div>
+    <div class="content_box">
+      <a class="item_box" href="https://poc.10086.cn/station/login.html" style="background: url('img/item_bg3.png');background-size:cover;" target="_blank">
+        <div class="item_hover_box">
+          <img src="./img/item_title1.png" alt="">
+        </div>
+      </a>
+      <a class="item_box" href="https://poc.10086.cn/station/login.html" style="background: url('img/item_bg2.png');background-size:cover;" target="_blank">
+        <div class="item_hover_box">
+          <img src="./img/item_title2.png" alt="">
+        </div>
+      </a>
+    </div>
+    <div class="foot_box">
+<!--      <img src="./img/footer.png" alt="">-->
+    </div>
+  </div>
+  
+</div>
+
+<script>
+  document.getElementsByClassName('main_box')[0].style.height = document.body.clientHeight+'px'
+  window.onresize = ()=>{
+    location.reload()
+  }
+
+</script>
+
+</body>
+</html>
